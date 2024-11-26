@@ -20,5 +20,9 @@ export function SpotifyButton() {
     }
   };
 
-  return <Button onClick={handleLogin}>Login with Spotify</Button>;
+  return (
+    <Button className="w-min bg-green-500" onClick={handleLogin}>
+      Login with Spotify
+    </Button>
+  );
 }

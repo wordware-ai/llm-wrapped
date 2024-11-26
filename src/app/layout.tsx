@@ -20,7 +20,7 @@ export default async function RootLayout({
   const { user } = await getUser();
   const { session } = await getSession();
   return (
-    <html lang="en" className={`${GeistSans.variable} dark`}>
+    <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <TRPCReactProvider>
           <AuthProvider user={user ?? undefined} session={session ?? undefined}>

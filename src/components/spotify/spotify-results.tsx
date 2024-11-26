@@ -6,8 +6,10 @@ import { type SpotifyResult } from "@prisma/client";
 import { useEffect } from "react";
 import { CardWrapper } from "./bento-cards/base-card";
 import { cardConfigs } from "./card-config";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useStreamContext } from "../stream-provider";
+import { Card } from "../ui/card";
+import { cn } from "@/lib/utils";
 
 export function SpotifyResults({
   data,
@@ -16,6 +18,7 @@ export function SpotifyResults({
   data: string;
   result?: SpotifyResult;
 }) {
+  console.log(data);
   const { mutate: createSpotifyResult } =
     api.spotifyUser.createSpotifyResult.useMutation();
 
@@ -42,7 +45,7 @@ export function SpotifyResults({
   const { results, setResults } = useStreamContext();
   const { streamResponse } = useStream({
     promptId: "ed4202f2-12b7-401c-a233-545b80dc740c",
-    data: "i like the smiths",
+    data,
     onFinish,
   });
 
@@ -76,13 +79,16 @@ export function SpotifyResults({
 
     const BentoComponent = config.bentoComponent;
     return (
-      <CardWrapper
-        gridConfig={config.gridConfig}
-        theme={config.theme}
-        key={config.id}
+      <Card
+        className={cn(
+          `col-span-${config.gridConfig.colSpan}`,
+          `row-span-${config.gridConfig.rowSpan}`,
+          config.theme.backgroundColor,
+          config.theme.textColor,
+        )}
       >
         <BentoComponent content={content} />
-      </CardWrapper>
+      </Card>
     );
   };
 
@@ -90,8 +96,8 @@ export function SpotifyResults({
     <div className="space-y-4 p-4">
       <div className="grid grid-cols-12 grid-rows-[12] gap-4">
         <div
-          onClick={() => router.push(`/results?slide=music_taste_analysis`)}
-          className="col-span-2 row-span-2"
+          onClick={() => router.push(`/results/slide?slide=1`)}
+          className="col-span-2 row-span-2 hover:cursor-pointer"
         >
           <div className="size-40 rounded-full bg-blue-500" />
         </div>
