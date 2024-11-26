@@ -1,16 +1,10 @@
-import { SpotifyResults } from "@/components/spotify-results";
+import { SpotifyResults } from "@/components/spotify/spotify-results";
 import { api } from "@/trpc/server";
 
 export default async function ResultsPage() {
   // Fetch all data concurrently
-  const [topArtists, topTracks, profile, playlists, recentlyPlayed] =
-    await Promise.all([
-      api.spotifyApi.getTopArtists(),
-      api.spotifyApi.getTopTracks(),
-      api.spotifyApi.getUserProfile(),
-      api.spotifyApi.getPlaylists(),
-      api.spotifyApi.getRecentlyPlayed(),
-    ]);
+  const { topArtists, topTracks, playlists, recentlyPlayed } =
+    await api.spotifyApi.getAllUserData();
 
   const spotifyResult = await api.spotifyUser.getSpotifyResult();
 
@@ -21,10 +15,10 @@ export default async function ResultsPage() {
         data={JSON.stringify({
           topArtists,
           topTracks,
-          profile,
           playlists,
           recentlyPlayed,
         })}
+        result={spotifyResult ?? undefined}
       />
     </div>
   );

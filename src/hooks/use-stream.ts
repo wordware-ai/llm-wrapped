@@ -107,6 +107,7 @@ export function useStream({
 
   return {
     results,
+    setResults,
     isLoading,
     streamResponse,
   };

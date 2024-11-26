@@ -10,7 +10,7 @@ import {
 
 // TRPC Router
 export const spotifyApiRouter = createTRPCRouter({
-  getTopArtists: privateProcedure
+  getAllUserData: privateProcedure
     .input(
       z
         .object({
@@ -29,118 +29,66 @@ export const spotifyApiRouter = createTRPCRouter({
         offset: (input?.offset ?? 0).toString(),
       });
 
-      const response = await fetch(
-        `https://api.spotify.com/v1/me/top/artists?${params}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session?.provider_token}`,
-          },
-        },
-      );
+      // Fetch all data in parallel
+      const [topArtists, topTracks, userProfile, playlists, recentlyPlayed] =
+        await Promise.all([
+          // Top Artists
+          fetch(`https://api.spotify.com/v1/me/top/artists?${params}`, {
+            headers: {
+              Authorization: `Bearer ${ctx.session?.provider_token}`,
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => topArtistsResponseSchema.parse(data)),
 
-      const data = (await response.json()) as unknown;
-      return topArtistsResponseSchema.parse(data);
-    }),
+          // Top Tracks
+          fetch(`https://api.spotify.com/v1/me/top/tracks?${params}`, {
+            headers: {
+              Authorization: `Bearer ${ctx.session?.provider_token}`,
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => topTracksResponseSchema.parse(data)),
 
-  getTopTracks: privateProcedure
-    .input(
-      z
-        .object({
-          timeRange: z
-            .enum(["short_term", "medium_term", "long_term"])
-            .optional(),
-          limit: z.number().min(1).max(50).optional(),
-          offset: z.number().min(0).optional(),
-        })
-        .optional(),
-    )
-    .query(async ({ ctx, input }) => {
-      const params = new URLSearchParams({
-        time_range: input?.timeRange ?? "medium_term",
-        limit: (input?.limit ?? 20).toString(),
-        offset: (input?.offset ?? 0).toString(),
-      });
+          // User Profile
+          fetch("https://api.spotify.com/v1/me", {
+            headers: {
+              Authorization: `Bearer ${ctx.session?.provider_token}`,
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => userProfileSchema.parse(data)),
 
-      const response = await fetch(
-        `https://api.spotify.com/v1/me/top/tracks?${params}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session?.provider_token}`,
-          },
-        },
-      );
+          // Playlists
+          fetch(`https://api.spotify.com/v1/me/playlists?${params}`, {
+            headers: {
+              Authorization: `Bearer ${ctx.session?.provider_token}`,
+            },
+          })
+            .then((res) => res.json())
+            .then((data) => playlistsResponseSchema.parse(data)),
 
-      const data = (await response.json()) as unknown;
-      return topTracksResponseSchema.parse(data);
-    }),
+          // Recently Played
+          fetch(
+            `https://api.spotify.com/v1/me/player/recently-played?limit=${
+              input?.limit ?? 20
+            }`,
+            {
+              headers: {
+                Authorization: `Bearer ${ctx.session?.provider_token}`,
+              },
+            },
+          )
+            .then((res) => res.json())
+            .then((data) => recentlyPlayedResponseSchema.parse(data)),
+        ]);
 
-  getUserProfile: privateProcedure.query(async ({ ctx }) => {
-    const response = await fetch("https://api.spotify.com/v1/me", {
-      headers: {
-        Authorization: `Bearer ${ctx.session?.provider_token}`,
-      },
-    });
-
-    const data = (await response.json()) as unknown;
-    return userProfileSchema.parse(data);
-  }),
-
-  getPlaylists: privateProcedure
-    .input(
-      z
-        .object({
-          limit: z.number().min(1).max(50).optional(),
-          offset: z.number().min(0).optional(),
-        })
-        .optional(),
-    )
-    .query(async ({ ctx, input }) => {
-      const params = new URLSearchParams({
-        limit: (input?.limit ?? 20).toString(),
-        offset: (input?.offset ?? 0).toString(),
-      });
-
-      const response = await fetch(
-        `https://api.spotify.com/v1/me/playlists?${params}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session?.provider_token}`,
-          },
-        },
-      );
-
-      const data = (await response.json()) as unknown;
-      return playlistsResponseSchema.parse(data);
-    }),
-
-  getRecentlyPlayed: privateProcedure
-    .input(
-      z
-        .object({
-          limit: z.number().min(1).max(50).optional(),
-          before: z.number().optional(),
-          after: z.number().optional(),
-        })
-        .optional(),
-    )
-    .query(async ({ ctx, input }) => {
-      const params = new URLSearchParams({
-        limit: (input?.limit ?? 20).toString(),
-      });
-
-      if (input?.before) params.append("before", input.before.toString());
-      if (input?.after) params.append("after", input.after.toString());
-
-      const response = await fetch(
-        `https://api.spotify.com/v1/me/player/recently-played?${params}`,
-        {
-          headers: {
-            Authorization: `Bearer ${ctx.session?.provider_token}`,
-          },
-        },
-      );
-
-      const data = (await response.json()) as unknown;
-      return recentlyPlayedResponseSchema.parse(data);
+      return {
+        topArtists: topArtistsResponseSchema.parse(topArtists),
+        topTracks: topTracksResponseSchema.parse(topTracks),
+        userProfile: userProfileSchema.parse(userProfile),
+        playlists: playlistsResponseSchema.parse(playlists),
+        recentlyPlayed: recentlyPlayedResponseSchema.parse(recentlyPlayed),
+      };
     }),
 });
