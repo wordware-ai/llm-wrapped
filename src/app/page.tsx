@@ -1,6 +1,7 @@
 import { SpotifyButton } from "@/components/spotify/spotify-button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Image from "next/image";
+import HomeCards from "@/components/spotify/bento-cards/home-cards";
 
 export default async function Home() {
   return (
@@ -81,6 +82,7 @@ export default async function Home() {
             </div>
           </div>
         </div>
+        <HomeCards />
       </div>
       <div className="flex hidden w-full flex-col gap-4 md:max-w-2xl">
         <Card>
