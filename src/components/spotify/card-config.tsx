@@ -36,8 +36,8 @@ type CardConfig = {
 };
 
 export const cardConfigs: Record<string, CardConfig> = {
-  musicTasteAnalysis: {
-    id: "music-taste-analysis",
+  music_taste_analysis: {
+    id: "music_taste_analysis",
     title: "Music Taste Analysis",
     bentoComponent: MusicTasteAnalysisBentoCard,
     gridConfig: {
@@ -49,8 +49,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-blue-950",
     },
   },
-  identityCrisis: {
-    id: "identity-crisis",
+  identity_crisis: {
+    id: "identity_crisis_level",
     title: "Identity Crisis Level",
     bentoComponent: IdentityCrisisLevelBentoCard,
     gridConfig: {
@@ -62,8 +62,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-green-950",
     },
   },
-  timeMachineStatus: {
-    id: "time-machine-status",
+  time_machine_status: {
+    id: "time_machine_status",
     title: "Time Machine Status",
     bentoComponent: TimeMachineStatusBentoCard,
     gridConfig: {
@@ -75,8 +75,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-purple-950",
     },
   },
-  danceFloorCredibility: {
-    id: "dance-floor-credibility",
+  dance_floor_credibility: {
+    id: "dance_floor_credibility",
     title: "Dance Floor Credibility",
     bentoComponent: DanceFloorCredibilityBentoCard,
     gridConfig: {
@@ -88,8 +88,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-yellow-950",
     },
   },
-  achievementUnlocked: {
-    id: "achievement-unlocked",
+  achievement_unlocked: {
+    id: "achievement_unlocked",
     title: "Achievement Unlocked",
     bentoComponent: AchievementUnlockedBentoCard,
     gridConfig: {
@@ -101,8 +101,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-amber-950",
     },
   },
-  emotionalStability: {
-    id: "emotional-stability",
+  emotional_stability: {
+    id: "emotional_stability_rating",
     title: "Emotional Stability Score",
     bentoComponent: EmotionalStabilityBentoCard,
     gridConfig: {
@@ -114,8 +114,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-red-950",
     },
   },
-  geographicConfusion: {
-    id: "geographic-confusion",
+  geographic_confusion_score: {
+    id: "geographic_confusion_score",
     title: "Geographic Confusion",
     bentoComponent: GeographicConfusionBentoCard,
     gridConfig: {
@@ -127,8 +127,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-teal-950",
     },
   },
-  guiltyPleasureSong: {
-    id: "guilty-pleasure-song",
+  guilty_pleasure_song: {
+    id: "guilty_pleasure_song",
     title: "Guilty Pleasure Song",
     bentoComponent: GuiltyPleasureSongBentoCard,
     gridConfig: {
@@ -140,8 +140,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-pink-950",
     },
   },
-  songsYouThinkAreAboutYou: {
-    id: "songs-you-think-are-about-you",
+  songs_you_secretly_think_are_about_you: {
+    id: "songs_you_secretly_think_are_about_you",
     title: "Songs You Think Are About You",
     bentoComponent: SongsYouThinkAreAboutYouBentoCard,
     gridConfig: {
@@ -153,8 +153,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-cyan-950",
     },
   },
-  lyricTherapistNeeded: {
-    id: "lyric-therapist-needed",
+  lyric_therapist_needed: {
+    id: "lyric_therapist_needed",
     title: "Lyric Therapist Needed",
     bentoComponent: LyricTherapistNeededBentoCard,
     gridConfig: {
@@ -166,8 +166,8 @@ export const cardConfigs: Record<string, CardConfig> = {
       textColor: "text-rose-950",
     },
   },
-  finalDiagnosis: {
-    id: "final-diagnosis",
+  final_diagnosis: {
+    id: "final_diagnosis",
     title: "Final Diagnosis",
     bentoComponent: FinalDiagnosisBentoCard,
     gridConfig: {

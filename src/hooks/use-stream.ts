@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useStreamContext } from "@/components/stream-provider";
 
 export function useStream({
   promptId,
@@ -9,8 +9,7 @@ export function useStream({
   data: string;
   onFinish?: (results: Record<string, string>) => void;
 }) {
-  const [results, setResults] = useState<Record<string, string>>({});
-  const [isLoading, setIsLoading] = useState(false);
+  const { setResults, setIsLoading } = useStreamContext();
 
   async function streamResponse() {
     setIsLoading(true);
@@ -106,9 +105,6 @@ export function useStream({
   }
 
   return {
-    results,
-    setResults,
-    isLoading,
     streamResponse,
   };
 }

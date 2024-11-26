@@ -20,11 +20,15 @@ export function CardWrapper({
   theme,
   className,
 }: CardWrapperProps) {
+  console.log({
+    rowSpan: gridConfig.rowSpan,
+    colSpan: gridConfig.colSpan,
+  });
   return (
     <Card
       className={cn(
-        `col-span-${gridConfig.colSpan}`.replace("col-span-", "col-span-"),
-        `row-span-${gridConfig.rowSpan}`.replace("row-span-", "row-span-"),
+        `col-span-${gridConfig.colSpan}`,
+        `row-span-${gridConfig.rowSpan}`,
         theme.backgroundColor,
         theme.textColor,
         className,

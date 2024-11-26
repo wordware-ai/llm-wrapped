@@ -9,8 +9,7 @@ export default async function ResultsPage() {
   const spotifyResult = await api.spotifyUser.getSpotifyResult();
 
   return (
-    <div>
-      <div className="h-14 w-full">Wordware</div>
+    <div className="p-8">
       <SpotifyResults
         data={JSON.stringify({
           topArtists,

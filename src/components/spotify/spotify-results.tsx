@@ -1,12 +1,13 @@
 "use client";
 
-import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useStream } from "@/hooks/use-stream";
 import { api } from "@/trpc/react";
 import { type SpotifyResult } from "@prisma/client";
 import { useEffect } from "react";
 import { CardWrapper } from "./bento-cards/base-card";
 import { cardConfigs } from "./card-config";
+import { useRouter } from "next/router";
+import { useStreamContext } from "../stream-provider";
 
 export function SpotifyResults({
   data,
@@ -38,7 +39,8 @@ export function SpotifyResults({
     createSpotifyResult(spotifyResult);
   };
 
-  const { results, setResults, isLoading, streamResponse } = useStream({
+  const { results, setResults } = useStreamContext();
+  const { streamResponse } = useStream({
     promptId: "ed4202f2-12b7-401c-a233-545b80dc740c",
     data: "i like the smiths",
     onFinish,
@@ -66,7 +68,7 @@ export function SpotifyResults({
     }
   }, [result]);
 
-  console.log("results", results);
+  const router = useRouter();
 
   const renderCard = (key: string, content?: string) => {
     const config = cardConfigs[key];
@@ -79,33 +81,24 @@ export function SpotifyResults({
         theme={config.theme}
         key={config.id}
       >
-        <div className="h-full max-h-[200px] overflow-y-auto">
-          <BentoComponent content={content} />
-        </div>
+        <BentoComponent content={content} />
       </CardWrapper>
     );
   };
 
-  console.log("results", results);
-
   return (
-    <div className="p-4">
-      <div className="grid h-[800px] grid-cols-12 gap-4">
-        {renderCard("musicTasteAnalysis", results.music_taste_analysis)}
-        {renderCard("identityCrisis", results.identity_crisis_level)}
-        {renderCard("emotionalStability", results.emotional_stability_rating)}
-        {renderCard("danceFloorCredibility", results.dance_floor_credibility)}
-        {renderCard("timeMachineStatus", results.time_machine_status)}
-        {renderCard("achievementUnlocked", results.achievement_unlocked)}
-        {renderCard("geographicConfusion", results.geographic_confusion_score)}
-        {renderCard("guiltyPleasureSong", results.guilty_pleasure_song)}
-        {renderCard(
-          "songsYouThinkAreAboutYou",
-          results.songs_you_secretly_think_are_about_you,
+    <div className="space-y-4 p-4">
+      <div className="grid grid-cols-12 grid-rows-[12] gap-4">
+        <div
+          onClick={() => router.push(`/results?slide=music_taste_analysis`)}
+          className="col-span-2 row-span-2"
+        >
+          <div className="size-40 rounded-full bg-blue-500" />
+        </div>
+
+        {Object.entries(cardConfigs).map(([key, config]) =>
+          renderCard(key, results[config.id]),
         )}
-        {renderCard("lyricTherapistNeeded", results.lyric_therapist_needed)}
-        {renderCard("finalDiagnosis", results.final_diagnosis)}
-        {renderCard("recommendation", results.recommendation)}
       </div>
     </div>
   );
