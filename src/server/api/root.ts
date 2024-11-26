@@ -1,4 +1,5 @@
-import { spotifyRouter } from "@/server/api/routers/spotify";
+import { spotifyApiRouter } from "@/server/api/routers/spotify-api";
+import { spotifyUserRouter } from "@/server/api/routers/spotify-user";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 import { wordwareRouter } from "./routers/wordware";
 import { usersRouter } from "./routers/users";
@@ -9,7 +10,8 @@ import { usersRouter } from "./routers/users";
  */
 export const appRouter = createTRPCRouter({
   users: usersRouter,
-  spotify: spotifyRouter,
+  spotifyApi: spotifyApiRouter,
+  spotifyUser: spotifyUserRouter,
   wordware: wordwareRouter,
 });
 

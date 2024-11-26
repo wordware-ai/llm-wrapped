@@ -21,10 +21,10 @@ model User {
   updatedAt DateTime @updatedAt
 
   // Relations
-  spotifyRoast SpotifyRoast?
+  spotifyResult SpotifyResult?
 }
 
-model SpotifyRoast {
+model SpotifyResult {
   id                       String @id @default(cuid())
   musicTasteAnalysis       String
   identityCrisisLevel      String

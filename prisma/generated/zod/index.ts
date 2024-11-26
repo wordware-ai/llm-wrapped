@@ -14,7 +14,7 @@ export const TransactionIsolationLevelSchema = z.enum(['ReadUncommitted','ReadCo
 
 export const UserScalarFieldEnumSchema = z.enum(['id','email','name','createdAt','updatedAt']);
 
-export const SpotifyRoastScalarFieldEnumSchema = z.enum(['id','musicTasteAnalysis','identityCrisisLevel','emotionalStability','danceFloorCredibility','timeMachineStatus','achievementUnlocked','geographicConfusion','guiltyPleasureSong','songsYouThinkAreAboutYou','lyricTherapistNeeded','finalDiagnosis','recommendation','createdAt','updatedAt','userId']);
+export const SpotifyResultScalarFieldEnumSchema = z.enum(['id','musicTasteAnalysis','identityCrisisLevel','emotionalStability','danceFloorCredibility','timeMachineStatus','achievementUnlocked','geographicConfusion','guiltyPleasureSong','songsYouThinkAreAboutYou','lyricTherapistNeeded','finalDiagnosis','recommendation','createdAt','updatedAt','userId']);
 
 export const SortOrderSchema = z.enum(['asc','desc']);
 
@@ -40,10 +40,10 @@ export const UserSchema = z.object({
 export type User = z.infer<typeof UserSchema>
 
 /////////////////////////////////////////
-// SPOTIFY ROAST SCHEMA
+// SPOTIFY RESULT SCHEMA
 /////////////////////////////////////////
 
-export const SpotifyRoastSchema = z.object({
+export const SpotifyResultSchema = z.object({
   id: z.string().cuid(),
   musicTasteAnalysis: z.string(),
   identityCrisisLevel: z.string(),
@@ -62,7 +62,7 @@ export const SpotifyRoastSchema = z.object({
   userId: z.string(),
 })
 
-export type SpotifyRoast = z.infer<typeof SpotifyRoastSchema>
+export type SpotifyResult = z.infer<typeof SpotifyResultSchema>
 
 /////////////////////////////////////////
 // SELECT & INCLUDE
@@ -72,7 +72,7 @@ export type SpotifyRoast = z.infer<typeof SpotifyRoastSchema>
 //------------------------------------------------------
 
 export const UserIncludeSchema: z.ZodType<Prisma.UserInclude> = z.object({
-  spotifyRoast: z.union([z.boolean(),z.lazy(() => SpotifyRoastArgsSchema)]).optional(),
+  spotifyResult: z.union([z.boolean(),z.lazy(() => SpotifyResultArgsSchema)]).optional(),
 }).strict()
 
 export const UserArgsSchema: z.ZodType<Prisma.UserDefaultArgs> = z.object({
@@ -86,22 +86,22 @@ export const UserSelectSchema: z.ZodType<Prisma.UserSelect> = z.object({
   name: z.boolean().optional(),
   createdAt: z.boolean().optional(),
   updatedAt: z.boolean().optional(),
-  spotifyRoast: z.union([z.boolean(),z.lazy(() => SpotifyRoastArgsSchema)]).optional(),
+  spotifyResult: z.union([z.boolean(),z.lazy(() => SpotifyResultArgsSchema)]).optional(),
 }).strict()
 
-// SPOTIFY ROAST
+// SPOTIFY RESULT
 //------------------------------------------------------
 
-export const SpotifyRoastIncludeSchema: z.ZodType<Prisma.SpotifyRoastInclude> = z.object({
+export const SpotifyResultIncludeSchema: z.ZodType<Prisma.SpotifyResultInclude> = z.object({
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
 }).strict()
 
-export const SpotifyRoastArgsSchema: z.ZodType<Prisma.SpotifyRoastDefaultArgs> = z.object({
-  select: z.lazy(() => SpotifyRoastSelectSchema).optional(),
-  include: z.lazy(() => SpotifyRoastIncludeSchema).optional(),
+export const SpotifyResultArgsSchema: z.ZodType<Prisma.SpotifyResultDefaultArgs> = z.object({
+  select: z.lazy(() => SpotifyResultSelectSchema).optional(),
+  include: z.lazy(() => SpotifyResultIncludeSchema).optional(),
 }).strict();
 
-export const SpotifyRoastSelectSchema: z.ZodType<Prisma.SpotifyRoastSelect> = z.object({
+export const SpotifyResultSelectSchema: z.ZodType<Prisma.SpotifyResultSelect> = z.object({
   id: z.boolean().optional(),
   musicTasteAnalysis: z.boolean().optional(),
   identityCrisisLevel: z.boolean().optional(),
@@ -135,7 +135,7 @@ export const UserWhereInputSchema: z.ZodType<Prisma.UserWhereInput> = z.object({
   name: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
   createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
-  spotifyRoast: z.union([ z.lazy(() => SpotifyRoastNullableRelationFilterSchema),z.lazy(() => SpotifyRoastWhereInputSchema) ]).optional().nullable(),
+  spotifyResult: z.union([ z.lazy(() => SpotifyResultNullableRelationFilterSchema),z.lazy(() => SpotifyResultWhereInputSchema) ]).optional().nullable(),
 }).strict();
 
 export const UserOrderByWithRelationInputSchema: z.ZodType<Prisma.UserOrderByWithRelationInput> = z.object({
@@ -144,7 +144,7 @@ export const UserOrderByWithRelationInputSchema: z.ZodType<Prisma.UserOrderByWit
   name: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   createdAt: z.lazy(() => SortOrderSchema).optional(),
   updatedAt: z.lazy(() => SortOrderSchema).optional(),
-  spotifyRoast: z.lazy(() => SpotifyRoastOrderByWithRelationInputSchema).optional()
+  spotifyResult: z.lazy(() => SpotifyResultOrderByWithRelationInputSchema).optional()
 }).strict();
 
 export const UserWhereUniqueInputSchema: z.ZodType<Prisma.UserWhereUniqueInput> = z.union([
@@ -168,7 +168,7 @@ export const UserWhereUniqueInputSchema: z.ZodType<Prisma.UserWhereUniqueInput> 
   name: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
   createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
-  spotifyRoast: z.union([ z.lazy(() => SpotifyRoastNullableRelationFilterSchema),z.lazy(() => SpotifyRoastWhereInputSchema) ]).optional().nullable(),
+  spotifyResult: z.union([ z.lazy(() => SpotifyResultNullableRelationFilterSchema),z.lazy(() => SpotifyResultWhereInputSchema) ]).optional().nullable(),
 }).strict());
 
 export const UserOrderByWithAggregationInputSchema: z.ZodType<Prisma.UserOrderByWithAggregationInput> = z.object({
@@ -193,10 +193,10 @@ export const UserScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.UserScal
   updatedAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
 }).strict();
 
-export const SpotifyRoastWhereInputSchema: z.ZodType<Prisma.SpotifyRoastWhereInput> = z.object({
-  AND: z.union([ z.lazy(() => SpotifyRoastWhereInputSchema),z.lazy(() => SpotifyRoastWhereInputSchema).array() ]).optional(),
-  OR: z.lazy(() => SpotifyRoastWhereInputSchema).array().optional(),
-  NOT: z.union([ z.lazy(() => SpotifyRoastWhereInputSchema),z.lazy(() => SpotifyRoastWhereInputSchema).array() ]).optional(),
+export const SpotifyResultWhereInputSchema: z.ZodType<Prisma.SpotifyResultWhereInput> = z.object({
+  AND: z.union([ z.lazy(() => SpotifyResultWhereInputSchema),z.lazy(() => SpotifyResultWhereInputSchema).array() ]).optional(),
+  OR: z.lazy(() => SpotifyResultWhereInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => SpotifyResultWhereInputSchema),z.lazy(() => SpotifyResultWhereInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   musicTasteAnalysis: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   identityCrisisLevel: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
@@ -216,7 +216,7 @@ export const SpotifyRoastWhereInputSchema: z.ZodType<Prisma.SpotifyRoastWhereInp
   user: z.union([ z.lazy(() => UserRelationFilterSchema),z.lazy(() => UserWhereInputSchema) ]).optional(),
 }).strict();
 
-export const SpotifyRoastOrderByWithRelationInputSchema: z.ZodType<Prisma.SpotifyRoastOrderByWithRelationInput> = z.object({
+export const SpotifyResultOrderByWithRelationInputSchema: z.ZodType<Prisma.SpotifyResultOrderByWithRelationInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   musicTasteAnalysis: z.lazy(() => SortOrderSchema).optional(),
   identityCrisisLevel: z.lazy(() => SortOrderSchema).optional(),
@@ -236,7 +236,7 @@ export const SpotifyRoastOrderByWithRelationInputSchema: z.ZodType<Prisma.Spotif
   user: z.lazy(() => UserOrderByWithRelationInputSchema).optional()
 }).strict();
 
-export const SpotifyRoastWhereUniqueInputSchema: z.ZodType<Prisma.SpotifyRoastWhereUniqueInput> = z.union([
+export const SpotifyResultWhereUniqueInputSchema: z.ZodType<Prisma.SpotifyResultWhereUniqueInput> = z.union([
   z.object({
     id: z.string().cuid(),
     userId: z.string()
@@ -251,9 +251,9 @@ export const SpotifyRoastWhereUniqueInputSchema: z.ZodType<Prisma.SpotifyRoastWh
 .and(z.object({
   id: z.string().cuid().optional(),
   userId: z.string().optional(),
-  AND: z.union([ z.lazy(() => SpotifyRoastWhereInputSchema),z.lazy(() => SpotifyRoastWhereInputSchema).array() ]).optional(),
-  OR: z.lazy(() => SpotifyRoastWhereInputSchema).array().optional(),
-  NOT: z.union([ z.lazy(() => SpotifyRoastWhereInputSchema),z.lazy(() => SpotifyRoastWhereInputSchema).array() ]).optional(),
+  AND: z.union([ z.lazy(() => SpotifyResultWhereInputSchema),z.lazy(() => SpotifyResultWhereInputSchema).array() ]).optional(),
+  OR: z.lazy(() => SpotifyResultWhereInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => SpotifyResultWhereInputSchema),z.lazy(() => SpotifyResultWhereInputSchema).array() ]).optional(),
   musicTasteAnalysis: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   identityCrisisLevel: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   emotionalStability: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
@@ -271,7 +271,7 @@ export const SpotifyRoastWhereUniqueInputSchema: z.ZodType<Prisma.SpotifyRoastWh
   user: z.union([ z.lazy(() => UserRelationFilterSchema),z.lazy(() => UserWhereInputSchema) ]).optional(),
 }).strict());
 
-export const SpotifyRoastOrderByWithAggregationInputSchema: z.ZodType<Prisma.SpotifyRoastOrderByWithAggregationInput> = z.object({
+export const SpotifyResultOrderByWithAggregationInputSchema: z.ZodType<Prisma.SpotifyResultOrderByWithAggregationInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   musicTasteAnalysis: z.lazy(() => SortOrderSchema).optional(),
   identityCrisisLevel: z.lazy(() => SortOrderSchema).optional(),
@@ -288,15 +288,15 @@ export const SpotifyRoastOrderByWithAggregationInputSchema: z.ZodType<Prisma.Spo
   createdAt: z.lazy(() => SortOrderSchema).optional(),
   updatedAt: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional(),
-  _count: z.lazy(() => SpotifyRoastCountOrderByAggregateInputSchema).optional(),
-  _max: z.lazy(() => SpotifyRoastMaxOrderByAggregateInputSchema).optional(),
-  _min: z.lazy(() => SpotifyRoastMinOrderByAggregateInputSchema).optional()
+  _count: z.lazy(() => SpotifyResultCountOrderByAggregateInputSchema).optional(),
+  _max: z.lazy(() => SpotifyResultMaxOrderByAggregateInputSchema).optional(),
+  _min: z.lazy(() => SpotifyResultMinOrderByAggregateInputSchema).optional()
 }).strict();
 
-export const SpotifyRoastScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.SpotifyRoastScalarWhereWithAggregatesInput> = z.object({
-  AND: z.union([ z.lazy(() => SpotifyRoastScalarWhereWithAggregatesInputSchema),z.lazy(() => SpotifyRoastScalarWhereWithAggregatesInputSchema).array() ]).optional(),
-  OR: z.lazy(() => SpotifyRoastScalarWhereWithAggregatesInputSchema).array().optional(),
-  NOT: z.union([ z.lazy(() => SpotifyRoastScalarWhereWithAggregatesInputSchema),z.lazy(() => SpotifyRoastScalarWhereWithAggregatesInputSchema).array() ]).optional(),
+export const SpotifyResultScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.SpotifyResultScalarWhereWithAggregatesInput> = z.object({
+  AND: z.union([ z.lazy(() => SpotifyResultScalarWhereWithAggregatesInputSchema),z.lazy(() => SpotifyResultScalarWhereWithAggregatesInputSchema).array() ]).optional(),
+  OR: z.lazy(() => SpotifyResultScalarWhereWithAggregatesInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => SpotifyResultScalarWhereWithAggregatesInputSchema),z.lazy(() => SpotifyResultScalarWhereWithAggregatesInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   musicTasteAnalysis: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   identityCrisisLevel: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
@@ -321,7 +321,7 @@ export const UserCreateInputSchema: z.ZodType<Prisma.UserCreateInput> = z.object
   name: z.string().optional().nullable(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
-  spotifyRoast: z.lazy(() => SpotifyRoastCreateNestedOneWithoutUserInputSchema).optional()
+  spotifyResult: z.lazy(() => SpotifyResultCreateNestedOneWithoutUserInputSchema).optional()
 }).strict();
 
 export const UserUncheckedCreateInputSchema: z.ZodType<Prisma.UserUncheckedCreateInput> = z.object({
@@ -330,7 +330,7 @@ export const UserUncheckedCreateInputSchema: z.ZodType<Prisma.UserUncheckedCreat
   name: z.string().optional().nullable(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
-  spotifyRoast: z.lazy(() => SpotifyRoastUncheckedCreateNestedOneWithoutUserInputSchema).optional()
+  spotifyResult: z.lazy(() => SpotifyResultUncheckedCreateNestedOneWithoutUserInputSchema).optional()
 }).strict();
 
 export const UserUpdateInputSchema: z.ZodType<Prisma.UserUpdateInput> = z.object({
@@ -339,7 +339,7 @@ export const UserUpdateInputSchema: z.ZodType<Prisma.UserUpdateInput> = z.object
   name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
-  spotifyRoast: z.lazy(() => SpotifyRoastUpdateOneWithoutUserNestedInputSchema).optional()
+  spotifyResult: z.lazy(() => SpotifyResultUpdateOneWithoutUserNestedInputSchema).optional()
 }).strict();
 
 export const UserUncheckedUpdateInputSchema: z.ZodType<Prisma.UserUncheckedUpdateInput> = z.object({
@@ -348,7 +348,7 @@ export const UserUncheckedUpdateInputSchema: z.ZodType<Prisma.UserUncheckedUpdat
   name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
-  spotifyRoast: z.lazy(() => SpotifyRoastUncheckedUpdateOneWithoutUserNestedInputSchema).optional()
+  spotifyResult: z.lazy(() => SpotifyResultUncheckedUpdateOneWithoutUserNestedInputSchema).optional()
 }).strict();
 
 export const UserCreateManyInputSchema: z.ZodType<Prisma.UserCreateManyInput> = z.object({
@@ -375,7 +375,7 @@ export const UserUncheckedUpdateManyInputSchema: z.ZodType<Prisma.UserUncheckedU
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const SpotifyRoastCreateInputSchema: z.ZodType<Prisma.SpotifyRoastCreateInput> = z.object({
+export const SpotifyResultCreateInputSchema: z.ZodType<Prisma.SpotifyResultCreateInput> = z.object({
   id: z.string().cuid().optional(),
   musicTasteAnalysis: z.string(),
   identityCrisisLevel: z.string(),
@@ -391,10 +391,10 @@ export const SpotifyRoastCreateInputSchema: z.ZodType<Prisma.SpotifyRoastCreateI
   recommendation: z.string(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
-  user: z.lazy(() => UserCreateNestedOneWithoutSpotifyRoastInputSchema)
+  user: z.lazy(() => UserCreateNestedOneWithoutSpotifyResultInputSchema)
 }).strict();
 
-export const SpotifyRoastUncheckedCreateInputSchema: z.ZodType<Prisma.SpotifyRoastUncheckedCreateInput> = z.object({
+export const SpotifyResultUncheckedCreateInputSchema: z.ZodType<Prisma.SpotifyResultUncheckedCreateInput> = z.object({
   id: z.string().cuid().optional(),
   musicTasteAnalysis: z.string(),
   identityCrisisLevel: z.string(),
@@ -413,7 +413,7 @@ export const SpotifyRoastUncheckedCreateInputSchema: z.ZodType<Prisma.SpotifyRoa
   userId: z.string()
 }).strict();
 
-export const SpotifyRoastUpdateInputSchema: z.ZodType<Prisma.SpotifyRoastUpdateInput> = z.object({
+export const SpotifyResultUpdateInputSchema: z.ZodType<Prisma.SpotifyResultUpdateInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   musicTasteAnalysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   identityCrisisLevel: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -429,10 +429,10 @@ export const SpotifyRoastUpdateInputSchema: z.ZodType<Prisma.SpotifyRoastUpdateI
   recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
-  user: z.lazy(() => UserUpdateOneRequiredWithoutSpotifyRoastNestedInputSchema).optional()
+  user: z.lazy(() => UserUpdateOneRequiredWithoutSpotifyResultNestedInputSchema).optional()
 }).strict();
 
-export const SpotifyRoastUncheckedUpdateInputSchema: z.ZodType<Prisma.SpotifyRoastUncheckedUpdateInput> = z.object({
+export const SpotifyResultUncheckedUpdateInputSchema: z.ZodType<Prisma.SpotifyResultUncheckedUpdateInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   musicTasteAnalysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   identityCrisisLevel: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -451,7 +451,7 @@ export const SpotifyRoastUncheckedUpdateInputSchema: z.ZodType<Prisma.SpotifyRoa
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const SpotifyRoastCreateManyInputSchema: z.ZodType<Prisma.SpotifyRoastCreateManyInput> = z.object({
+export const SpotifyResultCreateManyInputSchema: z.ZodType<Prisma.SpotifyResultCreateManyInput> = z.object({
   id: z.string().cuid().optional(),
   musicTasteAnalysis: z.string(),
   identityCrisisLevel: z.string(),
@@ -470,7 +470,7 @@ export const SpotifyRoastCreateManyInputSchema: z.ZodType<Prisma.SpotifyRoastCre
   userId: z.string()
 }).strict();
 
-export const SpotifyRoastUpdateManyMutationInputSchema: z.ZodType<Prisma.SpotifyRoastUpdateManyMutationInput> = z.object({
+export const SpotifyResultUpdateManyMutationInputSchema: z.ZodType<Prisma.SpotifyResultUpdateManyMutationInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   musicTasteAnalysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   identityCrisisLevel: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -488,7 +488,7 @@ export const SpotifyRoastUpdateManyMutationInputSchema: z.ZodType<Prisma.Spotify
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const SpotifyRoastUncheckedUpdateManyInputSchema: z.ZodType<Prisma.SpotifyRoastUncheckedUpdateManyInput> = z.object({
+export const SpotifyResultUncheckedUpdateManyInputSchema: z.ZodType<Prisma.SpotifyResultUncheckedUpdateManyInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   musicTasteAnalysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   identityCrisisLevel: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -548,9 +548,9 @@ export const DateTimeFilterSchema: z.ZodType<Prisma.DateTimeFilter> = z.object({
   not: z.union([ z.coerce.date(),z.lazy(() => NestedDateTimeFilterSchema) ]).optional(),
 }).strict();
 
-export const SpotifyRoastNullableRelationFilterSchema: z.ZodType<Prisma.SpotifyRoastNullableRelationFilter> = z.object({
-  is: z.lazy(() => SpotifyRoastWhereInputSchema).optional().nullable(),
-  isNot: z.lazy(() => SpotifyRoastWhereInputSchema).optional().nullable()
+export const SpotifyResultNullableRelationFilterSchema: z.ZodType<Prisma.SpotifyResultNullableRelationFilter> = z.object({
+  is: z.lazy(() => SpotifyResultWhereInputSchema).optional().nullable(),
+  isNot: z.lazy(() => SpotifyResultWhereInputSchema).optional().nullable()
 }).strict();
 
 export const SortOrderInputSchema: z.ZodType<Prisma.SortOrderInput> = z.object({
@@ -637,7 +637,7 @@ export const UserRelationFilterSchema: z.ZodType<Prisma.UserRelationFilter> = z.
   isNot: z.lazy(() => UserWhereInputSchema).optional()
 }).strict();
 
-export const SpotifyRoastCountOrderByAggregateInputSchema: z.ZodType<Prisma.SpotifyRoastCountOrderByAggregateInput> = z.object({
+export const SpotifyResultCountOrderByAggregateInputSchema: z.ZodType<Prisma.SpotifyResultCountOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   musicTasteAnalysis: z.lazy(() => SortOrderSchema).optional(),
   identityCrisisLevel: z.lazy(() => SortOrderSchema).optional(),
@@ -656,7 +656,7 @@ export const SpotifyRoastCountOrderByAggregateInputSchema: z.ZodType<Prisma.Spot
   userId: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
-export const SpotifyRoastMaxOrderByAggregateInputSchema: z.ZodType<Prisma.SpotifyRoastMaxOrderByAggregateInput> = z.object({
+export const SpotifyResultMaxOrderByAggregateInputSchema: z.ZodType<Prisma.SpotifyResultMaxOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   musicTasteAnalysis: z.lazy(() => SortOrderSchema).optional(),
   identityCrisisLevel: z.lazy(() => SortOrderSchema).optional(),
@@ -675,7 +675,7 @@ export const SpotifyRoastMaxOrderByAggregateInputSchema: z.ZodType<Prisma.Spotif
   userId: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
-export const SpotifyRoastMinOrderByAggregateInputSchema: z.ZodType<Prisma.SpotifyRoastMinOrderByAggregateInput> = z.object({
+export const SpotifyResultMinOrderByAggregateInputSchema: z.ZodType<Prisma.SpotifyResultMinOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   musicTasteAnalysis: z.lazy(() => SortOrderSchema).optional(),
   identityCrisisLevel: z.lazy(() => SortOrderSchema).optional(),
@@ -694,16 +694,16 @@ export const SpotifyRoastMinOrderByAggregateInputSchema: z.ZodType<Prisma.Spotif
   userId: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
-export const SpotifyRoastCreateNestedOneWithoutUserInputSchema: z.ZodType<Prisma.SpotifyRoastCreateNestedOneWithoutUserInput> = z.object({
-  create: z.union([ z.lazy(() => SpotifyRoastCreateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedCreateWithoutUserInputSchema) ]).optional(),
-  connectOrCreate: z.lazy(() => SpotifyRoastCreateOrConnectWithoutUserInputSchema).optional(),
-  connect: z.lazy(() => SpotifyRoastWhereUniqueInputSchema).optional()
+export const SpotifyResultCreateNestedOneWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultCreateNestedOneWithoutUserInput> = z.object({
+  create: z.union([ z.lazy(() => SpotifyResultCreateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedCreateWithoutUserInputSchema) ]).optional(),
+  connectOrCreate: z.lazy(() => SpotifyResultCreateOrConnectWithoutUserInputSchema).optional(),
+  connect: z.lazy(() => SpotifyResultWhereUniqueInputSchema).optional()
 }).strict();
 
-export const SpotifyRoastUncheckedCreateNestedOneWithoutUserInputSchema: z.ZodType<Prisma.SpotifyRoastUncheckedCreateNestedOneWithoutUserInput> = z.object({
-  create: z.union([ z.lazy(() => SpotifyRoastCreateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedCreateWithoutUserInputSchema) ]).optional(),
-  connectOrCreate: z.lazy(() => SpotifyRoastCreateOrConnectWithoutUserInputSchema).optional(),
-  connect: z.lazy(() => SpotifyRoastWhereUniqueInputSchema).optional()
+export const SpotifyResultUncheckedCreateNestedOneWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultUncheckedCreateNestedOneWithoutUserInput> = z.object({
+  create: z.union([ z.lazy(() => SpotifyResultCreateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedCreateWithoutUserInputSchema) ]).optional(),
+  connectOrCreate: z.lazy(() => SpotifyResultCreateOrConnectWithoutUserInputSchema).optional(),
+  connect: z.lazy(() => SpotifyResultWhereUniqueInputSchema).optional()
 }).strict();
 
 export const StringFieldUpdateOperationsInputSchema: z.ZodType<Prisma.StringFieldUpdateOperationsInput> = z.object({
@@ -718,38 +718,38 @@ export const DateTimeFieldUpdateOperationsInputSchema: z.ZodType<Prisma.DateTime
   set: z.coerce.date().optional()
 }).strict();
 
-export const SpotifyRoastUpdateOneWithoutUserNestedInputSchema: z.ZodType<Prisma.SpotifyRoastUpdateOneWithoutUserNestedInput> = z.object({
-  create: z.union([ z.lazy(() => SpotifyRoastCreateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedCreateWithoutUserInputSchema) ]).optional(),
-  connectOrCreate: z.lazy(() => SpotifyRoastCreateOrConnectWithoutUserInputSchema).optional(),
-  upsert: z.lazy(() => SpotifyRoastUpsertWithoutUserInputSchema).optional(),
-  disconnect: z.union([ z.boolean(),z.lazy(() => SpotifyRoastWhereInputSchema) ]).optional(),
-  delete: z.union([ z.boolean(),z.lazy(() => SpotifyRoastWhereInputSchema) ]).optional(),
-  connect: z.lazy(() => SpotifyRoastWhereUniqueInputSchema).optional(),
-  update: z.union([ z.lazy(() => SpotifyRoastUpdateToOneWithWhereWithoutUserInputSchema),z.lazy(() => SpotifyRoastUpdateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedUpdateWithoutUserInputSchema) ]).optional(),
+export const SpotifyResultUpdateOneWithoutUserNestedInputSchema: z.ZodType<Prisma.SpotifyResultUpdateOneWithoutUserNestedInput> = z.object({
+  create: z.union([ z.lazy(() => SpotifyResultCreateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedCreateWithoutUserInputSchema) ]).optional(),
+  connectOrCreate: z.lazy(() => SpotifyResultCreateOrConnectWithoutUserInputSchema).optional(),
+  upsert: z.lazy(() => SpotifyResultUpsertWithoutUserInputSchema).optional(),
+  disconnect: z.union([ z.boolean(),z.lazy(() => SpotifyResultWhereInputSchema) ]).optional(),
+  delete: z.union([ z.boolean(),z.lazy(() => SpotifyResultWhereInputSchema) ]).optional(),
+  connect: z.lazy(() => SpotifyResultWhereUniqueInputSchema).optional(),
+  update: z.union([ z.lazy(() => SpotifyResultUpdateToOneWithWhereWithoutUserInputSchema),z.lazy(() => SpotifyResultUpdateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedUpdateWithoutUserInputSchema) ]).optional(),
 }).strict();
 
-export const SpotifyRoastUncheckedUpdateOneWithoutUserNestedInputSchema: z.ZodType<Prisma.SpotifyRoastUncheckedUpdateOneWithoutUserNestedInput> = z.object({
-  create: z.union([ z.lazy(() => SpotifyRoastCreateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedCreateWithoutUserInputSchema) ]).optional(),
-  connectOrCreate: z.lazy(() => SpotifyRoastCreateOrConnectWithoutUserInputSchema).optional(),
-  upsert: z.lazy(() => SpotifyRoastUpsertWithoutUserInputSchema).optional(),
-  disconnect: z.union([ z.boolean(),z.lazy(() => SpotifyRoastWhereInputSchema) ]).optional(),
-  delete: z.union([ z.boolean(),z.lazy(() => SpotifyRoastWhereInputSchema) ]).optional(),
-  connect: z.lazy(() => SpotifyRoastWhereUniqueInputSchema).optional(),
-  update: z.union([ z.lazy(() => SpotifyRoastUpdateToOneWithWhereWithoutUserInputSchema),z.lazy(() => SpotifyRoastUpdateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedUpdateWithoutUserInputSchema) ]).optional(),
+export const SpotifyResultUncheckedUpdateOneWithoutUserNestedInputSchema: z.ZodType<Prisma.SpotifyResultUncheckedUpdateOneWithoutUserNestedInput> = z.object({
+  create: z.union([ z.lazy(() => SpotifyResultCreateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedCreateWithoutUserInputSchema) ]).optional(),
+  connectOrCreate: z.lazy(() => SpotifyResultCreateOrConnectWithoutUserInputSchema).optional(),
+  upsert: z.lazy(() => SpotifyResultUpsertWithoutUserInputSchema).optional(),
+  disconnect: z.union([ z.boolean(),z.lazy(() => SpotifyResultWhereInputSchema) ]).optional(),
+  delete: z.union([ z.boolean(),z.lazy(() => SpotifyResultWhereInputSchema) ]).optional(),
+  connect: z.lazy(() => SpotifyResultWhereUniqueInputSchema).optional(),
+  update: z.union([ z.lazy(() => SpotifyResultUpdateToOneWithWhereWithoutUserInputSchema),z.lazy(() => SpotifyResultUpdateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedUpdateWithoutUserInputSchema) ]).optional(),
 }).strict();
 
-export const UserCreateNestedOneWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserCreateNestedOneWithoutSpotifyRoastInput> = z.object({
-  create: z.union([ z.lazy(() => UserCreateWithoutSpotifyRoastInputSchema),z.lazy(() => UserUncheckedCreateWithoutSpotifyRoastInputSchema) ]).optional(),
-  connectOrCreate: z.lazy(() => UserCreateOrConnectWithoutSpotifyRoastInputSchema).optional(),
+export const UserCreateNestedOneWithoutSpotifyResultInputSchema: z.ZodType<Prisma.UserCreateNestedOneWithoutSpotifyResultInput> = z.object({
+  create: z.union([ z.lazy(() => UserCreateWithoutSpotifyResultInputSchema),z.lazy(() => UserUncheckedCreateWithoutSpotifyResultInputSchema) ]).optional(),
+  connectOrCreate: z.lazy(() => UserCreateOrConnectWithoutSpotifyResultInputSchema).optional(),
   connect: z.lazy(() => UserWhereUniqueInputSchema).optional()
 }).strict();
 
-export const UserUpdateOneRequiredWithoutSpotifyRoastNestedInputSchema: z.ZodType<Prisma.UserUpdateOneRequiredWithoutSpotifyRoastNestedInput> = z.object({
-  create: z.union([ z.lazy(() => UserCreateWithoutSpotifyRoastInputSchema),z.lazy(() => UserUncheckedCreateWithoutSpotifyRoastInputSchema) ]).optional(),
-  connectOrCreate: z.lazy(() => UserCreateOrConnectWithoutSpotifyRoastInputSchema).optional(),
-  upsert: z.lazy(() => UserUpsertWithoutSpotifyRoastInputSchema).optional(),
+export const UserUpdateOneRequiredWithoutSpotifyResultNestedInputSchema: z.ZodType<Prisma.UserUpdateOneRequiredWithoutSpotifyResultNestedInput> = z.object({
+  create: z.union([ z.lazy(() => UserCreateWithoutSpotifyResultInputSchema),z.lazy(() => UserUncheckedCreateWithoutSpotifyResultInputSchema) ]).optional(),
+  connectOrCreate: z.lazy(() => UserCreateOrConnectWithoutSpotifyResultInputSchema).optional(),
+  upsert: z.lazy(() => UserUpsertWithoutSpotifyResultInputSchema).optional(),
   connect: z.lazy(() => UserWhereUniqueInputSchema).optional(),
-  update: z.union([ z.lazy(() => UserUpdateToOneWithWhereWithoutSpotifyRoastInputSchema),z.lazy(() => UserUpdateWithoutSpotifyRoastInputSchema),z.lazy(() => UserUncheckedUpdateWithoutSpotifyRoastInputSchema) ]).optional(),
+  update: z.union([ z.lazy(() => UserUpdateToOneWithWhereWithoutSpotifyResultInputSchema),z.lazy(() => UserUpdateWithoutSpotifyResultInputSchema),z.lazy(() => UserUncheckedUpdateWithoutSpotifyResultInputSchema) ]).optional(),
 }).strict();
 
 export const NestedStringFilterSchema: z.ZodType<Prisma.NestedStringFilter> = z.object({
@@ -861,7 +861,7 @@ export const NestedDateTimeWithAggregatesFilterSchema: z.ZodType<Prisma.NestedDa
   _max: z.lazy(() => NestedDateTimeFilterSchema).optional()
 }).strict();
 
-export const SpotifyRoastCreateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyRoastCreateWithoutUserInput> = z.object({
+export const SpotifyResultCreateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultCreateWithoutUserInput> = z.object({
   id: z.string().cuid().optional(),
   musicTasteAnalysis: z.string(),
   identityCrisisLevel: z.string(),
@@ -879,7 +879,7 @@ export const SpotifyRoastCreateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyR
   updatedAt: z.coerce.date().optional()
 }).strict();
 
-export const SpotifyRoastUncheckedCreateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyRoastUncheckedCreateWithoutUserInput> = z.object({
+export const SpotifyResultUncheckedCreateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultUncheckedCreateWithoutUserInput> = z.object({
   id: z.string().cuid().optional(),
   musicTasteAnalysis: z.string(),
   identityCrisisLevel: z.string(),
@@ -897,23 +897,23 @@ export const SpotifyRoastUncheckedCreateWithoutUserInputSchema: z.ZodType<Prisma
   updatedAt: z.coerce.date().optional()
 }).strict();
 
-export const SpotifyRoastCreateOrConnectWithoutUserInputSchema: z.ZodType<Prisma.SpotifyRoastCreateOrConnectWithoutUserInput> = z.object({
-  where: z.lazy(() => SpotifyRoastWhereUniqueInputSchema),
-  create: z.union([ z.lazy(() => SpotifyRoastCreateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedCreateWithoutUserInputSchema) ]),
+export const SpotifyResultCreateOrConnectWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultCreateOrConnectWithoutUserInput> = z.object({
+  where: z.lazy(() => SpotifyResultWhereUniqueInputSchema),
+  create: z.union([ z.lazy(() => SpotifyResultCreateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedCreateWithoutUserInputSchema) ]),
 }).strict();
 
-export const SpotifyRoastUpsertWithoutUserInputSchema: z.ZodType<Prisma.SpotifyRoastUpsertWithoutUserInput> = z.object({
-  update: z.union([ z.lazy(() => SpotifyRoastUpdateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedUpdateWithoutUserInputSchema) ]),
-  create: z.union([ z.lazy(() => SpotifyRoastCreateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedCreateWithoutUserInputSchema) ]),
-  where: z.lazy(() => SpotifyRoastWhereInputSchema).optional()
+export const SpotifyResultUpsertWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultUpsertWithoutUserInput> = z.object({
+  update: z.union([ z.lazy(() => SpotifyResultUpdateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedUpdateWithoutUserInputSchema) ]),
+  create: z.union([ z.lazy(() => SpotifyResultCreateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedCreateWithoutUserInputSchema) ]),
+  where: z.lazy(() => SpotifyResultWhereInputSchema).optional()
 }).strict();
 
-export const SpotifyRoastUpdateToOneWithWhereWithoutUserInputSchema: z.ZodType<Prisma.SpotifyRoastUpdateToOneWithWhereWithoutUserInput> = z.object({
-  where: z.lazy(() => SpotifyRoastWhereInputSchema).optional(),
-  data: z.union([ z.lazy(() => SpotifyRoastUpdateWithoutUserInputSchema),z.lazy(() => SpotifyRoastUncheckedUpdateWithoutUserInputSchema) ]),
+export const SpotifyResultUpdateToOneWithWhereWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultUpdateToOneWithWhereWithoutUserInput> = z.object({
+  where: z.lazy(() => SpotifyResultWhereInputSchema).optional(),
+  data: z.union([ z.lazy(() => SpotifyResultUpdateWithoutUserInputSchema),z.lazy(() => SpotifyResultUncheckedUpdateWithoutUserInputSchema) ]),
 }).strict();
 
-export const SpotifyRoastUpdateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyRoastUpdateWithoutUserInput> = z.object({
+export const SpotifyResultUpdateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultUpdateWithoutUserInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   musicTasteAnalysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   identityCrisisLevel: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -931,7 +931,7 @@ export const SpotifyRoastUpdateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyR
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const SpotifyRoastUncheckedUpdateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyRoastUncheckedUpdateWithoutUserInput> = z.object({
+export const SpotifyResultUncheckedUpdateWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultUncheckedUpdateWithoutUserInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   musicTasteAnalysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   identityCrisisLevel: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -949,7 +949,7 @@ export const SpotifyRoastUncheckedUpdateWithoutUserInputSchema: z.ZodType<Prisma
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const UserCreateWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserCreateWithoutSpotifyRoastInput> = z.object({
+export const UserCreateWithoutSpotifyResultInputSchema: z.ZodType<Prisma.UserCreateWithoutSpotifyResultInput> = z.object({
   id: z.string(),
   email: z.string().optional().nullable(),
   name: z.string().optional().nullable(),
@@ -957,7 +957,7 @@ export const UserCreateWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserCrea
   updatedAt: z.coerce.date().optional()
 }).strict();
 
-export const UserUncheckedCreateWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserUncheckedCreateWithoutSpotifyRoastInput> = z.object({
+export const UserUncheckedCreateWithoutSpotifyResultInputSchema: z.ZodType<Prisma.UserUncheckedCreateWithoutSpotifyResultInput> = z.object({
   id: z.string(),
   email: z.string().optional().nullable(),
   name: z.string().optional().nullable(),
@@ -965,23 +965,23 @@ export const UserUncheckedCreateWithoutSpotifyRoastInputSchema: z.ZodType<Prisma
   updatedAt: z.coerce.date().optional()
 }).strict();
 
-export const UserCreateOrConnectWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserCreateOrConnectWithoutSpotifyRoastInput> = z.object({
+export const UserCreateOrConnectWithoutSpotifyResultInputSchema: z.ZodType<Prisma.UserCreateOrConnectWithoutSpotifyResultInput> = z.object({
   where: z.lazy(() => UserWhereUniqueInputSchema),
-  create: z.union([ z.lazy(() => UserCreateWithoutSpotifyRoastInputSchema),z.lazy(() => UserUncheckedCreateWithoutSpotifyRoastInputSchema) ]),
+  create: z.union([ z.lazy(() => UserCreateWithoutSpotifyResultInputSchema),z.lazy(() => UserUncheckedCreateWithoutSpotifyResultInputSchema) ]),
 }).strict();
 
-export const UserUpsertWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserUpsertWithoutSpotifyRoastInput> = z.object({
-  update: z.union([ z.lazy(() => UserUpdateWithoutSpotifyRoastInputSchema),z.lazy(() => UserUncheckedUpdateWithoutSpotifyRoastInputSchema) ]),
-  create: z.union([ z.lazy(() => UserCreateWithoutSpotifyRoastInputSchema),z.lazy(() => UserUncheckedCreateWithoutSpotifyRoastInputSchema) ]),
+export const UserUpsertWithoutSpotifyResultInputSchema: z.ZodType<Prisma.UserUpsertWithoutSpotifyResultInput> = z.object({
+  update: z.union([ z.lazy(() => UserUpdateWithoutSpotifyResultInputSchema),z.lazy(() => UserUncheckedUpdateWithoutSpotifyResultInputSchema) ]),
+  create: z.union([ z.lazy(() => UserCreateWithoutSpotifyResultInputSchema),z.lazy(() => UserUncheckedCreateWithoutSpotifyResultInputSchema) ]),
   where: z.lazy(() => UserWhereInputSchema).optional()
 }).strict();
 
-export const UserUpdateToOneWithWhereWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserUpdateToOneWithWhereWithoutSpotifyRoastInput> = z.object({
+export const UserUpdateToOneWithWhereWithoutSpotifyResultInputSchema: z.ZodType<Prisma.UserUpdateToOneWithWhereWithoutSpotifyResultInput> = z.object({
   where: z.lazy(() => UserWhereInputSchema).optional(),
-  data: z.union([ z.lazy(() => UserUpdateWithoutSpotifyRoastInputSchema),z.lazy(() => UserUncheckedUpdateWithoutSpotifyRoastInputSchema) ]),
+  data: z.union([ z.lazy(() => UserUpdateWithoutSpotifyResultInputSchema),z.lazy(() => UserUncheckedUpdateWithoutSpotifyResultInputSchema) ]),
 }).strict();
 
-export const UserUpdateWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserUpdateWithoutSpotifyRoastInput> = z.object({
+export const UserUpdateWithoutSpotifyResultInputSchema: z.ZodType<Prisma.UserUpdateWithoutSpotifyResultInput> = z.object({
   id: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   email: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
@@ -989,7 +989,7 @@ export const UserUpdateWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserUpda
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
-export const UserUncheckedUpdateWithoutSpotifyRoastInputSchema: z.ZodType<Prisma.UserUncheckedUpdateWithoutSpotifyRoastInput> = z.object({
+export const UserUncheckedUpdateWithoutSpotifyResultInputSchema: z.ZodType<Prisma.UserUncheckedUpdateWithoutSpotifyResultInput> = z.object({
   id: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   email: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
@@ -1063,66 +1063,66 @@ export const UserFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.UserFindUniqueOrT
   where: UserWhereUniqueInputSchema,
 }).strict() ;
 
-export const SpotifyRoastFindFirstArgsSchema: z.ZodType<Prisma.SpotifyRoastFindFirstArgs> = z.object({
-  select: SpotifyRoastSelectSchema.optional(),
-  include: SpotifyRoastIncludeSchema.optional(),
-  where: SpotifyRoastWhereInputSchema.optional(),
-  orderBy: z.union([ SpotifyRoastOrderByWithRelationInputSchema.array(),SpotifyRoastOrderByWithRelationInputSchema ]).optional(),
-  cursor: SpotifyRoastWhereUniqueInputSchema.optional(),
+export const SpotifyResultFindFirstArgsSchema: z.ZodType<Prisma.SpotifyResultFindFirstArgs> = z.object({
+  select: SpotifyResultSelectSchema.optional(),
+  include: SpotifyResultIncludeSchema.optional(),
+  where: SpotifyResultWhereInputSchema.optional(),
+  orderBy: z.union([ SpotifyResultOrderByWithRelationInputSchema.array(),SpotifyResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: SpotifyResultWhereUniqueInputSchema.optional(),
   take: z.number().optional(),
   skip: z.number().optional(),
-  distinct: z.union([ SpotifyRoastScalarFieldEnumSchema,SpotifyRoastScalarFieldEnumSchema.array() ]).optional(),
+  distinct: z.union([ SpotifyResultScalarFieldEnumSchema,SpotifyResultScalarFieldEnumSchema.array() ]).optional(),
 }).strict() ;
 
-export const SpotifyRoastFindFirstOrThrowArgsSchema: z.ZodType<Prisma.SpotifyRoastFindFirstOrThrowArgs> = z.object({
-  select: SpotifyRoastSelectSchema.optional(),
-  include: SpotifyRoastIncludeSchema.optional(),
-  where: SpotifyRoastWhereInputSchema.optional(),
-  orderBy: z.union([ SpotifyRoastOrderByWithRelationInputSchema.array(),SpotifyRoastOrderByWithRelationInputSchema ]).optional(),
-  cursor: SpotifyRoastWhereUniqueInputSchema.optional(),
+export const SpotifyResultFindFirstOrThrowArgsSchema: z.ZodType<Prisma.SpotifyResultFindFirstOrThrowArgs> = z.object({
+  select: SpotifyResultSelectSchema.optional(),
+  include: SpotifyResultIncludeSchema.optional(),
+  where: SpotifyResultWhereInputSchema.optional(),
+  orderBy: z.union([ SpotifyResultOrderByWithRelationInputSchema.array(),SpotifyResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: SpotifyResultWhereUniqueInputSchema.optional(),
   take: z.number().optional(),
   skip: z.number().optional(),
-  distinct: z.union([ SpotifyRoastScalarFieldEnumSchema,SpotifyRoastScalarFieldEnumSchema.array() ]).optional(),
+  distinct: z.union([ SpotifyResultScalarFieldEnumSchema,SpotifyResultScalarFieldEnumSchema.array() ]).optional(),
 }).strict() ;
 
-export const SpotifyRoastFindManyArgsSchema: z.ZodType<Prisma.SpotifyRoastFindManyArgs> = z.object({
-  select: SpotifyRoastSelectSchema.optional(),
-  include: SpotifyRoastIncludeSchema.optional(),
-  where: SpotifyRoastWhereInputSchema.optional(),
-  orderBy: z.union([ SpotifyRoastOrderByWithRelationInputSchema.array(),SpotifyRoastOrderByWithRelationInputSchema ]).optional(),
-  cursor: SpotifyRoastWhereUniqueInputSchema.optional(),
+export const SpotifyResultFindManyArgsSchema: z.ZodType<Prisma.SpotifyResultFindManyArgs> = z.object({
+  select: SpotifyResultSelectSchema.optional(),
+  include: SpotifyResultIncludeSchema.optional(),
+  where: SpotifyResultWhereInputSchema.optional(),
+  orderBy: z.union([ SpotifyResultOrderByWithRelationInputSchema.array(),SpotifyResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: SpotifyResultWhereUniqueInputSchema.optional(),
   take: z.number().optional(),
   skip: z.number().optional(),
-  distinct: z.union([ SpotifyRoastScalarFieldEnumSchema,SpotifyRoastScalarFieldEnumSchema.array() ]).optional(),
+  distinct: z.union([ SpotifyResultScalarFieldEnumSchema,SpotifyResultScalarFieldEnumSchema.array() ]).optional(),
 }).strict() ;
 
-export const SpotifyRoastAggregateArgsSchema: z.ZodType<Prisma.SpotifyRoastAggregateArgs> = z.object({
-  where: SpotifyRoastWhereInputSchema.optional(),
-  orderBy: z.union([ SpotifyRoastOrderByWithRelationInputSchema.array(),SpotifyRoastOrderByWithRelationInputSchema ]).optional(),
-  cursor: SpotifyRoastWhereUniqueInputSchema.optional(),
-  take: z.number().optional(),
-  skip: z.number().optional(),
-}).strict() ;
-
-export const SpotifyRoastGroupByArgsSchema: z.ZodType<Prisma.SpotifyRoastGroupByArgs> = z.object({
-  where: SpotifyRoastWhereInputSchema.optional(),
-  orderBy: z.union([ SpotifyRoastOrderByWithAggregationInputSchema.array(),SpotifyRoastOrderByWithAggregationInputSchema ]).optional(),
-  by: SpotifyRoastScalarFieldEnumSchema.array(),
-  having: SpotifyRoastScalarWhereWithAggregatesInputSchema.optional(),
+export const SpotifyResultAggregateArgsSchema: z.ZodType<Prisma.SpotifyResultAggregateArgs> = z.object({
+  where: SpotifyResultWhereInputSchema.optional(),
+  orderBy: z.union([ SpotifyResultOrderByWithRelationInputSchema.array(),SpotifyResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: SpotifyResultWhereUniqueInputSchema.optional(),
   take: z.number().optional(),
   skip: z.number().optional(),
 }).strict() ;
 
-export const SpotifyRoastFindUniqueArgsSchema: z.ZodType<Prisma.SpotifyRoastFindUniqueArgs> = z.object({
-  select: SpotifyRoastSelectSchema.optional(),
-  include: SpotifyRoastIncludeSchema.optional(),
-  where: SpotifyRoastWhereUniqueInputSchema,
+export const SpotifyResultGroupByArgsSchema: z.ZodType<Prisma.SpotifyResultGroupByArgs> = z.object({
+  where: SpotifyResultWhereInputSchema.optional(),
+  orderBy: z.union([ SpotifyResultOrderByWithAggregationInputSchema.array(),SpotifyResultOrderByWithAggregationInputSchema ]).optional(),
+  by: SpotifyResultScalarFieldEnumSchema.array(),
+  having: SpotifyResultScalarWhereWithAggregatesInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
 }).strict() ;
 
-export const SpotifyRoastFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.SpotifyRoastFindUniqueOrThrowArgs> = z.object({
-  select: SpotifyRoastSelectSchema.optional(),
-  include: SpotifyRoastIncludeSchema.optional(),
-  where: SpotifyRoastWhereUniqueInputSchema,
+export const SpotifyResultFindUniqueArgsSchema: z.ZodType<Prisma.SpotifyResultFindUniqueArgs> = z.object({
+  select: SpotifyResultSelectSchema.optional(),
+  include: SpotifyResultIncludeSchema.optional(),
+  where: SpotifyResultWhereUniqueInputSchema,
+}).strict() ;
+
+export const SpotifyResultFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.SpotifyResultFindUniqueOrThrowArgs> = z.object({
+  select: SpotifyResultSelectSchema.optional(),
+  include: SpotifyResultIncludeSchema.optional(),
+  where: SpotifyResultWhereUniqueInputSchema,
 }).strict() ;
 
 export const UserCreateArgsSchema: z.ZodType<Prisma.UserCreateArgs> = z.object({
@@ -1171,48 +1171,48 @@ export const UserDeleteManyArgsSchema: z.ZodType<Prisma.UserDeleteManyArgs> = z.
   where: UserWhereInputSchema.optional(),
 }).strict() ;
 
-export const SpotifyRoastCreateArgsSchema: z.ZodType<Prisma.SpotifyRoastCreateArgs> = z.object({
-  select: SpotifyRoastSelectSchema.optional(),
-  include: SpotifyRoastIncludeSchema.optional(),
-  data: z.union([ SpotifyRoastCreateInputSchema,SpotifyRoastUncheckedCreateInputSchema ]),
+export const SpotifyResultCreateArgsSchema: z.ZodType<Prisma.SpotifyResultCreateArgs> = z.object({
+  select: SpotifyResultSelectSchema.optional(),
+  include: SpotifyResultIncludeSchema.optional(),
+  data: z.union([ SpotifyResultCreateInputSchema,SpotifyResultUncheckedCreateInputSchema ]),
 }).strict() ;
 
-export const SpotifyRoastUpsertArgsSchema: z.ZodType<Prisma.SpotifyRoastUpsertArgs> = z.object({
-  select: SpotifyRoastSelectSchema.optional(),
-  include: SpotifyRoastIncludeSchema.optional(),
-  where: SpotifyRoastWhereUniqueInputSchema,
-  create: z.union([ SpotifyRoastCreateInputSchema,SpotifyRoastUncheckedCreateInputSchema ]),
-  update: z.union([ SpotifyRoastUpdateInputSchema,SpotifyRoastUncheckedUpdateInputSchema ]),
+export const SpotifyResultUpsertArgsSchema: z.ZodType<Prisma.SpotifyResultUpsertArgs> = z.object({
+  select: SpotifyResultSelectSchema.optional(),
+  include: SpotifyResultIncludeSchema.optional(),
+  where: SpotifyResultWhereUniqueInputSchema,
+  create: z.union([ SpotifyResultCreateInputSchema,SpotifyResultUncheckedCreateInputSchema ]),
+  update: z.union([ SpotifyResultUpdateInputSchema,SpotifyResultUncheckedUpdateInputSchema ]),
 }).strict() ;
 
-export const SpotifyRoastCreateManyArgsSchema: z.ZodType<Prisma.SpotifyRoastCreateManyArgs> = z.object({
-  data: z.union([ SpotifyRoastCreateManyInputSchema,SpotifyRoastCreateManyInputSchema.array() ]),
+export const SpotifyResultCreateManyArgsSchema: z.ZodType<Prisma.SpotifyResultCreateManyArgs> = z.object({
+  data: z.union([ SpotifyResultCreateManyInputSchema,SpotifyResultCreateManyInputSchema.array() ]),
   skipDuplicates: z.boolean().optional(),
 }).strict() ;
 
-export const SpotifyRoastCreateManyAndReturnArgsSchema: z.ZodType<Prisma.SpotifyRoastCreateManyAndReturnArgs> = z.object({
-  data: z.union([ SpotifyRoastCreateManyInputSchema,SpotifyRoastCreateManyInputSchema.array() ]),
+export const SpotifyResultCreateManyAndReturnArgsSchema: z.ZodType<Prisma.SpotifyResultCreateManyAndReturnArgs> = z.object({
+  data: z.union([ SpotifyResultCreateManyInputSchema,SpotifyResultCreateManyInputSchema.array() ]),
   skipDuplicates: z.boolean().optional(),
 }).strict() ;
 
-export const SpotifyRoastDeleteArgsSchema: z.ZodType<Prisma.SpotifyRoastDeleteArgs> = z.object({
-  select: SpotifyRoastSelectSchema.optional(),
-  include: SpotifyRoastIncludeSchema.optional(),
-  where: SpotifyRoastWhereUniqueInputSchema,
+export const SpotifyResultDeleteArgsSchema: z.ZodType<Prisma.SpotifyResultDeleteArgs> = z.object({
+  select: SpotifyResultSelectSchema.optional(),
+  include: SpotifyResultIncludeSchema.optional(),
+  where: SpotifyResultWhereUniqueInputSchema,
 }).strict() ;
 
-export const SpotifyRoastUpdateArgsSchema: z.ZodType<Prisma.SpotifyRoastUpdateArgs> = z.object({
-  select: SpotifyRoastSelectSchema.optional(),
-  include: SpotifyRoastIncludeSchema.optional(),
-  data: z.union([ SpotifyRoastUpdateInputSchema,SpotifyRoastUncheckedUpdateInputSchema ]),
-  where: SpotifyRoastWhereUniqueInputSchema,
+export const SpotifyResultUpdateArgsSchema: z.ZodType<Prisma.SpotifyResultUpdateArgs> = z.object({
+  select: SpotifyResultSelectSchema.optional(),
+  include: SpotifyResultIncludeSchema.optional(),
+  data: z.union([ SpotifyResultUpdateInputSchema,SpotifyResultUncheckedUpdateInputSchema ]),
+  where: SpotifyResultWhereUniqueInputSchema,
 }).strict() ;
 
-export const SpotifyRoastUpdateManyArgsSchema: z.ZodType<Prisma.SpotifyRoastUpdateManyArgs> = z.object({
-  data: z.union([ SpotifyRoastUpdateManyMutationInputSchema,SpotifyRoastUncheckedUpdateManyInputSchema ]),
-  where: SpotifyRoastWhereInputSchema.optional(),
+export const SpotifyResultUpdateManyArgsSchema: z.ZodType<Prisma.SpotifyResultUpdateManyArgs> = z.object({
+  data: z.union([ SpotifyResultUpdateManyMutationInputSchema,SpotifyResultUncheckedUpdateManyInputSchema ]),
+  where: SpotifyResultWhereInputSchema.optional(),
 }).strict() ;
 
-export const SpotifyRoastDeleteManyArgsSchema: z.ZodType<Prisma.SpotifyRoastDeleteManyArgs> = z.object({
-  where: SpotifyRoastWhereInputSchema.optional(),
+export const SpotifyResultDeleteManyArgsSchema: z.ZodType<Prisma.SpotifyResultDeleteManyArgs> = z.object({
+  where: SpotifyResultWhereInputSchema.optional(),
 }).strict() ;

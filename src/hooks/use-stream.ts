@@ -1,6 +1,14 @@
 import { useState } from "react";
 
-export function useStream(promptId: string) {
+export function useStream({
+  promptId,
+  data,
+  onFinish,
+}: {
+  promptId: string;
+  data: string;
+  onFinish?: (results: Record<string, string>) => void;
+}) {
   const [results, setResults] = useState<Record<string, string>>({});
   const [isLoading, setIsLoading] = useState(false);
 
@@ -15,7 +23,7 @@ export function useStream(promptId: string) {
       },
       body: JSON.stringify({
         inputs: {
-          data: "I like the smiths",
+          data,
         },
         version: "^1.0",
       }),
@@ -38,6 +46,7 @@ export function useStream(promptId: string) {
 
     try {
       let accumulatedData = "";
+      let finalResults: Record<string, string> = {};
 
       while (true) {
         const { done, value } = await reader.read();
@@ -78,12 +87,17 @@ export function useStream(promptId: string) {
               }
             });
 
+            finalResults = parsedResults;
             setResults(parsedResults);
           }
         } catch {
           // Continue if parsing fails
         }
       }
+
+      // Use finalResults for logging and callback
+      console.log("results", finalResults);
+      onFinish?.(finalResults);
     } catch (error) {
       console.error("Stream error:", error);
     } finally {

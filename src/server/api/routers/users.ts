@@ -1,14 +1,14 @@
 import { UserCreateInputSchema } from "prisma/generated/zod";
-import { createTRPCRouter, privateProcedure, publicProcedure } from "../trpc";
+import { createTRPCRouter, privateProcedure } from "../trpc";
 
 export const usersRouter = createTRPCRouter({
-  create: publicProcedure
+  create: privateProcedure
     .input(UserCreateInputSchema)
     .mutation(async ({ ctx, input }) => {
       const user = await ctx.db.user.create({
         data: {
-          id: ctx.user?.id,
           ...input,
+          id: ctx.user.id,
         },
       });
 

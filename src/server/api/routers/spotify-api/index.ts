@@ -9,7 +9,7 @@ import {
 } from "./schemas";
 
 // TRPC Router
-export const spotifyRouter = createTRPCRouter({
+export const spotifyApiRouter = createTRPCRouter({
   getTopArtists: privateProcedure
     .input(
       z
