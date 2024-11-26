@@ -7,6 +7,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { AuthProvider } from "@/components/auth-provider";
 import { getSession, getUser } from "@/lib/supabase/server";
 import { StreamProvider } from "@/components/stream-provider";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -27,6 +28,7 @@ export default async function RootLayout({
             <StreamProvider>{children}</StreamProvider>
           </AuthProvider>
         </TRPCReactProvider>
+        <Footer />
       </body>
     </html>
   );
