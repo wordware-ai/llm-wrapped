@@ -4,6 +4,8 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "@/trpc/react";
+import { AuthProvider } from "@/components/auth-provider";
+import { getSession, getUser } from "@/lib/supabase/server";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -11,13 +13,19 @@ export const metadata: Metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const { user } = await getUser();
+  const { session } = await getSession();
   return (
     <html lang="en" className={`${GeistSans.variable} dark`}>
       <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+        <TRPCReactProvider>
+          <AuthProvider user={user ?? undefined} session={session ?? undefined}>
+            {children}
+          </AuthProvider>
+        </TRPCReactProvider>
       </body>
     </html>
   );

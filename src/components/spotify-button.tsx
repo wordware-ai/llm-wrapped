@@ -1,13 +1,24 @@
 "use client";
 
-import { spotifyAuth } from "@/actions/spotify";
 import { Button } from "@/components/ui/button";
+import { env } from "@/env";
+import { createClient } from "@/lib/supabase/client";
 
 export function SpotifyButton() {
-  const handleAuth = async () => {
-    const authUrl = await spotifyAuth();
-    window.location.href = authUrl;
+  const supabase = createClient();
+
+  const handleLogin = async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: "spotify",
+      options: {
+        redirectTo: `${env.NEXT_PUBLIC_APP_URL}/auth/callback?next=/results`,
+        scopes: "user-read-email user-read-private user-top-read",
+      },
+    });
+    if (error) {
+      console.error("OAuth error", error);
+    }
   };
 
-  return <Button onClick={handleAuth}>Login with Spotify</Button>;
+  return <Button onClick={handleLogin}>Login with Spotify</Button>;
 }
