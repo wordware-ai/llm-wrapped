@@ -1,13 +1,16 @@
 import { spotifyRouter } from "@/server/api/routers/spotify";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
-
+import { wordwareRouter } from "./routers/wordware";
+import { usersRouter } from "./routers/users";
 /**
  * This is the primary router for your server.
  *
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
+  users: usersRouter,
   spotify: spotifyRouter,
+  wordware: wordwareRouter,
 });
 
 // export type definition of API

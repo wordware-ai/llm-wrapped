@@ -1,16 +1,27 @@
-import { z } from "zod";
+import { UserCreateInputSchema } from "prisma/generated/zod";
+import { createTRPCRouter, privateProcedure, publicProcedure } from "../trpc";
 
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
-import { type PrismaClient } from "@prisma/client";
-
-export const spotifyRouter = createTRPCRouter({
+export const usersRouter = createTRPCRouter({
   create: publicProcedure
-    .input(z.object({ name: z.string().min(1) }))
+    .input(UserCreateInputSchema)
     .mutation(async ({ ctx, input }) => {
-      return ctx.db.post.create({
+      const user = await ctx.db.user.create({
         data: {
-          name: input.name,
+          id: ctx.user?.id,
+          ...input,
         },
       });
+
+      return user;
     }),
+
+  getCurrent: privateProcedure.query(async ({ ctx }) => {
+    const user = await ctx.db.user.findUnique({
+      where: {
+        id: ctx.user.id,
+      },
+    });
+
+    return user;
+  }),
 });

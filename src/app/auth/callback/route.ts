@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { api } from "@/trpc/server";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -10,14 +11,15 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-    console.log("Provider tokens:", data.session?.provider_token);
-    console.log(
-      "Provider refresh token:",
-      data.session?.provider_refresh_token,
-    );
-    console.log("Access token:", data.session?.access_token);
-
-    if (!error) {
+    if (!error && data.user) {
+      const existingUser = await api.users.getCurrent();
+      if (!existingUser) {
+        await api.users.create({
+          id: "n/a",
+          name: (data.user.user_metadata as { name?: string }).name ?? null,
+          email: data.user.email,
+        });
+      }
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";
       if (isLocalEnv) {
