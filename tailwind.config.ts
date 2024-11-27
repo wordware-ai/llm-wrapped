@@ -9,6 +9,7 @@ export default {
       screens: {
         xs: "475px",
       },
+
       fontFamily: {
         sans: ["var(--font-geist-sans)", ...fontFamily.sans],
       },
@@ -58,6 +59,15 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+      },
+    },
+    animation: {
+      scroll: "scroll 20s linear infinite",
+    },
+    keyframes: {
+      scroll: {
+        "0%": { transform: "translateX(0)" },
+        "100%": { transform: "translateX(-100%)" },
       },
     },
   },
