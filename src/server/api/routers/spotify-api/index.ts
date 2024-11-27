@@ -4,10 +4,8 @@ import {
   recentlyPlayedResponseSchema,
   topArtistsResponseSchema,
   topTracksResponseSchema,
-  userProfileSchema,
 } from "./schemas";
-
-// TRPC Router
+import { convertToMarkdown } from "@/lib/convert-to-markdown";
 export const spotifyApiRouter = createTRPCRouter({
   getAllUserData: privateProcedure.query(async ({ ctx }) => {
     const params = new URLSearchParams({
@@ -16,7 +14,7 @@ export const spotifyApiRouter = createTRPCRouter({
     });
 
     // Fetch all data in parallel
-    const [topArtists, topTracks, userProfile, playlists, recentlyPlayed] =
+    const [topArtists, topTracks, playlists, recentlyPlayed] =
       await Promise.all([
         // Top Artists
         fetch(`https://api.spotify.com/v1/me/top/artists?${params}`, {
@@ -35,15 +33,6 @@ export const spotifyApiRouter = createTRPCRouter({
         })
           .then((res) => res.json())
           .then((data) => topTracksResponseSchema.parse(data)),
-
-        // User Profile
-        fetch("https://api.spotify.com/v1/me", {
-          headers: {
-            Authorization: `Bearer ${ctx.session?.provider_token}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => userProfileSchema.parse(data)),
 
         // Playlists
         fetch(`https://api.spotify.com/v1/me/playlists?${params}`, {
@@ -64,12 +53,62 @@ export const spotifyApiRouter = createTRPCRouter({
           .then((data) => recentlyPlayedResponseSchema.parse(data)),
       ]);
 
-    return {
-      topArtists: topArtistsResponseSchema.parse(topArtists),
-      topTracks: topTracksResponseSchema.parse(topTracks),
-      userProfile: userProfileSchema.parse(userProfile),
-      playlists: playlistsResponseSchema.parse(playlists),
-      recentlyPlayed: recentlyPlayedResponseSchema.parse(recentlyPlayed),
+    // Transform the data
+    const allArtistNames = topArtists.items.map((artist) => artist.name);
+
+    const allTracks = topTracks.items.map((track) => ({
+      trackName: track.name,
+      artistName: track.artists[0]?.name,
+    }));
+
+    const playlistNames = playlists.items.map((playlist) => playlist.name);
+
+    const recentlyPlayedTracks = recentlyPlayed.items.map((item) => ({
+      trackName: item.track.name,
+      artistName: item.track.artists[0]?.name,
+    }));
+
+    // Get top 5 least popular artists
+    const leastPopularArtists = [...topArtists.items]
+      .sort((a, b) => (a.popularity ?? 0) - (b.popularity ?? 0))
+      .slice(0, 5);
+
+    // Get top 5 most popular artists by popularity
+    const mostPopularArtists = [...topArtists.items]
+      .sort((a, b) => (b.popularity ?? 0) - (a.popularity ?? 0))
+      .slice(0, 5);
+
+    // Get top 5 artists by followers
+    const mostFollowedArtists = [...topArtists.items]
+      .sort((a, b) => (b.followers?.total ?? 0) - (a.followers?.total ?? 0))
+      .slice(0, 5);
+
+    // Get top 5 oldest songs
+    const oldestSongs = [...topTracks.items]
+      .sort(
+        (a, b) =>
+          new Date(a.album.release_date).getTime() -
+          new Date(b.album.release_date).getTime(),
+      )
+      .slice(0, 5)
+      .map((track) => ({
+        name: track.name,
+        artist: track.artists[0]?.name,
+        releaseDate: track.album.release_date,
+        albumName: track.album.name,
+      }));
+
+    const transformedData = {
+      allArtistNames,
+      allTracks,
+      playlistNames,
+      recentlyPlayedTracks,
+      leastPopularArtists,
+      mostPopularArtists,
+      mostFollowedArtists,
+      oldestSongs,
     };
+
+    return convertToMarkdown(transformedData);
   }),
 });

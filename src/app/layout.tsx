@@ -28,6 +28,7 @@ export default async function RootLayout({
             <StreamProvider>{children}</StreamProvider>
           </AuthProvider>
         </TRPCReactProvider>
+        <Footer />
       </body>
     </html>
   );

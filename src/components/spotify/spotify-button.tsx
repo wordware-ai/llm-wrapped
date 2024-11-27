@@ -8,6 +8,8 @@ export function SpotifyButton() {
   const supabase = createClient();
 
   const handleLogin = async () => {
+    console.log(env.NEXT_PUBLIC_APP_URL);
+
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "spotify",
       options: {

@@ -11,11 +11,13 @@ import Slideshow from "../slideshow";
 import StoryCircle from "../story-circle";
 import { useStreamContext } from "../stream-provider";
 import { Linkedin } from "lucide-react";
+import FirstCard from "./bento-cards/first-card";
+import ThirdCard from "./bento-cards/third-card";
+import SecondCard from "./bento-cards/second-card";
 
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
   const { session } = useUser();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: spotifyData } = api.spotifyApi.getAllUserData.useQuery(
     undefined,
     {
@@ -46,7 +48,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const { results, setResults } = useStreamContext();
   const { streamResponse } = useStream({
     promptId: "fbc771dc-7c8f-4deb-9a80-a15b8f355ab6",
-    data: "I like the smiths",
+    data: JSON.stringify(spotifyData),
     onFinish,
   });
 
@@ -66,10 +68,12 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
       };
       setResults(displayResults);
     } else {
-      void streamResponse();
+      if (spotifyData) {
+        streamResponse();
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [previousRun]);
+  }, [previousRun, spotifyData]);
 
   const searchParams = useSearchParams();
   const slide = searchParams.get("slide");
@@ -118,17 +122,11 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
         </div>
       </div>
       <div className="flex h-full w-full flex-col gap-4 lg:w-[55%]">
-        <div className="flex h-[400px] w-full items-center justify-center rounded-xl border-2 bg-green-500 p-8 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:h-[35%]">
-          {results.short_response_1}
-        </div>
+        <FirstCard content={results.short_response_1} />
         <div className="flex w-full flex-col gap-4 md:h-[65%] md:flex-row">
-          <div className="flex h-[400px] items-center justify-center rounded-xl border-2 bg-red-500 p-4 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:w-1/2">
-            {results.short_response_2}
-          </div>
+          <SecondCard content={results.short_response_2} />
 
-          <div className="flex h-[400px] items-center justify-center rounded-xl border-2 bg-purple-500 p-4 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:w-1/2">
-            {results.short_response_3}
-          </div>
+          <ThirdCard content={results.short_response_3} />
         </div>
       </div>
     </div>
