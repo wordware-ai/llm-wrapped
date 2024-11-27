@@ -2,10 +2,12 @@ import { env } from "@/env";
 
 export async function POST(
   request: Request,
-  { params }: { params: { promptId: string } },
+  { params }: { params: Promise<{ promptId: string }> },
 ) {
+  const promptId = (await params).promptId;
+
   const response = await fetch(
-    `https://app.wordware.ai/api/released-app/${params.promptId}/run`,
+    `https://app.wordware.ai/api/released-app/${promptId}/run`,
     {
       method: "POST",
       headers: {

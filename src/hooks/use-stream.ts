@@ -78,6 +78,7 @@ export function useStream({
                 // Updated regex to handle incomplete strings
                 const match = /"([^"]+)":\s*"([^"]*)/.exec(pair);
                 if (match?.[1] && match?.[2]) {
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   const [_, key, value] = match;
                   parsedResults[key] = value;
                 }

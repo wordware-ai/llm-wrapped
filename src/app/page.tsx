@@ -7,10 +7,10 @@ import InfiniteBanner from "@/components/infinite-banner";
 
 export default async function Home() {
   return (
-    <div className="flex max-w-full flex-col gap-8 p-8 md:flex-row md:p-12">
-      <div className="flex flex-col gap-8">
-        <div className="flex items-center justify-end gap-2">
-          <h3 className="pt-1 text-xl">Powered by</h3>
+    <div className="flex flex-col gap-12 p-8 md:flex-row md:p-12">
+      <div className="flex w-full flex-col gap-2">
+        <div className="flex items-center gap-2 md:justify-start lg:justify-end">
+          <h3 className="pt-1 text-xl lg:text-2xl">Powered by</h3>
           <Image
             src="/brand/wordware-black.svg"
             alt="Wordware"
@@ -19,67 +19,47 @@ export default async function Home() {
             height={200}
           />
         </div>
-        <h1 className="w-full text-center text-5xl md:text-6xl lg:text-8xl xl:text-9xl">
-          #LLMWrapped
+        <h1 className="w-full text-6xl lg:text-8xl xl:text-9xl">
+          <span className="xs:hidden">
+            #LLM
+            <br />
+            Wrapped
+          </span>
+          <span className="xs:inline hidden">#LLMWrapped</span>
         </h1>
         <p className="text-xl">
           get a true look at yourself through the lens of large language models
           (LLMs)
         </p>
-        <div className="flex flex-col gap-2 md:flex-row md:items-center">
+        <div></div>
+        <div className="flex flex-col gap-2">
           <SpotifyButton />
           <p>for a brutally honest take on your music taste</p>
         </div>
-        <div className="flex flex-col gap-8 md:flex-row md:items-center">
+        <div className="flex flex-col gap-4 pt-12 sm:flex-row sm:gap-6 md:flex-col md:gap-4 lg:flex-row lg:gap-6">
           <div className="flex flex-col gap-2">
             <p>Spotify</p>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-4">
               <Image
                 src="/images/kamil.png"
                 alt="Kamil"
-                width={50}
-                height={50}
-                className="aspect-square rounded-full object-cover"
+                width={200}
+                height={200}
+                className="aspect-square h-20 w-20 rounded-full object-cover"
               />
               <Image
                 src="/images/kamil.png"
                 alt="Kamil"
-                width={50}
-                height={50}
-                className="aspect-square rounded-full object-cover"
+                width={200}
+                height={200}
+                className="aspect-square h-20 w-20 rounded-full object-cover"
               />
               <Image
                 src="/images/kamil.png"
                 alt="Kamil"
-                width={50}
-                height={50}
-                className="aspect-square rounded-full object-cover"
-              />
-            </div>
-          </div>
-          <div className="flex flex-col gap-2">
-            <p>Linkedin</p>
-            <div className="flex items-center gap-2">
-              <Image
-                src="/images/kamil.png"
-                alt="Kamil"
-                width={50}
-                height={50}
-                className="aspect-square rounded-full object-cover"
-              />
-              <Image
-                src="/images/kamil.png"
-                alt="Kamil"
-                width={50}
-                height={50}
-                className="aspect-square rounded-full object-cover"
-              />
-              <Image
-                src="/images/kamil.png"
-                alt="Kamil"
-                width={50}
-                height={50}
-                className="aspect-square rounded-full object-cover"
+                width={200}
+                height={200}
+                className="aspect-square h-20 w-20 rounded-full object-cover"
               />
             </div>
           </div>
@@ -88,7 +68,7 @@ export default async function Home() {
         <HomeCards />
         <InfoCards />
       </div>
-      <div className="flex hidden w-full flex-col gap-4 md:max-w-2xl">
+      <div className="flex h-80 w-full flex-col gap-4 md:max-w-xl">
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl">

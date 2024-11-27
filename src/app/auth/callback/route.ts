@@ -5,7 +5,7 @@ import { api } from "@/trpc/server";
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/";
+  let next = "/";
 
   if (code) {
     const supabase = await createClient();
@@ -13,12 +13,15 @@ export async function GET(request: Request) {
 
     if (!error && data.user) {
       const existingUser = await api.users.getCurrent();
-      if (!existingUser) {
-        await api.users.create({
+      if (existingUser) {
+        next = `/${existingUser.id}`;
+      } else {
+        const user = await api.users.create({
           id: "n/a",
-          name: (data.user.user_metadata as { name?: string }).name ?? null,
+          username: (data.user.user_metadata as { name?: string }).name ?? null,
           email: data.user.email,
         });
+        next = `/${user.id}`;
       }
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";
