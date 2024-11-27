@@ -20,6 +20,9 @@ export const usersRouter = createTRPCRouter({
       where: {
         id: ctx.user.id,
       },
+      include: {
+        spotifyResult: true,
+      },
     });
 
     return user;

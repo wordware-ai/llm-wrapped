@@ -1,24 +1,13 @@
 import { SpotifyResults } from "@/components/spotify/spotify-results";
 import { api } from "@/trpc/server";
+import { redirect } from "next/navigation";
 
 export default async function ResultsPage() {
-  // Fetch all data concurrently
-  const { topArtists, topTracks, playlists, recentlyPlayed } =
-    await api.spotifyApi.getAllUserData();
+  const user = await api.users.getCurrent();
 
-  const spotifyResult = await api.spotifyUser.getSpotifyResult();
+  if (!user) {
+    redirect("/");
+  }
 
-  return (
-    <div className="p-8">
-      <SpotifyResults
-        data={JSON.stringify({
-          topArtists,
-          topTracks,
-          playlists,
-          recentlyPlayed,
-        })}
-        result={spotifyResult ?? undefined}
-      />
-    </div>
-  );
+  return <SpotifyResults user={user} />;
 }
