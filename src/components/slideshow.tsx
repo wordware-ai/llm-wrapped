@@ -66,7 +66,10 @@ export default function SlideShow() {
     >
       <X
         className="absolute right-4 top-4 size-8 hover:cursor-pointer"
-        onClick={() => router.push(`/${userId as string}`)}
+        onClick={(e) => {
+          e.stopPropagation();
+          router.push(`/${userId as string}`);
+        }}
       />
       <ChevronLeft
         className={cn(
