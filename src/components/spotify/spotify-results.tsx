@@ -118,15 +118,15 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
         </div>
       </div>
       <div className="flex h-full w-full flex-col gap-4 lg:w-[55%]">
-        <div className="flex w-full items-center justify-center rounded-xl border-2 bg-green-500 p-8 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:h-[35%]">
+        <div className="flex h-[400px] w-full items-center justify-center rounded-xl border-2 bg-green-500 p-8 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:h-[35%]">
           {results.short_response_1}
         </div>
         <div className="flex w-full flex-col gap-4 md:h-[65%] md:flex-row">
-          <div className="flex items-center justify-center rounded-xl border-2 bg-red-500 p-4 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:w-1/2">
+          <div className="flex h-[400px] items-center justify-center rounded-xl border-2 bg-red-500 p-4 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:w-1/2">
             {results.short_response_2}
           </div>
 
-          <div className="flex items-center justify-center rounded-xl border-2 bg-purple-500 p-4 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:w-1/2">
+          <div className="flex h-[400px] items-center justify-center rounded-xl border-2 bg-purple-500 p-4 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:w-1/2">
             {results.short_response_3}
           </div>
         </div>
