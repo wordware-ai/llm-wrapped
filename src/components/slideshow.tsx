@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStreamContext } from "./stream-provider";
@@ -17,15 +17,16 @@ export default function SlideShow() {
   const resultsArray = Object.values(results);
 
   const router = useRouter();
+  const { userId } = useParams();
 
   const nextSlide = () => {
     const next = currentSlide + 1;
     if (next === 7) {
-      router.push("/results");
+      router.push(`/${userId as string}`);
     } else {
       if (resultsArray.length >= next + 3) {
         setCurrentSlide(next);
-        router.push(`/results?slide=${next}`, { scroll: false });
+        router.push(`/${userId as string}?slide=${next}`, { scroll: false });
       }
     }
   };
@@ -33,7 +34,7 @@ export default function SlideShow() {
   const previousSlide = () => {
     const prev = Math.max(1, currentSlide - 1);
     setCurrentSlide(prev);
-    router.push(`/results?slide=${prev}`, { scroll: false });
+    router.push(`/${userId as string}?slide=${prev}`, { scroll: false });
   };
 
   const handleClick = (e: React.MouseEvent) => {

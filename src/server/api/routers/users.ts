@@ -1,5 +1,6 @@
 import { UserCreateInputSchema } from "prisma/generated/zod";
-import { createTRPCRouter, privateProcedure } from "../trpc";
+import { createTRPCRouter, privateProcedure, publicProcedure } from "../trpc";
+import { z } from "zod";
 
 export const usersRouter = createTRPCRouter({
   create: privateProcedure
@@ -27,4 +28,16 @@ export const usersRouter = createTRPCRouter({
 
     return user;
   }),
+
+  getById: publicProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const user = await ctx.db.user.findUnique({
+        where: { id: input.id },
+        include: {
+          spotifyResult: true,
+        },
+      });
+      return user;
+    }),
 });

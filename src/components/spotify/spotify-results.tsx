@@ -111,7 +111,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
 
         <div className="flex flex-col gap-4">
           <div className="break-words text-8xl font-bold leading-[1.1]">
-            {user.name}
+            {user.username}
           </div>
           <div className="flex gap-12">
             <p>Share on X</p>
