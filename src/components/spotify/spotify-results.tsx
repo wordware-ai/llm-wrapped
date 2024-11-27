@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import Slideshow from "../slideshow";
 import StoryCircle from "../story-circle";
 import { useStreamContext } from "../stream-provider";
+import { Linkedin } from "lucide-react";
 
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
@@ -27,19 +28,16 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
 
   const onFinish = (results: Record<string, string>) => {
     const spotifyResult = {
-      musicTasteAnalysis: results.music_taste_analysis ?? "",
-      identityCrisisLevel: results.identity_crisis_level ?? "",
-      emotionalStability: results.emotional_stability_rating ?? "",
-      danceFloorCredibility: results.dance_floor_credibility ?? "",
-      timeMachineStatus: results.time_machine_status ?? "",
-      achievementUnlocked: results.achievement_unlocked ?? "",
-      geographicConfusion: results.geographic_confusion_score ?? "",
-      guiltyPleasureSong: results.guilty_pleasure_song ?? "",
-      songsYouThinkAreAboutYou:
-        results.songs_you_secretly_think_are_about_you ?? "",
-      lyricTherapistNeeded: results.lyric_therapist_needed ?? "",
-      finalDiagnosis: results.final_diagnosis ?? "",
-      recommendation: results.recommendation ?? "",
+      shortResponse1: results.short_response_1 ?? "",
+      shortResponse2: results.short_response_2 ?? "",
+      shortResponse3: results.short_response_3 ?? "",
+      longResponse1: results.dance_floor_credibility ?? "",
+      longResponse2: results.time_machine_status ?? "",
+      longResponse3: results.achievement_unlocked ?? "",
+      longResponse4: results.geographic_confusion_score ?? "",
+      longResponse5: results.guilty_pleasure_song ?? "",
+      longResponse6: results.songs_you_secretly_think_are_about_you ?? "",
+      longResponse7: results.lyric_therapist_needed ?? "",
       user: {}, // Handled in procedure
     };
     createSpotifyResult(spotifyResult);
@@ -47,7 +45,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
 
   const { results, setResults } = useStreamContext();
   const { streamResponse } = useStream({
-    promptId: "ed4202f2-12b7-401c-a233-545b80dc740c",
+    promptId: "fbc771dc-7c8f-4deb-9a80-a15b8f355ab6",
     data: "I like the smiths",
     onFinish,
   });
@@ -55,19 +53,16 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   useEffect(() => {
     if (previousRun) {
       const displayResults: Record<string, string> = {
-        music_taste_analysis: previousRun.musicTasteAnalysis,
-        identity_crisis_level: previousRun.identityCrisisLevel,
-        emotional_stability_rating: previousRun.emotionalStability,
-        dance_floor_credibility: previousRun.danceFloorCredibility,
-        time_machine_status: previousRun.timeMachineStatus,
-        achievement_unlocked: previousRun.achievementUnlocked,
-        geographic_confusion_score: previousRun.geographicConfusion,
-        guilty_pleasure_song: previousRun.guiltyPleasureSong,
-        songs_you_secretly_think_are_about_you:
-          previousRun.songsYouThinkAreAboutYou,
-        lyric_therapist_needed: previousRun.lyricTherapistNeeded,
-        final_diagnosis: previousRun.finalDiagnosis,
-        recommendation: previousRun.recommendation,
+        short_response_1: previousRun.shortResponse1,
+        short_response_2: previousRun.shortResponse2,
+        short_response_3: previousRun.shortResponse3,
+        long_response_1: previousRun.longResponse1,
+        long_response_2: previousRun.longResponse2,
+        long_response_3: previousRun.longResponse3,
+        long_response_4: previousRun.longResponse4,
+        long_response_5: previousRun.longResponse5,
+        long_response_6: previousRun.longResponse6,
+        long_response_7: previousRun.longResponse7,
       };
       setResults(displayResults);
     } else {
@@ -88,52 +83,53 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   }
 
   return (
-    <div className="flex h-screen gap-12 p-8">
-      <div className="flex h-full flex-col">
-        <div className="flex h-full items-center gap-12 pb-12">
-          <div className="flex h-full flex-col justify-between">
-            <Image
-              src="/brand/wordware-black.svg"
-              alt="Wordware"
-              width={100}
-              height={100}
-              className="w-48"
-            />
-            <StoryCircle />
-          </div>
+    <div className="flex flex-col gap-8 p-4 sm:p-8 md:gap-12 lg:h-screen lg:flex-row">
+      <div className="flex h-min w-full flex-col gap-8 md:h-full lg:w-[45%] lg:justify-between xl:gap-12">
+        <Image
+          src="/brand/wordware-black.svg"
+          alt="Wordware"
+          width={100}
+          height={100}
+          className="w-48"
+        />
+        <div className="flex flex-row items-center gap-4 lg:flex-col lg:items-start">
+          <StoryCircle />
 
-          {results.music_taste_analysis && (
-            <div className="h-full w-full">
-              <div className="h-full w-full rounded-xl bg-orange-500 p-4">
-                {results.music_taste_analysis}
+          <div className="flex flex-col gap-2 md:gap-4">
+            <div className="break-words text-3xl font-bold leading-[1.1] md:text-4xl lg:text-6xl">
+              {user.username}
+            </div>
+            <div className="flex flex-row gap-4 sm:gap-8">
+              <p className="text-lg md:hidden">Share:</p>
+              <div className="flex items-center gap-2">
+                <Linkedin />
+                <p className="hidden md:block">Share on Instagram</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Linkedin />
+                <p className="hidden md:block">Share on LinkedIn</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <Linkedin />
+                <p className="hidden md:block">Share on X</p>
               </div>
             </div>
-          )}
-        </div>
-
-        <div className="flex flex-col gap-4">
-          <div className="break-words text-8xl font-bold leading-[1.1]">
-            {user.username}
-          </div>
-          <div className="flex gap-12">
-            <p>Share on X</p>
-            <p>Share on Instagram</p>
-            <p>Share on LinkedIn</p>
           </div>
         </div>
       </div>
-      <div className="flex h-full w-full flex-col gap-12">
-        {results.identity_crisis_level && (
-          <div className="h-1/3 w-full rounded-xl bg-red-500 p-4">
-            {results.identity_crisis_level}
+      <div className="flex h-full w-full flex-col gap-4 lg:w-[55%]">
+        <div className="flex w-full items-center justify-center rounded-xl border-2 bg-green-500 p-8 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:h-[35%]">
+          {results.short_response_1}
+        </div>
+        <div className="flex w-full flex-col gap-4 md:h-[65%] md:flex-row">
+          <div className="flex items-center justify-center rounded-xl border-2 bg-red-500 p-4 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:w-1/2">
+            {results.short_response_2}
           </div>
-        )}
 
-        {results.emotional_stability_rating && (
-          <div className="h-2/3 w-full rounded-xl bg-green-500 p-4">
-            {results.emotional_stability_rating}
+          <div className="flex items-center justify-center rounded-xl border-2 bg-purple-500 p-4 text-center text-4xl font-semibold text-white [text-shadow:_-1px_-1px_0_#000,_1px_-1px_0_#000,_-1px_1px_0_#000,_1px_1px_0_#000] md:w-1/2">
+            {results.short_response_3}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

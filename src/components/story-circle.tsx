@@ -17,7 +17,7 @@ export default function StoryCircle() {
   return (
     <div
       className={cn(
-        "h-40 w-40 animate-pulse rounded-full bg-blue-500",
+        "size-20 shrink-0 animate-pulse rounded-full border-2 bg-blue-500 lg:size-40",
         canClick && "animate-none cursor-pointer",
       )}
       onClick={onClick}
