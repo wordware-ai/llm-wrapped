@@ -14,7 +14,7 @@ datasource db {
 
 // Models
 model User {
-  id        String   @id 
+  id        String   @id
   email     String?  @unique
   username  String?  @unique
   createdAt DateTime @default(now())
@@ -25,19 +25,17 @@ model User {
 }
 
 model SpotifyResult {
-  id                       String @id @default(cuid())
-  musicTasteAnalysis       String
-  identityCrisisLevel      String
-  emotionalStability       String
-  danceFloorCredibility    String
-  timeMachineStatus        String
-  achievementUnlocked      String
-  geographicConfusion      String
-  guiltyPleasureSong       String
-  songsYouThinkAreAboutYou String
-  lyricTherapistNeeded     String
-  finalDiagnosis           String
-  recommendation           String
+  id             String @id @default(cuid())
+  shortResponse1 String
+  shortResponse2 String
+  shortResponse3 String
+  longResponse1  String
+  longResponse2  String
+  longResponse3  String
+  longResponse4  String
+  longResponse5  String
+  longResponse6  String
+  longResponse7  String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
