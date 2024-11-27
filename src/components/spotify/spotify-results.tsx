@@ -14,6 +14,7 @@ import { useStreamContext } from "../stream-provider";
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
   const { session } = useUser();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: spotifyData } = api.spotifyApi.getAllUserData.useQuery(
     undefined,
     {
@@ -44,7 +45,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
     createSpotifyResult(spotifyResult);
   };
 
-  const { results, setResults, isLoading } = useStreamContext();
+  const { results, setResults } = useStreamContext();
   const { streamResponse } = useStream({
     promptId: "ed4202f2-12b7-401c-a233-545b80dc740c",
     data: "I like the smiths",
@@ -72,6 +73,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
     } else {
       void streamResponse();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previousRun]);
 
   const searchParams = useSearchParams();
