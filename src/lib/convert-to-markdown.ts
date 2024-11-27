@@ -1,37 +1,43 @@
+/* eslint-disable */
+
 export const convertToMarkdown = (data: any): string => {
   const sections = [
     "# Spotify User Data Analysis",
     "",
     "### Artists",
-    data.allArtistNames.map((artist) => `- ${artist}`).join("\n"),
+    data.allArtistNames.map((artist: any) => `- ${artist}`).join("\n"),
     "",
     "### Tracks",
     data.allTracks
-      .map((track) => `- ${track.trackName} by ${track.artistName}`)
+      .map((track: any) => `- ${track.trackName} by ${track.artistName}`)
       .join("\n"),
     "",
     "### Playlists",
-    data.playlistNames.map((playlist) => `- ${playlist}`).join("\n"),
+    data.playlistNames.map((playlist: any) => `- ${playlist}`).join("\n"),
     "",
     "### Recently Played Tracks",
     data.recentlyPlayedTracks
-      .map((track) => `- ${track.trackName} by ${track.artistName}`)
+      .map((track: any) => `- ${track.trackName} by ${track.artistName}`)
       .join("\n"),
     "",
     "### Least Popular Artists",
     data.leastPopularArtists
-      .map((artist) => `- ${artist.name} (Popularity: ${artist.popularity})`)
+      .map(
+        (artist: any) => `- ${artist.name} (Popularity: ${artist.popularity})`,
+      )
       .join("\n"),
     "",
     "### Most Popular Artists",
     data.mostPopularArtists
-      .map((artist) => `- ${artist.name} (Popularity: ${artist.popularity})`)
+      .map(
+        (artist: any) => `- ${artist.name} (Popularity: ${artist.popularity})`,
+      )
       .join("\n"),
     "",
     "### Most Followed Artists",
     data.mostFollowedArtists
       .map(
-        (artist) =>
+        (artist: any) =>
           `- ${artist.name} (Followers: ${artist.followers.total.toLocaleString()})`,
       )
       .join("\n"),
@@ -39,7 +45,7 @@ export const convertToMarkdown = (data: any): string => {
     "### Oldest Songs",
     data.oldestSongs
       .map(
-        (song) =>
+        (song: any) =>
           `- ${song.name} by ${song.artist} (Album: ${song.albumName}, Released: ${song.releaseDate})`,
       )
       .join("\n"),

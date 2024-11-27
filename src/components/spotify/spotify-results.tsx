@@ -69,7 +69,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
       setResults(displayResults);
     } else {
       if (spotifyData) {
-        streamResponse();
+        void streamResponse();
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
