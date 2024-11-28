@@ -1,10 +1,12 @@
 import { Hero } from "@/components/hero";
+import HomeCards from "@/components/spotify/bento-cards/home-cards";
 
 export default async function Home() {
   return (
-    <div className="flex w-full flex-col bg-[#F8FFFA] p-4">
+    <div className="flex w-full flex-col gap-20 bg-[#F8FFFA] p-4">
       {/* This includes the story examples because they both need access to tab state */}
       <Hero />
+      <HomeCards />
     </div>
   );
 }
