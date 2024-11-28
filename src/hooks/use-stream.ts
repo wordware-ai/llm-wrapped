@@ -1,4 +1,5 @@
 import { useStreamContext } from "@/components/stream-provider";
+import { parsePartialJSON } from "@/lib/parse-partial-json";
 
 export function useStream({
   promptId,
@@ -7,7 +8,7 @@ export function useStream({
 }: {
   promptId: string;
   data: string;
-  onFinish?: (results: Record<string, string>) => void;
+  onFinish?: (results: Record<string, unknown>) => void;
 }) {
   const { setResults, setIsLoading } = useStreamContext();
 
@@ -45,51 +46,24 @@ export function useStream({
 
     try {
       let accumulatedData = "";
-      let finalResults: Record<string, string> = {};
+      let finalResults: Record<string, unknown> = {};
 
       while (true) {
         const { done, value } = await reader.read();
         if (done) break;
 
         accumulatedData += decoder.decode(value);
+        console.log("accumulatedData", accumulatedData);
 
         // Try to parse any complete key-value pairs
         try {
-          // Add closing quote and brace if needed
-          let jsonString = accumulatedData;
-          if (!jsonString.endsWith("}")) {
-            // If the last quote is not closed, close it
-            if ((jsonString.match(/"/g) ?? []).length % 2 !== 0) {
-              jsonString += '"';
-            }
-            jsonString += "}";
-          }
-
-          // Remove curly braces and split by commas
-          const cleanData = jsonString.replace(/^\{|\}$/g, "").trim();
-
-          if (cleanData) {
-            // Parse individual key-value pairs
-            const pairs = cleanData.split(/,(?=\s*")/);
-            const parsedResults: Record<string, string> = {};
-
-            pairs.forEach((pair) => {
-              try {
-                // Updated regex to handle incomplete strings
-                const match = /"([^"]+)":\s*"([^"]*)/.exec(pair);
-                if (match?.[1] && match?.[2]) {
-                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                  const [_, key, value] = match;
-                  parsedResults[key] = value;
-                }
-              } catch {
-                // Skip invalid pairs
-              }
-            });
-
-            finalResults = parsedResults;
-            setResults(parsedResults);
-          }
+          const parsedResults = parsePartialJSON(accumulatedData) as Record<
+            string,
+            unknown
+          >;
+          console.log("parsedResults", parsedResults);
+          finalResults = parsedResults;
+          setResults(parsedResults);
         } catch {
           // Continue if parsing fails
         }

@@ -24,9 +24,9 @@ export function Hero() {
         />
         <div className="z-10 flex flex-col items-center justify-center">
           <h1 className="text-5xl font-bold text-white sm:text-7xl lg:text-9xl">
-            #LLMWrapped
+            #LLMwrapped
           </h1>
-          <p className="text-muted-foreground w-full max-w-xs text-center text-sm md:max-w-lg md:text-xl lg:max-w-none lg:text-2xl">
+          <p className="w-full max-w-xs text-center text-sm text-zinc-300 md:max-w-lg md:text-xl lg:max-w-none lg:text-2xl">
             get a true look at yourself through the lens of large language
             models (LLMs)
           </p>
@@ -106,7 +106,7 @@ export function Hero() {
               <Button>GitHub</Button>
             </TabsContent>
           </div>
-          <p className="text-muted-foreground w-96 text-center text-xs">
+          <p className="w-96 text-center text-xs text-muted-foreground">
             By logging in you agree to our Terms and Conditions and acknowledge
             our Privacy Policy.
           </p>

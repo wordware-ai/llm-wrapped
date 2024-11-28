@@ -25,22 +25,27 @@ model User {
 }
 
 model SpotifyResult {
-  id             String @id @default(cuid())
-  response1      String
-  response2      String
-  response3      String
-  response4      String
-  response5      String
-  response6      String
-  response7      String
-  response8      String
-  response9      String
-  response10     String
-  response11     String
-  response12     String
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                                     String   @id @default(cuid())
+  short_summary                          String
+  music_taste_analysis_1                 String
+  music_taste_analysis_2                 String
+  music_taste_analysis_3                 String
+  lyric_therapy_needed                 String
+  identity_crisis_level                  Json
+  emotional_stability_ranking            Json
+  achievement                            Json
+  dance_floor_credibility                String
+  song_you_would_hit_the_dance_floor     String
+  songs_you_secretly_think_are_about_you String
+  guilty_pleasure_song                   String
+  least_popular_artist                   String
+  most_popular_artist                    String
+  time_machine_status                    String
+  titles_that_need_therapy               String
+  final_diagnosis                        String
+  recommendation                         String
+  createdAt                              DateTime @default(now())
+  updatedAt                              DateTime @updatedAt
 
   // Relations
   user   User   @relation(fields: [userId], references: [id])

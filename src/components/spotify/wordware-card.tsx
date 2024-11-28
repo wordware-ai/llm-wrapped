@@ -1,26 +1,32 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-
+import { type ReactNode } from "react";
 export default function WordwareCard({
-  content,
-  bgColor,
+  children,
   fillColor,
-  width,
+  className,
+  wide = false,
+  hideHashtag = false,
 }: {
-  content: string;
-  bgColor: string;
+  children: ReactNode;
   fillColor?: string;
-  width?: string;
+  className: string;
+  wide?: boolean;
+  hideHashtag?: boolean;
 }) {
   return (
     <div
       className={cn(
-        "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg",
-        bgColor,
-        width,
+        "relative -z-20 flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
+        className,
       )}
     >
-      <div className="absolute left-0 top-0 flex w-full flex-col gap-[7px] px-2">
+      <div
+        className={cn(
+          "absolute left-0 top-0 -z-10 w-full gap-[7px] px-2",
+          wide ? "grid grid-cols-2" : "flex flex-col",
+        )}
+      >
         <WordwareLogo fillColor={fillColor} />
         <WordwareLogo fillColor={fillColor} />
         <WordwareLogo fillColor={fillColor} />
@@ -37,14 +43,16 @@ export default function WordwareCard({
         <WordwareLogo fillColor={fillColor} />
         <WordwareLogo fillColor={fillColor} />
       </div>
-      <p className="z-10 p-8 pb-16 text-2xl font-bold text-white">{content}</p>
-      <p className="absolute bottom-8 left-8 text-white">#LLMWrapped</p>
+      {children}
+      {!hideHashtag && (
+        <p className="absolute bottom-8 left-8 text-white">#LLMWrapped</p>
+      )}
     </div>
   );
 }
 
 function WordwareLogo({
-  fillColor = "fill-black opacity-20",
+  fillColor = "fill-black opacity-50",
 }: {
   fillColor?: string;
 }) {

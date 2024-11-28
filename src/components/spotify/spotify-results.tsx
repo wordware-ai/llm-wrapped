@@ -8,9 +8,11 @@ import { redirect, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import Slideshow from "../slideshow";
 import { useStreamContext } from "../stream-provider";
+import { CardGrid } from "./card-grid";
+
 import Navbar from "./navbar";
-import { BaseStory } from "../stories/base";
-import { ResultsGroup1 } from "./results-group-1";
+import { SideCards } from "./results-group-1";
+import { UserInfo } from "./user-info";
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
   const { session } = useUser();
@@ -24,20 +26,28 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const { mutate: createSpotifyResult } =
     api.spotifyUser.createSpotifyResult.useMutation();
 
-  const onFinish = (results: Record<string, string>) => {
+  const onFinish = (results: Record<string, unknown>) => {
     const spotifyResult = {
-      response1: results.music_taste_analysis ?? "",
-      response2: results.identity_crisis_level ?? "",
-      response3: results.emotional_stability_rating ?? "",
-      response4: results.dance_floor_credibility ?? "",
-      response5: results.time_machine_status ?? "",
-      response6: results.achievement_unlocked ?? "",
-      response7: results.geographic_confusion_score ?? "",
-      response8: results.guilty_pleasure_song ?? "",
-      response9: results.songs_you_secretly_think_are_about_you ?? "",
-      response10: results.lyric_therapist_needed ?? "",
-      response11: results.final_diagnosis ?? "",
-      response12: results.recommendation ?? "",
+      short_summary: String(results.short_summary) ?? "",
+      music_taste_analysis_1: String(results.music_taste_analysis_1) ?? "",
+      music_taste_analysis_2: String(results.music_taste_analysis_2) ?? "",
+      music_taste_analysis_3: String(results.music_taste_analysis_3) ?? "",
+      lyric_therapy_needed: String(results.lyric_therapy_needed) ?? "",
+      identity_crisis_level: results.identity_crisis_level ?? {},
+      emotional_stability_ranking: results.emotional_stability_rating ?? {},
+      achievement: results.achievement ?? {},
+      dance_floor_credibility: String(results.dance_floor_credibility) ?? "",
+      song_you_would_hit_the_dance_floor:
+        String(results.song_you_would_hit_the_dance_floor) ?? "",
+      songs_you_secretly_think_are_about_you:
+        String(results.songs_you_secretly_think_are_about_you) ?? "",
+      guilty_pleasure_song: String(results.guilty_pleasure_song) ?? "",
+      least_popular_artist: String(results.least_popular_artist) ?? "",
+      most_popular_artist: String(results.most_popular_artist) ?? "",
+      time_machine_status: String(results.time_machine_status) ?? "",
+      titles_that_need_therapy: String(results.titles_that_need_therapy) ?? "",
+      final_diagnosis: String(results.final_diagnosis) ?? "",
+      recommendation: String(results.recommendation) ?? "",
       user: {}, // Handled in procedure
     };
     createSpotifyResult(spotifyResult);
@@ -45,26 +55,34 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
 
   const { setResults } = useStreamContext();
   const { streamResponse } = useStream({
-    promptId: "8ffe6968-fdf7-4822-90a6-2ed650812e7a",
+    promptId: "5d5cb90e-4197-4c60-bcb4-8c9b8137f636",
     data: spotifyData ?? "",
     onFinish,
   });
 
   useEffect(() => {
     if (previousRun) {
-      const displayResults: Record<string, string> = {
-        music_taste_analysis: previousRun.response1,
-        identity_crisis_level: previousRun.response2,
-        emotional_stability_ranking: previousRun.response3,
-        dance_floor_credibility: previousRun.response4,
-        time_machine_status: previousRun.response5,
-        achievement_unlocked: previousRun.response6,
-        geographic_confusion_score: previousRun.response7,
-        guilty_pleasure_song: previousRun.response8,
-        songs_you_secretly_think_are_about_you: previousRun.response9,
-        lyric_therapist_needed: previousRun.response10,
-        final_diagnosis: previousRun.response11,
-        recommendation: previousRun.response12,
+      const displayResults: Record<string, unknown> = {
+        short_summary: previousRun.short_summary,
+        music_taste_analysis_1: previousRun.music_taste_analysis_1,
+        music_taste_analysis_2: previousRun.music_taste_analysis_2,
+        music_taste_analysis_3: previousRun.music_taste_analysis_3,
+        lyric_therapy_needed: previousRun.lyric_therapy_needed,
+        identity_crisis_level: previousRun.identity_crisis_level,
+        emotional_stability_ranking: previousRun.emotional_stability_ranking,
+        achievement: previousRun.achievement,
+        dance_floor_credibility: previousRun.dance_floor_credibility,
+        song_you_would_hit_the_dance_floor:
+          previousRun.song_you_would_hit_the_dance_floor,
+        songs_you_secretly_think_are_about_you:
+          previousRun.songs_you_secretly_think_are_about_you,
+        guilty_pleasure_song: previousRun.guilty_pleasure_song,
+        least_popular_artist: previousRun.least_popular_artist,
+        most_popular_artist: previousRun.most_popular_artist,
+        time_machine_status: previousRun.time_machine_status,
+        titles_that_need_therapy: previousRun.titles_that_need_therapy,
+        final_diagnosis: previousRun.final_diagnosis,
+        recommendation: previousRun.recommendation,
       };
       setResults(displayResults);
     } else {
@@ -89,35 +107,12 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   return (
     <div className="flex flex-col">
       <Navbar />
-      <div className="flex flex-col gap-4 p-8 lg:h-[calc(100vh-56px)] lg:flex-row">
-        <div className="flex flex-col justify-between gap-4 lg:w-1/2">
-          <h1 className="text-5xl font-semibold xs:text-6xl sm:text-7xl md:text-8xl lg:text-7xl xl:text-8xl">
-            #LLMWrapped
-          </h1>
-          <div className="flex gap-8 lg:gap-20">
-            <div className="flex w-min flex-col gap-4">
-              <BaseStory
-                size="lg:size-64 size-36 p-1 lg:p-2"
-                src="/images/kamil.png"
-                alt="Spotify 1"
-                id="6def5615-1a4d-42e6-b1df-6e3063349e89"
-              />
-              <p className="text-center text-xl font-semibold">Kamil Kamil</p>
-            </div>
-            <div className="flex flex-col gap-8">
-              <p className="text-xl sm:text-2xl">Share your results</p>
-              <div className="grid grid-cols-2 gap-4">
-                <p>Twitter</p>
-                <p>Instagram</p>
-                <p>LinkedIn</p>
-                <p>TikTok</p>
-                <p>Reddit</p>
-                <p>WhatsApp</p>
-              </div>
-            </div>
-          </div>
+      <div>
+        <div className="flex flex-col gap-4 p-8 lg:h-[calc(100vh-56px)] lg:flex-row">
+          <UserInfo />
+          <SideCards />
         </div>
-        <ResultsGroup1 />
+        <CardGrid />
       </div>
     </div>
   );

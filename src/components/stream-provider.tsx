@@ -8,9 +8,9 @@ import React, {
 } from "react";
 
 interface StreamContextType {
-  results: Record<string, string>;
+  results: Record<string, unknown>;
   isLoading: boolean;
-  setResults: (results: Record<string, string>) => void;
+  setResults: (results: Record<string, unknown>) => void;
   setIsLoading: (loading: boolean) => void;
 }
 
@@ -21,7 +21,7 @@ interface StreamProviderProps {
 }
 
 export function StreamProvider({ children }: StreamProviderProps) {
-  const [results, setResults] = useState<Record<string, string>>({});
+  const [results, setResults] = useState<Record<string, unknown>>({});
   const [isLoading, setIsLoading] = useState(false);
 
   return (
