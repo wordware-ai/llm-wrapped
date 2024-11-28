@@ -13,7 +13,7 @@ export function Hero() {
   );
 
   return (
-    <div className="flex w-full flex-col items-center justify-center">
+    <div className="flex w-full flex-col items-center justify-center gap-12">
       <div className="relative z-0 flex h-[500px] w-full flex-col items-center justify-center gap-12 overflow-hidden rounded-xl bg-black">
         <Image
           src="/blobs/background.svg"
@@ -23,8 +23,10 @@ export function Hero() {
           height={1000}
         />
         <div className="z-10 flex flex-col items-center justify-center">
-          <h1 className="text-9xl font-bold text-white">#LLMWrapped</h1>
-          <p className="text-xl text-white">
+          <h1 className="text-5xl font-bold text-white sm:text-7xl lg:text-9xl">
+            #LLMWrapped
+          </h1>
+          <p className="text-muted-foreground w-full max-w-lg text-center text-xl lg:max-w-none lg:text-2xl">
             get a true look at yourself through the lens of large language
             models (LLMs)
           </p>
