@@ -26,41 +26,45 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
 
   const onFinish = (results: Record<string, string>) => {
     const spotifyResult = {
-      shortResponse1: results.short_response_1 ?? "",
-      shortResponse2: results.short_response_2 ?? "",
-      shortResponse3: results.short_response_3 ?? "",
-      longResponse1: results.dance_floor_credibility ?? "",
-      longResponse2: results.time_machine_status ?? "",
-      longResponse3: results.achievement_unlocked ?? "",
-      longResponse4: results.geographic_confusion_score ?? "",
-      longResponse5: results.guilty_pleasure_song ?? "",
-      longResponse6: results.songs_you_secretly_think_are_about_you ?? "",
-      longResponse7: results.lyric_therapist_needed ?? "",
+      response1: results.music_taste_analysis ?? "",
+      response2: results.identity_crisis_level ?? "",
+      response3: results.emotional_stability_rating ?? "",
+      response4: results.dance_floor_credibility ?? "",
+      response5: results.time_machine_status ?? "",
+      response6: results.achievement_unlocked ?? "",
+      response7: results.geographic_confusion_score ?? "",
+      response8: results.guilty_pleasure_song ?? "",
+      response9: results.songs_you_secretly_think_are_about_you ?? "",
+      response10: results.lyric_therapist_needed ?? "",
+      response11: results.final_diagnosis ?? "",
+      response12: results.recommendation ?? "",
       user: {}, // Handled in procedure
     };
     createSpotifyResult(spotifyResult);
   };
 
-  const { results, setResults } = useStreamContext();
+  const { setResults } = useStreamContext();
   const { streamResponse } = useStream({
-    promptId: "fbc771dc-7c8f-4deb-9a80-a15b8f355ab6",
-    data: JSON.stringify(spotifyData),
+    promptId: "8ffe6968-fdf7-4822-90a6-2ed650812e7a",
+    data: spotifyData ?? "",
     onFinish,
   });
 
   useEffect(() => {
     if (previousRun) {
       const displayResults: Record<string, string> = {
-        short_response_1: previousRun.shortResponse1,
-        short_response_2: previousRun.shortResponse2,
-        short_response_3: previousRun.shortResponse3,
-        long_response_1: previousRun.longResponse1,
-        long_response_2: previousRun.longResponse2,
-        long_response_3: previousRun.longResponse3,
-        long_response_4: previousRun.longResponse4,
-        long_response_5: previousRun.longResponse5,
-        long_response_6: previousRun.longResponse6,
-        long_response_7: previousRun.longResponse7,
+        music_taste_analysis: previousRun.response1,
+        identity_crisis_level: previousRun.response2,
+        emotional_stability_ranking: previousRun.response3,
+        dance_floor_credibility: previousRun.response4,
+        time_machine_status: previousRun.response5,
+        achievement_unlocked: previousRun.response6,
+        geographic_confusion_score: previousRun.response7,
+        guilty_pleasure_song: previousRun.response8,
+        songs_you_secretly_think_are_about_you: previousRun.response9,
+        lyric_therapist_needed: previousRun.response10,
+        final_diagnosis: previousRun.response11,
+        recommendation: previousRun.response12,
       };
       setResults(displayResults);
     } else {

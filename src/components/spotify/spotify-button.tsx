@@ -6,15 +6,11 @@ import { useUser } from "@/hooks/use-user";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 export function SpotifyButton() {
   const supabase = createClient();
-  const router = useRouter();
 
   const handleLogin = async () => {
-    console.log(env.NEXT_PUBLIC_APP_URL);
-
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "spotify",
       options: {

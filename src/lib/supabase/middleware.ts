@@ -7,6 +7,7 @@ export async function updateSession(request: NextRequest) {
     request,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const supabase = createServerClient(
     env.NEXT_PUBLIC_SUPABASE_URL,
     env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
@@ -33,12 +34,6 @@ export async function updateSession(request: NextRequest) {
   // IMPORTANT: Avoid writing any logic between createServerClient and
   // supabase.auth.getUser(). A simple mistake could make it very hard to debug
   // issues with users being randomly logged out.
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  console.log("user", user);
 
   // IMPORTANT: You *must* return the supabaseResponse object as it is. If you're
   // creating a new response object with NextResponse.next() make sure to:

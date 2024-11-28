@@ -26,16 +26,18 @@ model User {
 
 model SpotifyResult {
   id             String @id @default(cuid())
-  shortResponse1 String
-  shortResponse2 String
-  shortResponse3 String
-  longResponse1  String
-  longResponse2  String
-  longResponse3  String
-  longResponse4  String
-  longResponse5  String
-  longResponse6  String
-  longResponse7  String
+  response1      String
+  response2      String
+  response3      String
+  response4      String
+  response5      String
+  response6      String
+  response7      String
+  response8      String
+  response9      String
+  response10     String
+  response11     String
+  response12     String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
