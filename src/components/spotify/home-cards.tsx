@@ -18,6 +18,7 @@ const cards = [
     bgColor: "bg-gradient-to-bl from-gray-800 via-indigo-950 to-slate-900",
   },
 ];
+
 export default function HomeCards() {
   return (
     <div className="flex flex-col justify-center gap-8 md:flex-row">

@@ -1,6 +1,6 @@
 import Footer from "@/components/footer";
 import { Hero } from "@/components/hero";
-import HomeCards from "@/components/spotify/bento-cards/home-cards";
+import HomeCards from "@/components/spotify/home-cards";
 
 export default async function Home() {
   return (

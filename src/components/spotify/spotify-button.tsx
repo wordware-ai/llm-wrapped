@@ -1,11 +1,16 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { env } from "@/env";
+import { useUser } from "@/hooks/use-user";
 import { createClient } from "@/lib/supabase/client";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function SpotifyButton() {
   const supabase = createClient();
+  const router = useRouter();
 
   const handleLogin = async () => {
     console.log(env.NEXT_PUBLIC_APP_URL);
@@ -22,8 +27,20 @@ export function SpotifyButton() {
     }
   };
 
-  return (
-    <Button className="w-min bg-green-500" onClick={handleLogin}>
+  const { user } = useUser();
+
+  return user ? (
+    <Link
+      href={`/${user.id}`}
+      className={cn(buttonVariants(), "w-min bg-green-500 hover:bg-green-600")}
+    >
+      View Your Results
+    </Link>
+  ) : (
+    <Button
+      className="w-min bg-green-500 hover:bg-green-600"
+      onClick={handleLogin}
+    >
       Login with Spotify
     </Button>
   );

@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStreamContext } from "./stream-provider";
 import { useQueryState, parseAsInteger, parseAsBoolean } from "nuqs";
-import WordwareCard from "./spotify/bento-cards/wordware-card";
+import WordwareCard from "./spotify/wordware-card";
 
 export default function SlideShow() {
   const colorMap = {
@@ -38,33 +38,33 @@ export default function SlideShow() {
     }
   };
 
-  const nextSlide = () => {
+  const nextSlide = async () => {
     if (currentSlide === 7) {
       exit();
     } else {
       const next = currentSlide + 1;
       if (resultsArray.length >= next + 3) {
-        setCurrentSlide(next);
+        await setCurrentSlide(next);
       }
     }
   };
 
-  const previousSlide = () => {
+  const previousSlide = async () => {
     if (currentSlide !== 1) {
       const prev = Math.max(1, currentSlide - 1);
-      setCurrentSlide(prev);
+      await setCurrentSlide(prev);
     }
   };
 
-  const handleClick = (e: React.MouseEvent) => {
+  const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     const { clientX, currentTarget } = e;
     const third = currentTarget.clientWidth / 3;
 
     if (clientX > third * 2) {
-      nextSlide();
+      await nextSlide();
     } else if (clientX < third) {
-      previousSlide();
+      await previousSlide();
     }
   };
 

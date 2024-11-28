@@ -4,17 +4,13 @@ import { useStream } from "@/hooks/use-stream";
 import { useUser } from "@/hooks/use-user";
 import { api } from "@/trpc/react";
 import { type UserWithSpotifyResult } from "@/types/user";
-import Image from "next/image";
 import { redirect, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import Slideshow from "../slideshow";
-import StoryCircle from "../story-circle";
 import { useStreamContext } from "../stream-provider";
-import { Linkedin } from "lucide-react";
-import FirstCard from "./bento-cards/first-card";
-import ThirdCard from "./bento-cards/third-card";
-import SecondCard from "./bento-cards/second-card";
-
+import Navbar from "./navbar";
+import { BaseStory } from "../stories/base";
+import { ResultsGroup1 } from "./results-group-1";
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
   const { session } = useUser();
@@ -87,47 +83,37 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   }
 
   return (
-    <div className="flex flex-col gap-8 p-4 sm:p-8 md:gap-12 lg:h-screen lg:flex-row">
-      <div className="flex h-min w-full flex-col gap-8 md:h-full lg:w-[45%] lg:justify-between xl:gap-12">
-        <Image
-          src="/brand/wordware-black.svg"
-          alt="Wordware"
-          width={100}
-          height={100}
-          className="w-48"
-        />
-        <div className="flex flex-row items-center gap-4 lg:flex-col lg:items-start">
-          <StoryCircle />
-
-          <div className="flex flex-col gap-2 md:gap-4">
-            <div className="break-words text-3xl font-bold leading-[1.1] md:text-4xl lg:text-6xl">
-              {user.username}
+    <div className="flex flex-col">
+      <Navbar />
+      <div className="flex flex-col gap-4 p-8 lg:h-[calc(100vh-56px)] lg:flex-row">
+        <div className="flex flex-col justify-between gap-4 lg:w-1/2">
+          <h1 className="text-5xl font-semibold xs:text-6xl sm:text-7xl md:text-8xl lg:text-7xl xl:text-8xl">
+            #LLMWrapped
+          </h1>
+          <div className="flex gap-8 lg:gap-20">
+            <div className="flex w-min flex-col gap-4">
+              <BaseStory
+                size="lg:size-64 size-36 p-1 lg:p-2"
+                src="/images/kamil.png"
+                alt="Spotify 1"
+                id="6def5615-1a4d-42e6-b1df-6e3063349e89"
+              />
+              <p className="text-center text-xl font-semibold">Kamil Kamil</p>
             </div>
-            <div className="flex flex-row gap-4 sm:gap-8">
-              <p className="text-lg md:hidden">Share:</p>
-              <div className="flex items-center gap-2">
-                <Linkedin />
-                <p className="hidden md:block">Share on Instagram</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <Linkedin />
-                <p className="hidden md:block">Share on LinkedIn</p>
-              </div>
-              <div className="flex items-center gap-2">
-                <Linkedin />
-                <p className="hidden md:block">Share on X</p>
+            <div className="flex flex-col gap-8">
+              <p className="text-xl sm:text-2xl">Share your results</p>
+              <div className="grid grid-cols-2 gap-4">
+                <p>Twitter</p>
+                <p>Instagram</p>
+                <p>LinkedIn</p>
+                <p>TikTok</p>
+                <p>Reddit</p>
+                <p>WhatsApp</p>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="flex h-full w-full flex-col gap-4 lg:w-[55%]">
-        <FirstCard content={results.short_response_1} />
-        <div className="flex w-full flex-col gap-4 md:h-[65%] md:flex-row">
-          <SecondCard content={results.short_response_2} />
-
-          <ThirdCard content={results.short_response_3} />
-        </div>
+        <ResultsGroup1 />
       </div>
     </div>
   );

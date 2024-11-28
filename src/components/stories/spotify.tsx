@@ -39,7 +39,7 @@ export function SpotifyStorys() {
             <p className="text-center">{story.alt}</p>
           </div>
         ))}
-        <div className="rounded-lg border bg-white p-4">
+        <div className="flex flex-col items-center gap-2 rounded-lg border bg-white p-4">
           <BaseStory
             src="/brand/w-black.png"
             alt="Wordware"
