@@ -6,16 +6,17 @@ import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStreamContext } from "./stream-provider";
 import { useQueryState, parseAsInteger, parseAsBoolean } from "nuqs";
+import WordwareCard from "./spotify/bento-cards/wordware-card";
 
 export default function SlideShow() {
   const colorMap = {
-    1: "bg-blue-500",
-    2: "bg-green-500",
-    3: "bg-yellow-500",
-    4: "bg-purple-500",
-    5: "bg-pink-500",
-    6: "bg-orange-500",
-    7: "bg-teal-500",
+    1: "bg-gradient-to-bl from-gray-800 via-blue-950 to-slate-900",
+    2: "bg-gradient-to-bl from-gray-800 via-emerald-950 to-slate-900",
+    3: "bg-gradient-to-bl from-gray-900 via-amber-950 to-slate-900",
+    4: "bg-gradient-to-bl from-gray-800 via-purple-950 to-slate-900",
+    5: "bg-gradient-to-bl from-gray-800 via-pink-950 to-slate-900",
+    6: "bg-gradient-to-bl from-gray-900 via-orange-950 to-slate-900",
+    7: "bg-gradient-to-bl from-gray-800 via-teal-950 to-slate-900",
   };
 
   const [currentSlide, setCurrentSlide] = useQueryState(
@@ -49,8 +50,10 @@ export default function SlideShow() {
   };
 
   const previousSlide = () => {
-    const prev = Math.max(1, currentSlide - 1);
-    setCurrentSlide(prev);
+    if (currentSlide !== 1) {
+      const prev = Math.max(1, currentSlide - 1);
+      setCurrentSlide(prev);
+    }
   };
 
   const handleClick = (e: React.MouseEvent) => {
@@ -67,7 +70,7 @@ export default function SlideShow() {
 
   return (
     <div
-      className="flex h-screen w-full items-center justify-center gap-4 md:p-6"
+      className="flex h-screen w-full select-none items-center justify-center gap-4 md:p-6"
       onClick={handleClick}
     >
       <X
@@ -83,19 +86,11 @@ export default function SlideShow() {
           currentSlide === 1 && "invisible",
         )}
       />
-
-      <div
-        className={cn(
-          "h-full w-full p-6 shadow-lg md:max-w-xl md:rounded-lg",
-          colorMap[currentSlide as keyof typeof colorMap],
-        )}
-      >
-        <div className="flex h-full items-center justify-center">
-          <p className="text-center text-5xl text-white">
-            {resultsArray[currentSlide + 2]}
-          </p>
-        </div>
-      </div>
+      <WordwareCard
+        content={resultsArray[currentSlide + 2] ?? ""}
+        bgColor={colorMap[currentSlide as keyof typeof colorMap]}
+        width="w-full sm:max-w-md h-full sm:h-auto rounded-none sm:rounded-xl"
+      />
       <ChevronRight
         className={cn(
           "hidden size-8 hover:cursor-pointer md:block",

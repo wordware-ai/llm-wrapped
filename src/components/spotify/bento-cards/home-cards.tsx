@@ -26,6 +26,7 @@ export default function HomeCards() {
           key={card.content}
           content={card.content}
           bgColor={card.bgColor}
+          width="w-full sm:max-w-xs"
         />
       ))}
     </div>

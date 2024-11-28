@@ -5,19 +5,27 @@ export default function WordwareCard({
   content,
   bgColor,
   fillColor,
+  width,
 }: {
   content: string;
   bgColor: string;
   fillColor?: string;
+  width?: string;
 }) {
   return (
     <div
       className={cn(
-        "relative flex aspect-[4/7] w-full items-center overflow-hidden rounded-lg sm:max-w-xs",
+        "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg",
         bgColor,
+        width,
       )}
     >
       <div className="absolute left-0 top-0 flex w-full flex-col gap-[7px] px-2">
+        <WordwareLogo fillColor={fillColor} />
+        <WordwareLogo fillColor={fillColor} />
+        <WordwareLogo fillColor={fillColor} />
+        <WordwareLogo fillColor={fillColor} />
+        <WordwareLogo fillColor={fillColor} />
         <WordwareLogo fillColor={fillColor} />
         <WordwareLogo fillColor={fillColor} />
         <WordwareLogo fillColor={fillColor} />
