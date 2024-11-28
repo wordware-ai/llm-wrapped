@@ -15,7 +15,7 @@ export function BaseStory({
 }) {
   const router = useRouter();
   const onClick = () => {
-    router.push(`/${id}?slide=1`);
+    router.push(`/${id}?slide=1&returnHome=true`);
   };
 
   return (

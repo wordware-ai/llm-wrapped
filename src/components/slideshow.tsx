@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
+import React from "react";
+import { useParams, useRouter } from "next/navigation";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useStreamContext } from "./stream-provider";
+import { useQueryState, parseAsInteger, parseAsBoolean } from "nuqs";
 
 export default function SlideShow() {
   const colorMap = {
@@ -17,26 +18,32 @@ export default function SlideShow() {
     7: "bg-teal-500",
   };
 
-  // Use search params instead of dynamic route
-  const searchParams = useSearchParams();
-  const initialSlide = parseInt(searchParams.get("slide") ?? "1");
-  const [currentSlide, setCurrentSlide] = useState(initialSlide);
+  const [currentSlide, setCurrentSlide] = useQueryState(
+    "slide",
+    parseAsInteger.withDefault(1),
+  );
+  const [returnHome] = useQueryState("returnHome", parseAsBoolean);
 
   const { results } = useStreamContext();
-
   const resultsArray = Object.values(results);
-
   const router = useRouter();
   const { userId } = useParams();
 
+  const exit = () => {
+    if (returnHome) {
+      router.push("/");
+    } else {
+      router.push(`/${userId as string}`);
+    }
+  };
+
   const nextSlide = () => {
     if (currentSlide === 7) {
-      router.push(`/${userId as string}`);
+      exit();
     } else {
       const next = currentSlide + 1;
       if (resultsArray.length >= next + 3) {
         setCurrentSlide(next);
-        router.push(`/${userId as string}?slide=${next}`, { scroll: false });
       }
     }
   };
@@ -44,7 +51,6 @@ export default function SlideShow() {
   const previousSlide = () => {
     const prev = Math.max(1, currentSlide - 1);
     setCurrentSlide(prev);
-    router.push(`/${userId as string}?slide=${prev}`, { scroll: false });
   };
 
   const handleClick = (e: React.MouseEvent) => {
@@ -68,7 +74,7 @@ export default function SlideShow() {
         className="absolute right-4 top-4 size-8 hover:cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
-          router.push(`/${userId as string}`);
+          exit();
         }}
       />
       <ChevronLeft

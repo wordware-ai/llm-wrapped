@@ -9,10 +9,6 @@ export default async function ResultsPage({
 }) {
   const user = await api.users.getById({ id: (await params).userId });
 
-  const data = await api.spotifyApi.getAllUserData();
-
-  console.log(JSON.stringify(data, null, 2));
-
   if (!user) {
     redirect("/");
   }

@@ -1,11 +1,31 @@
 import { BaseStory } from "./base";
 
 const spotifyStorys = [
-  { src: "/images/kamil.png", alt: "Kamil", id: "1" },
-  { src: "/images/kamil.png", alt: "Kamil", id: "2" },
-  { src: "/images/kamil.png", alt: "Kamil", id: "3" },
-  { src: "/images/kamil.png", alt: "Kamil", id: "4" },
-  { src: "/images/kamil.png", alt: "Kamil", id: "5" },
+  {
+    src: "/images/kamil.png",
+    alt: "Kamil",
+    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+  },
+  {
+    src: "/images/kamil.png",
+    alt: "Kamil",
+    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+  },
+  {
+    src: "/images/kamil.png",
+    alt: "Kamil",
+    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+  },
+  {
+    src: "/images/kamil.png",
+    alt: "Kamil",
+    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+  },
+  {
+    src: "/images/kamil.png",
+    alt: "Kamil",
+    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+  },
 ];
 
 export function SpotifyStorys() {
@@ -13,8 +33,8 @@ export function SpotifyStorys() {
     <div className="flex flex-col gap-4">
       <p className="text-center text-2xl font-semibold">Spotify Examples</p>
       <div className="grid grid-cols-3 items-center gap-2 md:flex md:gap-8">
-        {spotifyStorys.map((story) => (
-          <div key={story.id} className="flex flex-col items-center gap-2">
+        {spotifyStorys.map((story, index) => (
+          <div key={index} className="flex flex-col items-center gap-2">
             <BaseStory {...story} />
             <p className="text-center">{story.alt}</p>
           </div>

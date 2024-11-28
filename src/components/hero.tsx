@@ -26,7 +26,7 @@ export function Hero() {
           <h1 className="text-5xl font-bold text-white sm:text-7xl lg:text-9xl">
             #LLMWrapped
           </h1>
-          <p className="text-muted-foreground w-full max-w-lg text-center text-xl lg:max-w-none lg:text-2xl">
+          <p className="text-muted-foreground w-full max-w-xs text-center text-sm md:max-w-lg md:text-xl lg:max-w-none lg:text-2xl">
             get a true look at yourself through the lens of large language
             models (LLMs)
           </p>

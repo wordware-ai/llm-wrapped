@@ -3,11 +3,11 @@ import "@/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
-import { TRPCReactProvider } from "@/trpc/react";
 import { AuthProvider } from "@/components/auth-provider";
-import { getSession, getUser } from "@/lib/supabase/server";
 import { StreamProvider } from "@/components/stream-provider";
-import Footer from "@/components/footer";
+import { getSession, getUser } from "@/lib/supabase/server";
+import { TRPCReactProvider } from "@/trpc/react";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -25,10 +25,11 @@ export default async function RootLayout({
       <body>
         <TRPCReactProvider>
           <AuthProvider user={user ?? undefined} session={session ?? undefined}>
-            <StreamProvider>{children}</StreamProvider>
+            <StreamProvider>
+              <NuqsAdapter>{children}</NuqsAdapter>
+            </StreamProvider>
           </AuthProvider>
         </TRPCReactProvider>
-        <Footer />
       </body>
     </html>
   );
