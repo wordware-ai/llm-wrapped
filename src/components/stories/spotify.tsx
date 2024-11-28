@@ -4,27 +4,27 @@ const spotifyStorys = [
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
   },
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
   },
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
   },
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
   },
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "6def5615-1a4d-42e6-b1df-6e3063349e89",
+    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
   },
 ];
 
