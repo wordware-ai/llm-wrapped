@@ -9,6 +9,7 @@ import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import React, { useEffect, useMemo } from "react";
 import WordwareCard from "./spotify/wordware-card";
 import { useStreamContext } from "./stream-provider";
+import { getImageUrl } from "@/lib/get-image-url";
 
 export default function SlideShow() {
   const [currentSlide, setCurrentSlide] = useQueryState(
@@ -143,13 +144,14 @@ export default function SlideShow() {
                   : { value: currentSlideData.value }
               }
               imageUrl={
-                currentSlideData.id === "least_popular_artist"
-                  ? (results.least_popular_artist_image_url as string)
-                  : currentSlideData.id === "most_popular_artist"
-                    ? (results.most_popular_artist_image_url as string)
-                    : currentSlideData.id === "music_taste_analysis_1"
-                      ? (results.top_artist_image_url as string)
-                      : undefined
+                userId
+                  ? getImageUrl(currentSlideData.id, results)
+                  : getImageUrl(
+                      currentSlideData.id,
+                      homepageSlideshows[
+                        name as keyof typeof homepageSlideshows
+                      ],
+                    )
               }
             />
           ) : (
