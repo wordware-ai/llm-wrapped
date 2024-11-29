@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { type ReactNode } from "react";
+import React, { type ReactNode } from "react";
 export default function WordwareCard({
   children,
   fillColor,
@@ -46,7 +46,7 @@ export default function WordwareCard({
           <WordwareLogo fillColor={fillColor} />
           <WordwareLogo fillColor={fillColor} />
         </div>
-        {children}
+        <div className="z-10">{children}</div>
         {!hideHashtag && (
           <p className="absolute bottom-8 left-8 text-white">#LLMwrapped</p>
         )}
