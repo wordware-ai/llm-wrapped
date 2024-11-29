@@ -1,6 +1,7 @@
+import { type User } from "@prisma/client";
 import { BaseStory } from "../stories/base";
 
-export function UserInfo() {
+export function UserInfo({ user }: { user: User }) {
   return (
     <div className="flex flex-col justify-between gap-4 lg:w-1/2">
       <h1 className="text-5xl font-semibold xs:text-6xl sm:text-7xl md:text-8xl lg:text-7xl xl:text-8xl">
@@ -10,11 +11,13 @@ export function UserInfo() {
         <div className="flex w-min flex-col gap-4">
           <BaseStory
             size="lg:size-64 size-36 p-1 lg:p-2"
-            src="/images/kamil.png"
+            src={user.imageUrl}
             alt="Spotify 1"
-            id="6def5615-1a4d-42e6-b1df-6e3063349e89"
+            id={user.id}
           />
-          <p className="text-center text-xl font-semibold">Kamil Kamil</p>
+          <p className="text-center text-xl font-semibold">
+            {user.username ?? user.email}
+          </p>
         </div>
         <div className="flex flex-col gap-8">
           <p className="text-xl sm:text-2xl">Share your results</p>

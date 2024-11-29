@@ -14,44 +14,43 @@ export const spotifyApiRouter = createTRPCRouter({
     });
 
     // Fetch all data in parallel
-    const [topArtists, topTracks, playlists, recentlyPlayed] =
-      await Promise.all([
-        // Top Artists
-        fetch(`https://api.spotify.com/v1/me/top/artists?${params}`, {
-          headers: {
-            Authorization: `Bearer ${ctx.session?.provider_token}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => topArtistsResponseSchema.parse(data)),
+    const [topArtists, topTracks, playlists] = await Promise.all([
+      // Top Artists
+      fetch(`https://api.spotify.com/v1/me/top/artists?${params}`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session?.provider_token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => topArtistsResponseSchema.parse(data)),
 
-        // Top Tracks
-        fetch(`https://api.spotify.com/v1/me/top/tracks?${params}`, {
-          headers: {
-            Authorization: `Bearer ${ctx.session?.provider_token}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => topTracksResponseSchema.parse(data)),
+      // Top Tracks
+      fetch(`https://api.spotify.com/v1/me/top/tracks?${params}`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session?.provider_token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => topTracksResponseSchema.parse(data)),
 
-        // Playlists
-        fetch(`https://api.spotify.com/v1/me/playlists?${params}`, {
-          headers: {
-            Authorization: `Bearer ${ctx.session?.provider_token}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => playlistsResponseSchema.parse(data)),
+      // Playlists
+      fetch(`https://api.spotify.com/v1/me/playlists?${params}`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session?.provider_token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => playlistsResponseSchema.parse(data)),
 
-        // Recently Played
-        fetch(`https://api.spotify.com/v1/me/player/recently-played?limit=50`, {
-          headers: {
-            Authorization: `Bearer ${ctx.session?.provider_token}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => recentlyPlayedResponseSchema.parse(data)),
-      ]);
+      // Recently Played
+      fetch(`https://api.spotify.com/v1/me/player/recently-played?limit=50`, {
+        headers: {
+          Authorization: `Bearer ${ctx.session?.provider_token}`,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => recentlyPlayedResponseSchema.parse(data)),
+    ]);
 
     // Transform the data
     const allArtistNames = topArtists.items.map((artist) => artist.name);
@@ -62,11 +61,6 @@ export const spotifyApiRouter = createTRPCRouter({
     }));
 
     const playlistNames = playlists.items.map((playlist) => playlist.name);
-
-    const recentlyPlayedTracks = recentlyPlayed.items.map((item) => ({
-      trackName: item.track.name,
-      artistName: item.track.artists[0]?.name,
-    }));
 
     // Get top 5 least popular artists
     const leastPopularArtists = [...topArtists.items]
@@ -102,13 +96,22 @@ export const spotifyApiRouter = createTRPCRouter({
       allArtistNames,
       allTracks,
       playlistNames,
-      recentlyPlayedTracks,
       leastPopularArtists,
       mostPopularArtists,
       mostFollowedArtists,
       oldestSongs,
     };
 
-    return convertToMarkdown(transformedData);
+    // Get the required image URLs
+    const imageUrls = {
+      mostPopularArtist: mostPopularArtists[0]?.images?.[0]?.url ?? null,
+      leastPopularArtist: leastPopularArtists[0]?.images?.[0]?.url ?? null,
+      topArtist: topArtists.items[0]?.images?.[0]?.url ?? null,
+    };
+
+    return {
+      spotifyData: convertToMarkdown(transformedData),
+      imageUrls,
+    };
   }),
 });

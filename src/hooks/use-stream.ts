@@ -5,16 +5,18 @@ export function useStream({
   promptId,
   data,
   onFinish,
+  initialState,
 }: {
   promptId: string;
   data: string;
   onFinish?: (results: Record<string, unknown>) => void;
+  initialState?: Record<string, unknown>;
 }) {
   const { setResults, setIsLoading } = useStreamContext();
 
   async function streamResponse() {
     setIsLoading(true);
-    setResults({}); // Clear previous results
+    setResults(initialState ?? {}); // Clear previous results
 
     const response = await fetch(`/stream/${promptId}`, {
       method: "POST",

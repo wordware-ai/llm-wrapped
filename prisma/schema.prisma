@@ -17,6 +17,7 @@ model User {
   id        String   @id
   email     String?  @unique
   username  String?  @unique
+  imageUrl  String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -25,14 +26,14 @@ model User {
 }
 
 model SpotifyResult {
-  id                                     String   @id @default(cuid())
+  id                                     String  @id @default(cuid())
   short_summary                          String
   music_taste_analysis_1                 String
   music_taste_analysis_2                 String
   music_taste_analysis_3                 String
-  lyric_therapy_needed                 String
+  lyric_therapy_needed                   String
   identity_crisis_level                  Json
-  emotional_stability_rating           Json
+  emotional_stability_rating             Json
   achievement                            Json
   dance_floor_credibility                String
   song_you_would_hit_the_dance_floor     String
@@ -44,8 +45,12 @@ model SpotifyResult {
   titles_that_need_therapy               String
   final_diagnosis                        String
   recommendation                         String
-  createdAt                              DateTime @default(now())
-  updatedAt                              DateTime @updatedAt
+  least_popular_artist_image_url         String?
+  most_popular_artist_image_url          String?
+  top_artist_image_url                   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   // Relations
   user   User   @relation(fields: [userId], references: [id])

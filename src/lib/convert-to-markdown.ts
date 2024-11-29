@@ -15,11 +15,7 @@ export const convertToMarkdown = (data: any): string => {
     "### Playlists",
     data.playlistNames.map((playlist: any) => `- ${playlist}`).join("\n"),
     "",
-    "### Recently Played Tracks",
-    data.recentlyPlayedTracks
-      .map((track: any) => `- ${track.trackName} by ${track.artistName}`)
-      .join("\n"),
-    "",
+
     "### Least Popular Artists",
     data.leastPopularArtists
       .map(
