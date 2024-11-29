@@ -52,7 +52,4 @@ export const homepageSlideshows = {
     top_artist_image_url:
       "https://i.scdn.co/image/481b980af463122013e4578c08fb8c5cbfaed1e9",
   },
-  anotherUser: {
-    // ... properties
-  },
 } as const;

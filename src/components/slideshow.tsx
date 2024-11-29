@@ -1,5 +1,7 @@
 "use client";
 
+import { slideshowCards } from "@/config/slideshow-card-config";
+import { homepageSlideshows } from "@/config/slideshow-config";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -7,9 +9,6 @@ import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import React, { useEffect, useMemo } from "react";
 import WordwareCard from "./spotify/wordware-card";
 import { useStreamContext } from "./stream-provider";
-import { homepageSlideshows } from "@/config/slideshow-config";
-import { cards } from "@/config/card-config";
-import { slideshowCards } from "@/config/slideshow-card-config";
 
 type SlideData = {
   id: string;
@@ -41,11 +40,11 @@ export default function SlideShow() {
 
   const slides = useMemo<SlideData[]>(() => {
     if (userId && results) {
-      // Map results to their corresponding card configurations
-      console.log(results);
+      // Filter out metadata fields before mapping
+
       return Object.entries(results).map(([key, value]) => {
         // Find the card config for this result
-        const cardConfig = cards.find((card) => card.data.id === key);
+        const cardConfig = slideshowCards.find((card) => card.data.id === key);
 
         return {
           id: key,
@@ -55,12 +54,12 @@ export default function SlideShow() {
         };
       });
     } else if (name) {
+      console.log(homepageSlideshows);
       const staticSlideshow =
         homepageSlideshows[name as keyof typeof homepageSlideshows];
       if (!staticSlideshow) return [];
-
       return Object.entries(staticSlideshow)
-        .filter(([_, value]) => typeof value === "string")
+
         .map(([key, value]) => ({
           id: key,
           value,
@@ -114,9 +113,11 @@ export default function SlideShow() {
     }
   };
 
+  console.log(slides);
+
   return (
     <div
-      className="fixed z-20 flex h-screen w-full select-none items-center justify-center gap-4 bg-black/90 md:p-6"
+      className="fixed z-20 flex h-screen w-full select-none items-center justify-center gap-4 bg-black/95 md:p-6"
       onClick={exit}
     >
       <X
@@ -128,7 +129,7 @@ export default function SlideShow() {
       />
       <ChevronLeft
         className={cn(
-          "hidden size-7 rounded-full bg-zinc-600 pr-0.5 hover:cursor-pointer md:block",
+          "hidden size-7 rounded-full bg-zinc-600 pr-0.5 hover:cursor-pointer sm:block",
           currentSlide === 1 && "invisible",
         )}
         onClick={async (e) => {
@@ -162,7 +163,7 @@ export default function SlideShow() {
       </div>
       <ChevronRight
         className={cn(
-          "hidden size-7 rounded-full bg-zinc-600 pl-0.5 hover:cursor-pointer md:block",
+          "hidden size-7 rounded-full bg-zinc-600 pl-0.5 hover:cursor-pointer sm:block",
           currentSlide === slides.length && "invisible",
         )}
         onClick={async (e) => {

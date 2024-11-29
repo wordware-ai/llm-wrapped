@@ -28,7 +28,7 @@ export default function HomeCards() {
           key={card.content}
           className={cn("w-full sm:max-w-xs", card.bgColor)}
         >
-          <div>{card.content}</div>
+          <div className="z-10 text-white">{card.content}</div>
         </WordwareCard>
       ))}
     </div>
