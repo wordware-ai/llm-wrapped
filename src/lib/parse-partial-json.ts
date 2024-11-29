@@ -1,4 +1,4 @@
-export function parsePartialJSON(input: string): any {
+export function parsePartialJSON(input: string): unknown {
   if (typeof input !== "string") {
     throw new TypeError("Input must be a string");
   }
@@ -7,12 +7,10 @@ export function parsePartialJSON(input: string): any {
   function balanceQuotes(str: string): string {
     let inString = false;
     let escaped = false;
-    let lastQuoteIndex = -1;
 
     for (const char of str) {
       if (char === '"' && !escaped) {
         inString = !inString;
-        lastQuoteIndex = str.indexOf(char);
       }
       escaped = char === "\\" && !escaped;
     }
@@ -60,7 +58,7 @@ export function parsePartialJSON(input: string): any {
   try {
     // Try parsing as-is first
     return JSON.parse(input);
-  } catch (e) {
+  } catch {
     // If parsing fails, try to fix the JSON
     let processed = input.trim();
 
@@ -72,8 +70,10 @@ export function parsePartialJSON(input: string): any {
 
     try {
       return JSON.parse(processed);
-    } catch (e) {
-      throw new Error(`Could not parse JSON: ${e.message}`);
+    } catch (e: unknown) {
+      throw new Error(
+        `Could not parse JSON: ${e instanceof Error ? e.message : String(e)}`,
+      );
     }
   }
 }

@@ -5,14 +5,14 @@ export default function WordwareCard({
   children,
   fillColor,
   className,
-  show,
+  show = true,
   wide = false,
   hideHashtag = false,
 }: {
   children: ReactNode;
   fillColor?: string;
   className: string;
-  show: boolean;
+  show?: boolean;
   wide?: boolean;
   hideHashtag?: boolean;
 }) {

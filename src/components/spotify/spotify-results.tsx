@@ -45,7 +45,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
       setResults(displayResults);
     } else {
       if (spotifyData) {
-        void streamResponse({ initialState: { ...data?.imageUrls } ?? {} });
+        void streamResponse({ initialState: { ...data?.imageUrls } });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -54,10 +54,9 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const searchParams = useSearchParams();
   const slide = searchParams.get("slide");
 
-  // uncomment this
-  // if (!previousRun && !session?.provider_token) {
-  //   redirect("/");
-  // }
+  if (!previousRun && !session?.provider_token) {
+    redirect("/");
+  }
 
   if (slide) {
     return <Slideshow />;

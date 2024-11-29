@@ -46,7 +46,7 @@ const Achievement = ({ result }: CardComponentProps) => {
   );
 };
 
-const LeastPopularArtist = ({ result }: CardComponentProps) => {
+const LeastPopularArtist = () => {
   const { results } = useStreamContext();
   return (
     <div className="flex flex-col justify-center text-center text-white">
@@ -54,20 +54,20 @@ const LeastPopularArtist = ({ result }: CardComponentProps) => {
       {!!results.least_popular_artist_image_url && (
         <div className="my-2 flex justify-center">
           <Image
-            src={String(results.least_popular_artist_image_url)}
-            alt="Top Artist"
+            src={results.least_popular_artist_image_url as string}
+            alt="Least Popular Artist"
             className="aspect-square rounded-lg object-cover"
             width={120}
             height={120}
           />
         </div>
       )}
-      <div>{String(result)}</div>
+      <div>{results.least_popular_artist as string}</div>
     </div>
   );
 };
 
-const MostPopularArtist = ({ result }: CardComponentProps) => {
+const MostPopularArtist = () => {
   const { results } = useStreamContext();
   return (
     <div className="flex flex-col text-center text-white">
@@ -75,15 +75,15 @@ const MostPopularArtist = ({ result }: CardComponentProps) => {
       {!!results.most_popular_artist_image_url && (
         <div className="my-2 flex justify-center">
           <Image
-            src={String(results.most_popular_artist_image_url)}
-            alt="Top Artist"
+            src={results.most_popular_artist_image_url as string}
+            alt="Most Popular Artist"
             className="aspect-square rounded-lg object-cover"
             width={120}
             height={120}
           />
         </div>
       )}
-      <div>{String(result)}</div>
+      <div>{results.most_popular_artist as string}</div>
     </div>
   );
 };

@@ -25,7 +25,7 @@ export function SideCards() {
           <div className="flex flex-col items-center justify-center gap-4">
             {!!results.top_artist_image_url && (
               <Image
-                src={String(results.top_artist_image_url)}
+                src={results.top_artist_image_url as string}
                 alt="Top Artist"
                 className="aspect-square rounded-lg object-cover"
                 width={120}
