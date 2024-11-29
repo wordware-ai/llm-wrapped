@@ -38,12 +38,20 @@ export function CardGrid() {
             <Component
               key={data.id}
               result={results[data.id] as Record<string, unknown>}
+              imageUrl={
+                data.id === "least_popular_artist"
+                  ? (results.least_popular_artist_image_url as string)
+                  : data.id === "most_popular_artist"
+                    ? (results.most_popular_artist_image_url as string)
+                    : undefined
+              }
             />
           ) : (
             <div className="flex flex-col gap-4 text-center">
               <h3 className="text-2xl font-semibold text-white">
                 {data.title}
               </h3>
+
               <p className="text-white">{String(results[data.id])}</p>
             </div>
           )}

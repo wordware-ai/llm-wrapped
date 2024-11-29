@@ -10,13 +10,6 @@ import React, { useEffect, useMemo } from "react";
 import WordwareCard from "./spotify/wordware-card";
 import { useStreamContext } from "./stream-provider";
 
-type SlideData = {
-  id: string;
-  value: unknown;
-  Component?: React.ComponentType<{ result: Record<string, unknown> }>;
-  title?: string;
-};
-
 export default function SlideShow() {
   const [currentSlide, setCurrentSlide] = useQueryState(
     "slide",
@@ -38,7 +31,7 @@ export default function SlideShow() {
     }
   }, [currentSlide]);
 
-  const slides = useMemo<SlideData[]>(() => {
+  const slides = useMemo(() => {
     if (userId && results) {
       // Filter out metadata fields before mapping
 
@@ -54,7 +47,6 @@ export default function SlideShow() {
         };
       });
     } else if (name) {
-      console.log(homepageSlideshows);
       const staticSlideshow =
         homepageSlideshows[name as keyof typeof homepageSlideshows];
       if (!staticSlideshow) return [];
@@ -113,7 +105,7 @@ export default function SlideShow() {
     }
   };
 
-  console.log(slides);
+  console.log(results);
 
   return (
     <div
@@ -149,6 +141,15 @@ export default function SlideShow() {
                 typeof currentSlideData.value === "object"
                   ? (currentSlideData.value as Record<string, unknown>)
                   : { value: currentSlideData.value }
+              }
+              imageUrl={
+                currentSlideData.id === "least_popular_artist"
+                  ? (results.least_popular_artist_image_url as string)
+                  : currentSlideData.id === "most_popular_artist"
+                    ? (results.most_popular_artist_image_url as string)
+                    : currentSlideData.id === "music_taste_analysis_1"
+                      ? (results.top_artist_image_url as string)
+                      : undefined
               }
             />
           ) : (

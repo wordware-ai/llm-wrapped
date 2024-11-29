@@ -3,7 +3,13 @@ import { type SpotifyResult } from "@prisma/client";
 export function convertDbToState(
   previousRun: Partial<SpotifyResult>,
 ): Record<string, unknown> {
-  return { ...previousRun };
+  const fieldsToRemove = ["createdAt", "updatedAt", "userId", "id"];
+  const cleanedPreviousRun = Object.fromEntries(
+    Object.entries(previousRun).filter(
+      ([key]) => !fieldsToRemove.includes(key),
+    ),
+  );
+  return { ...cleanedPreviousRun };
 }
 
 export function convertStateToDb(results: Record<string, unknown>) {

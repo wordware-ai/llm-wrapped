@@ -40,15 +40,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
 
   useEffect(() => {
     if (previousRun) {
-      const fieldsToRemove = ["createdAt", "updatedAt", "userId", "id"];
-      const cleanedPreviousRun = Object.fromEntries(
-        Object.entries(previousRun).filter(
-          ([key]) => !fieldsToRemove.includes(key),
-        ),
-      );
-      console.log("previousRun", cleanedPreviousRun);
-
-      const displayResults = convertDbToState(cleanedPreviousRun);
+      const displayResults = convertDbToState(previousRun);
       setResults(displayResults);
     } else {
       if (spotifyData) {

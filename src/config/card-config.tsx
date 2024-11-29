@@ -1,4 +1,3 @@
-import { useStreamContext } from "../components/stream-provider";
 import Image from "next/image";
 
 type CardData = {
@@ -6,8 +5,9 @@ type CardData = {
   title: string;
 };
 
-type CardComponentProps = {
+export type CardComponentProps = {
   result: Record<string, unknown>;
+  imageUrl?: string;
 };
 
 export type CardItem = {
@@ -45,15 +45,14 @@ const Achievement = ({ result }: CardComponentProps) => {
   );
 };
 
-const LeastPopularArtist = () => {
-  const { results } = useStreamContext();
+const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
   return (
     <div className="flex flex-col justify-center text-center text-white">
       <p className="text-2xl font-semibold">Least Popular Artist</p>
-      {!!results.least_popular_artist_image_url && (
+      {imageUrl && (
         <div className="my-2 flex justify-center">
           <Image
-            src={results.least_popular_artist_image_url as string}
+            src={imageUrl}
             alt="Least Popular Artist"
             className="aspect-square rounded-lg object-cover"
             width={120}
@@ -61,20 +60,19 @@ const LeastPopularArtist = () => {
           />
         </div>
       )}
-      <div>{results.least_popular_artist as string}</div>
+      <div>{result.value as string}</div>
     </div>
   );
 };
 
-const MostPopularArtist = () => {
-  const { results } = useStreamContext();
+const MostPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
   return (
     <div className="flex h-max w-full flex-col text-center text-white">
       <p className="text-2xl font-semibold">Top Artist</p>
-      {!!results.most_popular_artist_image_url && (
+      {imageUrl && (
         <div className="my-2 flex justify-center">
           <Image
-            src={results.most_popular_artist_image_url as string}
+            src={imageUrl}
             alt="Most Popular Artist"
             className="aspect-square rounded-lg object-cover"
             width={120}
@@ -82,7 +80,7 @@ const MostPopularArtist = () => {
           />
         </div>
       )}
-      <div>{results.most_popular_artist as string}</div>
+      <div>{result.value as string}</div>
     </div>
   );
 };

@@ -1,4 +1,25 @@
-import { type CardItem, cards } from "./card-config";
+import { type CardComponentProps, type CardItem, cards } from "./card-config";
+import Image from "next/image";
+
+const TopArtist = ({ result, imageUrl }: CardComponentProps) => {
+  return (
+    <div className="flex h-max w-full flex-col text-center text-white">
+      <p className="text-2xl font-semibold">Top Artist</p>
+      {imageUrl && (
+        <div className="my-2 flex justify-center">
+          <Image
+            src={imageUrl}
+            alt="Most Popular Artist"
+            className="aspect-square rounded-lg object-cover"
+            width={120}
+            height={120}
+          />
+        </div>
+      )}
+      <div>{result.value as string}</div>
+    </div>
+  );
+};
 
 export const slideshowCards: CardItem[] = [
   {
@@ -12,6 +33,7 @@ export const slideshowCards: CardItem[] = [
       id: "music_taste_analysis_1",
       title: "Music Taste Analysis 1",
     },
+    Component: TopArtist,
   },
   {
     data: {
