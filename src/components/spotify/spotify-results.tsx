@@ -37,7 +37,6 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
     promptId: "5d5cb90e-4197-4c60-bcb4-8c9b8137f636",
     data: spotifyData ?? "",
     onFinish,
-    initialState: data?.imageUrls ?? {},
   });
 
   useEffect(() => {
@@ -46,7 +45,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
       setResults(displayResults);
     } else {
       if (spotifyData) {
-        void streamResponse();
+        void streamResponse({ initialState: { ...data?.imageUrls } ?? {} });
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -5,16 +5,19 @@ export function useStream({
   promptId,
   data,
   onFinish,
-  initialState,
 }: {
   promptId: string;
   data: string;
   onFinish?: (results: Record<string, unknown>) => void;
-  initialState?: Record<string, unknown>;
 }) {
   const { setResults, setIsLoading } = useStreamContext();
 
-  async function streamResponse() {
+  async function streamResponse({
+    initialState,
+  }: {
+    initialState?: Record<string, unknown>;
+  }) {
+    console.log("initialState", initialState);
     setIsLoading(true);
     setResults(initialState ?? {}); // Clear previous results
 
@@ -62,8 +65,8 @@ export function useStream({
             string,
             unknown
           >;
-          finalResults = parsedResults;
-          setResults(parsedResults);
+          finalResults = { ...initialState, ...parsedResults };
+          setResults(finalResults);
         } catch {
           // Continue if parsing fails
         }

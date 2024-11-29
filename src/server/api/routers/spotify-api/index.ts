@@ -104,9 +104,11 @@ export const spotifyApiRouter = createTRPCRouter({
 
     // Get the required image URLs
     const imageUrls = {
-      mostPopularArtist: mostPopularArtists[0]?.images?.[0]?.url ?? null,
-      leastPopularArtist: leastPopularArtists[0]?.images?.[0]?.url ?? null,
-      topArtist: topArtists.items[0]?.images?.[0]?.url ?? null,
+      most_popular_artist_image_url:
+        mostPopularArtists[0]?.images?.[0]?.url ?? null,
+      least_popular_artist_image_url:
+        leastPopularArtists[0]?.images?.[0]?.url ?? null,
+      top_artist_image_url: topArtists.items[0]?.images?.[0]?.url ?? null,
     };
 
     return {
