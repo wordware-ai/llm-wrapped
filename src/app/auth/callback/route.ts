@@ -20,6 +20,9 @@ export async function GET(request: Request) {
           id: "n/a",
           username: (data.user.user_metadata as { name?: string }).name ?? null,
           email: data.user.email,
+          imageUrl:
+            (data.user.user_metadata as { image_url?: string }).image_url ??
+            null,
         });
         next = `/${user.id}`;
       }

@@ -1,12 +1,91 @@
+import { useStreamContext } from "../stream-provider";
+import Image from "next/image";
+
 type CardData = {
   id: string;
   title: string;
   // ... other common card data
 };
 
+type CardComponentProps = {
+  result: Record<string, unknown>;
+};
+
 type CardItem = {
   data: CardData;
-  Component?: React.ComponentType<CardData>; // Optional custom component
+  Component?: React.ComponentType<CardComponentProps>;
+};
+
+const IdentityCrisisLevel = ({ result }: CardComponentProps) => {
+  return (
+    <div className="flex flex-col text-center text-white">
+      <p className="text-2xl font-semibold">Identity Crisis Level</p>
+      <div className="text-4xl">{String(result.level)}</div>
+      <p className="">{String(result.description)}</p>
+    </div>
+  );
+};
+
+const EmotionalStability = ({ result }: CardComponentProps) => {
+  return (
+    <div className="flex flex-col text-center text-white">
+      <p className="text-2xl font-semibold">Emotional Stability</p>
+      <div className="text-7xl">{String(result.level)}</div>
+      <p className="">{String(result.description)}</p>
+    </div>
+  );
+};
+
+const Achievement = ({ result }: CardComponentProps) => {
+  return (
+    <div className="flex flex-col text-center text-white">
+      <p className="text-2xl font-semibold">Achievement</p>
+      <div className="text-4xl">{String(result.title)}</div>
+      <p className="">{String(result.description)}</p>
+    </div>
+  );
+};
+
+const LeastPopularArtist = () => {
+  const { results } = useStreamContext();
+  return (
+    <div className="flex flex-col justify-center text-center text-white">
+      <p className="text-2xl font-semibold">Least Popular Artist</p>
+      {!!results.least_popular_artist_image_url && (
+        <div className="my-2 flex justify-center">
+          <Image
+            src={results.least_popular_artist_image_url as string}
+            alt="Least Popular Artist"
+            className="aspect-square rounded-lg object-cover"
+            width={120}
+            height={120}
+          />
+        </div>
+      )}
+      <div>{results.least_popular_artist as string}</div>
+    </div>
+  );
+};
+
+const MostPopularArtist = () => {
+  const { results } = useStreamContext();
+  return (
+    <div className="flex flex-col text-center text-white">
+      <p className="text-2xl font-semibold">Top Artist</p>
+      {!!results.most_popular_artist_image_url && (
+        <div className="my-2 flex justify-center">
+          <Image
+            src={results.most_popular_artist_image_url as string}
+            alt="Most Popular Artist"
+            className="aspect-square rounded-lg object-cover"
+            width={120}
+            height={120}
+          />
+        </div>
+      )}
+      <div>{results.most_popular_artist as string}</div>
+    </div>
+  );
 };
 
 export const cards: CardItem[] = [
@@ -15,18 +94,21 @@ export const cards: CardItem[] = [
       id: "identity_crisis_level",
       title: "Identity Crisis Level",
     },
+    Component: IdentityCrisisLevel,
   },
   {
     data: {
-      id: "emotional_stability_ranking",
+      id: "emotional_stability_rating",
       title: "Emotional Stability",
     },
+    Component: EmotionalStability,
   },
   {
     data: {
       id: "achievement",
       title: "Achievement",
     },
+    Component: Achievement,
   },
   {
     data: {
@@ -57,12 +139,14 @@ export const cards: CardItem[] = [
       id: "least_popular_artist",
       title: "Rare Finds, Rare Listens",
     },
+    Component: LeastPopularArtist,
   },
   {
     data: {
       id: "most_popular_artist",
       title: "Overplayed and Overhyped",
     },
+    Component: MostPopularArtist,
   },
   {
     data: {

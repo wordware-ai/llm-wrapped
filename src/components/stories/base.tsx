@@ -9,7 +9,7 @@ export function BaseStory({
   className,
   size,
 }: {
-  src: string;
+  src: string | null;
   alt: string;
   id: string;
   className?: string;
@@ -23,16 +23,19 @@ export function BaseStory({
         size,
       )}
     >
-      <Image
-        src={src}
-        alt={alt}
-        width={200}
-        height={200}
-        className={cn(
-          "aspect-square h-full w-full rounded-full bg-background object-cover",
-          className,
+      <div className="aspect-square h-full w-full rounded-full bg-background object-cover">
+        {src ? (
+          <Image
+            src={src}
+            alt={alt}
+            width={200}
+            height={200}
+            className={cn("h-full w-full rounded-full object-cover", className)}
+          />
+        ) : (
+          <div className="h-full w-full rounded-full bg-gray-200" />
         )}
-      />
+      </div>
     </Link>
   );
 }

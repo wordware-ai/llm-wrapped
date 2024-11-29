@@ -9,15 +9,15 @@ import { useQueryState, parseAsInteger, parseAsBoolean } from "nuqs";
 import WordwareCard from "./spotify/wordware-card";
 
 export default function SlideShow() {
-  const colorMap = {
-    1: "bg-gradient-to-bl from-gray-800 via-blue-950 to-slate-900",
-    2: "bg-gradient-to-bl from-gray-800 via-emerald-950 to-slate-900",
-    3: "bg-gradient-to-bl from-gray-900 via-amber-950 to-slate-900",
-    4: "bg-gradient-to-bl from-gray-800 via-purple-950 to-slate-900",
-    5: "bg-gradient-to-bl from-gray-800 via-pink-950 to-slate-900",
-    6: "bg-gradient-to-bl from-gray-900 via-orange-950 to-slate-900",
-    7: "bg-gradient-to-bl from-gray-800 via-teal-950 to-slate-900",
-  };
+  // const colorMap = {
+  //   1: "bg-gradient-to-bl from-gray-800 via-blue-950 to-slate-900",
+  //   2: "bg-gradient-to-bl from-gray-800 via-emerald-950 to-slate-900",
+  //   3: "bg-gradient-to-bl from-gray-900 via-amber-950 to-slate-900",
+  //   4: "bg-gradient-to-bl from-gray-800 via-purple-950 to-slate-900",
+  //   5: "bg-gradient-to-bl from-gray-800 via-pink-950 to-slate-900",
+  //   6: "bg-gradient-to-bl from-gray-900 via-orange-950 to-slate-900",
+  //   7: "bg-gradient-to-bl from-gray-800 via-teal-950 to-slate-900",
+  // };
 
   const [currentSlide, setCurrentSlide] = useQueryState(
     "slide",
@@ -86,11 +86,9 @@ export default function SlideShow() {
           currentSlide === 1 && "invisible",
         )}
       />
-      <WordwareCard
-        content={resultsArray[currentSlide + 2] ?? ""}
-        bgColor={colorMap[currentSlide as keyof typeof colorMap]}
-        width="w-full sm:max-w-md h-full sm:h-auto rounded-none sm:rounded-xl"
-      />
+      <WordwareCard className="h-full w-full rounded-none sm:h-auto sm:max-w-md sm:rounded-xl">
+        <div>{resultsArray[currentSlide + 2] as string}</div>
+      </WordwareCard>
       <ChevronRight
         className={cn(
           "hidden size-8 hover:cursor-pointer md:block",

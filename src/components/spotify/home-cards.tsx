@@ -1,5 +1,6 @@
 import React from "react";
 import WordwareCard from "./wordware-card";
+import { cn } from "@/lib/utils";
 
 const cards = [
   {
@@ -25,10 +26,10 @@ export default function HomeCards() {
       {cards.map((card) => (
         <WordwareCard
           key={card.content}
-          content={card.content}
-          bgColor={card.bgColor}
-          width="w-full sm:max-w-xs"
-        />
+          className={cn("w-full sm:max-w-xs", card.bgColor)}
+        >
+          <div>{card.content}</div>
+        </WordwareCard>
       ))}
     </div>
   );

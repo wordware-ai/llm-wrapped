@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BaseStory } from "../stories/base";
 import { useStreamContext } from "../stream-provider";
 import WordwareCard from "./wordware-card";
@@ -21,9 +22,20 @@ export function SideCards() {
           show={!!results.music_taste_analysis_1}
           className="h-full w-full rounded-xl bg-[#1A1A1A]"
         >
-          <p className="text-3xl text-white">
-            {String(results.music_taste_analysis_1)}
-          </p>
+          <div className="flex flex-col items-center justify-center gap-4">
+            {!!results.top_artist_image_url && (
+              <Image
+                src={results.top_artist_image_url as string}
+                alt="Top Artist"
+                className="aspect-square rounded-lg object-cover"
+                width={120}
+                height={120}
+              />
+            )}
+            <p className="text-center text-2xl text-white">
+              {String(results.music_taste_analysis_1)}
+            </p>
+          </div>
         </WordwareCard>
         <div className="h-full w-full rounded-xl">
           <div className="flex h-full w-full flex-col gap-4">
@@ -36,7 +48,7 @@ export function SideCards() {
                 {String(results.music_taste_analysis_2)}
               </p>
             </WordwareCard>
-            {String(results.music_taste_analysis_2) && (
+            {!!results.music_taste_analysis_3 && (
               <div className="flex h-1/3 w-full items-center justify-between gap-4 rounded-xl border p-4">
                 <p className="">
                   LLMwrapped has been built with Wordware - the ultimate AI

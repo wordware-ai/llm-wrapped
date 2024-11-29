@@ -12,9 +12,14 @@ export function useStream({
 }) {
   const { setResults, setIsLoading } = useStreamContext();
 
-  async function streamResponse() {
+  async function streamResponse({
+    initialState,
+  }: {
+    initialState?: Record<string, unknown>;
+  }) {
+    console.log("initialState", initialState);
     setIsLoading(true);
-    setResults({}); // Clear previous results
+    setResults(initialState ?? {}); // Clear previous results
 
     const response = await fetch(`/stream/${promptId}`, {
       method: "POST",
@@ -53,7 +58,6 @@ export function useStream({
         if (done) break;
 
         accumulatedData += decoder.decode(value);
-        console.log("accumulatedData", accumulatedData);
 
         // Try to parse any complete key-value pairs
         try {
@@ -61,9 +65,8 @@ export function useStream({
             string,
             unknown
           >;
-          console.log("parsedResults", parsedResults);
-          finalResults = parsedResults;
-          setResults(parsedResults);
+          finalResults = { ...initialState, ...parsedResults };
+          setResults(finalResults);
         } catch {
           // Continue if parsing fails
         }

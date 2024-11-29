@@ -9,6 +9,7 @@ export const spotifyArtistSchema = z.object({
       total: z.number(),
     })
     .optional(),
+  images: z.array(z.object({ url: z.string() })).optional(),
 });
 
 // Track Schema
