@@ -1,12 +1,20 @@
 import Link from "next/link";
+import Image from "next/image";
+import WordwareLogo from "public/brand/wordware-black.svg";
 
 export default function Footer() {
   return (
     <footer className="flex flex-col gap-8 bg-black p-8 text-white">
       <div className="flex items-center">
-        <h2 className="text-2xl font-bold">wordware</h2>
+        <Image
+          src={WordwareLogo}
+          alt="Wordware Logo"
+          width={120}
+          height={30}
+          className="invert"
+        />
       </div>
-      
+
       <div className="flex flex-wrap gap-8">
         <Link href="https://wordware.ai" className="hover:underline">
           Wordware home page
@@ -14,7 +22,10 @@ export default function Footer() {
         <Link href="https://discord.gg/wordware" className="hover:underline">
           Join Discord
         </Link>
-        <Link href="https://twitter.com/wordware_ai" className="hover:underline">
+        <Link
+          href="https://twitter.com/wordware_ai"
+          className="hover:underline"
+        >
           Follow us on X (fka Twitter)
         </Link>
       </div>
@@ -32,4 +43,4 @@ export default function Footer() {
       </div>
     </footer>
   );
-} 
+}
