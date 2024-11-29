@@ -5,49 +5,53 @@ export default function WordwareCard({
   children,
   fillColor,
   className,
+  show,
   wide = false,
   hideHashtag = false,
 }: {
   children: ReactNode;
   fillColor?: string;
   className: string;
+  show: boolean;
   wide?: boolean;
   hideHashtag?: boolean;
 }) {
   return (
-    <div
-      className={cn(
-        "relative -z-20 flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
-        className,
-      )}
-    >
+    show && (
       <div
         className={cn(
-          "absolute left-0 top-0 -z-10 w-full gap-[7px] px-2",
-          wide ? "grid grid-cols-2" : "flex flex-col",
+          "relative -z-20 flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
+          className,
         )}
       >
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
-        <WordwareLogo fillColor={fillColor} />
+        <div
+          className={cn(
+            "absolute left-0 top-0 -z-10 w-full gap-[7px] px-2",
+            wide ? "grid grid-cols-2" : "flex flex-col",
+          )}
+        >
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+          <WordwareLogo fillColor={fillColor} />
+        </div>
+        {children}
+        {!hideHashtag && (
+          <p className="absolute bottom-8 left-8 text-white">#LLMWrapped</p>
+        )}
       </div>
-      {children}
-      {!hideHashtag && (
-        <p className="absolute bottom-8 left-8 text-white">#LLMWrapped</p>
-      )}
-    </div>
+    )
   );
 }
 
