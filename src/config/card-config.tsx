@@ -46,6 +46,7 @@ const Achievement = ({ result }: CardComponentProps) => {
 };
 
 const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
+  console.log(imageUrl);
   return (
     <div className="flex flex-col justify-center text-center text-white">
       <p className="text-2xl font-semibold">Least Popular Artist</p>

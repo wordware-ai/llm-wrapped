@@ -2,29 +2,34 @@ import { BaseStory } from "./base";
 
 const spotifyStorys = [
   {
-    src: "/images/kamil.png",
-    alt: "Kamil",
-    href: "/?name=kamil&slide=1",
+    src: "/images/stories/brian.webp",
+    alt: "Brian Chesky",
+    href: "/?name=brian&slide=1",
   },
   {
-    src: "/images/kamil.png",
-    alt: "Kamil",
-    href: "/?name=kamil&slide=1",
+    src: "/images/stories/trump.webp",
+    alt: "Donald Trump",
+    href: "/?name=trump&slide=1",
   },
   {
-    src: "/images/kamil.png",
-    alt: "Kamil",
-    href: "/?name=kamil&slide=1",
+    src: "/images/stories/elon.jpg",
+    alt: "Elon Musk",
+    href: "/?name=elon&slide=1",
   },
   {
-    src: "/images/kamil.png",
-    alt: "Kamil",
-    href: "/?name=kamil&slide=1",
+    src: "/images/stories/kanye.jpg",
+    alt: "Kanye West",
+    href: "/?name=kanye&slide=1",
   },
   {
-    src: "/images/kamil.png",
-    alt: "Kamil",
-    href: "/?name=kamil&slide=1",
+    src: "/images/stories/sam.webp",
+    alt: "Sam Altman",
+    href: "/?name=sam&slide=1",
+  },
+  {
+    src: "/images/stories/taylor.webp",
+    alt: "Taylor Swift",
+    href: "/?name=taylor&slide=1",
   },
 ];
 
@@ -39,7 +44,7 @@ export function SpotifyStorys() {
             <p className="text-center">{story.alt}</p>
           </div>
         ))}
-        <div className="flex flex-col items-center gap-2 rounded-lg border bg-white p-4">
+        {/* <div className="flex flex-col items-center gap-2 rounded-lg border bg-white p-4">
           <BaseStory
             src="/brand/w-black.png"
             alt="Wordware"
@@ -47,7 +52,7 @@ export function SpotifyStorys() {
             className="pt-1.5"
           />
           <p className="text-center">Kamil </p>
-        </div>
+        </div> */}
       </div>
     </div>
   );
