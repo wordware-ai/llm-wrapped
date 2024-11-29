@@ -8,6 +8,8 @@ import { StreamProvider } from "@/components/stream-provider";
 import { getSession, getUser } from "@/lib/supabase/server";
 import { TRPCReactProvider } from "@/trpc/react";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import SlideShow from "@/components/slideshow";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -26,7 +28,11 @@ export default async function RootLayout({
         <TRPCReactProvider>
           <AuthProvider user={user ?? undefined} session={session ?? undefined}>
             <StreamProvider>
-              <NuqsAdapter>{children}</NuqsAdapter>
+              <NuqsAdapter>
+                <SlideShow />
+                {children}
+                <Footer />
+              </NuqsAdapter>
             </StreamProvider>
           </AuthProvider>
         </TRPCReactProvider>

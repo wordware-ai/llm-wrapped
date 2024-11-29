@@ -4,16 +4,15 @@ import { useStream } from "@/hooks/use-stream";
 import { useUser } from "@/hooks/use-user";
 import { api } from "@/trpc/react";
 import { type UserWithSpotifyResult } from "@/types/user";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
 import { useEffect } from "react";
-import Slideshow from "../slideshow";
 import { useStreamContext } from "../stream-provider";
 import { CardGrid } from "./card-grid";
 
+import { convertDbToState, convertStateToDb } from "@/lib/convert-results";
 import Navbar from "./navbar";
 import { SideCards } from "./side-cards";
 import { UserInfo } from "./user-info";
-import { convertDbToState, convertStateToDb } from "@/lib/convert-results";
 
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
@@ -51,15 +50,8 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previousRun, spotifyData]);
 
-  const searchParams = useSearchParams();
-  const slide = searchParams.get("slide");
-
   if (!previousRun && !session?.provider_token) {
     redirect("/");
-  }
-
-  if (slide) {
-    return <Slideshow />;
   }
 
   return (

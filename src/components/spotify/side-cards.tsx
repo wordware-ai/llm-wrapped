@@ -57,7 +57,7 @@ export function SideCards() {
                 <BaseStory
                   src="/brand/w-black.png"
                   alt="Wordware"
-                  id="add"
+                  href="/?name=wordware&slide=1"
                   className="pt-1.5"
                   size="shrink-0"
                 />

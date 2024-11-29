@@ -1,17 +1,16 @@
-import { useStreamContext } from "../stream-provider";
+import { useStreamContext } from "../components/stream-provider";
 import Image from "next/image";
 
 type CardData = {
   id: string;
   title: string;
-  // ... other common card data
 };
 
 type CardComponentProps = {
   result: Record<string, unknown>;
 };
 
-type CardItem = {
+export type CardItem = {
   data: CardData;
   Component?: React.ComponentType<CardComponentProps>;
 };
@@ -70,7 +69,7 @@ const LeastPopularArtist = () => {
 const MostPopularArtist = () => {
   const { results } = useStreamContext();
   return (
-    <div className="flex flex-col text-center text-white">
+    <div className="flex h-max w-full flex-col text-center text-white">
       <p className="text-2xl font-semibold">Top Artist</p>
       {!!results.most_popular_artist_image_url && (
         <div className="my-2 flex justify-center">
