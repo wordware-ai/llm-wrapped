@@ -17,7 +17,6 @@ export function useStream({
   }: {
     initialState?: Record<string, unknown>;
   }) {
-    console.log("initialState", initialState);
     setIsLoading(true);
     setResults(initialState ?? {}); // Clear previous results
 
@@ -73,7 +72,6 @@ export function useStream({
       }
 
       // Use finalResults for logging and callback
-      console.log("results", finalResults);
       onFinish?.(finalResults);
     } catch (error) {
       console.error("Stream error:", error);

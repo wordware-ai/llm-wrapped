@@ -6,8 +6,6 @@ import WordwareCard from "./wordware-card";
 export function SideCards() {
   const { results } = useStreamContext();
 
-  console.log(results);
-
   return (
     <div className="flex h-[800px] flex-col justify-between gap-4 lg:h-full lg:w-1/2">
       <WordwareCard

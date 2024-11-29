@@ -42,6 +42,7 @@ export default function SlideShow() {
   const slides = useMemo<SlideData[]>(() => {
     if (userId && results) {
       // Map results to their corresponding card configurations
+      console.log(results);
       return Object.entries(results).map(([key, value]) => {
         // Find the card config for this result
         const cardConfig = cards.find((card) => card.data.id === key);
@@ -71,8 +72,6 @@ export default function SlideShow() {
     }
     return [];
   }, [userId, name, results]);
-
-  console.log(slides);
 
   if (!currentSlide || !slides.length) return null;
 
