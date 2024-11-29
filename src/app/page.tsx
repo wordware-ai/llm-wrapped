@@ -3,6 +3,7 @@ import HomeCards from "@/components/spotify/home-cards";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import InfiniteBanner from "@/components/infinite-banner";
 
 export default async function Home() {
   return (
@@ -10,6 +11,7 @@ export default async function Home() {
       {/* This includes the story examples because they both need access to tab state */}
       <Hero />
       <HomeCards />
+      <InfiniteBanner />
       <div className="mx-auto flex max-w-3xl flex-col gap-4 text-left text-3xl font-light leading-10">
         <h1>Why did we build #LLMwrapped?</h1>
 
@@ -28,7 +30,7 @@ export default async function Home() {
           audioscribe.wordware.ai
         </p>
       </div>
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center gap-4 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-600/20 py-14 text-center text-2xl font-light">
+      <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center gap-4 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-600/20 py-6 text-center text-2xl font-light">
         <h2 className="font-medium">Ready to create your own AI showcase?</h2>
         <p className="max-w-xl text-gray-600">
           Start building with Wordware today and create powerful AI applications
@@ -40,7 +42,7 @@ export default async function Home() {
           href="https://wordware.ai"
           className={cn(
             buttonVariants({ variant: "default" }),
-            "bg-[#22C55E] hover:opacity-90",
+            "bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 hover:opacity-90",
           )}
         >
           Duplicate this WordApp

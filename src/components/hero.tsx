@@ -23,7 +23,7 @@ export function Hero() {
           height={1000}
         />
         <div className="z-10 flex flex-col items-center justify-center">
-          <h1 className="text-5xl font-bold text-white sm:text-7xl lg:text-9xl">
+          <h1 className="text-5xl font-medium text-white sm:text-7xl lg:text-9xl">
             #LLMwrapped
           </h1>
           <p className="w-full max-w-xs text-center text-sm text-zinc-300 md:max-w-lg md:text-xl lg:max-w-none lg:text-2xl">

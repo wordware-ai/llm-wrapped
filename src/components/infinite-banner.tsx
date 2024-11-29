@@ -3,21 +3,21 @@ import React from "react";
 export default function InfiniteBanner() {
   const content = (
     <>
-      <span className="text-black">This is a</span>
-      <span className="font-bold"> WordApp</span>
-      <span className="text-gray-300"> - Wordware - </span>
+      <span className="text-gray-400">This is a</span>
+      <span className="text-black"> WordApp</span>
+      <span className="text-gray-400">-- A Wordware Application --</span>
     </>
   );
 
   return (
-    <div className="relative flex w-full overflow-hidden bg-white py-8">
-      <div className="animate-scroll flex min-w-full shrink-0 items-center justify-around gap-4 text-4xl md:text-6xl">
+    <div className="relative flex w-full overflow-hidden py-8">
+      <div className="flex min-w-full shrink-0 animate-scroll items-center justify-around gap-4 text-4xl md:text-8xl">
         {content}
         {content}
         {content}
         {content}
       </div>
-      <div className="animate-scroll flex min-w-full shrink-0 items-center justify-around gap-4 text-4xl md:text-6xl">
+      <div className="flex min-w-full shrink-0 animate-scroll items-center justify-around gap-4 text-4xl md:text-8xl">
         {content}
         {content}
         {content}
@@ -25,4 +25,4 @@ export default function InfiniteBanner() {
       </div>
     </div>
   );
-} 
+}

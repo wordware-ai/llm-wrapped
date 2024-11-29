@@ -17,7 +17,7 @@ const spotifyStorys = [
     href: "/?name=elon&slide=1",
   },
   {
-    src: "/images/stories/kanye.jpg",
+    src: "/images/stories/kanye.webp",
     alt: "Kanye West",
     href: "/?name=kanye&slide=1",
   },
@@ -27,7 +27,7 @@ const spotifyStorys = [
     href: "/?name=sam&slide=1",
   },
   {
-    src: "/images/stories/taylor.webp",
+    src: "/images/stories/taylor.jpg",
     alt: "Taylor Swift",
     href: "/?name=taylor&slide=1",
   },
