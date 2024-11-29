@@ -58,7 +58,7 @@ export const TransactionIsolationLevelSchema = z.enum(['ReadUncommitted','ReadCo
 
 export const UserScalarFieldEnumSchema = z.enum(['id','email','username','imageUrl','createdAt','updatedAt']);
 
-export const SpotifyResultScalarFieldEnumSchema = z.enum(['id','short_summary','music_taste_analysis_1','music_taste_analysis_2','music_taste_analysis_3','lyric_therapy_needed','identity_crisis_level','emotional_stability_rating','achievement','dance_floor_credibility','song_you_would_hit_the_dance_floor','songs_you_secretly_think_are_about_you','guilty_pleasure_song','least_popular_artist','most_popular_artist','time_machine_status','titles_that_need_therapy','final_diagnosis','recommendation','createdAt','updatedAt','userId']);
+export const SpotifyResultScalarFieldEnumSchema = z.enum(['id','short_summary','music_taste_analysis_1','music_taste_analysis_2','music_taste_analysis_3','lyric_therapy_needed','identity_crisis_level','emotional_stability_rating','achievement','dance_floor_credibility','song_you_would_hit_the_dance_floor','songs_you_secretly_think_are_about_you','guilty_pleasure_song','least_popular_artist','most_popular_artist','time_machine_status','titles_that_need_therapy','final_diagnosis','recommendation','least_popular_artist_image_url','most_popular_artist_image_url','top_artist_image_url','createdAt','updatedAt','userId']);
 
 export const SortOrderSchema = z.enum(['asc','desc']);
 
@@ -112,6 +112,9 @@ export const SpotifyResultSchema = z.object({
   titles_that_need_therapy: z.string(),
   final_diagnosis: z.string(),
   recommendation: z.string(),
+  least_popular_artist_image_url: z.string().nullable(),
+  most_popular_artist_image_url: z.string().nullable(),
+  top_artist_image_url: z.string().nullable(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
   userId: z.string(),
@@ -177,6 +180,9 @@ export const SpotifyResultSelectSchema: z.ZodType<Prisma.SpotifyResultSelect> = 
   titles_that_need_therapy: z.boolean().optional(),
   final_diagnosis: z.boolean().optional(),
   recommendation: z.boolean().optional(),
+  least_popular_artist_image_url: z.boolean().optional(),
+  most_popular_artist_image_url: z.boolean().optional(),
+  top_artist_image_url: z.boolean().optional(),
   createdAt: z.boolean().optional(),
   updatedAt: z.boolean().optional(),
   userId: z.boolean().optional(),
@@ -299,6 +305,9 @@ export const SpotifyResultWhereInputSchema: z.ZodType<Prisma.SpotifyResultWhereI
   titles_that_need_therapy: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   final_diagnosis: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   recommendation: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  least_popular_artist_image_url: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
+  most_popular_artist_image_url: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
+  top_artist_image_url: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
   createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   userId: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
@@ -325,6 +334,9 @@ export const SpotifyResultOrderByWithRelationInputSchema: z.ZodType<Prisma.Spoti
   titles_that_need_therapy: z.lazy(() => SortOrderSchema).optional(),
   final_diagnosis: z.lazy(() => SortOrderSchema).optional(),
   recommendation: z.lazy(() => SortOrderSchema).optional(),
+  least_popular_artist_image_url: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
+  most_popular_artist_image_url: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
+  top_artist_image_url: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   createdAt: z.lazy(() => SortOrderSchema).optional(),
   updatedAt: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional(),
@@ -367,6 +379,9 @@ export const SpotifyResultWhereUniqueInputSchema: z.ZodType<Prisma.SpotifyResult
   titles_that_need_therapy: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   final_diagnosis: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   recommendation: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  least_popular_artist_image_url: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
+  most_popular_artist_image_url: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
+  top_artist_image_url: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
   createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   user: z.union([ z.lazy(() => UserRelationFilterSchema),z.lazy(() => UserWhereInputSchema) ]).optional(),
@@ -392,6 +407,9 @@ export const SpotifyResultOrderByWithAggregationInputSchema: z.ZodType<Prisma.Sp
   titles_that_need_therapy: z.lazy(() => SortOrderSchema).optional(),
   final_diagnosis: z.lazy(() => SortOrderSchema).optional(),
   recommendation: z.lazy(() => SortOrderSchema).optional(),
+  least_popular_artist_image_url: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
+  most_popular_artist_image_url: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
+  top_artist_image_url: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   createdAt: z.lazy(() => SortOrderSchema).optional(),
   updatedAt: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional(),
@@ -423,6 +441,9 @@ export const SpotifyResultScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma
   titles_that_need_therapy: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   final_diagnosis: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   recommendation: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  least_popular_artist_image_url: z.union([ z.lazy(() => StringNullableWithAggregatesFilterSchema),z.string() ]).optional().nullable(),
+  most_popular_artist_image_url: z.union([ z.lazy(() => StringNullableWithAggregatesFilterSchema),z.string() ]).optional().nullable(),
+  top_artist_image_url: z.union([ z.lazy(() => StringNullableWithAggregatesFilterSchema),z.string() ]).optional().nullable(),
   createdAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
   userId: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
@@ -515,6 +536,9 @@ export const SpotifyResultCreateInputSchema: z.ZodType<Prisma.SpotifyResultCreat
   titles_that_need_therapy: z.string(),
   final_diagnosis: z.string(),
   recommendation: z.string(),
+  least_popular_artist_image_url: z.string().optional().nullable(),
+  most_popular_artist_image_url: z.string().optional().nullable(),
+  top_artist_image_url: z.string().optional().nullable(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
   user: z.lazy(() => UserCreateNestedOneWithoutSpotifyResultInputSchema)
@@ -540,6 +564,9 @@ export const SpotifyResultUncheckedCreateInputSchema: z.ZodType<Prisma.SpotifyRe
   titles_that_need_therapy: z.string(),
   final_diagnosis: z.string(),
   recommendation: z.string(),
+  least_popular_artist_image_url: z.string().optional().nullable(),
+  most_popular_artist_image_url: z.string().optional().nullable(),
+  top_artist_image_url: z.string().optional().nullable(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
   userId: z.string()
@@ -565,6 +592,9 @@ export const SpotifyResultUpdateInputSchema: z.ZodType<Prisma.SpotifyResultUpdat
   titles_that_need_therapy: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   final_diagnosis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  least_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  most_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  top_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   user: z.lazy(() => UserUpdateOneRequiredWithoutSpotifyResultNestedInputSchema).optional()
@@ -590,6 +620,9 @@ export const SpotifyResultUncheckedUpdateInputSchema: z.ZodType<Prisma.SpotifyRe
   titles_that_need_therapy: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   final_diagnosis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  least_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  most_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  top_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -615,6 +648,9 @@ export const SpotifyResultCreateManyInputSchema: z.ZodType<Prisma.SpotifyResultC
   titles_that_need_therapy: z.string(),
   final_diagnosis: z.string(),
   recommendation: z.string(),
+  least_popular_artist_image_url: z.string().optional().nullable(),
+  most_popular_artist_image_url: z.string().optional().nullable(),
+  top_artist_image_url: z.string().optional().nullable(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
   userId: z.string()
@@ -640,6 +676,9 @@ export const SpotifyResultUpdateManyMutationInputSchema: z.ZodType<Prisma.Spotif
   titles_that_need_therapy: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   final_diagnosis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  least_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  most_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  top_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
@@ -664,6 +703,9 @@ export const SpotifyResultUncheckedUpdateManyInputSchema: z.ZodType<Prisma.Spoti
   titles_that_need_therapy: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   final_diagnosis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  least_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  most_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  top_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -838,6 +880,9 @@ export const SpotifyResultCountOrderByAggregateInputSchema: z.ZodType<Prisma.Spo
   titles_that_need_therapy: z.lazy(() => SortOrderSchema).optional(),
   final_diagnosis: z.lazy(() => SortOrderSchema).optional(),
   recommendation: z.lazy(() => SortOrderSchema).optional(),
+  least_popular_artist_image_url: z.lazy(() => SortOrderSchema).optional(),
+  most_popular_artist_image_url: z.lazy(() => SortOrderSchema).optional(),
+  top_artist_image_url: z.lazy(() => SortOrderSchema).optional(),
   createdAt: z.lazy(() => SortOrderSchema).optional(),
   updatedAt: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional()
@@ -860,6 +905,9 @@ export const SpotifyResultMaxOrderByAggregateInputSchema: z.ZodType<Prisma.Spoti
   titles_that_need_therapy: z.lazy(() => SortOrderSchema).optional(),
   final_diagnosis: z.lazy(() => SortOrderSchema).optional(),
   recommendation: z.lazy(() => SortOrderSchema).optional(),
+  least_popular_artist_image_url: z.lazy(() => SortOrderSchema).optional(),
+  most_popular_artist_image_url: z.lazy(() => SortOrderSchema).optional(),
+  top_artist_image_url: z.lazy(() => SortOrderSchema).optional(),
   createdAt: z.lazy(() => SortOrderSchema).optional(),
   updatedAt: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional()
@@ -882,6 +930,9 @@ export const SpotifyResultMinOrderByAggregateInputSchema: z.ZodType<Prisma.Spoti
   titles_that_need_therapy: z.lazy(() => SortOrderSchema).optional(),
   final_diagnosis: z.lazy(() => SortOrderSchema).optional(),
   recommendation: z.lazy(() => SortOrderSchema).optional(),
+  least_popular_artist_image_url: z.lazy(() => SortOrderSchema).optional(),
+  most_popular_artist_image_url: z.lazy(() => SortOrderSchema).optional(),
+  top_artist_image_url: z.lazy(() => SortOrderSchema).optional(),
   createdAt: z.lazy(() => SortOrderSchema).optional(),
   updatedAt: z.lazy(() => SortOrderSchema).optional(),
   userId: z.lazy(() => SortOrderSchema).optional()
@@ -1109,6 +1160,9 @@ export const SpotifyResultCreateWithoutUserInputSchema: z.ZodType<Prisma.Spotify
   titles_that_need_therapy: z.string(),
   final_diagnosis: z.string(),
   recommendation: z.string(),
+  least_popular_artist_image_url: z.string().optional().nullable(),
+  most_popular_artist_image_url: z.string().optional().nullable(),
+  top_artist_image_url: z.string().optional().nullable(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional()
 }).strict();
@@ -1133,6 +1187,9 @@ export const SpotifyResultUncheckedCreateWithoutUserInputSchema: z.ZodType<Prism
   titles_that_need_therapy: z.string(),
   final_diagnosis: z.string(),
   recommendation: z.string(),
+  least_popular_artist_image_url: z.string().optional().nullable(),
+  most_popular_artist_image_url: z.string().optional().nullable(),
+  top_artist_image_url: z.string().optional().nullable(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional()
 }).strict();
@@ -1173,6 +1230,9 @@ export const SpotifyResultUpdateWithoutUserInputSchema: z.ZodType<Prisma.Spotify
   titles_that_need_therapy: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   final_diagnosis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  least_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  most_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  top_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
@@ -1197,6 +1257,9 @@ export const SpotifyResultUncheckedUpdateWithoutUserInputSchema: z.ZodType<Prism
   titles_that_need_therapy: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   final_diagnosis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  least_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  most_popular_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  top_artist_image_url: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();

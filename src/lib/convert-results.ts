@@ -28,6 +28,11 @@ export function convertStateToDb(results: Record<string, unknown>) {
     titles_that_need_therapy: String(results.titles_that_need_therapy) ?? "",
     final_diagnosis: String(results.final_diagnosis) ?? "",
     recommendation: String(results.recommendation) ?? "",
+    least_popular_artist_image_url:
+      results.least_popular_artist_image_url ?? null,
+    most_popular_artist_image_url:
+      results.most_popular_artist_image_url ?? null,
+    top_artist_image_url: results.top_artist_image_url ?? null,
     user: {}, // Handled in procedure
   };
 }

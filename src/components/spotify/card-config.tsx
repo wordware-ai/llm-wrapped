@@ -1,3 +1,6 @@
+import { useStreamContext } from "../stream-provider";
+import Image from "next/image";
+
 type CardData = {
   id: string;
   title: string;
@@ -39,6 +42,48 @@ const Achievement = ({ result }: CardComponentProps) => {
       <p className="text-2xl font-semibold">Achievement</p>
       <div className="text-4xl">{String(result.title)}</div>
       <p className="">{String(result.description)}</p>
+    </div>
+  );
+};
+
+const LeastPopularArtist = ({ result }: CardComponentProps) => {
+  const { results } = useStreamContext();
+  return (
+    <div className="flex flex-col justify-center text-center text-white">
+      <p className="text-2xl font-semibold">Least Popular Artist</p>
+      {!!results.least_popular_artist_image_url && (
+        <div className="my-2 flex justify-center">
+          <Image
+            src={String(results.least_popular_artist_image_url)}
+            alt="Top Artist"
+            className="aspect-square rounded-lg object-cover"
+            width={120}
+            height={120}
+          />
+        </div>
+      )}
+      <div>{String(result)}</div>
+    </div>
+  );
+};
+
+const MostPopularArtist = ({ result }: CardComponentProps) => {
+  const { results } = useStreamContext();
+  return (
+    <div className="flex flex-col text-center text-white">
+      <p className="text-2xl font-semibold">Top Artist</p>
+      {!!results.most_popular_artist_image_url && (
+        <div className="my-2 flex justify-center">
+          <Image
+            src={String(results.most_popular_artist_image_url)}
+            alt="Top Artist"
+            className="aspect-square rounded-lg object-cover"
+            width={120}
+            height={120}
+          />
+        </div>
+      )}
+      <div>{String(result)}</div>
     </div>
   );
 };
@@ -94,12 +139,14 @@ export const cards: CardItem[] = [
       id: "least_popular_artist",
       title: "Rare Finds, Rare Listens",
     },
+    Component: LeastPopularArtist,
   },
   {
     data: {
       id: "most_popular_artist",
       title: "Overplayed and Overhyped",
     },
+    Component: MostPopularArtist,
   },
   {
     data: {
