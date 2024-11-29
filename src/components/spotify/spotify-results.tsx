@@ -11,7 +11,7 @@ import { useStreamContext } from "../stream-provider";
 import { CardGrid } from "./card-grid";
 
 import Navbar from "./navbar";
-import { SideCards } from "./results-group-1";
+import { SideCards } from "./side-cards";
 import { UserInfo } from "./user-info";
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
@@ -34,7 +34,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
       music_taste_analysis_3: String(results.music_taste_analysis_3) ?? "",
       lyric_therapy_needed: String(results.lyric_therapy_needed) ?? "",
       identity_crisis_level: results.identity_crisis_level ?? {},
-      emotional_stability_ranking: results.emotional_stability_rating ?? {},
+      emotional_stability_rating: results.emotional_stability_rating ?? {},
       achievement: results.achievement ?? {},
       dance_floor_credibility: String(results.dance_floor_credibility) ?? "",
       song_you_would_hit_the_dance_floor:
@@ -69,7 +69,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
         music_taste_analysis_3: previousRun.music_taste_analysis_3,
         lyric_therapy_needed: previousRun.lyric_therapy_needed,
         identity_crisis_level: previousRun.identity_crisis_level,
-        emotional_stability_ranking: previousRun.emotional_stability_ranking,
+        emotional_stability_rating: previousRun.emotional_stability_rating,
         achievement: previousRun.achievement,
         dance_floor_credibility: previousRun.dance_floor_credibility,
         song_you_would_hit_the_dance_floor:
@@ -96,9 +96,10 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const searchParams = useSearchParams();
   const slide = searchParams.get("slide");
 
-  if (!previousRun && !session?.provider_token) {
-    redirect("/");
-  }
+  // uncomment this
+  // if (!previousRun && !session?.provider_token) {
+  //   redirect("/");
+  // }
 
   if (slide) {
     return <Slideshow />;

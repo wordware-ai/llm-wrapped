@@ -32,7 +32,7 @@ model SpotifyResult {
   music_taste_analysis_3                 String
   lyric_therapy_needed                 String
   identity_crisis_level                  Json
-  emotional_stability_ranking            Json
+  emotional_stability_rating           Json
   achievement                            Json
   dance_floor_credibility                String
   song_you_would_hit_the_dance_floor     String

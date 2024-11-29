@@ -36,7 +36,7 @@ export function SideCards() {
                 {String(results.music_taste_analysis_2)}
               </p>
             </WordwareCard>
-            {String(results.music_taste_analysis_2) && (
+            {!!results.music_taste_analysis_2 && (
               <div className="flex h-1/3 w-full items-center justify-between gap-4 rounded-xl border p-4">
                 <p className="">
                   LLMwrapped has been built with Wordware - the ultimate AI

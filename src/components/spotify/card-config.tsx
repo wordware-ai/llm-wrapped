@@ -4,9 +4,43 @@ type CardData = {
   // ... other common card data
 };
 
+type CardComponentProps = {
+  result: Record<string, unknown>;
+};
+
 type CardItem = {
   data: CardData;
-  Component?: React.ComponentType<CardData>; // Optional custom component
+  Component?: React.ComponentType<CardComponentProps>;
+};
+
+const IdentityCrisisLevel = ({ result }: CardComponentProps) => {
+  return (
+    <div className="flex flex-col text-center text-white">
+      <p className="text-2xl font-semibold">Identity Crisis Level</p>
+      <div className="text-4xl">{String(result.level)}</div>
+      <p className="">{String(result.description)}</p>
+    </div>
+  );
+};
+
+const EmotionalStability = ({ result }: CardComponentProps) => {
+  return (
+    <div className="flex flex-col text-center text-white">
+      <p className="text-2xl font-semibold">Emotional Stability</p>
+      <div className="text-7xl">{String(result.level)}</div>
+      <p className="">{String(result.description)}</p>
+    </div>
+  );
+};
+
+const Achievement = ({ result }: CardComponentProps) => {
+  return (
+    <div className="flex flex-col text-center text-white">
+      <p className="text-2xl font-semibold">Achievement</p>
+      <div className="text-4xl">{String(result.title)}</div>
+      <p className="">{String(result.description)}</p>
+    </div>
+  );
 };
 
 export const cards: CardItem[] = [
@@ -15,18 +49,21 @@ export const cards: CardItem[] = [
       id: "identity_crisis_level",
       title: "Identity Crisis Level",
     },
+    Component: IdentityCrisisLevel,
   },
   {
     data: {
-      id: "emotional_stability_ranking",
+      id: "emotional_stability_rating",
       title: "Emotional Stability",
     },
+    Component: EmotionalStability,
   },
   {
     data: {
       id: "achievement",
       title: "Achievement",
     },
+    Component: Achievement,
   },
   {
     data: {

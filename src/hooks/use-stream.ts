@@ -53,7 +53,6 @@ export function useStream({
         if (done) break;
 
         accumulatedData += decoder.decode(value);
-        console.log("accumulatedData", accumulatedData);
 
         // Try to parse any complete key-value pairs
         try {
@@ -61,7 +60,6 @@ export function useStream({
             string,
             unknown
           >;
-          console.log("parsedResults", parsedResults);
           finalResults = parsedResults;
           setResults(parsedResults);
         } catch {

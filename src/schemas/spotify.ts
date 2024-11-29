@@ -17,7 +17,7 @@ export const spotifyResultsSchema = z.object({
   music_taste_analysis_3: z.string(),
   lyric_therapy_needed: z.string(),
   identity_crisis_level: levelRatingSchema,
-  emotional_stability_ranking: levelRatingSchema,
+  emotional_stability_rating: levelRatingSchema,
   achievement: achievementSchema,
   dance_floor_credibility: z.string(),
   song_you_would_hit_the_dance_floor: z.string(),
