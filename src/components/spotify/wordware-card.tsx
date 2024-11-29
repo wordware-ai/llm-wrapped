@@ -20,13 +20,13 @@ export default function WordwareCard({
     show && (
       <div
         className={cn(
-          "relative -z-20 flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
+          "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
           className,
         )}
       >
         <div
           className={cn(
-            "absolute left-0 top-0 -z-10 w-full gap-[7px] px-2",
+            "absolute left-0 top-0 w-full gap-[7px] px-2",
             wide ? "grid grid-cols-2" : "flex flex-col",
           )}
         >

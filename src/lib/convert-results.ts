@@ -1,7 +1,7 @@
 import { type SpotifyResult } from "@prisma/client";
 
 export function convertDbToState(
-  previousRun: SpotifyResult,
+  previousRun: Partial<SpotifyResult>,
 ): Record<string, unknown> {
   return { ...previousRun };
 }
