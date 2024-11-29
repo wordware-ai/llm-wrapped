@@ -4,27 +4,27 @@ const spotifyStorys = [
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
+    href: "/?name=kamil&slide=1",
   },
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
+    href: "/?name=kamil&slide=1",
   },
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
+    href: "/?name=kamil&slide=1",
   },
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
+    href: "/?name=kamil&slide=1",
   },
   {
     src: "/images/kamil.png",
     alt: "Kamil",
-    id: "2914d7c8-2dcb-4544-b339-a2e942c17166",
+    href: "/?name=kamil&slide=1",
   },
 ];
 
@@ -43,7 +43,7 @@ export function SpotifyStorys() {
           <BaseStory
             src="/brand/w-black.png"
             alt="Wordware"
-            id="add"
+            href="/?name=wordware&slide=1"
             className="pt-1.5"
           />
           <p className="text-center">Kamil </p>

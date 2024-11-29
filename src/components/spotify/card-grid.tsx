@@ -1,5 +1,5 @@
 import WordwareCard from "./wordware-card";
-import { cards } from "./card-config";
+import { cards } from "../../config/card-config";
 import { useStreamContext } from "../stream-provider";
 
 export function CardGrid() {

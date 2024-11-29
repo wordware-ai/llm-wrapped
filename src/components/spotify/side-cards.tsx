@@ -6,6 +6,8 @@ import WordwareCard from "./wordware-card";
 export function SideCards() {
   const { results } = useStreamContext();
 
+  console.log(results);
+
   return (
     <div className="flex h-[800px] flex-col justify-between gap-4 lg:h-full lg:w-1/2">
       <WordwareCard
@@ -57,7 +59,7 @@ export function SideCards() {
                 <BaseStory
                   src="/brand/w-black.png"
                   alt="Wordware"
-                  id="add"
+                  href="/?name=wordware&slide=1"
                   className="pt-1.5"
                   size="shrink-0"
                 />

@@ -5,19 +5,20 @@ import Link from "next/link";
 export function BaseStory({
   src,
   alt,
-  id,
+  href,
   className,
   size,
 }: {
   src: string | null;
   alt: string;
-  id: string;
+  href: string;
   className?: string;
   size?: string;
 }) {
   return (
     <Link
-      href={`/${id}?slide=1&returnHome=true`}
+      href={href}
+      scroll={false}
       className={cn(
         "relative size-20 cursor-pointer rounded-full bg-gradient-to-br from-yellow-400 via-pink-500 to-purple-600 p-[4px]",
         size,

@@ -48,7 +48,7 @@ export default function WordwareCard({
         </div>
         {children}
         {!hideHashtag && (
-          <p className="absolute bottom-8 left-8 text-white">#LLMWrapped</p>
+          <p className="absolute bottom-8 left-8 text-white">#LLMwrapped</p>
         )}
       </div>
     )
