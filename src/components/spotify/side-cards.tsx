@@ -7,7 +7,7 @@ export function SideCards() {
   const { results } = useStreamContext();
 
   return (
-    <div className="flex h-[800px] flex-col justify-between gap-4 lg:h-full lg:w-1/2">
+    <div className="flex flex-col justify-between gap-4 lg:h-full lg:w-1/2">
       <WordwareCard
         wide
         hideHashtag
@@ -16,7 +16,7 @@ export function SideCards() {
       >
         <p className="text-3xl text-white">{String(results.short_summary)}</p>
       </WordwareCard>
-      <div className="flex h-2/3 w-full gap-4 rounded-xl">
+      <div className="flex w-full flex-col gap-4 rounded-xl md:h-2/3 md:flex-row">
         <WordwareCard
           hideHashtag
           show={!!results.music_taste_analysis_1}
@@ -58,8 +58,8 @@ export function SideCards() {
                   src="/brand/w-black.png"
                   alt="Wordware"
                   href="/?name=wordware&slide=1"
-                  className="pt-1.5"
-                  size="shrink-0"
+                  imageClassName="pt-1.5"
+                  className="shrink-0"
                 />
               </div>
             )}

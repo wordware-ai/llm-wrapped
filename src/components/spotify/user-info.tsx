@@ -10,7 +10,7 @@ export function UserInfo({ user }: { user: User }) {
       <div className="flex gap-8 lg:gap-20">
         <div className="flex w-min flex-col gap-4">
           <BaseStory
-            size="lg:size-64 size-36 p-1 lg:p-2"
+            className="size-36 p-1 lg:size-48 lg:p-2"
             src={user.imageUrl}
             alt="Spotify 1"
             href={`/${user.id}?slide=1`}
