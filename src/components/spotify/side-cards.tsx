@@ -11,6 +11,7 @@ export function SideCards() {
       <WordwareCard
         wide
         hideHashtag
+        hideShare
         show={!!results.short_summary}
         className="h-1/3 w-full rounded-xl bg-[#1A1A1A]"
       >
@@ -19,6 +20,7 @@ export function SideCards() {
       <div className="flex w-full flex-col gap-4 rounded-xl md:h-2/3 md:flex-row">
         <WordwareCard
           hideHashtag
+          hideShare
           show={!!results.music_taste_analysis_1}
           className="h-full w-full rounded-xl bg-[#1A1A1A]"
         >
@@ -41,6 +43,7 @@ export function SideCards() {
           <div className="flex h-full w-full flex-col gap-4">
             <WordwareCard
               hideHashtag
+              hideShare
               show={!!results.music_taste_analysis_2}
               className="h-2/3 w-full rounded-xl bg-[#1A1A1A]"
             >
