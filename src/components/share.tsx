@@ -88,7 +88,7 @@ export default function ShareButton({
       <DialogTrigger asChild>
         <Button
           variant="ghost"
-         className={cn(
+          className={cn(
             "flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 backdrop-blur-sm hover:bg-white/30",
             className,
           )}

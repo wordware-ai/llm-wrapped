@@ -19,7 +19,7 @@ export function UserInfo({ user }: { user: User }) {
             {user.username ?? user.email}
           </p>
         </div>
-        <div className="flex flex-col gap-8">
+        <div className="flex flex-col gap-8 lg:pt-16">
           <p className="text-xl sm:text-2xl">Share your results</p>
           <div className="grid grid-cols-2 gap-4">
             <p>Twitter</p>
