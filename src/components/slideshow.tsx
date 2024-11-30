@@ -133,6 +133,7 @@ export default function SlideShow() {
           className={cn(
             "h-full w-full rounded-none bg-[#1A1A1A] sm:h-auto sm:max-w-md sm:rounded-xl",
           )}
+          hideShare={!userId}
         >
           {currentSlideData.Component ? (
             <currentSlideData.Component
