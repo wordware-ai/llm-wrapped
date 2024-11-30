@@ -111,7 +111,7 @@ export default function ShareButton({
         <Button
           variant="ghost"
           className={cn(
-            "flex items-center gap-2 rounded-xl bg-white/20 px-6 py-3 backdrop-blur-sm hover:bg-white/30",
+            "flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 backdrop-blur-sm hover:bg-white/30",
             className,
           )}
         >
@@ -119,9 +119,9 @@ export default function ShareButton({
           <span>Share this story</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="p-0 sm:max-w-md">
+      <DialogContent className="w-[300px] rounded-lg p-0">
         <DialogTitle className="px-6 pt-6">Share your results</DialogTitle>
-        <div className="grid grid-cols-3 gap-4 p-6">
+        <div className="grid grid-cols-2 gap-4 p-6">
           {shareOptions.map((option, index) => (
             <button
               key={index}
