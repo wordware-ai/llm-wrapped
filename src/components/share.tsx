@@ -2,7 +2,12 @@
 
 import { Share, Link2, MoreHorizontal, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
 interface ShareOption {
@@ -107,7 +112,7 @@ export default function ShareButton({
           variant="ghost"
           className={cn("gap-2 bg-transparent font-medium", className)}
         >
-          {children || (
+          {children ?? (
             <>
               <Share className="h-5 w-5" />
               Share this story
@@ -116,6 +121,7 @@ export default function ShareButton({
         </Button>
       </DialogTrigger>
       <DialogContent className="p-0 sm:max-w-md">
+        <DialogTitle></DialogTitle>
         <div className="grid grid-cols-3 gap-4 p-6">
           {shareOptions.map((option, index) => (
             <button
