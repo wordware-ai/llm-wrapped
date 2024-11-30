@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
@@ -29,6 +29,9 @@ export default function WordwareCard({
           className,
         )}
       >
+        {!hideHashtag && (
+          <p className="absolute left-8 top-8 z-[10] text-white">#LLMwrapped</p>
+        )}
         <div
           className={cn(
             "absolute left-0 top-0 w-full gap-[7px] px-2",
@@ -52,8 +55,10 @@ export default function WordwareCard({
           <WordwareLogo fillColor={fillColor} />
         </div>
         <div className="z-10">{children}</div>
-        <div className="absolute bottom-8 left-8 flex items-center gap-4" onClick={(e) => e.stopPropagation()}>
-          {!hideHashtag && <p className="text-white">#LLMwrapped</p>}
+        <div
+          className="absolute bottom-8 left-8 flex items-center gap-4"
+          onClick={(e) => e.stopPropagation()}
+        >
           <ShareButton className="text-white hover:text-white/80">
             Share
           </ShareButton>
