@@ -55,8 +55,8 @@ export default function WordwareCard({
           <WordwareLogo fillColor={fillColor} />
         </div>
         <div className="z-10">{children}</div>
-        <div
-          className="absolute bottom-8 left-8 flex items-center gap-4"
+        <div 
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center" 
           onClick={(e) => e.stopPropagation()}
         >
           <ShareButton className="text-white hover:text-white/80">
