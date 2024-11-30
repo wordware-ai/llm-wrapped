@@ -1,10 +1,9 @@
-"use client"
+"use client";
 
-import Image from "next/image";
-import { cn } from "@/lib/utils";
-import React, { type ReactNode } from "react";
-import { Button } from "@/components/ui/button";
 import ShareButton from "@/components/share";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
+import { type ReactNode } from "react";
 
 export default function WordwareCard({
   children,
@@ -32,7 +31,7 @@ export default function WordwareCard({
         <div
           className={cn(
             "absolute left-0 top-0 w-full gap-[7px] px-2",
-            wide ? "grid grid-cols-2" : "flex flex-col",
+            wide ? "grid md:grid-cols-2" : "flex flex-col",
           )}
         >
           <WordwareLogo fillColor={fillColor} />
@@ -52,7 +51,10 @@ export default function WordwareCard({
           <WordwareLogo fillColor={fillColor} />
         </div>
         <div className="z-10">{children}</div>
-        <div className="absolute bottom-8 left-8 flex items-center gap-4" onClick={(e) => e.stopPropagation()}>
+        <div
+          className="absolute bottom-8 left-8 flex items-center gap-4"
+          onClick={(e) => e.stopPropagation()}
+        >
           {!hideHashtag && <p className="text-white">#LLMwrapped</p>}
           <ShareButton className="text-white hover:text-white/80">
             Share

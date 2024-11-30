@@ -46,7 +46,6 @@ const Achievement = ({ result }: CardComponentProps) => {
 };
 
 const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
-  console.log(imageUrl);
   return (
     <div className="flex flex-col justify-center text-center text-white">
       <p className="text-2xl font-semibold">Least Popular Artist</p>
@@ -61,7 +60,11 @@ const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
           />
         </div>
       )}
-      <div>{result.value as string}</div>
+      <div>
+        {typeof result === "object" && result !== null
+          ? (result.value as string)
+          : (result as string)}
+      </div>
     </div>
   );
 };
@@ -81,7 +84,12 @@ const MostPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
           />
         </div>
       )}
-      <div>{result.value as string}</div>
+      <div>
+        {" "}
+        {typeof result === "object" && result !== null
+          ? (result.value as string)
+          : (result as string)}
+      </div>
     </div>
   );
 };
