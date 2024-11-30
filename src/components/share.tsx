@@ -1,9 +1,14 @@
 "use client";
 
-import { Share, Link2, MoreHorizontal, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
+import { Link2, Share } from "lucide-react";
 
 interface ShareButtonProps {
   url?: string;
@@ -16,11 +21,9 @@ interface ShareButtonProps {
 export default function ShareButton({
   url,
   className,
-  children,
   cardContent,
-  cardImage,
 }: ShareButtonProps) {
-  const shareUrl = url || window.location.href;
+  const shareUrl = url ?? window.location.href;
   const shareText = cardContent ? `${cardContent}\n\n${shareUrl}` : shareUrl;
 
   const shareOptions = [
@@ -57,7 +60,7 @@ export default function ShareButton({
       label: "Facebook",
       action: () => {
         window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(cardContent || '')}`,
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(cardContent ?? "")}`,
           "_blank",
         );
       },
@@ -87,14 +90,14 @@ export default function ShareButton({
           variant="ghost"
           className={cn(
             "flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 backdrop-blur-sm hover:bg-white/30",
-            className
+            className,
           )}
         >
           <Share className="h-5 w-5" />
           <span>Share this story</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="p-0 w-[300px]">
+      <DialogContent className="w-[300px] p-0">
         <DialogTitle className="px-6 pt-6">Share your results</DialogTitle>
         <div className="grid grid-cols-2 gap-4 p-6">
           {shareOptions.map((option, index) => (
