@@ -10,6 +10,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import SlideShow from "@/components/slideshow";
 import Footer from "@/components/footer";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -29,7 +30,9 @@ export default async function RootLayout({
           <AuthProvider user={user ?? undefined} session={session ?? undefined}>
             <StreamProvider>
               <NuqsAdapter>
-                <SlideShow />
+                <Suspense fallback={<div>Loading...</div>}>
+                  <SlideShow />
+                </Suspense>
                 {children}
                 <Footer />
               </NuqsAdapter>

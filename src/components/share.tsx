@@ -23,7 +23,8 @@ export default function ShareButton({
   className,
   cardContent,
 }: ShareButtonProps) {
-  const shareUrl = url ?? window.location.href;
+  const shareUrl =
+    url ?? (typeof window !== "undefined" ? window.location.href : "");
   const shareText = cardContent ? `${cardContent}\n\n${shareUrl}` : shareUrl;
 
   const shareOptions = [
@@ -31,8 +32,10 @@ export default function ShareButton({
       icon: <Link2 className="h-6 w-6" />,
       label: "Copy link",
       action: async () => {
-        await navigator.clipboard.writeText(shareUrl);
-        alert("Link copied!");
+        if (typeof window !== "undefined") {
+          await navigator.clipboard.writeText(shareUrl);
+          alert("Link copied!");
+        }
       },
       className: "bg-gray-100",
     },
@@ -44,10 +47,12 @@ export default function ShareButton({
       ),
       label: "WhatsApp",
       action: () => {
-        window.open(
-          `https://wa.me/?text=${encodeURIComponent(shareText)}`,
-          "_blank",
-        );
+        if (typeof window !== "undefined") {
+          window.open(
+            `https://wa.me/?text=${encodeURIComponent(shareText)}`,
+            "_blank",
+          );
+        }
       },
       className: "bg-[#25D366]",
     },
@@ -59,10 +64,12 @@ export default function ShareButton({
       ),
       label: "Facebook",
       action: () => {
-        window.open(
-          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(cardContent ?? "")}`,
-          "_blank",
-        );
+        if (typeof window !== "undefined") {
+          window.open(
+            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(cardContent ?? "")}`,
+            "_blank",
+          );
+        }
       },
       className: "bg-[#1877F2]",
     },
@@ -74,10 +81,12 @@ export default function ShareButton({
       ),
       label: "Twitter",
       action: () => {
-        window.open(
-          `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`,
-          "_blank",
-        );
+        if (typeof window !== "undefined") {
+          window.open(
+            `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`,
+            "_blank",
+          );
+        }
       },
       className: "bg-black",
     },

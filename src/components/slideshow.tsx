@@ -106,8 +106,6 @@ export default function SlideShow() {
     }
   };
 
-  console.log(results);
-
   return (
     <div
       className="fixed z-20 flex h-screen w-full select-none items-center justify-center gap-4 bg-black/95 md:p-6"
