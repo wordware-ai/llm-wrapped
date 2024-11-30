@@ -1,9 +1,9 @@
 "use client";
 
-import ShareButton from "@/components/share";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { type ReactNode } from "react";
+import ShareButton from "../share";
 
 export default function WordwareCard({
   children,
@@ -55,12 +55,10 @@ export default function WordwareCard({
         </div>
         <div className="z-10">{children}</div>
 
-
-        <div 
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center" 
+        <div
+          className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center"
           onClick={(e) => e.stopPropagation()}
         >
-
           <ShareButton className="text-white hover:text-white/80">
             Share
           </ShareButton>

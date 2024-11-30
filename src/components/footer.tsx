@@ -1,13 +1,12 @@
 import Link from "next/link";
 import Image from "next/image";
-import WordwareLogo from "public/brand/wordware-black.svg";
 
 export default function Footer() {
   return (
     <footer className="flex flex-col gap-8 bg-black p-8 text-white">
       <div className="flex items-center">
         <Image
-          src={WordwareLogo}
+          src="/brand/wordware-black.svg"
           alt="Wordware Logo"
           width={120}
           height={30}
