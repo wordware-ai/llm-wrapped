@@ -2,35 +2,28 @@
 
 import { Share, Link2, MoreHorizontal, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTrigger, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
-
-interface ShareOption {
-  icon: JSX.Element;
-  label: string;
-  action: () => void;
-  className?: string;
-}
 
 interface ShareButtonProps {
   url?: string;
   className?: string;
   children?: React.ReactNode;
+  cardContent?: string;
+  cardImage?: string;
 }
 
 export default function ShareButton({
   url,
   className,
   children,
+  cardContent,
+  cardImage,
 }: ShareButtonProps) {
   const shareUrl = url || window.location.href;
+  const shareText = cardContent ? `${cardContent}\n\n${shareUrl}` : shareUrl;
 
-  const shareOptions: ShareOption[] = [
+  const shareOptions = [
     {
       icon: <Link2 className="h-6 w-6" />,
       label: "Copy link",
@@ -49,7 +42,7 @@ export default function ShareButton({
       label: "WhatsApp",
       action: () => {
         window.open(
-          `https://wa.me/?text=${encodeURIComponent(shareUrl)}`,
+          `https://wa.me/?text=${encodeURIComponent(shareText)}`,
           "_blank",
         );
       },
@@ -58,50 +51,32 @@ export default function ShareButton({
     {
       icon: (
         <svg viewBox="0 0 24 24" className="h-6 w-6 fill-white">
-          <path d="M12 0C5.373 0 0 4.974 0 11.111c0 3.498 1.744 6.614 4.469 8.654V24l4.088-2.242c1.092.3 2.246.464 3.443.464 6.627 0 12-4.975 12-11.111S18.627 0 12 0zm1.191 14.963l-3.055-3.26-5.963 3.26L10.732 8l3.131 3.259L19.752 8l-6.561 6.963z" />
+          <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0z" />
         </svg>
       ),
-      label: "Messenger",
+      label: "Facebook",
       action: () => {
         window.open(
-          `https://www.facebook.com/dialog/send?link=${encodeURIComponent(shareUrl)}&app_id=YOUR_APP_ID`,
+          `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(cardContent || '')}`,
           "_blank",
         );
       },
-      className: "bg-[#006AFF]",
+      className: "bg-[#1877F2]",
     },
     {
       icon: (
         <svg viewBox="0 0 24 24" className="h-6 w-6 fill-white">
-          <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm5.5 6.5h-11v-2h11v2zm0 4h-11v-2h11v2zm-4 4h-7v-2h7v2z" />
+          <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
         </svg>
       ),
-      label: "Messages",
+      label: "Twitter",
       action: () => {
-        window.open(`sms:?&body=${encodeURIComponent(shareUrl)}`, "_blank");
+        window.open(
+          `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`,
+          "_blank",
+        );
       },
-      className: "bg-[#34C759]",
-    },
-    {
-      icon: <MoreHorizontal className="h-6 w-6" />,
-      label: "More",
-      action: () => {
-        if (navigator.share) {
-          navigator.share({
-            url: shareUrl,
-          });
-        }
-      },
-      className: "bg-gray-100",
-    },
-    {
-      icon: <Download className="h-6 w-6" />,
-      label: "Download",
-      action: () => {
-        // Implement download functionality
-        console.log("Download clicked");
-      },
-      className: "bg-gray-100",
+      className: "bg-black",
     },
   ];
 
@@ -112,14 +87,14 @@ export default function ShareButton({
           variant="ghost"
           className={cn(
             "flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 backdrop-blur-sm hover:bg-white/30",
-            className,
+            className
           )}
         >
           <Share className="h-5 w-5" />
           <span>Share this story</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-[300px] rounded-lg p-0">
+      <DialogContent className="p-0 w-[300px]">
         <DialogTitle className="px-6 pt-6">Share your results</DialogTitle>
         <div className="grid grid-cols-2 gap-4 p-6">
           {shareOptions.map((option, index) => (
