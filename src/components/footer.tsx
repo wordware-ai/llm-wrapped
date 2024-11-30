@@ -16,9 +16,6 @@ export default function Footer() {
       </div>
 
       <div className="flex flex-wrap gap-8">
-        <Link href="https://wordware.ai" className="hover:underline">
-          Wordware home page
-        </Link>
         <Link href="https://discord.gg/wordware" className="hover:underline">
           Join Discord
         </Link>
