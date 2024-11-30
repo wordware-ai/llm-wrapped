@@ -12,6 +12,7 @@ export default function WordwareCard({
   show = true,
   wide = false,
   hideHashtag = false,
+  hideShare = false,
 }: {
   children: ReactNode;
   fillColor?: string;
@@ -19,12 +20,13 @@ export default function WordwareCard({
   show?: boolean;
   wide?: boolean;
   hideHashtag?: boolean;
+  hideShare?: boolean;
 }) {
   return (
     show && (
       <div
         className={cn(
-          "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
+          "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg bg-[#1A1A1A] p-8",
           className,
         )}
       >
@@ -55,14 +57,16 @@ export default function WordwareCard({
         </div>
         <div className="z-10">{children}</div>
 
-        <div
-          className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <ShareButton className="text-white hover:text-white/80">
-            Share
-          </ShareButton>
-        </div>
+        {!hideShare && (
+          <div
+            className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ShareButton className="text-white hover:text-white/80">
+              Share
+            </ShareButton>
+          </div>
+        )}
       </div>
     )
   );
