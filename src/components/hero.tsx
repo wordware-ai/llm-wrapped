@@ -15,7 +15,7 @@ export function Hero() {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-12">
       <div className="relative z-0 flex h-[500px] w-full flex-col items-center justify-center gap-12 overflow-hidden rounded-xl bg-black">
-        <Image
+        <img
           src="/blobs/background.svg"
           className="absolute left-0 top-0 -z-10 h-full w-full object-cover opacity-20"
           alt="Background"
@@ -42,7 +42,7 @@ export function Hero() {
         >
           <TabsList className="flex justify-center">
             <TabsTrigger value="spotify">
-              <Image
+              <img
                 src="/logos/spotify-big.svg"
                 alt="Spotify"
                 width={70}
@@ -50,7 +50,7 @@ export function Hero() {
               />
             </TabsTrigger>
             <TabsTrigger value="linkedin" className="overflow-hidden">
-              <Image
+              <img
                 src="/logos/linkedin-big.svg"
                 alt="LinkedIn"
                 width={80}
@@ -59,7 +59,7 @@ export function Hero() {
             </TabsTrigger>
             <TabsTrigger value="twitter">
               <div className="flex items-center gap-1">
-                <Image
+                <img
                   src="/logos/twitter-small.svg"
                   alt="Twitter"
                   width={20}
@@ -70,7 +70,7 @@ export function Hero() {
             </TabsTrigger>
             <TabsTrigger value="github">
               <div className="flex items-center gap-2">
-                <Image
+                <img
                   src="/logos/github-small.svg"
                   alt="GitHub"
                   width={20}
