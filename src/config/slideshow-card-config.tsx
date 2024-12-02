@@ -21,6 +21,49 @@ const TopArtist = ({ result, imageUrl }: CardComponentProps) => {
   );
 };
 
+const Tools = () => {
+  return (
+    <div className="flex h-max w-full flex-col text-center text-white">
+      <p className="text-3xl font-semibold">Tools</p>
+      <p className="text-2xl">
+        feel unstoppable with tools that take your WordApps to the next level.
+        from web searches to image generation, text-to-speech, PDF parsing, and
+        more—you can do so much, so quickly.
+        <br />
+        <br />
+        ready to add one? just type / in the editor and explore the tool
+        section.
+      </p>
+    </div>
+  );
+};
+
+const GetStarted = () => {
+  return (
+    <div className="flex h-max w-full flex-col text-center text-white">
+      <p className="text-3xl font-semibold">Get Started</p>
+      <p className="text-2xl">
+        Whether you&apos;re new to AI or ready to create complex AI agents,
+        Wordware is here for you. Try for free at{" "}
+        <a
+          href="https://wordware.ai"
+          className="text-blue-500 hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            window.open("https://wordware.ai", "_blank", "noopener,noreferrer");
+          }}
+        >
+          wordware.ai
+        </a>{" "}
+        or book a demo call to see it in action.
+      </p>
+    </div>
+  );
+};
+
 export const slideshowCards: CardItem[] = [
   {
     data: {
@@ -88,12 +131,14 @@ export const slideshowCards: CardItem[] = [
       id: "tools",
       title: "Tools to supercharge your WordApps",
     },
+    Component: Tools,
   },
   {
     data: {
       id: "get_started",
       title: "Ready to build something amazing?",
     },
+    Component: GetStarted,
   },
 
   ...Object.values(cards),
