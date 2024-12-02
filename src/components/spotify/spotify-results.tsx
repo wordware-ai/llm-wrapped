@@ -58,7 +58,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
     <div className="flex flex-col">
       <Navbar />
       <div className="flex flex-col gap-4 p-4 md:p-8">
-        <div className="flex flex-col gap-4 pb-16 lg:h-[calc(100vh-56px)] lg:flex-row">
+        <div className="flex flex-col gap-4 sm:pb-16 lg:h-[calc(100vh-56px)] lg:flex-row">
           <UserInfo user={user} />
           <SideCards />
         </div>

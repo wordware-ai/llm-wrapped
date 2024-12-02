@@ -11,7 +11,6 @@ export default function WordwareCard({
   className,
   show = true,
   wide = false,
-  story = false,
   hideHashtag = false,
   hideShare = false,
 }: {
@@ -20,7 +19,6 @@ export default function WordwareCard({
   className: string;
   show?: boolean;
   wide?: boolean;
-  story?: boolean;
   hideHashtag?: boolean;
   hideShare?: boolean;
 }) {

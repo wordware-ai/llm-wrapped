@@ -135,7 +135,6 @@ export default function SlideShow() {
           )}
           hideShare={!userId}
           hideHashtag
-          story
         >
           {currentSlideData.Component ? (
             <currentSlideData.Component
