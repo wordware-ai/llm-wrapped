@@ -4,7 +4,7 @@ import Image from "next/image";
 const TopArtist = ({ result, imageUrl }: CardComponentProps) => {
   return (
     <div className="flex h-max w-full flex-col text-center text-white">
-      <p className="text-2xl font-semibold">Top Artist</p>
+      <p className="text-3xl font-semibold">Top Artist</p>
       {imageUrl && (
         <div className="my-2 flex justify-center">
           <Image
@@ -16,7 +16,7 @@ const TopArtist = ({ result, imageUrl }: CardComponentProps) => {
           />
         </div>
       )}
-      <div>{result.value as string}</div>
+      <p className="text-2xl">{result.value as string}</p>
     </div>
   );
 };
