@@ -60,7 +60,7 @@ export default function WordwareCard({
           <div
             className={cn(
               "absolute left-1/2 flex -translate-x-1/2 items-center",
-              story && "bottom-16 sm:bottom-8",
+              story && "bottom-12 sm:bottom-8",
             )}
             onClick={(e) => e.stopPropagation()}
           >
