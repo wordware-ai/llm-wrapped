@@ -11,6 +11,8 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
+    console.log("dating", data);
+
     if (!error && data.user) {
       const existingUser = await api.users.getCurrent();
       if (existingUser) {
@@ -21,7 +23,18 @@ export async function GET(request: Request) {
           username: (data.user.user_metadata as { name?: string }).name ?? null,
           email: data.user.email,
           imageUrl:
-            (data.user.user_metadata as { image_url?: string }).image_url ??
+            (
+              data.user.user_metadata as {
+                picture?: string;
+                avatar_url?: string;
+              }
+            ).picture ??
+            (
+              data.user.user_metadata as {
+                picture?: string;
+                avatar_url?: string;
+              }
+            ).avatar_url ??
             null,
         });
         next = `/${user.username}`;
