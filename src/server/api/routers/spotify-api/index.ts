@@ -111,6 +111,7 @@ export const spotifyApiRouter = createTRPCRouter({
       top_artist_image_url: topArtists.items[0]?.images?.[0]?.url ?? null,
     };
 
+    console.log(transformedData);
     return {
       spotifyData: convertToMarkdown(transformedData),
       imageUrls,

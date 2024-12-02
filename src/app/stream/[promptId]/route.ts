@@ -18,6 +18,8 @@ export async function POST(
     },
   );
 
+  console.log(response);
+
   if (!response.ok) {
     return Response.json(
       { error: `API responded with status ${response.status}` },
