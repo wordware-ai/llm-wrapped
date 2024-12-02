@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     if (!error && data.user) {
       const existingUser = await api.users.getCurrent();
       if (existingUser) {
-        next = `/${existingUser.id}`;
+        next = `/${existingUser.username}`;
       } else {
         const user = await api.users.create({
           id: "n/a",
@@ -24,7 +24,7 @@ export async function GET(request: Request) {
             (data.user.user_metadata as { image_url?: string }).image_url ??
             null,
         });
-        next = `/${user.id}`;
+        next = `/${user.username}`;
       }
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";

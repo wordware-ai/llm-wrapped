@@ -120,7 +120,7 @@ export function Hero() {
                 {index > 0 && (
                   <div
                     className={`my-1 w-px self-stretch transition-opacity ${
-                      tab === tabItem.value || tab === tabs[index - 1].value
+                      tab === tabItem.value || tab === tabs[index - 1]?.value
                         ? "opacity-0"
                         : "bg-muted-foreground/25"
                     }`}
