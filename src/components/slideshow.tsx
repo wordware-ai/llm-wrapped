@@ -128,10 +128,10 @@ export default function SlideShow() {
           await previousSlide();
         }}
       />
-      <div onClick={handleClick}>
+      <div onClick={handleClick} className="h-full sm:h-auto">
         <WordwareCard
           className={cn(
-            "h-full w-full rounded-none bg-[#1A1A1A] sm:h-auto sm:max-w-md sm:rounded-xl",
+            "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-w-md sm:rounded-xl",
           )}
           hideShare={!userId}
           hideHashtag
