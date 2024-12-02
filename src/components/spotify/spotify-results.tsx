@@ -5,7 +5,7 @@ import { useUser } from "@/hooks/use-user";
 import { api } from "@/trpc/react";
 import { type UserWithSpotifyResult } from "@/types/user";
 import { redirect } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStreamContext } from "../stream-provider";
 import { CardGrid } from "./card-grid";
 
@@ -13,6 +13,7 @@ import { convertDbToState, convertStateToDb } from "@/lib/convert-results";
 import Navbar from "./navbar";
 import { SideCards } from "./side-cards";
 import { UserInfo } from "./user-info";
+import { ChevronDown } from "lucide-react";
 
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
@@ -20,6 +21,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const { data } = api.spotifyApi.getAllUserData.useQuery(undefined, {
     enabled: !previousRun && !!session?.provider_token,
   });
+  const [showScroll] = useState(false);
 
   const spotifyData = data?.spotifyData;
 
@@ -64,6 +66,11 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
         </div>
         <CardGrid />
       </div>
+      {showScroll && (
+        <div className="fixed bottom-2 left-1/2 -translate-x-1/2 rounded-full bg-background/80 p-2 pb-1 pt-3 shadow-md ring-1 ring-border backdrop-blur hover:cursor-pointer">
+          <ChevronDown className="animate-bounce size-6 shrink-0" />
+        </div>
+      )}
     </div>
   );
 }

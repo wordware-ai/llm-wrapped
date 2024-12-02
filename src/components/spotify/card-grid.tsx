@@ -7,7 +7,7 @@ export function CardGrid() {
   const { results } = useStreamContext();
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       <div className="flex aspect-[4/7] h-full flex-col gap-4">
         <WordwareCard
           show={!!results?.music_taste_analysis_3}

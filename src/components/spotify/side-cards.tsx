@@ -19,7 +19,7 @@ export function SideCards() {
           {String(results.short_summary)}
         </p>
       </WordwareCard>
-      <div className="flex w-full flex-col gap-4 rounded-xl md:h-2/3 md:flex-row">
+      <div className="flex w-full flex-col gap-4 rounded-xl sm:flex-row md:h-2/3">
         <WordwareCard
           hideHashtag
           hideShare

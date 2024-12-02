@@ -41,43 +41,53 @@ export function Hero() {
           }
         >
           <TabsList className="flex justify-center">
-            <TabsTrigger value="spotify">
+            <TabsTrigger className="h-8" value="spotify">
               <div className="h-[20px] w-[70px]">
                 <Image
                   src="/logos/spotify-big.svg"
                   alt="Spotify"
-                  width={70}
-                  height={70}
+                  width={0}
+                  height={0}
+                  sizes="70px"
                   className="h-full w-full"
+                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
             </TabsTrigger>
-            <TabsTrigger value="linkedin" className="overflow-hidden">
+            <TabsTrigger className="h-8" value="linkedin">
               <Image
                 src="/logos/linkedin-big.svg"
                 alt="LinkedIn"
-                width={80}
-                height={80}
+                width={0}
+                height={0}
+                sizes="80px"
+                style={{ width: "auto", height: "auto" }}
               />
             </TabsTrigger>
-            <TabsTrigger value="twitter">
+            <TabsTrigger className="h-8" value="twitter">
               <div className="flex items-center gap-1">
                 <Image
                   src="/logos/twitter-small.svg"
                   alt="Twitter"
-                  width={20}
-                  height={20}
+                  width={0}
+                  height={0}
+                  sizes="16px"
+                  className="h-4 w-4"
+                  style={{ width: "auto", height: "auto" }}
                 />
                 <p className="text-black">Twitter</p>
               </div>
             </TabsTrigger>
-            <TabsTrigger value="github">
+            <TabsTrigger className="h-8" value="github">
               <div className="flex items-center gap-2">
                 <Image
                   src="/logos/github-small.svg"
                   alt="GitHub"
-                  width={20}
-                  height={20}
+                  width={0}
+                  height={0}
+                  sizes="16px"
+                  className="h-4 w-4"
+                  style={{ width: "auto", height: "auto" }}
                 />
                 <p className="text-black">GitHub</p>
               </div>

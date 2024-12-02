@@ -25,7 +25,7 @@ export default async function RootLayout({
   const { session } = await getSession();
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
+      <body className="flex min-h-screen flex-col">
         <TRPCReactProvider>
           <AuthProvider user={user ?? undefined} session={session ?? undefined}>
             <StreamProvider>
