@@ -52,7 +52,9 @@ export default function WordwareCard({
           <WordwareLogo fillColor={fillColor} />
           <WordwareLogo fillColor={fillColor} />
         </div>
-        <div className={cn("z-10", !hideShare && "pb-16")}>{children}</div>
+        <div className={cn("z-10", hideShare || (hideHashtag && "pb-16"))}>
+          {children}
+        </div>
 
         {!hideShare && (
           <div
