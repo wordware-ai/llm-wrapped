@@ -59,8 +59,7 @@ export default function WordwareCard({
         {!hideShare && (
           <div
             className={cn(
-              "absolute left-1/2 flex -translate-x-1/2 items-center",
-              story && "bottom-8 sm:bottom-8",
+              "absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center",
             )}
             onClick={(e) => e.stopPropagation()}
           >
