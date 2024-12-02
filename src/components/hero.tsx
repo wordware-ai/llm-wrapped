@@ -3,7 +3,6 @@
 import { SpotifyButton } from "@/components/spotify/spotify-button";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import Image from "next/image";
 import { useState } from "react";
 import { SpotifyStorys } from "./stories/spotify";
 
@@ -15,12 +14,10 @@ export function Hero() {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-12">
       <div className="relative z-0 flex h-[500px] w-full flex-col items-center justify-center gap-12 overflow-hidden bg-black sm:rounded-xl">
-        <Image
+        <img
           src="/blobs/background.svg"
           className="absolute left-0 top-0 -z-10 h-full w-full object-cover opacity-20"
           alt="Background"
-          width={1000}
-          height={1000}
         />
         <div className="z-10 flex flex-col items-center justify-center">
           <h1 className="text-5xl font-medium text-white sm:text-7xl lg:text-9xl">
@@ -43,51 +40,36 @@ export function Hero() {
           <TabsList className="flex justify-center">
             <TabsTrigger className="h-8" value="spotify">
               <div className="h-[20px] w-[70px]">
-                <Image
+                <img
                   src="/logos/spotify-big.svg"
                   alt="Spotify"
-                  width={0}
-                  height={0}
-                  sizes="70px"
                   className="h-full w-full"
-                  style={{ width: "auto", height: "auto" }}
                 />
               </div>
             </TabsTrigger>
             <TabsTrigger className="h-8" value="linkedin">
-              <Image
+              <img
                 src="/logos/linkedin-big.svg"
                 alt="LinkedIn"
-                width={0}
-                height={0}
-                sizes="80px"
-                style={{ width: "auto", height: "auto" }}
+                className="h-5 w-auto"
               />
             </TabsTrigger>
             <TabsTrigger className="h-8" value="twitter">
               <div className="flex items-center gap-1">
-                <Image
+                <img
                   src="/logos/twitter-small.svg"
                   alt="Twitter"
-                  width={0}
-                  height={0}
-                  sizes="16px"
                   className="h-4 w-4"
-                  style={{ width: "auto", height: "auto" }}
                 />
                 <p className="text-black">Twitter</p>
               </div>
             </TabsTrigger>
             <TabsTrigger className="h-8" value="github">
               <div className="flex items-center gap-2">
-                <Image
+                <img
                   src="/logos/github-small.svg"
                   alt="GitHub"
-                  width={0}
-                  height={0}
-                  sizes="16px"
                   className="h-4 w-4"
-                  style={{ width: "auto", height: "auto" }}
                 />
                 <p className="text-black">GitHub</p>
               </div>
