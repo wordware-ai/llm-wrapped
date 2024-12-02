@@ -3,8 +3,13 @@
 import { SpotifyButton } from "@/components/spotify/spotify-button";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Image from "next/image";
 import { useState } from "react";
+import { SpotifyLogo } from "./logos/spotify";
 import { SpotifyStorys } from "./stories/spotify";
+import { LinkedinLogo } from "./logos/linkedin";
+import { TwitterXLogo } from "./logos/twitter";
+import { GitHubLogo } from "./logos/github";
 
 export function Hero() {
   const [tab, setTab] = useState<"spotify" | "linkedin" | "twitter" | "github">(
@@ -14,10 +19,12 @@ export function Hero() {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-12">
       <div className="relative z-0 flex h-[500px] w-full flex-col items-center justify-center gap-12 overflow-hidden bg-black sm:rounded-xl">
-        <img
+        <Image
           src="/blobs/background.svg"
           className="absolute left-0 top-0 -z-10 h-full w-full object-cover opacity-20"
           alt="Background"
+          width={1000}
+          height={1000}
         />
         <div className="z-10 flex flex-col items-center justify-center">
           <h1 className="text-5xl font-medium text-white sm:text-7xl lg:text-9xl">
@@ -37,42 +44,18 @@ export function Hero() {
             setTab(value as "spotify" | "linkedin" | "twitter" | "github")
           }
         >
-          <TabsList className="flex justify-center">
-            <TabsTrigger className="h-8" value="spotify">
-              <div className="h-[20px] w-[70px]">
-                <img
-                  src="/logos/spotify-big.svg"
-                  alt="Spotify"
-                  className="h-full w-full"
-                />
-              </div>
+          <TabsList className="flex h-10 justify-center">
+            <TabsTrigger value="spotify">
+              <SpotifyLogo className="h-7 w-auto" />
             </TabsTrigger>
-            <TabsTrigger className="h-8" value="linkedin">
-              <img
-                src="/logos/linkedin-big.svg"
-                alt="LinkedIn"
-                className="h-5 w-auto"
-              />
+            <TabsTrigger value="linkedin">
+              <LinkedinLogo className="h-7 w-auto" />
             </TabsTrigger>
-            <TabsTrigger className="h-8" value="twitter">
-              <div className="flex items-center gap-1">
-                <img
-                  src="/logos/twitter-small.svg"
-                  alt="Twitter"
-                  className="h-4 w-4"
-                />
-                <p className="text-black">Twitter</p>
-              </div>
+            <TabsTrigger value="twitter">
+              <TwitterXLogo className="h-7 w-auto" />
             </TabsTrigger>
-            <TabsTrigger className="h-8" value="github">
-              <div className="flex items-center gap-2">
-                <img
-                  src="/logos/github-small.svg"
-                  alt="GitHub"
-                  className="h-4 w-4"
-                />
-                <p className="text-black">GitHub</p>
-              </div>
+            <TabsTrigger value="github">
+              <GitHubLogo className="h-7 w-auto" />
             </TabsTrigger>
           </TabsList>
           <div className="h-10 w-full">
