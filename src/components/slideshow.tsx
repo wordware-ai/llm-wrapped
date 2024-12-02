@@ -128,7 +128,7 @@ export default function SlideShow() {
           await previousSlide();
         }}
       />
-      <div onClick={handleClick} className="h-[100svh] sm:h-auto">
+      <div onClick={handleClick} className="h-[100dvh] sm:h-auto">
         <WordwareCard
           className={cn(
             "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-w-md sm:rounded-xl",
