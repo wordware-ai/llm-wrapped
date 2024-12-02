@@ -11,6 +11,7 @@ export default function WordwareCard({
   className,
   show = true,
   wide = false,
+  story = false,
   hideHashtag = false,
   hideShare = false,
 }: {
@@ -19,6 +20,7 @@ export default function WordwareCard({
   className: string;
   show?: boolean;
   wide?: boolean;
+  story?: boolean;
   hideHashtag?: boolean;
   hideShare?: boolean;
 }) {
@@ -56,7 +58,10 @@ export default function WordwareCard({
 
         {!hideShare && (
           <div
-            className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center"
+            className={cn(
+              "absolute left-1/2 flex -translate-x-1/2 items-center",
+              story && "bottom-16 sm:bottom-8",
+            )}
             onClick={(e) => e.stopPropagation()}
           >
             <ShareButton className="text-white hover:text-white/80">
