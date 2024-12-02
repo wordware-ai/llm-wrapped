@@ -8,7 +8,7 @@ import {
 export const spotifyApiRouter = createTRPCRouter({
   getAllUserData: privateProcedure.query(async ({ ctx }) => {
     const params = new URLSearchParams({
-      time_range: "long_term",
+      time_range: "medium_term",
       limit: "50",
     });
 

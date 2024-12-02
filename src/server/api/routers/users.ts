@@ -29,11 +29,11 @@ export const usersRouter = createTRPCRouter({
     return user;
   }),
 
-  getById: publicProcedure
-    .input(z.object({ id: z.string() }))
+  getByUsername: publicProcedure
+    .input(z.object({ username: z.string() }))
     .query(async ({ ctx, input }) => {
       const user = await ctx.db.user.findUnique({
-        where: { id: input.id },
+        where: { username: input.username },
         include: {
           spotifyResult: true,
         },

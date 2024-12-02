@@ -20,7 +20,7 @@ export default function SlideShow() {
 
   const { results } = useStreamContext();
   const router = useRouter();
-  const { userId } = useParams();
+  const { username } = useParams();
 
   // Prevent scrolling when the slideshow is open
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function SlideShow() {
   }, [currentSlide]);
 
   const slides = useMemo(() => {
-    if (userId && results) {
+    if (username && results) {
       // Filter out metadata fields before mapping
 
       return Object.entries(results).map(([key, value]) => {
@@ -63,7 +63,7 @@ export default function SlideShow() {
         }));
     }
     return [];
-  }, [userId, name, results]);
+  }, [username, name, results]);
 
   if (!currentSlide || !slides.length) return null;
 
@@ -71,8 +71,8 @@ export default function SlideShow() {
   if (!currentSlideData) return null;
 
   const exit = () => {
-    if (userId) {
-      router.push(`/${userId as string}`);
+    if (username) {
+      router.push(`/${username as string}`);
     } else {
       router.push("/", { scroll: false });
     }
@@ -133,7 +133,7 @@ export default function SlideShow() {
           className={cn(
             "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-w-md sm:rounded-xl",
           )}
-          hideShare={!userId}
+          hideShare={!username}
           hideHashtag
         >
           {currentSlideData.Component ? (
@@ -144,7 +144,7 @@ export default function SlideShow() {
                   : { value: currentSlideData.value }
               }
               imageUrl={
-                userId
+                username
                   ? getImageUrl(currentSlideData.id, results)
                   : getImageUrl(
                       currentSlideData.id,
