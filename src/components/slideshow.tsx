@@ -112,7 +112,7 @@ export default function SlideShow() {
       onClick={exit}
     >
       <X
-        className="absolute right-4 top-4 size-8 text-white hover:cursor-pointer"
+        className="absolute right-4 top-4 z-20 size-8 text-white hover:cursor-pointer"
         onClick={(e) => {
           e.stopPropagation();
           exit();
