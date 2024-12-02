@@ -45,17 +45,21 @@ export function Hero() {
           }
         >
           <TabsList className="flex h-10 justify-center">
-            <TabsTrigger value="spotify">
+            <TabsTrigger value="spotify" className="flex items-center gap-2">
               <SpotifyLogo className="h-7 w-auto" />
+              <p className="hidden md:block">Spotify</p>
             </TabsTrigger>
-            <TabsTrigger value="linkedin">
+            <TabsTrigger value="linkedin" className="flex items-center gap-2">
               <LinkedinLogo className="h-7 w-auto" />
+              <p className="hidden md:block">LinkedIn</p>
             </TabsTrigger>
-            <TabsTrigger value="twitter">
+            <TabsTrigger value="twitter" className="flex items-center gap-2">
               <TwitterXLogo className="h-7 w-auto" />
+              <p className="hidden md:block">Twitter</p>
             </TabsTrigger>
-            <TabsTrigger value="github">
+            <TabsTrigger value="github" className="flex items-center gap-2">
               <GitHubLogo className="h-7 w-auto" />
+              <p className="hidden md:block">GitHub</p>
             </TabsTrigger>
           </TabsList>
           <div className="h-10 w-full">
