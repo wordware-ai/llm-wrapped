@@ -14,13 +14,13 @@ export default function InfiniteBanner() {
       <div className="absolute left-0 top-0 z-10 h-full w-[200px] bg-gradient-to-r from-white to-transparent"></div>
       <div className="absolute right-0 top-0 z-10 h-full w-[200px] bg-gradient-to-l from-white to-transparent"></div>
 
-      <div className="flex min-w-full shrink-0 animate-scroll items-center justify-around gap-4 text-4xl md:text-8xl">
+      <div className="flex min-w-full shrink-0 animate-scroll items-center justify-around gap-4 text-6xl md:text-8xl">
         {content}
         {content}
         {content}
         {content}
       </div>
-      <div className="flex min-w-full shrink-0 animate-scroll items-center justify-around gap-4 text-4xl md:text-8xl">
+      <div className="flex min-w-full shrink-0 animate-scroll items-center justify-around gap-4 text-6xl md:text-8xl">
         {content}
         {content}
         {content}

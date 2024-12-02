@@ -1,7 +1,7 @@
 "use client";
 
 import { slideshowCards } from "@/config/slideshow-card-config";
-import { homepageSlideshows } from "@/config/slideshow-config";
+import { homepageSlideshows } from "@/config/examples-config";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
@@ -134,6 +134,7 @@ export default function SlideShow() {
             "h-full w-full rounded-none bg-[#1A1A1A] sm:h-auto sm:max-w-md sm:rounded-xl",
           )}
           hideShare={!userId}
+          hideHashtag
         >
           {currentSlideData.Component ? (
             <currentSlideData.Component
@@ -155,10 +156,12 @@ export default function SlideShow() {
             />
           ) : (
             <div className="flex flex-col gap-4 text-center">
-              <h3 className="text-2xl font-semibold text-white">
+              <h3 className="text-3xl font-semibold text-white">
                 {currentSlideData.title}
               </h3>
-              <p className="text-white">{String(currentSlideData.value)}</p>
+              <p className="text-2xl text-white">
+                {String(currentSlideData.value)}
+              </p>
             </div>
           )}
         </WordwareCard>

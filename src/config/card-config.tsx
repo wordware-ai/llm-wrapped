@@ -17,38 +17,44 @@ export type CardItem = {
 
 const IdentityCrisisLevel = ({ result }: CardComponentProps) => {
   return (
-    <div className="flex flex-col text-center text-white">
-      <p className="text-2xl font-semibold">Identity Crisis Level</p>
-      <div className="text-4xl">{String(result.level)}</div>
-      <p className="">{String(result.description)}</p>
+    <div className="flex flex-col gap-4 text-center text-white">
+      <p className="text-3xl font-semibold">Identity Crisis Level</p>
+      <div className="text-5xl font-semibold italic">
+        {String(result.level)}
+      </div>
+      <p className="text-2xl">{String(result.description)}</p>
     </div>
   );
 };
 
 const EmotionalStability = ({ result }: CardComponentProps) => {
   return (
-    <div className="flex flex-col text-center text-white">
-      <p className="text-2xl font-semibold">Emotional Stability</p>
-      <div className="text-7xl">{String(result.level)}</div>
-      <p className="">{String(result.description)}</p>
+    <div className="flex flex-col gap-4 text-center text-white">
+      <p className="text-3xl font-semibold">Emotional Stability</p>
+      <div className="text-7xl font-semibold italic">
+        {String(result.level)}
+      </div>
+      <p className="text-2xl">{String(result.description)}</p>
     </div>
   );
 };
 
 const Achievement = ({ result }: CardComponentProps) => {
   return (
-    <div className="flex flex-col text-center text-white">
-      <p className="text-2xl font-semibold">Achievement</p>
-      <div className="text-4xl">{String(result.title)}</div>
-      <p className="">{String(result.description)}</p>
+    <div className="flex flex-col gap-4 text-center text-white">
+      <p className="text-3xl font-semibold">Achievement</p>
+      <div className="text-5xl font-semibold italic">
+        {String(result.title)}
+      </div>
+      <p className="text-2xl">{String(result.description)}</p>
     </div>
   );
 };
 
 const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
   return (
-    <div className="flex flex-col justify-center text-center text-white">
-      <p className="text-2xl font-semibold">Least Popular Artist</p>
+    <div className="flex flex-col justify-center gap-4 text-center text-white">
+      <p className="text-3xl font-semibold">Least Popular Artist</p>
       {imageUrl && (
         <div className="my-2 flex justify-center">
           <Image
@@ -60,11 +66,11 @@ const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
           />
         </div>
       )}
-      <div>
+      <p className="text-2xl">
         {typeof result === "object" && result !== null
           ? (result.value as string)
           : (result as string)}
-      </div>
+      </p>
     </div>
   );
 };
@@ -72,7 +78,7 @@ const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
 const MostPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
   return (
     <div className="flex h-max w-full flex-col text-center text-white">
-      <p className="text-2xl font-semibold">Top Artist</p>
+      <p className="text-3xl font-semibold">Top Artist</p>
       {imageUrl && (
         <div className="my-2 flex justify-center">
           <Image
@@ -84,12 +90,11 @@ const MostPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
           />
         </div>
       )}
-      <div>
-        {" "}
+      <p className="text-2xl">
         {typeof result === "object" && result !== null
           ? (result.value as string)
           : (result as string)}
-      </div>
+      </p>
     </div>
   );
 };

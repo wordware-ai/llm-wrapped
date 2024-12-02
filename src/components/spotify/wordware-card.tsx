@@ -30,9 +30,6 @@ export default function WordwareCard({
           className,
         )}
       >
-        {!hideHashtag && (
-          <p className="absolute left-8 top-8 z-[10] text-white">#LLMwrapped</p>
-        )}
         <div
           className={cn(
             "absolute left-0 top-0 w-full gap-[7px] px-2",
@@ -55,7 +52,7 @@ export default function WordwareCard({
           <WordwareLogo fillColor={fillColor} />
           <WordwareLogo fillColor={fillColor} />
         </div>
-        <div className="z-10">{children}</div>
+        <div className={cn("z-10", !hideShare && "pb-16")}>{children}</div>
 
         {!hideShare && (
           <div
@@ -66,6 +63,11 @@ export default function WordwareCard({
               Share
             </ShareButton>
           </div>
+        )}
+        {!hideHashtag && (
+          <p className="absolute bottom-8 left-8 z-[10] text-white">
+            #LLMwrapped
+          </p>
         )}
       </div>
     )
