@@ -78,7 +78,7 @@ const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
 const MostPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
   return (
     <div className="flex h-max w-full flex-col text-center text-white">
-      <p className="text-3xl font-semibold">Top Artist</p>
+      <p className="text-3xl font-semibold">Most Popular Artist</p>
       {imageUrl && (
         <div className="my-2 flex justify-center">
           <Image

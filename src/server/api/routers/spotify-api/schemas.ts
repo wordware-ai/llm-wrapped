@@ -24,12 +24,14 @@ export const spotifyTrackSchema = z.object({
 });
 
 // Playlist Schema
-export const playlistSchema = z.object({
-  name: z.string(),
-  tracks: z.object({
-    total: z.number(),
-  }),
-});
+export const playlistSchema = z
+  .object({
+    name: z.string(),
+    tracks: z.object({
+      total: z.number(),
+    }),
+  })
+  .nullable();
 
 // Response Schemas
 export const topArtistsResponseSchema = z.object({

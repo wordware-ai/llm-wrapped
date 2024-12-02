@@ -1,11 +1,10 @@
+import { convertToMarkdown } from "@/lib/convert-to-markdown";
 import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
 import {
   playlistsResponseSchema,
-  recentlyPlayedResponseSchema,
   topArtistsResponseSchema,
   topTracksResponseSchema,
 } from "./schemas";
-import { convertToMarkdown } from "@/lib/convert-to-markdown";
 export const spotifyApiRouter = createTRPCRouter({
   getAllUserData: privateProcedure.query(async ({ ctx }) => {
     const params = new URLSearchParams({
@@ -40,16 +39,8 @@ export const spotifyApiRouter = createTRPCRouter({
         },
       })
         .then((res) => res.json())
-        .then((data) => playlistsResponseSchema.parse(data)),
 
-      // Recently Played
-      fetch(`https://api.spotify.com/v1/me/player/recently-played?limit=50`, {
-        headers: {
-          Authorization: `Bearer ${ctx.session?.provider_token}`,
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => recentlyPlayedResponseSchema.parse(data)),
+        .then((data) => playlistsResponseSchema.parse(data)),
     ]);
 
     // Transform the data
@@ -60,7 +51,7 @@ export const spotifyApiRouter = createTRPCRouter({
       artistName: track.artists[0]?.name,
     }));
 
-    const playlistNames = playlists.items.map((playlist) => playlist.name);
+    const playlistNames = playlists.items.map((playlist) => playlist?.name);
 
     // Get top 5 least popular artists
     const leastPopularArtists = [...topArtists.items]
@@ -111,7 +102,6 @@ export const spotifyApiRouter = createTRPCRouter({
       top_artist_image_url: topArtists.items[0]?.images?.[0]?.url ?? null,
     };
 
-    console.log(transformedData);
     return {
       spotifyData: convertToMarkdown(transformedData),
       imageUrls,
