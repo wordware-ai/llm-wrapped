@@ -108,7 +108,7 @@ export default function SlideShow() {
 
   return (
     <div
-      className="fixed z-20 flex h-screen w-full select-none items-center justify-center gap-4 bg-black/95 md:p-6"
+      className="fixed z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 sm:items-center md:p-6"
       onClick={exit}
     >
       <X
