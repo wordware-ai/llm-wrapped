@@ -53,5 +53,48 @@ export const slideshowCards: CardItem[] = [
       title: "Lyric Therapy Needed",
     },
   },
+  {
+    data: {
+      id: "what_is_wordware",
+      title: "What is Wordware?",
+    },
+  },
+  {
+    data: {
+      id: "all_the_models",
+      title: "All the models you need in one place",
+    },
+  },
+  {
+    data: {
+      id: "multi_modal",
+      title: "Ohh, did we mention we're multimodal?",
+    },
+  },
+  {
+    data: {
+      id: "deploy_with_api",
+      title: "Deploy anywhere via API",
+    },
+  },
+  {
+    data: {
+      id: "functions",
+      title: "Functions that work for you",
+    },
+  },
+  {
+    data: {
+      id: "tools",
+      title: "Tools to supercharge your WordApps",
+    },
+  },
+  {
+    data: {
+      id: "get_started",
+      title: "Ready to build something amazing?",
+    },
+  },
+
   ...Object.values(cards),
 ];

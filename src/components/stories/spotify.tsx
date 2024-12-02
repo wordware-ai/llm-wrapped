@@ -21,11 +21,11 @@ const spotifyStorys = [
     alt: "Kanye West",
     href: "/?name=kanye&slide=1",
   },
-  {
-    src: "/images/stories/sam.webp",
-    alt: "Sam Altman",
-    href: "/?name=sam&slide=1",
-  },
+  // {
+  //   src: "/images/stories/sam.webp",
+  //   alt: "Sam Altman",
+  //   href: "/?name=sam&slide=1",
+  // },
   {
     src: "/images/stories/taylor.jpg",
     alt: "Taylor Swift",
@@ -44,15 +44,15 @@ export function SpotifyStorys() {
             <p className="text-center">{story.alt}</p>
           </div>
         ))}
-        {/* <div className="flex flex-col items-center gap-2 rounded-lg border bg-white p-4">
+        <div className="flex flex-col items-center gap-2 rounded-lg border bg-white p-4">
           <BaseStory
             src="/brand/w-black.png"
             alt="Wordware"
             href="/?name=wordware&slide=1"
-            className="pt-1.5"
+            imageClassName="pt-1.5"
           />
-          <p className="text-center">Kamil </p>
-        </div> */}
+          <p className="text-center">Wordware </p>
+        </div>
       </div>
     </div>
   );

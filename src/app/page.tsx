@@ -1,5 +1,5 @@
 import { Hero } from "@/components/hero";
-import HomeInfo from "@/components/home-info";
+import WordwareInfo from "@/components/wordware-info";
 import InfiniteBanner from "@/components/infinite-banner";
 import HomeCards from "@/components/spotify/home-cards";
 
@@ -10,7 +10,7 @@ export default async function Home() {
       <div className="flex flex-col gap-12 px-4 sm:px-0">
         <HomeCards />
         <InfiniteBanner />
-        <HomeInfo />
+        <WordwareInfo />
       </div>
     </div>
   );

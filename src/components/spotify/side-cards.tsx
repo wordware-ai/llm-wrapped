@@ -2,10 +2,11 @@ import Image from "next/image";
 import { BaseStory } from "../stories/base";
 import { useStreamContext } from "../stream-provider";
 import WordwareCard from "./wordware-card";
+import { useParams } from "next/navigation";
 
 export function SideCards() {
   const { results } = useStreamContext();
-
+  const { username } = useParams();
   return (
     <div className="flex flex-col justify-between gap-4 lg:h-full lg:w-1/2">
       <WordwareCard
@@ -62,7 +63,7 @@ export function SideCards() {
                 <BaseStory
                   src="/brand/w-black.png"
                   alt="Wordware"
-                  href="/?name=wordware&slide=1"
+                  href={`/${username as string}?name=wordware&slide=1`}
                   imageClassName="pt-1.5"
                   className="shrink-0"
                 />

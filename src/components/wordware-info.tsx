@@ -2,9 +2,9 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 
-export default function HomeInfo() {
+export default function WordwareInfo() {
   return (
-    <>
+    <div className="flex flex-col gap-12">
       <div className="mx-auto flex max-w-3xl flex-col gap-4 text-left text-3xl font-light leading-10">
         <h1>Why did we build #LLMwrapped?</h1>
 
@@ -33,22 +33,28 @@ export default function HomeInfo() {
       <div className="flex justify-center gap-4 pb-20">
         <Link
           href="https://wordware.ai"
+          className={cn(buttonVariants({ variant: "default", size: "lg" }))}
+        >
+          Sign up for free
+        </Link>
+        <Link
+          href="https://wordware.ai"
           className={cn(
-            buttonVariants({ variant: "default" }),
+            buttonVariants({ variant: "default", size: "lg" }),
             "bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 hover:opacity-90",
           )}
         >
           Duplicate this WordApp
         </Link>
         <Link
-          href="https://github.com/wordware-ai"
-          className={cn(buttonVariants({ variant: "outline" }))}
+          href="https://github.com/wordware-ai/llm-wrapped"
+          className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
           target="_blank"
           rel="noopener noreferrer"
         >
           GitHub repo
         </Link>
       </div>
-    </>
+    </div>
   );
 }

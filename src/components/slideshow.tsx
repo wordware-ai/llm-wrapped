@@ -33,9 +33,19 @@ export default function SlideShow() {
   }, [currentSlide]);
 
   const slides = useMemo(() => {
-    if (username && results) {
+    if (name) {
+      const staticSlideshow =
+        homepageSlideshows[name as keyof typeof homepageSlideshows];
+      if (!staticSlideshow) return [];
+      return Object.entries(staticSlideshow).map(([key, value]) => ({
+        id: key,
+        value,
+        Component: slideshowCards.find((card) => card.data.id === key)
+          ?.Component,
+        title: slideshowCards.find((card) => card.data.id === key)?.data.title,
+      }));
+    } else if (username && results) {
       // Filter out metadata fields before mapping
-
       return Object.entries(results).map(([key, value]) => {
         // Find the card config for this result
         const cardConfig = slideshowCards.find((card) => card.data.id === key);
@@ -47,25 +57,13 @@ export default function SlideShow() {
           title: cardConfig?.data.title,
         };
       });
-    } else if (name) {
-      const staticSlideshow =
-        homepageSlideshows[name as keyof typeof homepageSlideshows];
-      if (!staticSlideshow) return [];
-      return Object.entries(staticSlideshow)
-
-        .map(([key, value]) => ({
-          id: key,
-          value,
-          Component: slideshowCards.find((card) => card.data.id === key)
-            ?.Component,
-          title: slideshowCards.find((card) => card.data.id === key)?.data
-            .title,
-        }));
     }
     return [];
   }, [username, name, results]);
 
   if (!currentSlide || !slides.length) return null;
+
+  console.log(slides);
 
   const currentSlideData = slides[currentSlide - 1];
   if (!currentSlideData) return null;

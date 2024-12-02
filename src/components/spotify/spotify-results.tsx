@@ -14,6 +14,7 @@ import Navbar from "./navbar";
 import { SideCards } from "./side-cards";
 import { UserInfo } from "./user-info";
 import { ChevronDown } from "lucide-react";
+import WordwareInfo from "../wordware-info";
 
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
@@ -71,6 +72,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
           <ChevronDown className="animate-bounce size-6 shrink-0" />
         </div>
       )}
+      <WordwareInfo />
     </div>
   );
 }
