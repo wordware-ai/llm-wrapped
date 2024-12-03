@@ -54,7 +54,7 @@ export function UserInfo({ user }: { user: User }) {
             <button
               onClick={() => {
                 void navigator.clipboard.writeText(shareUrl);
-                alert('Link copied! Share it on Instagram');
+                alert("Link copied! Share it on Instagram");
               }}
               className="flex items-center gap-2 hover:opacity-80"
             >
