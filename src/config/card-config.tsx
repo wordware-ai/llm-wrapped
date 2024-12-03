@@ -174,7 +174,7 @@ export const cards: CardItem[] = [
   {
     data: {
       id: "final_diagnosis",
-      title: "Musical Taste Analysis",
+      title: "Musical Taste Diagnosis",
     },
   },
   {

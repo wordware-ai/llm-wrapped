@@ -1,8 +1,11 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { env } from "@/env";
+import { useUser } from "@/hooks/use-user";
 import { createClient } from "@/lib/supabase/client";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 export function SpotifyButton() {
   const supabase = createClient();
@@ -20,7 +23,16 @@ export function SpotifyButton() {
     }
   };
 
-  return (
+  const { session } = useUser();
+
+  return session ? (
+    <Link
+      href={`/${session.user.user_metadata.name}`}
+      className={cn(buttonVariants(), "w-min bg-green-500 hover:bg-green-600")}
+    >
+      View Your Results
+    </Link>
+  ) : (
     <Button
       className="w-min bg-green-500 hover:bg-green-600"
       onClick={handleLogin}

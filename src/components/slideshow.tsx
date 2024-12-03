@@ -6,10 +6,11 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import WordwareCard from "./spotify/wordware-card";
 import { useStreamContext } from "./stream-provider";
 import { getImageUrl } from "@/lib/get-image-url";
+import SlideIndicator from "./slide-indicator";
 
 export default function SlideShow() {
   const [currentSlide, setCurrentSlide] = useQueryState(
@@ -17,6 +18,7 @@ export default function SlideShow() {
     parseAsInteger,
   );
   const [name] = useQueryState("name", parseAsString);
+  const [isPaused, setIsPaused] = useState(false);
 
   const { results } = useStreamContext();
   const router = useRouter();
@@ -126,14 +128,30 @@ export default function SlideShow() {
           await previousSlide();
         }}
       />
-      <div onClick={handleClick} className="h-[100dvh] sm:h-auto">
+      <div
+        onClick={handleClick}
+        onMouseDown={() => setIsPaused(true)}
+        onMouseUp={() => setIsPaused(false)}
+        onMouseLeave={() => setIsPaused(false)}
+        onTouchStart={() => setIsPaused(true)}
+        onTouchEnd={() => setIsPaused(false)}
+        className="h-[100dvh] sm:h-auto"
+      >
         <WordwareCard
           className={cn(
-            "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-w-md sm:rounded-xl",
+            "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-w-md lg:max-w-xl lg:rounded-xl",
           )}
           hideShare={!username}
           hideHashtag
         >
+          <div className="absolute left-0 top-0 z-20 w-full">
+            <SlideIndicator
+              currentSlide={currentSlide}
+              totalSlides={slides.length - 3}
+              nextSlide={nextSlide}
+              isPaused={isPaused}
+            />
+          </div>
           {currentSlideData.Component ? (
             <currentSlideData.Component
               result={

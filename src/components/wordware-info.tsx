@@ -4,7 +4,7 @@ import { buttonVariants } from "./ui/button";
 
 export default function WordwareInfo() {
   return (
-    <div className="flex flex-col gap-12">
+    <div className="flex flex-col gap-12 px-4">
       <div className="mx-auto flex max-w-3xl flex-col gap-4 text-left text-3xl font-light leading-10">
         <h1>Why did we build #LLMwrapped?</h1>
 
@@ -30,7 +30,7 @@ export default function WordwareInfo() {
           in record time.
         </p>
       </div>
-      <div className="flex justify-center gap-4 pb-20">
+      <div className="flex flex-col justify-center gap-4 pb-20 sm:flex-row">
         <Link
           href="https://wordware.ai"
           className={cn(buttonVariants({ variant: "default", size: "lg" }))}
