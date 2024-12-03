@@ -16,6 +16,7 @@ import { LinkedinLogo } from "./logos/linkedin";
 import { TwitterXLogo } from "./logos/twitter";
 import { GitHubLogo } from "./logos/github";
 import { TinderLogo } from "./logos/tinder";
+import Link from "next/link";
 
 type TabValue = "spotify" | "linkedin" | "twitter" | "github" | "tinder";
 
@@ -153,7 +154,11 @@ export function Hero() {
 
           <p className="w-96 text-center text-xs text-muted-foreground">
             By logging in you agree to our Terms and Conditions and acknowledge
-            our Privacy Policy.
+            our{" "}
+            <Link href="https://www.wordware.ai/privacy-policy">
+              Privacy Policy
+            </Link>
+            .
           </p>
         </div>
       </div>

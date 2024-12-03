@@ -24,7 +24,7 @@ export default function WordwareInfo() {
         </p>
       </div>
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center gap-4 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-600/20 py-6 text-center text-2xl font-light">
-        <h2 className="font-medium">Ready to create your own AI showcase?</h2>
+        <h2 className="font-medium">Ready to build your own AI agents?</h2>
         <p className="max-w-xl text-gray-600">
           Start building with Wordware today and create powerful AI applications
           in record time.
