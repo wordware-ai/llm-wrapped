@@ -64,7 +64,7 @@ export default function SlideIndicator({
               index + 1 < currentSlide
                 ? "w-full bg-gray-300" // Completed slides
                 : index + 1 === currentSlide
-                  ? `${progress < 3 ? "bg-transparent" : "bg-gray-300"} transition-none` // Current slide
+                  ? `${progress < 5 ? "bg-transparent" : "bg-gray-300"} transition-none` // Current slide
                   : "w-0 bg-gray-600/30" // Future slides
             }`}
             style={{
