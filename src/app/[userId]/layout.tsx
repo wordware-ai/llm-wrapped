@@ -1,21 +1,23 @@
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
+  ),
   openGraph: {
     title: "LLMwrapped Results",
     description: "Check out my LLM usage wrapped for the year!",
     images: [
       {
-        url: '/api/og',
+        url: "/api/og",
         width: 1200,
         height: 630,
-        alt: 'LLMwrapped Results',
-      }
+        alt: "LLMwrapped Results",
+      },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: "LLMwrapped Results",
     description: "Check out my LLM usage wrapped for the year!",
-    images: ['/api/og'],
+    images: ["/api/og"],
   },
 };
