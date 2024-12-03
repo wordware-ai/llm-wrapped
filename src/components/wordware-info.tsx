@@ -6,7 +6,7 @@ export default function WordwareInfo() {
   return (
     <div className="flex flex-col gap-12 px-4">
       <div className="mx-auto flex max-w-3xl flex-col gap-4 text-left text-3xl font-light leading-10">
-        <h1>Why did we build #LLMwrapped?</h1>
+        <h1 className="font-medium">Why did we build #LLMwrapped?</h1>
 
         <p className="text-gray-400">
           <br />

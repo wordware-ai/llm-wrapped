@@ -4,6 +4,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import { type ReactNode } from "react";
 import ShareButton from "../share";
+import { motion } from "framer-motion";
 
 export default function WordwareCard({
   children,
@@ -30,28 +31,19 @@ export default function WordwareCard({
           className,
         )}
       >
-        <div
+        <motion.div
           className={cn(
             "absolute left-0 top-0 w-full gap-[7px] px-2",
             wide ? "grid md:grid-cols-2" : "flex flex-col",
           )}
+          initial={{ x: "-100%" }}
+          animate={{ x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-          <WordwareLogo fillColor={fillColor} />
-        </div>
+          {Array.from({ length: 15 }).map((_, i) => (
+            <WordwareLogo key={i} fillColor={fillColor} />
+          ))}
+        </motion.div>
         <div className={cn("z-10", hideShare || (hideHashtag && "pb-16"))}>
           {children}
         </div>
