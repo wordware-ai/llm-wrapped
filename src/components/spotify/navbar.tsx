@@ -1,21 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
-import { Menu } from "lucide-react";
+import { ChevronLeft, Menu } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   return (
     <div className="flex h-14 items-center justify-between border-b p-2 md:px-8">
-      <Link href="/">
-        <Image
-          src="/brand/wordware-black.svg"
-          alt="Wordware Logo"
-          width={112}
-          height={112}
-        />
+      <Link className={cn(buttonVariants({ variant: "outline" }))} href="/">
+        <ChevronLeft />
+        Home
       </Link>
       <div className="hidden gap-2 md:flex">
         <Button variant="outline">See rankings</Button>
