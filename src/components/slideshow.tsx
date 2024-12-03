@@ -63,6 +63,23 @@ export default function SlideShow() {
     return [];
   }, [username, name, results]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        void nextSlide();
+      } else if (e.key === "ArrowLeft") {
+        void previousSlide();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentSlide]);
+
   if (!currentSlide || !slides.length) return null;
 
   const currentSlideData = slides[currentSlide - 1];
