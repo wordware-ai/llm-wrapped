@@ -16,7 +16,7 @@ export function UserInfo({ user }: { user: User }) {
   const shareLinks = {
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
     instagram: `https://instagram.com/`,
-    linkedin: `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(shareText + ' ' + shareUrl)}`,
+    linkedin: `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(shareText + " " + shareUrl)}`,
     tiktok: `https://www.tiktok.com/`,
     reddit: `https://reddit.com/submit?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareText)}`,
     whatsapp: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`,
@@ -35,9 +35,10 @@ export function UserInfo({ user }: { user: User }) {
             alt="Spotify 1"
             href={`/${user.id}?slide=1`}
           />
-          <p className="text-center text-xl font-semibold">     {user.username ?? user.email}</p>
-       
-    
+          <p className="text-center text-xl font-semibold">
+            {" "}
+            {user.username ?? user.email}
+          </p>
         </div>
         <div className="flex flex-col gap-8 lg:pt-[4.15em]">
           <p className="text-xl sm:text-2xl">Share your results</p>
@@ -51,19 +52,23 @@ export function UserInfo({ user }: { user: User }) {
               <FaTwitter className="text-xl text-[#1DA1F2]" />
               <p>Twitter</p>
             </a>
-            <a
-              href={shareLinks.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
+
+            <button
+              onClick={() => {
+                void navigator.clipboard.writeText(shareUrl);
+                alert("Link copied! Share it on Instagram");
+              }}
               className="flex items-center gap-2 hover:opacity-80"
             >
               <FaInstagram className="text-xl text-[#E4405F]" />
               <p>Instagram</p>
-            </a>
+            </button>
             <button
               onClick={() => {
                 void navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
-                alert('Link copied!\n\nTo share on LinkedIn:\n1. Open LinkedIn\n2. Click "Start a post"\n3. Paste the copied text');
+                alert(
+                  'Link copied!\n\nTo share on LinkedIn:\n1. Open LinkedIn\n2. Click "Start a post"\n3. Paste the copied text',
+                );
               }}
               className="flex items-center gap-2 hover:opacity-80"
             >
@@ -73,7 +78,9 @@ export function UserInfo({ user }: { user: User }) {
             <button
               onClick={() => {
                 void navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
-                alert('Link copied!\n\nTo share on TikTok:\n1. Open TikTok\n2. Tap the "+" to create a new post\n3. Paste the copied text in the caption');
+                alert(
+                  'Link copied!\n\nTo share on TikTok:\n1. Open TikTok\n2. Tap the "+" to create a new post\n3. Paste the copied text in the caption',
+                );
               }}
               className="flex items-center gap-2 hover:opacity-80"
             >
