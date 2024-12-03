@@ -36,7 +36,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
 
   const { setResults } = useStreamContext();
   const { streamResponse } = useStream({
-    promptId: "5d5cb90e-4197-4c60-bcb4-8c9b8137f636",
+    promptId: "45bf050b-4223-45c1-9fd6-a2d6c6b2ac1d",
     data: spotifyData ?? "",
     onFinish,
   });
