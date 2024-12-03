@@ -1,10 +1,9 @@
-import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { ChevronLeft, Menu } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import { Button, buttonVariants } from "../ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
-import { ChevronLeft, Menu } from "lucide-react";
-import { useState } from "react";
-import { cn } from "@/lib/utils";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
