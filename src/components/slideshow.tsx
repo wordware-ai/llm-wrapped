@@ -65,8 +65,6 @@ export default function SlideShow() {
 
   if (!currentSlide || !slides.length) return null;
 
-  console.log(slides);
-
   const currentSlideData = slides[currentSlide - 1];
   if (!currentSlideData) return null;
 
@@ -130,6 +128,7 @@ export default function SlideShow() {
       />
       <div
         onClick={handleClick}
+        // Pause the slideshow when the user holds a card
         onMouseDown={() => setIsPaused(true)}
         onMouseUp={() => setIsPaused(false)}
         onMouseLeave={() => setIsPaused(false)}
@@ -139,7 +138,7 @@ export default function SlideShow() {
       >
         <WordwareCard
           className={cn(
-            "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-w-md lg:max-w-xl lg:rounded-xl",
+            "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-w-md lg:rounded-xl",
           )}
           hideShare={!username}
           hideHashtag
