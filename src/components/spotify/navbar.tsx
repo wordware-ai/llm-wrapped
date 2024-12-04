@@ -16,6 +16,7 @@ export default function Navbar() {
       <div className="hidden gap-2 md:flex">
         <Button variant="outline">See rankings</Button>
         <Button>How was it made?</Button>
+        {/* <DeleteAccount /> */}
       </div>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild className="md:hidden">
@@ -31,6 +32,7 @@ export default function Navbar() {
               See rankings
             </Button>
             <Button onClick={() => setOpen(false)}>How was it made?</Button>
+            {/* <DeleteAccount /> */}
           </div>
         </SheetContent>
       </Sheet>
