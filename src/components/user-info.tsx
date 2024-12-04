@@ -13,10 +13,12 @@ export function UserInfo({
   username,
   name,
   imageUrl,
+  storyHref,
 }: {
   username: string;
   name: string;
   imageUrl: string;
+  storyHref: string;
 }) {
   const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${username}`;
   const shareText = `Check out my #LLMwrapped results!`;
@@ -41,7 +43,7 @@ export function UserInfo({
             className="size-36 p-1 lg:size-48 lg:p-2"
             src={imageUrl}
             alt="Spotify 1"
-            href={`/spotify/${username}?slide=1`}
+            href={storyHref}
           />
           <p className="text-center text-xl font-semibold">{name}</p>
         </div>

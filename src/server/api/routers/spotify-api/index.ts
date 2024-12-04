@@ -21,7 +21,10 @@ export const spotifyApiRouter = createTRPCRouter({
         },
       })
         .then((res) => res.json())
-        .then((data) => topArtistsResponseSchema.parse(data)),
+        .then((data) => {
+          console.log(topArtistsResponseSchema.parse(data));
+          return topArtistsResponseSchema.parse(data);
+        }),
 
       // Top Tracks
       fetch(`https://api.spotify.com/v1/me/top/tracks?${params}`, {
@@ -95,16 +98,26 @@ export const spotifyApiRouter = createTRPCRouter({
 
     // Get the required image URLs
     const imageUrls = {
-      most_popular_artist_image_url:
-        mostPopularArtists[0]?.images?.[0]?.url ?? null,
-      least_popular_artist_image_url:
-        leastPopularArtists[0]?.images?.[0]?.url ?? null,
-      top_artist_image_url: topArtists.items[0]?.images?.[0]?.url ?? null,
+      mostPopularImageUrl: mostPopularArtists[0]?.images?.[0]?.url ?? null,
+      leastPopularImageUrl: leastPopularArtists[0]?.images?.[0]?.url ?? null,
+      topArtistImageUrl: topArtists.items[0]?.images?.[0]?.url ?? null,
+    };
+
+    const createUrl = (uri: string) => {
+      const cleanedUri = uri.replace("spotify:artist:", "");
+      return `https://open.spotify.com/artist/${cleanedUri}`;
+    };
+
+    const artistUrls = {
+      mostPopularUrl: createUrl(mostPopularArtists[0]?.uri ?? ""),
+      leastPopularUrl: createUrl(leastPopularArtists[0]?.uri ?? ""),
+      topArtistUrl: createUrl(topArtists.items[0]?.uri ?? ""),
     };
 
     return {
       spotifyData: convertSpotifyDataToMarkdown(transformedData),
       imageUrls,
+      artistUrls,
     };
   }),
 });

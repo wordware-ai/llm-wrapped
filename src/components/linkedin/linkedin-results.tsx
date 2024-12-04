@@ -10,10 +10,7 @@ import {
   convertLinkedinToDb,
 } from "@/lib/convert-linkedin";
 import { type LinkedinResult } from "@prisma/client";
-import WordwareInfo from "../wordware-info";
-import { useParams } from "next/navigation";
-import Navbar from "../navbar";
-import { UserInfo } from "../user-info";
+import { ResultsPage } from "../results-page";
 
 export function LinkedInResults({
   linkedinResult,
@@ -26,10 +23,9 @@ export function LinkedInResults({
     imageUrl?: string;
     name?: string;
     username?: string;
+    currentPositionImageUrl?: string;
   };
 }) {
-  const { username } = useParams();
-
   const { mutate: createLinkedinResult } =
     api.linkedinResults.createLinkedinResult.useMutation();
 
@@ -44,11 +40,7 @@ export function LinkedInResults({
   };
 
   const { results, setResults } = useStreamContext();
-  const { streamResponse } = useStream({
-    promptId: "81464643-a0e0-4982-9370-9bc37fd9a4a5",
-    data: llmData ?? "",
-    onFinish,
-  });
+  const { streamResponse } = useStream();
 
   useEffect(() => {
     if (linkedinResult) {
@@ -56,20 +48,32 @@ export function LinkedInResults({
       setResults(displayResults);
     } else {
       void streamResponse({
-        initialState: {},
+        promptId: "81464643-a0e0-4982-9370-9bc37fd9a4a5",
+        data: llmData ?? "",
+        onFinish,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedinResult]);
 
   return (
-    <div className="flex flex-col">
-      <Navbar />
-      <div className="flex flex-col gap-4 sm:pb-16 lg:h-[calc(100vh-56px)] lg:flex-row">
-        <UserInfo />
-        <SideCards />
-      </div>
-      <WordwareInfo />
-    </div>
+    <ResultsPage
+      user={{
+        username: profileData?.username ?? "",
+        name: profileData?.name ?? "",
+        imageUrl: profileData?.imageUrl ?? "",
+        storyHref: `/linkedin/${profileData?.username}?slide=1`,
+      }}
+      cards={{
+        card1text: results.short_summary as string,
+        card2: {
+          title: "Current Position",
+          text: results.current_position as string,
+          imageUrl: profileData?.currentPositionImageUrl ?? "",
+        },
+        card3text: results.actual_position as string,
+        storyHref: `/linkedin/${profileData?.username}?slide=1`,
+      }}
+    />
   );
 }

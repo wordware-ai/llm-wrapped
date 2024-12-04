@@ -1,45 +1,52 @@
 import Image from "next/image";
-import { BaseStory } from "./stories/base";
-import { useStreamContext } from "./stream-provider";
 import WordwareCard from "./spotify/wordware-card";
-import { useParams } from "next/navigation";
+import { BaseStory } from "./stories/base";
 
-export function SideCards() {
-  const { results } = useStreamContext();
-  const { username } = useParams();
+export function SideCards({
+  card1text,
+  card2,
+  card3text,
+  storyHref,
+}: {
+  card1text: string;
+  card2: {
+    title: string;
+    text: string;
+    imageUrl: string;
+  };
+  card3text: string;
+  storyHref: string;
+}) {
   return (
     <div className="flex flex-col justify-between gap-4 lg:h-full lg:w-1/2">
       <WordwareCard
         wide
         hideHashtag
         hideShare
-        show={!!results.short_summary}
+        show={!!card1text}
         className="w-full rounded-xl bg-[#1A1A1A] md:h-[400px] lg:h-1/3"
       >
-        <p className="text-center text-2xl text-white">
-          {String(results.short_summary)}
-        </p>
+        <p className="text-center text-2xl text-white">{card1text}</p>
       </WordwareCard>
       <div className="flex w-full flex-col gap-4 rounded-xl sm:flex-row md:h-2/3">
         <WordwareCard
           hideHashtag
           hideShare
-          show={!!results.music_taste_analysis_1}
+          show={!!card2.text}
           className="h-full w-full rounded-xl bg-[#1A1A1A]"
         >
           <div className="flex flex-col items-center justify-center gap-4">
-            {results.top_artist_image_url !== "null" && (
+            <h3 className="text-4xl font-semibold text-white">{card2.title}</h3>
+            {card2.imageUrl !== "null" && card2.text && (
               <Image
-                src={results.top_artist_image_url as string}
-                alt="Top Artist"
+                src={card2.imageUrl}
+                alt={card2.title}
                 className="aspect-square rounded-lg object-cover"
                 width={120}
                 height={120}
               />
             )}
-            <p className="text-center text-2xl text-white">
-              {String(results.music_taste_analysis_1)}
-            </p>
+            <p className="text-center text-2xl text-white">{card2.text}</p>
           </div>
         </WordwareCard>
         <div className="h-full w-full rounded-xl">
@@ -47,14 +54,12 @@ export function SideCards() {
             <WordwareCard
               hideHashtag
               hideShare
-              show={!!results.music_taste_analysis_2}
+              show={!!card3text}
               className="h-2/3 w-full rounded-xl bg-[#1A1A1A]"
             >
-              <p className="text-center text-2xl text-white">
-                {String(results.music_taste_analysis_2)}
-              </p>
+              <p className="text-center text-2xl text-white">{card3text}</p>
             </WordwareCard>
-            {!!results.music_taste_analysis_3 && (
+            {!!card3text && (
               <div className="flex h-1/3 w-full items-center justify-between gap-4 rounded-xl border p-4">
                 <p className="">
                   LLMwrapped has been built with Wordware - the ultimate AI
@@ -63,7 +68,7 @@ export function SideCards() {
                 <BaseStory
                   src="/brand/w-black.png"
                   alt="Wordware"
-                  href={`/${username as string}?name=wordware&slide=1`}
+                  href={storyHref}
                   imageClassName="pt-1.5"
                   className="shrink-0"
                 />

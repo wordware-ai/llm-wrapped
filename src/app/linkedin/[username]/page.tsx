@@ -23,6 +23,12 @@ export default async function LinkedInResultsPage({
       name: allData?.name,
       username,
     };
+  } else {
+    profileData = {
+      imageUrl: linkedinResult.imageUrl ?? undefined,
+      name: linkedinResult.name ?? undefined,
+      username,
+    };
   }
 
   return (

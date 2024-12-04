@@ -14,6 +14,10 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "media.licdn.com",
+      },
+      {
+        protocol: "https",
         hostname: "www.thisdayinmusic.com",
       },
       {
