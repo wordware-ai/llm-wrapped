@@ -1,7 +1,7 @@
 import { env } from "@/env";
 import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { z } from "zod";
-import { LinkedInProfileSchema } from "./schemas";
+import { type Experience, LinkedInProfileSchema } from "./schemas";
 import { convertLinkedinDataToMarkdown } from "@/lib/convert-to-markdown";
 
 export const linkedinApiRouter = createTRPCRouter({
@@ -32,7 +32,7 @@ export const linkedinApiRouter = createTRPCRouter({
       console.log(snapshotId);
 
       // Wait 10 seconds before fetching the snapshot data
-      await new Promise((resolve) => setTimeout(resolve, 30000));
+      await new Promise((resolve) => setTimeout(resolve, 40000));
 
       // Second request to get the data using the snapshot ID
       const dataResponse = await fetch(
@@ -49,11 +49,26 @@ export const linkedinApiRouter = createTRPCRouter({
 
       // Parse the response with our schema
       const linkedinData = LinkedInProfileSchema.parse(rawData[0]);
+      console.log(linkedinData);
+
+      const getCurrentCompanyImageUrl = (experience?: Experience[]) => {
+        if (!experience) return null;
+        return experience
+          .sort((a, b) => {
+            const dateA = new Date(a?.start_date ?? 0);
+            const dateB = new Date(b?.start_date ?? 0);
+            return dateB.getTime() - dateA.getTime();
+          })
+          .find((experience) => experience?.company)?.company_logo_url;
+      };
 
       return {
         linkedinData: convertLinkedinDataToMarkdown(linkedinData),
         imageUrl: linkedinData.avatar,
         name: linkedinData.name,
+        currentCompanyImageUrl: getCurrentCompanyImageUrl(
+          linkedinData.experience,
+        ),
       };
     }),
 });

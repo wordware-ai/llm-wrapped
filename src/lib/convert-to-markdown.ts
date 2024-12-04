@@ -92,12 +92,7 @@ export const convertLinkedinDataToMarkdown = (
       ].join("\n"),
     ) || ["No education history listed"]),
     "",
-    "## Recent Activity",
-    ...(data.activity?.map(
-      (act) =>
-        `- ${act?.interaction || "Interaction"}: ${act?.title || "Not specified"}`,
-    ) || ["No recent activity"]),
-    "",
+
     data.honors_and_awards
       ? [
           "## Honors and Awards",

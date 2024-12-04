@@ -33,8 +33,9 @@ export function LinkedInResults({
     const linkedinResult = {
       ...convertLinkedinToDb(results),
       username: profileData?.username ?? "",
-      imageUrl: profileData?.imageUrl ?? "",
-      name: profileData?.name ?? "",
+      imageUrl: profileData?.imageUrl ?? null,
+      name: profileData?.name ?? null,
+      currentPositionImageUrl: profileData?.currentPositionImageUrl ?? null,
     };
     createLinkedinResult(linkedinResult);
   };
