@@ -1,4 +1,4 @@
-import { convertToMarkdown } from "@/lib/convert-to-markdown";
+import { convertSpotifyDataToMarkdown } from "@/lib/convert-to-markdown";
 import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
 import {
   playlistsResponseSchema,
@@ -103,7 +103,7 @@ export const spotifyApiRouter = createTRPCRouter({
     };
 
     return {
-      spotifyData: convertToMarkdown(transformedData),
+      spotifyData: convertSpotifyDataToMarkdown(transformedData),
       imageUrls,
     };
   }),

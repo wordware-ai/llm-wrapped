@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import { Button, buttonVariants } from "../ui/button";
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
+import { Button, buttonVariants } from "./ui/button";
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);

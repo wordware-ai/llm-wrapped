@@ -60,7 +60,7 @@ export const UserScalarFieldEnumSchema = z.enum(['id','email','username','imageU
 
 export const SpotifyResultScalarFieldEnumSchema = z.enum(['id','short_summary','music_taste_analysis_1','music_taste_analysis_2','music_taste_analysis_3','lyric_therapy_needed','identity_crisis_level','emotional_stability_rating','achievement','dance_floor_credibility','song_you_would_hit_the_dance_floor','songs_you_secretly_think_are_about_you','guilty_pleasure_song','least_popular_artist','most_popular_artist','time_machine_status','titles_that_need_therapy','final_diagnosis','recommendation','least_popular_artist_image_url','most_popular_artist_image_url','top_artist_image_url','createdAt','updatedAt','userId']);
 
-export const LinkedinResultScalarFieldEnumSchema = z.enum(['id','username','imageUrl','short_summary','current_position','actual_position','position_mother','accidental_success','ambition','delusional','performance','career_trajectory','next_endeavor','job_description','buzzword_bingo','skills','reason_for_firing','recommendation','createdAt','updatedAt']);
+export const LinkedinResultScalarFieldEnumSchema = z.enum(['id','username','name','imageUrl','short_summary','current_position','actual_position','position_mother','accidental_success','ambition','delusional','performance','career_trajectory','next_endeavor','job_description','buzzword_bingo','skills','reason_for_firing','recommendation','createdAt','updatedAt']);
 
 export const SortOrderSchema = z.enum(['asc','desc']);
 
@@ -131,6 +131,7 @@ export type SpotifyResult = z.infer<typeof SpotifyResultSchema>
 export const LinkedinResultSchema = z.object({
   id: z.string().cuid(),
   username: z.string(),
+  name: z.string().nullable(),
   imageUrl: z.string().nullable(),
   short_summary: z.string(),
   current_position: z.string(),
@@ -226,6 +227,7 @@ export const SpotifyResultSelectSchema: z.ZodType<Prisma.SpotifyResultSelect> = 
 export const LinkedinResultSelectSchema: z.ZodType<Prisma.LinkedinResultSelect> = z.object({
   id: z.boolean().optional(),
   username: z.boolean().optional(),
+  name: z.boolean().optional(),
   imageUrl: z.boolean().optional(),
   short_summary: z.boolean().optional(),
   current_position: z.boolean().optional(),
@@ -512,6 +514,7 @@ export const LinkedinResultWhereInputSchema: z.ZodType<Prisma.LinkedinResultWher
   NOT: z.union([ z.lazy(() => LinkedinResultWhereInputSchema),z.lazy(() => LinkedinResultWhereInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   username: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  name: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
   imageUrl: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
   short_summary: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   current_position: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
@@ -535,6 +538,7 @@ export const LinkedinResultWhereInputSchema: z.ZodType<Prisma.LinkedinResultWher
 export const LinkedinResultOrderByWithRelationInputSchema: z.ZodType<Prisma.LinkedinResultOrderByWithRelationInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   username: z.lazy(() => SortOrderSchema).optional(),
+  name: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   imageUrl: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   short_summary: z.lazy(() => SortOrderSchema).optional(),
   current_position: z.lazy(() => SortOrderSchema).optional(),
@@ -573,6 +577,7 @@ export const LinkedinResultWhereUniqueInputSchema: z.ZodType<Prisma.LinkedinResu
   AND: z.union([ z.lazy(() => LinkedinResultWhereInputSchema),z.lazy(() => LinkedinResultWhereInputSchema).array() ]).optional(),
   OR: z.lazy(() => LinkedinResultWhereInputSchema).array().optional(),
   NOT: z.union([ z.lazy(() => LinkedinResultWhereInputSchema),z.lazy(() => LinkedinResultWhereInputSchema).array() ]).optional(),
+  name: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
   imageUrl: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
   short_summary: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   current_position: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
@@ -596,6 +601,7 @@ export const LinkedinResultWhereUniqueInputSchema: z.ZodType<Prisma.LinkedinResu
 export const LinkedinResultOrderByWithAggregationInputSchema: z.ZodType<Prisma.LinkedinResultOrderByWithAggregationInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   username: z.lazy(() => SortOrderSchema).optional(),
+  name: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   imageUrl: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
   short_summary: z.lazy(() => SortOrderSchema).optional(),
   current_position: z.lazy(() => SortOrderSchema).optional(),
@@ -625,6 +631,7 @@ export const LinkedinResultScalarWhereWithAggregatesInputSchema: z.ZodType<Prism
   NOT: z.union([ z.lazy(() => LinkedinResultScalarWhereWithAggregatesInputSchema),z.lazy(() => LinkedinResultScalarWhereWithAggregatesInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   username: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  name: z.union([ z.lazy(() => StringNullableWithAggregatesFilterSchema),z.string() ]).optional().nullable(),
   imageUrl: z.union([ z.lazy(() => StringNullableWithAggregatesFilterSchema),z.string() ]).optional().nullable(),
   short_summary: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   current_position: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
@@ -910,6 +917,7 @@ export const SpotifyResultUncheckedUpdateManyInputSchema: z.ZodType<Prisma.Spoti
 export const LinkedinResultCreateInputSchema: z.ZodType<Prisma.LinkedinResultCreateInput> = z.object({
   id: z.string().cuid().optional(),
   username: z.string(),
+  name: z.string().optional().nullable(),
   imageUrl: z.string().optional().nullable(),
   short_summary: z.string(),
   current_position: z.string(),
@@ -933,6 +941,7 @@ export const LinkedinResultCreateInputSchema: z.ZodType<Prisma.LinkedinResultCre
 export const LinkedinResultUncheckedCreateInputSchema: z.ZodType<Prisma.LinkedinResultUncheckedCreateInput> = z.object({
   id: z.string().cuid().optional(),
   username: z.string(),
+  name: z.string().optional().nullable(),
   imageUrl: z.string().optional().nullable(),
   short_summary: z.string(),
   current_position: z.string(),
@@ -956,6 +965,7 @@ export const LinkedinResultUncheckedCreateInputSchema: z.ZodType<Prisma.Linkedin
 export const LinkedinResultUpdateInputSchema: z.ZodType<Prisma.LinkedinResultUpdateInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   username: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   imageUrl: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   current_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -979,6 +989,7 @@ export const LinkedinResultUpdateInputSchema: z.ZodType<Prisma.LinkedinResultUpd
 export const LinkedinResultUncheckedUpdateInputSchema: z.ZodType<Prisma.LinkedinResultUncheckedUpdateInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   username: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   imageUrl: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   current_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -1002,6 +1013,7 @@ export const LinkedinResultUncheckedUpdateInputSchema: z.ZodType<Prisma.Linkedin
 export const LinkedinResultCreateManyInputSchema: z.ZodType<Prisma.LinkedinResultCreateManyInput> = z.object({
   id: z.string().cuid().optional(),
   username: z.string(),
+  name: z.string().optional().nullable(),
   imageUrl: z.string().optional().nullable(),
   short_summary: z.string(),
   current_position: z.string(),
@@ -1025,6 +1037,7 @@ export const LinkedinResultCreateManyInputSchema: z.ZodType<Prisma.LinkedinResul
 export const LinkedinResultUpdateManyMutationInputSchema: z.ZodType<Prisma.LinkedinResultUpdateManyMutationInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   username: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   imageUrl: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   current_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -1048,6 +1061,7 @@ export const LinkedinResultUpdateManyMutationInputSchema: z.ZodType<Prisma.Linke
 export const LinkedinResultUncheckedUpdateManyInputSchema: z.ZodType<Prisma.LinkedinResultUncheckedUpdateManyInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   username: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   imageUrl: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
   short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   current_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
@@ -1317,6 +1331,7 @@ export const JsonWithAggregatesFilterSchema: z.ZodType<Prisma.JsonWithAggregates
 export const LinkedinResultCountOrderByAggregateInputSchema: z.ZodType<Prisma.LinkedinResultCountOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   username: z.lazy(() => SortOrderSchema).optional(),
+  name: z.lazy(() => SortOrderSchema).optional(),
   imageUrl: z.lazy(() => SortOrderSchema).optional(),
   short_summary: z.lazy(() => SortOrderSchema).optional(),
   current_position: z.lazy(() => SortOrderSchema).optional(),
@@ -1340,6 +1355,7 @@ export const LinkedinResultCountOrderByAggregateInputSchema: z.ZodType<Prisma.Li
 export const LinkedinResultMaxOrderByAggregateInputSchema: z.ZodType<Prisma.LinkedinResultMaxOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   username: z.lazy(() => SortOrderSchema).optional(),
+  name: z.lazy(() => SortOrderSchema).optional(),
   imageUrl: z.lazy(() => SortOrderSchema).optional(),
   short_summary: z.lazy(() => SortOrderSchema).optional(),
   current_position: z.lazy(() => SortOrderSchema).optional(),
@@ -1360,6 +1376,7 @@ export const LinkedinResultMaxOrderByAggregateInputSchema: z.ZodType<Prisma.Link
 export const LinkedinResultMinOrderByAggregateInputSchema: z.ZodType<Prisma.LinkedinResultMinOrderByAggregateInput> = z.object({
   id: z.lazy(() => SortOrderSchema).optional(),
   username: z.lazy(() => SortOrderSchema).optional(),
+  name: z.lazy(() => SortOrderSchema).optional(),
   imageUrl: z.lazy(() => SortOrderSchema).optional(),
   short_summary: z.lazy(() => SortOrderSchema).optional(),
   current_position: z.lazy(() => SortOrderSchema).optional(),

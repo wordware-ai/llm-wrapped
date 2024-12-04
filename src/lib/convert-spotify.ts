@@ -1,6 +1,6 @@
 import { type SpotifyResult } from "@prisma/client";
 
-export function convertDbToState(
+export function convertSpotifyDbToState(
   previousRun: Partial<SpotifyResult>,
 ): Record<string, unknown> {
   const fieldsToRemove = ["createdAt", "updatedAt", "userId", "id"];
@@ -12,7 +12,7 @@ export function convertDbToState(
   return { ...cleanedPreviousRun };
 }
 
-export function convertStateToDb(results: Record<string, unknown>) {
+export function convertSpotifyToDb(results: Record<string, unknown>) {
   return {
     short_summary: String(results.short_summary) ?? "",
     music_taste_analysis_1: String(results.music_taste_analysis_1) ?? "",

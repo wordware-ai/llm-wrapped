@@ -1,5 +1,5 @@
 import { type User } from "@prisma/client";
-import { BaseStory } from "../stories/base";
+import { BaseStory } from "./stories/base";
 import {
   FaTwitter,
   FaInstagram,
@@ -9,8 +9,16 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 
-export function UserInfo({ user }: { user: User }) {
-  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${user.id}`;
+export function UserInfo({
+  username,
+  name,
+  imageUrl,
+}: {
+  username: string;
+  name: string;
+  imageUrl: string;
+}) {
+  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${username}`;
   const shareText = `Check out my #LLMwrapped results!`;
 
   const shareLinks = {
@@ -31,14 +39,11 @@ export function UserInfo({ user }: { user: User }) {
         <div className="flex w-min flex-col gap-4">
           <BaseStory
             className="size-36 p-1 lg:size-48 lg:p-2"
-            src={user.imageUrl}
+            src={imageUrl}
             alt="Spotify 1"
-            href={`/spotify/${user.username}?slide=1`}
+            href={`/spotify/${username}?slide=1`}
           />
-          <p className="text-center text-xl font-semibold">
-            {" "}
-            {user.username ?? user.email}
-          </p>
+          <p className="text-center text-xl font-semibold">{name}</p>
         </div>
         <div className="flex flex-col gap-8 lg:pt-[4.15em]">
           <p className="text-xl sm:text-2xl">Share your results</p>

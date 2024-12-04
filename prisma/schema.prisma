@@ -60,6 +60,7 @@ model SpotifyResult {
 model LinkedinResult {
   id        String   @id @default(cuid())
   username  String   @unique
+  name      String?
   imageUrl  String?
   short_summary String
   current_position String

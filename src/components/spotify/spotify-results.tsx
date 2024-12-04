@@ -8,11 +8,14 @@ import { redirect } from "next/navigation";
 import { useEffect } from "react";
 import { useStreamContext } from "../stream-provider";
 
-import { convertDbToState, convertStateToDb } from "@/lib/convert-results";
+import {
+  convertSpotifyDbToState,
+  convertSpotifyToDb,
+} from "@/lib/convert-spotify";
 import WordwareInfo from "../wordware-info";
-import Navbar from "./navbar";
-import { SideCards } from "./side-cards";
-import { UserInfo } from "./user-info";
+import Navbar from "../navbar";
+import { SideCards } from "../side-cards";
+import { UserInfo } from "../user-info";
 
 export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
   const previousRun = user.spotifyResult;
@@ -27,7 +30,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
     api.spotifyResults.createSpotifyResult.useMutation();
 
   const onFinish = (results: Record<string, unknown>) => {
-    const spotifyResult = convertStateToDb(results);
+    const spotifyResult = convertSpotifyToDb(results);
     createSpotifyResult(spotifyResult);
   };
 
@@ -40,7 +43,7 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
 
   useEffect(() => {
     if (previousRun) {
-      const displayResults = convertDbToState(previousRun);
+      const displayResults = convertSpotifyDbToState(previousRun);
       setResults(displayResults);
     } else {
       if (spotifyData) {

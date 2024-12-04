@@ -6,23 +6,30 @@ export default async function LinkedInResultsPage({
 }: {
   params: Promise<{ username: string }>;
 }) {
+  const username = (await params).username;
   const linkedinResult = await api.linkedinResults.getByUsername({
-    username: (await params).username,
+    username,
   });
 
-  let linkedinData;
-
+  let profileData;
+  let llmData;
   if (!linkedinResult) {
-    const data = await api.linkedinApi.getUserData({
+    const allData = await api.linkedinApi.getUserData({
       linkedinUrl: `https://www.linkedin.com/in/${(await params).username}`,
     });
-    linkedinData = data.linkedinData;
+    llmData = allData?.linkedinData;
+    profileData = {
+      imageUrl: allData?.imageUrl,
+      name: allData?.name,
+      username,
+    };
   }
 
   return (
     <LinkedInResults
       linkedinResult={linkedinResult}
-      linkedinData={linkedinData}
+      llmData={llmData}
+      profileData={profileData}
     />
   );
 }

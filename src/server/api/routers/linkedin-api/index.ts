@@ -1,7 +1,8 @@
-import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
 import { env } from "@/env";
-import { convertToMarkdown } from "@/lib/convert-to-markdown";
+import { createTRPCRouter, publicProcedure } from "@/server/api/trpc";
+import { z } from "zod";
+import { LinkedInProfileSchema } from "./schemas";
+import { convertLinkedinDataToMarkdown } from "@/lib/convert-to-markdown";
 
 export const linkedinApiRouter = createTRPCRouter({
   getUserData: publicProcedure
@@ -24,8 +25,14 @@ export const linkedinApiRouter = createTRPCRouter({
         },
       );
 
-      const triggerData = await triggerResponse.json();
+      const triggerData = (await triggerResponse.json()) as unknown;
       const snapshotId = triggerData.snapshot_id;
+
+      console.log(triggerData);
+      console.log(snapshotId);
+
+      // Wait 10 seconds before fetching the snapshot data
+      await new Promise((resolve) => setTimeout(resolve, 30000));
 
       // Second request to get the data using the snapshot ID
       const dataResponse = await fetch(
@@ -37,11 +44,16 @@ export const linkedinApiRouter = createTRPCRouter({
         },
       );
 
-      const linkedinData = await dataResponse.json();
+      const rawData = (await dataResponse.json()) as unknown[];
+      console.log(rawData);
 
-      // For now, just return the raw data converted to markdown
+      // Parse the response with our schema
+      const linkedinData = LinkedInProfileSchema.parse(rawData[0]);
+
       return {
-        linkedinData: convertToMarkdown(linkedinData),
+        linkedinData: convertLinkedinDataToMarkdown(linkedinData),
+        imageUrl: linkedinData.avatar,
+        name: linkedinData.name,
       };
     }),
 });

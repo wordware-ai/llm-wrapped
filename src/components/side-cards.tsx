@@ -1,7 +1,7 @@
 import Image from "next/image";
-import { BaseStory } from "../stories/base";
-import { useStreamContext } from "../stream-provider";
-import WordwareCard from "./wordware-card";
+import { BaseStory } from "./stories/base";
+import { useStreamContext } from "./stream-provider";
+import WordwareCard from "./spotify/wordware-card";
 import { useParams } from "next/navigation";
 
 export function SideCards() {
