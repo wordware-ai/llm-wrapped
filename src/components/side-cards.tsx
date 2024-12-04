@@ -1,6 +1,7 @@
 import Image from "next/image";
 import WordwareCard from "./spotify/wordware-card";
 import { BaseStory } from "./stories/base";
+import Link from "next/link";
 
 export function SideCards({
   card1text,
@@ -13,6 +14,7 @@ export function SideCards({
     title: string;
     text: string;
     imageUrl: string;
+    href?: string;
   };
   card3text: string;
   storyHref: string;
@@ -38,13 +40,27 @@ export function SideCards({
           <div className="flex flex-col items-center justify-center gap-4">
             <h3 className="text-4xl font-semibold text-white">{card2.title}</h3>
             {card2.imageUrl !== "null" && card2.text && (
-              <Image
-                src={card2.imageUrl}
-                alt={card2.title}
-                className="aspect-square rounded-lg object-cover"
-                width={120}
-                height={120}
-              />
+              <>
+                {card2.href ? (
+                  <Link href={card2.href}>
+                    <Image
+                      src={card2.imageUrl}
+                      alt={card2.title}
+                      className="aspect-square rounded-lg object-cover"
+                      width={120}
+                      height={120}
+                    />
+                  </Link>
+                ) : (
+                  <Image
+                    src={card2.imageUrl}
+                    alt={card2.title}
+                    className="aspect-square rounded-lg object-cover"
+                    width={120}
+                    height={120}
+                  />
+                )}
+              </>
             )}
             <p className="text-center text-2xl text-white">{card2.text}</p>
           </div>

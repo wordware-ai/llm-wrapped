@@ -3,7 +3,15 @@ import { type LinkedinResult } from "@prisma/client";
 export function convertLinkedinDbToState(
   previousRun: Partial<LinkedinResult>,
 ): Record<string, unknown> {
-  const fieldsToRemove = ["createdAt", "updatedAt", "id"];
+  const fieldsToRemove = [
+    "createdAt",
+    "updatedAt",
+    "id",
+    "username",
+    "name",
+    "imageUrl",
+    "currentPositionImageUrl",
+  ];
   const cleanedPreviousRun = Object.fromEntries(
     Object.entries(previousRun).filter(
       ([key]) => !fieldsToRemove.includes(key),

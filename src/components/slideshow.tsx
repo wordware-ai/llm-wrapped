@@ -1,10 +1,11 @@
 "use client";
 
-import { slideshowCards } from "@/config/slideshow-card-config";
+import { spotifyConfig } from "@/config/spotify-config";
+import { linkedinConfig } from "@/config/linkedin-config";
 import { homepageSlideshows } from "@/config/examples-config";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import React, { useEffect, useMemo, useState } from "react";
 import WordwareCard from "./spotify/wordware-card";
@@ -24,6 +25,14 @@ export default function SlideShow() {
   const router = useRouter();
   const { username } = useParams();
 
+  const pathname = usePathname();
+
+  const getServiceType = useMemo(() => {
+    if (!pathname) return null;
+    const path = pathname.split("/");
+    return path[1] as "spotify" | "linkedin" | null;
+  }, [pathname]);
+
   // Prevent scrolling when the slideshow is open
   useEffect(() => {
     if (currentSlide) {
@@ -35,33 +44,21 @@ export default function SlideShow() {
   }, [currentSlide]);
 
   const slides = useMemo(() => {
-    if (name) {
-      const staticSlideshow =
-        homepageSlideshows[name as keyof typeof homepageSlideshows];
-      if (!staticSlideshow) return [];
-      return Object.entries(staticSlideshow).map(([key, value]) => ({
+    return Object.entries(results).map(([key, value]) => {
+      // Find the card config for this result
+      const serviceCards =
+        getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
+
+      const cardConfig = serviceCards.find((card) => card.data.id === key);
+
+      return {
         id: key,
         value,
-        Component: slideshowCards.find((card) => card.data.id === key)
-          ?.Component,
-        title: slideshowCards.find((card) => card.data.id === key)?.data.title,
-      }));
-    } else if (username && results) {
-      // Filter out metadata fields before mapping
-      return Object.entries(results).map(([key, value]) => {
-        // Find the card config for this result
-        const cardConfig = slideshowCards.find((card) => card.data.id === key);
-
-        return {
-          id: key,
-          value,
-          Component: cardConfig?.Component,
-          title: cardConfig?.data.title,
-        };
-      });
-    }
-    return [];
-  }, [username, name, results]);
+        Component: cardConfig?.Component,
+        title: cardConfig?.data.title,
+      };
+    });
+  }, [results, getServiceType]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -96,7 +93,7 @@ export default function SlideShow() {
   };
 
   const nextSlide = async () => {
-    if (currentSlide === slides.length - 3) {
+    if (currentSlide === slides.length) {
       exit();
     } else {
       await setCurrentSlide(currentSlide + 1);
@@ -164,7 +161,7 @@ export default function SlideShow() {
           <div className="absolute left-0 top-0 z-20 w-full">
             <SlideIndicator
               currentSlide={currentSlide}
-              totalSlides={slides.length - 3}
+              totalSlides={slides.length}
               nextSlide={nextSlide}
               isPaused={isPaused}
             />
@@ -202,7 +199,6 @@ export default function SlideShow() {
       <ChevronRight
         className={cn(
           "hidden size-7 rounded-full bg-zinc-600 pl-0.5 hover:cursor-pointer sm:block",
-          currentSlide === slides.length && "invisible",
         )}
         onClick={async (e) => {
           e.stopPropagation();

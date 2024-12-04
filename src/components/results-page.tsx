@@ -19,6 +19,7 @@ export function ResultsPage({
       title: string;
       text: string;
       imageUrl: string;
+      href?: string;
     };
     card3text: string;
     storyHref: string;

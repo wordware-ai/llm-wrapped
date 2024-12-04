@@ -15,6 +15,25 @@ export type CardItem = {
   Component?: React.ComponentType<CardComponentProps>;
 };
 
+const TopArtist = ({ result, imageUrl }: CardComponentProps) => {
+  return (
+    <div className="flex h-max w-full flex-col gap-8 text-center text-white">
+      {imageUrl && (
+        <div className="my-2 flex justify-center">
+          <Image
+            src={imageUrl}
+            alt="Most Popular Artist"
+            className="aspect-square rounded-lg object-cover"
+            width={200}
+            height={200}
+          />
+        </div>
+      )}
+      <p className="text-4xl">{result.value as string}</p>
+    </div>
+  );
+};
+
 const IdentityCrisisLevel = ({ result }: CardComponentProps) => {
   return (
     <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
@@ -128,7 +147,38 @@ const Recommendation = ({ result }: CardComponentProps) => {
   );
 };
 
-export const cards: CardItem[] = [
+export const spotifyConfig: CardItem[] = [
+  {
+    data: {
+      id: "short_summary",
+      title: "",
+    },
+  },
+  {
+    data: {
+      id: "music_taste_analysis_1",
+      title: "",
+    },
+    Component: TopArtist,
+  },
+  {
+    data: {
+      id: "music_taste_analysis_2",
+      title: "",
+    },
+  },
+  {
+    data: {
+      id: "music_taste_analysis_3",
+      title: "",
+    },
+  },
+  {
+    data: {
+      id: "lyric_therapy_needed",
+      title: "",
+    },
+  },
   {
     data: {
       id: "identity_crisis_level",
