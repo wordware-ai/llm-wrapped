@@ -67,8 +67,8 @@ export function SpotifyStorys() {
               </defs>
             </svg>
           </div>
-          <BaseStory {...spotifyStorys[0]} />
-          <p className="text-center">{spotifyStorys[0].alt}</p>
+          <BaseStory {...spotifyStorys[0]!} />
+          <p className="text-center">{spotifyStorys[0]?.alt}</p>
         </div>
         {spotifyStorys.slice(1).map((story, index) => (
           <div key={index} className="flex flex-col items-center gap-2">
