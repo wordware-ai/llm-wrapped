@@ -3,20 +3,19 @@ import Image from "next/image";
 
 const TopArtist = ({ result, imageUrl }: CardComponentProps) => {
   return (
-    <div className="flex h-max w-full flex-col text-center text-white">
-      <p className="text-3xl font-semibold">Top Artist</p>
+    <div className="flex h-max w-full flex-col gap-8 text-center text-white">
       {imageUrl && (
         <div className="my-2 flex justify-center">
           <Image
             src={imageUrl}
             alt="Most Popular Artist"
             className="aspect-square rounded-lg object-cover"
-            width={120}
-            height={120}
+            width={200}
+            height={200}
           />
         </div>
       )}
-      <p className="text-2xl">{result.value as string}</p>
+      <p className="text-4xl">{result.value as string}</p>
     </div>
   );
 };
@@ -68,32 +67,32 @@ export const slideshowCards: CardItem[] = [
   {
     data: {
       id: "short_summary",
-      title: "Short Summary",
+      title: "",
     },
   },
   {
     data: {
       id: "music_taste_analysis_1",
-      title: "Music Taste Analysis 1",
+      title: "",
     },
     Component: TopArtist,
   },
   {
     data: {
       id: "music_taste_analysis_2",
-      title: "Music Taste Analysis 2",
+      title: "",
     },
   },
   {
     data: {
       id: "music_taste_analysis_3",
-      title: "Music Taste Analysis 3",
+      title: "",
     },
   },
   {
     data: {
       id: "lyric_therapy_needed",
-      title: "Lyric Therapy Needed",
+      title: "",
     },
   },
   {

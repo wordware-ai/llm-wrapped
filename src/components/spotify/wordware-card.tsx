@@ -44,7 +44,7 @@ export default function WordwareCard({
             <WordwareLogo key={i} fillColor={fillColor} />
           ))}
         </motion.div>
-        <div className={cn("z-10", hideShare || (hideHashtag && "pb-16"))}>
+        <div className={cn("z-10", (!hideShare || !hideHashtag) && "pb-24")}>
           {children}
         </div>
 
@@ -61,7 +61,12 @@ export default function WordwareCard({
           </div>
         )}
         {!hideHashtag && (
-          <p className="absolute bottom-8 left-8 z-[10] text-white">
+          <p
+            className={cn(
+              "absolute left-8 z-[10] text-white",
+              !hideShare ? "bottom-20 text-lg" : "bottom-8",
+            )}
+          >
             #LLMwrapped
           </p>
         )}

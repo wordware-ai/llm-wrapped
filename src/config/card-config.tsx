@@ -17,56 +17,70 @@ export type CardItem = {
 
 const IdentityCrisisLevel = ({ result }: CardComponentProps) => {
   return (
-    <div className="flex flex-col gap-4 text-center text-white">
-      <p className="text-3xl font-semibold">Identity Crisis Level</p>
-      <div className="text-5xl font-semibold italic">
+    <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
+      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
+        Identity Crisis Level
+      </p>
+      <div className="text-[7vh] font-semibold italic leading-tight text-[#F8D4D7] sm:text-[6vh]">
         {String(result.level)}
       </div>
-      <p className="text-2xl">{String(result.description)}</p>
+      <p className="text-[4vh] leading-tight sm:text-[3vh]">
+        {String(result.description)}
+      </p>
     </div>
   );
 };
 
 const EmotionalStability = ({ result }: CardComponentProps) => {
   return (
-    <div className="flex flex-col gap-4 text-center text-white">
-      <p className="text-3xl font-semibold">Emotional Stability</p>
-      <div className="text-7xl font-semibold italic">
+    <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
+      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
+        Emotional Stability
+      </p>
+      <div className="text-[7vh] font-semibold italic leading-tight text-[#F8D4D7] sm:text-[6vh]">
         {String(result.level)}
       </div>
-      <p className="text-2xl">{String(result.description)}</p>
+      <p className="text-[4vh] leading-tight sm:text-[3vh]">
+        {String(result.description)}
+      </p>
     </div>
   );
 };
 
 const Achievement = ({ result }: CardComponentProps) => {
   return (
-    <div className="flex flex-col gap-4 text-center text-white">
-      <p className="text-3xl font-semibold">Achievement</p>
-      <div className="text-5xl font-semibold italic">
+    <div className="flex flex-col gap-[3vh] text-center text-white sm:gap-4">
+      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
+        Achievement
+      </p>
+      <div className="text-[7vh] font-semibold italic leading-tight text-[#F8D4D7] sm:text-[6vh]">
         {String(result.title)}
       </div>
-      <p className="text-2xl">{String(result.description)}</p>
+      <p className="text-[4vh] leading-tight sm:text-[3vh]">
+        {String(result.description)}
+      </p>
     </div>
   );
 };
 
 const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
   return (
-    <div className="flex flex-col justify-center gap-4 text-center text-white">
-      <p className="text-3xl font-semibold">Least Popular Artist</p>
+    <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
+      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
+        Least Popular Artist
+      </p>
       {imageUrl && (
-        <div className="my-2 flex justify-center">
+        <div className="my-[2vh] flex justify-center sm:my-[1vh]">
           <Image
             src={imageUrl}
             alt="Least Popular Artist"
-            className="aspect-square rounded-lg object-cover"
-            width={120}
-            height={120}
+            className="aspect-square h-[18vh] w-[18vh] rounded-lg object-cover sm:h-[15vh] sm:w-[15vh]"
+            width={200}
+            height={200}
           />
         </div>
       )}
-      <p className="text-2xl">
+      <p className="text-[4vh] leading-tight sm:text-[3vh]">
         {typeof result === "object" && result !== null
           ? (result.value as string)
           : (result as string)}
@@ -78,22 +92,37 @@ const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
 const MostPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
   return (
     <div className="flex h-max w-full flex-col text-center text-white">
-      <p className="text-3xl font-semibold">Most Popular Artist</p>
+      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
+        Most Popular Artist
+      </p>
       {imageUrl && (
-        <div className="my-2 flex justify-center">
+        <div className="my-[2vh] flex justify-center sm:my-2">
           <Image
             src={imageUrl}
             alt="Most Popular Artist"
-            className="aspect-square rounded-lg object-cover"
-            width={120}
-            height={120}
+            className="aspect-square h-[18vh] w-[18vh] rounded-lg object-cover sm:h-[15vh] sm:w-[15vh]"
+            width={200}
+            height={200}
           />
         </div>
       )}
-      <p className="text-2xl">
+      <p className="text-[4vh] leading-tight sm:text-[3vh]">
         {typeof result === "object" && result !== null
           ? (result.value as string)
           : (result as string)}
+      </p>
+    </div>
+  );
+};
+
+const Recommendation = ({ result }: CardComponentProps) => {
+  return (
+    <div className="flex h-full flex-col justify-center gap-[4vh] text-center sm:gap-[3vh]">
+      <h3 className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]">
+        Recommendation
+      </h3>
+      <p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
+        {String(result.value)}
       </p>
     </div>
   );
@@ -182,5 +211,6 @@ export const cards: CardItem[] = [
       id: "recommendation",
       title: "Recommendation",
     },
+    Component: Recommendation,
   },
 ];

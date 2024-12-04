@@ -127,7 +127,7 @@ export default function SlideShow() {
       onClick={exit}
     >
       <X
-        className="absolute right-4 top-4 z-20 size-8 text-white hover:cursor-pointer"
+        className="absolute right-4 top-8 z-20 size-8 text-white hover:cursor-pointer md:top-4"
         onClick={(e) => {
           e.stopPropagation();
           exit();
@@ -158,7 +158,6 @@ export default function SlideShow() {
             "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] lg:rounded-xl",
           )}
           hideShare={!username}
-          hideHashtag
         >
           <div className="absolute left-0 top-0 z-20 w-full">
             <SlideIndicator
@@ -187,11 +186,11 @@ export default function SlideShow() {
               }
             />
           ) : (
-            <div className="flex flex-col gap-4 text-center">
-              <h3 className="text-3xl font-semibold text-white">
+            <div className="flex flex-col gap-[3vh] text-center sm:gap-[2vh]">
+              <h3 className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]">
                 {currentSlideData.title}
               </h3>
-              <p className="text-2xl text-white">
+              <p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
                 {String(currentSlideData.value)}
               </p>
             </div>
