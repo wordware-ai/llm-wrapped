@@ -1,7 +1,7 @@
 import { createTRPCRouter, privateProcedure } from "@/server/api/trpc";
 import { SpotifyResultCreateInputSchema } from "prisma/generated/zod";
 
-export const spotifyUserRouter = createTRPCRouter({
+export const spotifyResultsRouter = createTRPCRouter({
   createSpotifyResult: privateProcedure
     .input(SpotifyResultCreateInputSchema)
     .mutation(async ({ ctx, input }) => {
@@ -16,13 +16,4 @@ export const spotifyUserRouter = createTRPCRouter({
         },
       });
     }),
-
-  // Add new procedure to get user's Spotify data
-  getSpotifyResult: privateProcedure.query(async ({ ctx }) => {
-    return ctx.db.spotifyResult.findUnique({
-      where: {
-        userId: ctx.session.user.id,
-      },
-    });
-  }),
 });

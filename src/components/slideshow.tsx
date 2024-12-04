@@ -87,7 +87,9 @@ export default function SlideShow() {
 
   const exit = () => {
     if (username) {
-      router.push(`/${username as string}`);
+      // Get the current pathname and remove query parameters
+      const currentPath = window.location.pathname;
+      router.push(currentPath);
     } else {
       router.push("/", { scroll: false });
     }

@@ -60,6 +60,8 @@ export const UserScalarFieldEnumSchema = z.enum(['id','email','username','imageU
 
 export const SpotifyResultScalarFieldEnumSchema = z.enum(['id','short_summary','music_taste_analysis_1','music_taste_analysis_2','music_taste_analysis_3','lyric_therapy_needed','identity_crisis_level','emotional_stability_rating','achievement','dance_floor_credibility','song_you_would_hit_the_dance_floor','songs_you_secretly_think_are_about_you','guilty_pleasure_song','least_popular_artist','most_popular_artist','time_machine_status','titles_that_need_therapy','final_diagnosis','recommendation','least_popular_artist_image_url','most_popular_artist_image_url','top_artist_image_url','createdAt','updatedAt','userId']);
 
+export const LinkedinResultScalarFieldEnumSchema = z.enum(['id','username','imageUrl','short_summary','current_position','actual_position','position_mother','accidental_success','ambition','delusional','performance','career_trajectory','next_endeavor','job_description','buzzword_bingo','skills','reason_for_firing','recommendation','createdAt','updatedAt']);
+
 export const SortOrderSchema = z.enum(['asc','desc']);
 
 export const JsonNullValueInputSchema = z.enum(['JsonNull',]).transform((value) => (value === 'JsonNull' ? Prisma.JsonNull : value));
@@ -121,6 +123,35 @@ export const SpotifyResultSchema = z.object({
 })
 
 export type SpotifyResult = z.infer<typeof SpotifyResultSchema>
+
+/////////////////////////////////////////
+// LINKEDIN RESULT SCHEMA
+/////////////////////////////////////////
+
+export const LinkedinResultSchema = z.object({
+  id: z.string().cuid(),
+  username: z.string(),
+  imageUrl: z.string().nullable(),
+  short_summary: z.string(),
+  current_position: z.string(),
+  actual_position: z.string(),
+  position_mother: z.string(),
+  accidental_success: z.string(),
+  ambition: JsonValueSchema,
+  delusional: JsonValueSchema,
+  performance: JsonValueSchema,
+  career_trajectory: z.string(),
+  next_endeavor: z.string(),
+  job_description: z.string(),
+  buzzword_bingo: z.string(),
+  skills: z.string(),
+  reason_for_firing: z.string(),
+  recommendation: z.string(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+})
+
+export type LinkedinResult = z.infer<typeof LinkedinResultSchema>
 
 /////////////////////////////////////////
 // SELECT & INCLUDE
@@ -187,6 +218,32 @@ export const SpotifyResultSelectSchema: z.ZodType<Prisma.SpotifyResultSelect> = 
   updatedAt: z.boolean().optional(),
   userId: z.boolean().optional(),
   user: z.union([z.boolean(),z.lazy(() => UserArgsSchema)]).optional(),
+}).strict()
+
+// LINKEDIN RESULT
+//------------------------------------------------------
+
+export const LinkedinResultSelectSchema: z.ZodType<Prisma.LinkedinResultSelect> = z.object({
+  id: z.boolean().optional(),
+  username: z.boolean().optional(),
+  imageUrl: z.boolean().optional(),
+  short_summary: z.boolean().optional(),
+  current_position: z.boolean().optional(),
+  actual_position: z.boolean().optional(),
+  position_mother: z.boolean().optional(),
+  accidental_success: z.boolean().optional(),
+  ambition: z.boolean().optional(),
+  delusional: z.boolean().optional(),
+  performance: z.boolean().optional(),
+  career_trajectory: z.boolean().optional(),
+  next_endeavor: z.boolean().optional(),
+  job_description: z.boolean().optional(),
+  buzzword_bingo: z.boolean().optional(),
+  skills: z.boolean().optional(),
+  reason_for_firing: z.boolean().optional(),
+  recommendation: z.boolean().optional(),
+  createdAt: z.boolean().optional(),
+  updatedAt: z.boolean().optional(),
 }).strict()
 
 
@@ -447,6 +504,145 @@ export const SpotifyResultScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma
   createdAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
   userId: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+}).strict();
+
+export const LinkedinResultWhereInputSchema: z.ZodType<Prisma.LinkedinResultWhereInput> = z.object({
+  AND: z.union([ z.lazy(() => LinkedinResultWhereInputSchema),z.lazy(() => LinkedinResultWhereInputSchema).array() ]).optional(),
+  OR: z.lazy(() => LinkedinResultWhereInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => LinkedinResultWhereInputSchema),z.lazy(() => LinkedinResultWhereInputSchema).array() ]).optional(),
+  id: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  username: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  imageUrl: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
+  short_summary: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  current_position: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  actual_position: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  position_mother: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  accidental_success: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  ambition: z.lazy(() => JsonFilterSchema).optional(),
+  delusional: z.lazy(() => JsonFilterSchema).optional(),
+  performance: z.lazy(() => JsonFilterSchema).optional(),
+  career_trajectory: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  next_endeavor: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  job_description: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  buzzword_bingo: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  skills: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  reason_for_firing: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  recommendation: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+}).strict();
+
+export const LinkedinResultOrderByWithRelationInputSchema: z.ZodType<Prisma.LinkedinResultOrderByWithRelationInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  username: z.lazy(() => SortOrderSchema).optional(),
+  imageUrl: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  current_position: z.lazy(() => SortOrderSchema).optional(),
+  actual_position: z.lazy(() => SortOrderSchema).optional(),
+  position_mother: z.lazy(() => SortOrderSchema).optional(),
+  accidental_success: z.lazy(() => SortOrderSchema).optional(),
+  ambition: z.lazy(() => SortOrderSchema).optional(),
+  delusional: z.lazy(() => SortOrderSchema).optional(),
+  performance: z.lazy(() => SortOrderSchema).optional(),
+  career_trajectory: z.lazy(() => SortOrderSchema).optional(),
+  next_endeavor: z.lazy(() => SortOrderSchema).optional(),
+  job_description: z.lazy(() => SortOrderSchema).optional(),
+  buzzword_bingo: z.lazy(() => SortOrderSchema).optional(),
+  skills: z.lazy(() => SortOrderSchema).optional(),
+  reason_for_firing: z.lazy(() => SortOrderSchema).optional(),
+  recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional()
+}).strict();
+
+export const LinkedinResultWhereUniqueInputSchema: z.ZodType<Prisma.LinkedinResultWhereUniqueInput> = z.union([
+  z.object({
+    id: z.string().cuid(),
+    username: z.string()
+  }),
+  z.object({
+    id: z.string().cuid(),
+  }),
+  z.object({
+    username: z.string(),
+  }),
+])
+.and(z.object({
+  id: z.string().cuid().optional(),
+  username: z.string().optional(),
+  AND: z.union([ z.lazy(() => LinkedinResultWhereInputSchema),z.lazy(() => LinkedinResultWhereInputSchema).array() ]).optional(),
+  OR: z.lazy(() => LinkedinResultWhereInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => LinkedinResultWhereInputSchema),z.lazy(() => LinkedinResultWhereInputSchema).array() ]).optional(),
+  imageUrl: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
+  short_summary: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  current_position: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  actual_position: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  position_mother: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  accidental_success: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  ambition: z.lazy(() => JsonFilterSchema).optional(),
+  delusional: z.lazy(() => JsonFilterSchema).optional(),
+  performance: z.lazy(() => JsonFilterSchema).optional(),
+  career_trajectory: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  next_endeavor: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  job_description: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  buzzword_bingo: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  skills: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  reason_for_firing: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  recommendation: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+}).strict());
+
+export const LinkedinResultOrderByWithAggregationInputSchema: z.ZodType<Prisma.LinkedinResultOrderByWithAggregationInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  username: z.lazy(() => SortOrderSchema).optional(),
+  imageUrl: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  current_position: z.lazy(() => SortOrderSchema).optional(),
+  actual_position: z.lazy(() => SortOrderSchema).optional(),
+  position_mother: z.lazy(() => SortOrderSchema).optional(),
+  accidental_success: z.lazy(() => SortOrderSchema).optional(),
+  ambition: z.lazy(() => SortOrderSchema).optional(),
+  delusional: z.lazy(() => SortOrderSchema).optional(),
+  performance: z.lazy(() => SortOrderSchema).optional(),
+  career_trajectory: z.lazy(() => SortOrderSchema).optional(),
+  next_endeavor: z.lazy(() => SortOrderSchema).optional(),
+  job_description: z.lazy(() => SortOrderSchema).optional(),
+  buzzword_bingo: z.lazy(() => SortOrderSchema).optional(),
+  skills: z.lazy(() => SortOrderSchema).optional(),
+  reason_for_firing: z.lazy(() => SortOrderSchema).optional(),
+  recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional(),
+  _count: z.lazy(() => LinkedinResultCountOrderByAggregateInputSchema).optional(),
+  _max: z.lazy(() => LinkedinResultMaxOrderByAggregateInputSchema).optional(),
+  _min: z.lazy(() => LinkedinResultMinOrderByAggregateInputSchema).optional()
+}).strict();
+
+export const LinkedinResultScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.LinkedinResultScalarWhereWithAggregatesInput> = z.object({
+  AND: z.union([ z.lazy(() => LinkedinResultScalarWhereWithAggregatesInputSchema),z.lazy(() => LinkedinResultScalarWhereWithAggregatesInputSchema).array() ]).optional(),
+  OR: z.lazy(() => LinkedinResultScalarWhereWithAggregatesInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => LinkedinResultScalarWhereWithAggregatesInputSchema),z.lazy(() => LinkedinResultScalarWhereWithAggregatesInputSchema).array() ]).optional(),
+  id: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  username: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  imageUrl: z.union([ z.lazy(() => StringNullableWithAggregatesFilterSchema),z.string() ]).optional().nullable(),
+  short_summary: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  current_position: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  actual_position: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  position_mother: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  accidental_success: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  ambition: z.lazy(() => JsonWithAggregatesFilterSchema).optional(),
+  delusional: z.lazy(() => JsonWithAggregatesFilterSchema).optional(),
+  performance: z.lazy(() => JsonWithAggregatesFilterSchema).optional(),
+  career_trajectory: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  next_endeavor: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  job_description: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  buzzword_bingo: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  skills: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  reason_for_firing: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  recommendation: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
 }).strict();
 
 export const UserCreateInputSchema: z.ZodType<Prisma.UserCreateInput> = z.object({
@@ -711,6 +907,167 @@ export const SpotifyResultUncheckedUpdateManyInputSchema: z.ZodType<Prisma.Spoti
   userId: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
+export const LinkedinResultCreateInputSchema: z.ZodType<Prisma.LinkedinResultCreateInput> = z.object({
+  id: z.string().cuid().optional(),
+  username: z.string(),
+  imageUrl: z.string().optional().nullable(),
+  short_summary: z.string(),
+  current_position: z.string(),
+  actual_position: z.string(),
+  position_mother: z.string(),
+  accidental_success: z.string(),
+  ambition: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  delusional: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  performance: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  career_trajectory: z.string(),
+  next_endeavor: z.string(),
+  job_description: z.string(),
+  buzzword_bingo: z.string(),
+  skills: z.string(),
+  reason_for_firing: z.string(),
+  recommendation: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional()
+}).strict();
+
+export const LinkedinResultUncheckedCreateInputSchema: z.ZodType<Prisma.LinkedinResultUncheckedCreateInput> = z.object({
+  id: z.string().cuid().optional(),
+  username: z.string(),
+  imageUrl: z.string().optional().nullable(),
+  short_summary: z.string(),
+  current_position: z.string(),
+  actual_position: z.string(),
+  position_mother: z.string(),
+  accidental_success: z.string(),
+  ambition: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  delusional: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  performance: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  career_trajectory: z.string(),
+  next_endeavor: z.string(),
+  job_description: z.string(),
+  buzzword_bingo: z.string(),
+  skills: z.string(),
+  reason_for_firing: z.string(),
+  recommendation: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional()
+}).strict();
+
+export const LinkedinResultUpdateInputSchema: z.ZodType<Prisma.LinkedinResultUpdateInput> = z.object({
+  id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  username: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  imageUrl: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  current_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  actual_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  position_mother: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  accidental_success: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  ambition: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  delusional: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  performance: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  career_trajectory: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  next_endeavor: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  job_description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  buzzword_bingo: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  skills: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  reason_for_firing: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+}).strict();
+
+export const LinkedinResultUncheckedUpdateInputSchema: z.ZodType<Prisma.LinkedinResultUncheckedUpdateInput> = z.object({
+  id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  username: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  imageUrl: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  current_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  actual_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  position_mother: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  accidental_success: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  ambition: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  delusional: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  performance: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  career_trajectory: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  next_endeavor: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  job_description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  buzzword_bingo: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  skills: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  reason_for_firing: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+}).strict();
+
+export const LinkedinResultCreateManyInputSchema: z.ZodType<Prisma.LinkedinResultCreateManyInput> = z.object({
+  id: z.string().cuid().optional(),
+  username: z.string(),
+  imageUrl: z.string().optional().nullable(),
+  short_summary: z.string(),
+  current_position: z.string(),
+  actual_position: z.string(),
+  position_mother: z.string(),
+  accidental_success: z.string(),
+  ambition: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  delusional: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  performance: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  career_trajectory: z.string(),
+  next_endeavor: z.string(),
+  job_description: z.string(),
+  buzzword_bingo: z.string(),
+  skills: z.string(),
+  reason_for_firing: z.string(),
+  recommendation: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional()
+}).strict();
+
+export const LinkedinResultUpdateManyMutationInputSchema: z.ZodType<Prisma.LinkedinResultUpdateManyMutationInput> = z.object({
+  id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  username: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  imageUrl: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  current_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  actual_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  position_mother: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  accidental_success: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  ambition: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  delusional: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  performance: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  career_trajectory: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  next_endeavor: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  job_description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  buzzword_bingo: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  skills: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  reason_for_firing: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+}).strict();
+
+export const LinkedinResultUncheckedUpdateManyInputSchema: z.ZodType<Prisma.LinkedinResultUncheckedUpdateManyInput> = z.object({
+  id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  username: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  imageUrl: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  current_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  actual_position: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  position_mother: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  accidental_success: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  ambition: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  delusional: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  performance: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  career_trajectory: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  next_endeavor: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  job_description: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  buzzword_bingo: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  skills: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  reason_for_firing: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+}).strict();
+
 export const StringFilterSchema: z.ZodType<Prisma.StringFilter> = z.object({
   equals: z.string().optional(),
   in: z.string().array().optional(),
@@ -955,6 +1312,69 @@ export const JsonWithAggregatesFilterSchema: z.ZodType<Prisma.JsonWithAggregates
   _count: z.lazy(() => NestedIntFilterSchema).optional(),
   _min: z.lazy(() => NestedJsonFilterSchema).optional(),
   _max: z.lazy(() => NestedJsonFilterSchema).optional()
+}).strict();
+
+export const LinkedinResultCountOrderByAggregateInputSchema: z.ZodType<Prisma.LinkedinResultCountOrderByAggregateInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  username: z.lazy(() => SortOrderSchema).optional(),
+  imageUrl: z.lazy(() => SortOrderSchema).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  current_position: z.lazy(() => SortOrderSchema).optional(),
+  actual_position: z.lazy(() => SortOrderSchema).optional(),
+  position_mother: z.lazy(() => SortOrderSchema).optional(),
+  accidental_success: z.lazy(() => SortOrderSchema).optional(),
+  ambition: z.lazy(() => SortOrderSchema).optional(),
+  delusional: z.lazy(() => SortOrderSchema).optional(),
+  performance: z.lazy(() => SortOrderSchema).optional(),
+  career_trajectory: z.lazy(() => SortOrderSchema).optional(),
+  next_endeavor: z.lazy(() => SortOrderSchema).optional(),
+  job_description: z.lazy(() => SortOrderSchema).optional(),
+  buzzword_bingo: z.lazy(() => SortOrderSchema).optional(),
+  skills: z.lazy(() => SortOrderSchema).optional(),
+  reason_for_firing: z.lazy(() => SortOrderSchema).optional(),
+  recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional()
+}).strict();
+
+export const LinkedinResultMaxOrderByAggregateInputSchema: z.ZodType<Prisma.LinkedinResultMaxOrderByAggregateInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  username: z.lazy(() => SortOrderSchema).optional(),
+  imageUrl: z.lazy(() => SortOrderSchema).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  current_position: z.lazy(() => SortOrderSchema).optional(),
+  actual_position: z.lazy(() => SortOrderSchema).optional(),
+  position_mother: z.lazy(() => SortOrderSchema).optional(),
+  accidental_success: z.lazy(() => SortOrderSchema).optional(),
+  career_trajectory: z.lazy(() => SortOrderSchema).optional(),
+  next_endeavor: z.lazy(() => SortOrderSchema).optional(),
+  job_description: z.lazy(() => SortOrderSchema).optional(),
+  buzzword_bingo: z.lazy(() => SortOrderSchema).optional(),
+  skills: z.lazy(() => SortOrderSchema).optional(),
+  reason_for_firing: z.lazy(() => SortOrderSchema).optional(),
+  recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional()
+}).strict();
+
+export const LinkedinResultMinOrderByAggregateInputSchema: z.ZodType<Prisma.LinkedinResultMinOrderByAggregateInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  username: z.lazy(() => SortOrderSchema).optional(),
+  imageUrl: z.lazy(() => SortOrderSchema).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  current_position: z.lazy(() => SortOrderSchema).optional(),
+  actual_position: z.lazy(() => SortOrderSchema).optional(),
+  position_mother: z.lazy(() => SortOrderSchema).optional(),
+  accidental_success: z.lazy(() => SortOrderSchema).optional(),
+  career_trajectory: z.lazy(() => SortOrderSchema).optional(),
+  next_endeavor: z.lazy(() => SortOrderSchema).optional(),
+  job_description: z.lazy(() => SortOrderSchema).optional(),
+  buzzword_bingo: z.lazy(() => SortOrderSchema).optional(),
+  skills: z.lazy(() => SortOrderSchema).optional(),
+  reason_for_firing: z.lazy(() => SortOrderSchema).optional(),
+  recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
 export const SpotifyResultCreateNestedOneWithoutUserInputSchema: z.ZodType<Prisma.SpotifyResultCreateNestedOneWithoutUserInput> = z.object({
@@ -1444,6 +1864,63 @@ export const SpotifyResultFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.SpotifyR
   where: SpotifyResultWhereUniqueInputSchema,
 }).strict() ;
 
+export const LinkedinResultFindFirstArgsSchema: z.ZodType<Prisma.LinkedinResultFindFirstArgs> = z.object({
+  select: LinkedinResultSelectSchema.optional(),
+  where: LinkedinResultWhereInputSchema.optional(),
+  orderBy: z.union([ LinkedinResultOrderByWithRelationInputSchema.array(),LinkedinResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: LinkedinResultWhereUniqueInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+  distinct: z.union([ LinkedinResultScalarFieldEnumSchema,LinkedinResultScalarFieldEnumSchema.array() ]).optional(),
+}).strict() ;
+
+export const LinkedinResultFindFirstOrThrowArgsSchema: z.ZodType<Prisma.LinkedinResultFindFirstOrThrowArgs> = z.object({
+  select: LinkedinResultSelectSchema.optional(),
+  where: LinkedinResultWhereInputSchema.optional(),
+  orderBy: z.union([ LinkedinResultOrderByWithRelationInputSchema.array(),LinkedinResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: LinkedinResultWhereUniqueInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+  distinct: z.union([ LinkedinResultScalarFieldEnumSchema,LinkedinResultScalarFieldEnumSchema.array() ]).optional(),
+}).strict() ;
+
+export const LinkedinResultFindManyArgsSchema: z.ZodType<Prisma.LinkedinResultFindManyArgs> = z.object({
+  select: LinkedinResultSelectSchema.optional(),
+  where: LinkedinResultWhereInputSchema.optional(),
+  orderBy: z.union([ LinkedinResultOrderByWithRelationInputSchema.array(),LinkedinResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: LinkedinResultWhereUniqueInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+  distinct: z.union([ LinkedinResultScalarFieldEnumSchema,LinkedinResultScalarFieldEnumSchema.array() ]).optional(),
+}).strict() ;
+
+export const LinkedinResultAggregateArgsSchema: z.ZodType<Prisma.LinkedinResultAggregateArgs> = z.object({
+  where: LinkedinResultWhereInputSchema.optional(),
+  orderBy: z.union([ LinkedinResultOrderByWithRelationInputSchema.array(),LinkedinResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: LinkedinResultWhereUniqueInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+}).strict() ;
+
+export const LinkedinResultGroupByArgsSchema: z.ZodType<Prisma.LinkedinResultGroupByArgs> = z.object({
+  where: LinkedinResultWhereInputSchema.optional(),
+  orderBy: z.union([ LinkedinResultOrderByWithAggregationInputSchema.array(),LinkedinResultOrderByWithAggregationInputSchema ]).optional(),
+  by: LinkedinResultScalarFieldEnumSchema.array(),
+  having: LinkedinResultScalarWhereWithAggregatesInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+}).strict() ;
+
+export const LinkedinResultFindUniqueArgsSchema: z.ZodType<Prisma.LinkedinResultFindUniqueArgs> = z.object({
+  select: LinkedinResultSelectSchema.optional(),
+  where: LinkedinResultWhereUniqueInputSchema,
+}).strict() ;
+
+export const LinkedinResultFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.LinkedinResultFindUniqueOrThrowArgs> = z.object({
+  select: LinkedinResultSelectSchema.optional(),
+  where: LinkedinResultWhereUniqueInputSchema,
+}).strict() ;
+
 export const UserCreateArgsSchema: z.ZodType<Prisma.UserCreateArgs> = z.object({
   select: UserSelectSchema.optional(),
   include: UserIncludeSchema.optional(),
@@ -1534,4 +2011,46 @@ export const SpotifyResultUpdateManyArgsSchema: z.ZodType<Prisma.SpotifyResultUp
 
 export const SpotifyResultDeleteManyArgsSchema: z.ZodType<Prisma.SpotifyResultDeleteManyArgs> = z.object({
   where: SpotifyResultWhereInputSchema.optional(),
+}).strict() ;
+
+export const LinkedinResultCreateArgsSchema: z.ZodType<Prisma.LinkedinResultCreateArgs> = z.object({
+  select: LinkedinResultSelectSchema.optional(),
+  data: z.union([ LinkedinResultCreateInputSchema,LinkedinResultUncheckedCreateInputSchema ]),
+}).strict() ;
+
+export const LinkedinResultUpsertArgsSchema: z.ZodType<Prisma.LinkedinResultUpsertArgs> = z.object({
+  select: LinkedinResultSelectSchema.optional(),
+  where: LinkedinResultWhereUniqueInputSchema,
+  create: z.union([ LinkedinResultCreateInputSchema,LinkedinResultUncheckedCreateInputSchema ]),
+  update: z.union([ LinkedinResultUpdateInputSchema,LinkedinResultUncheckedUpdateInputSchema ]),
+}).strict() ;
+
+export const LinkedinResultCreateManyArgsSchema: z.ZodType<Prisma.LinkedinResultCreateManyArgs> = z.object({
+  data: z.union([ LinkedinResultCreateManyInputSchema,LinkedinResultCreateManyInputSchema.array() ]),
+  skipDuplicates: z.boolean().optional(),
+}).strict() ;
+
+export const LinkedinResultCreateManyAndReturnArgsSchema: z.ZodType<Prisma.LinkedinResultCreateManyAndReturnArgs> = z.object({
+  data: z.union([ LinkedinResultCreateManyInputSchema,LinkedinResultCreateManyInputSchema.array() ]),
+  skipDuplicates: z.boolean().optional(),
+}).strict() ;
+
+export const LinkedinResultDeleteArgsSchema: z.ZodType<Prisma.LinkedinResultDeleteArgs> = z.object({
+  select: LinkedinResultSelectSchema.optional(),
+  where: LinkedinResultWhereUniqueInputSchema,
+}).strict() ;
+
+export const LinkedinResultUpdateArgsSchema: z.ZodType<Prisma.LinkedinResultUpdateArgs> = z.object({
+  select: LinkedinResultSelectSchema.optional(),
+  data: z.union([ LinkedinResultUpdateInputSchema,LinkedinResultUncheckedUpdateInputSchema ]),
+  where: LinkedinResultWhereUniqueInputSchema,
+}).strict() ;
+
+export const LinkedinResultUpdateManyArgsSchema: z.ZodType<Prisma.LinkedinResultUpdateManyArgs> = z.object({
+  data: z.union([ LinkedinResultUpdateManyMutationInputSchema,LinkedinResultUncheckedUpdateManyInputSchema ]),
+  where: LinkedinResultWhereInputSchema.optional(),
+}).strict() ;
+
+export const LinkedinResultDeleteManyArgsSchema: z.ZodType<Prisma.LinkedinResultDeleteManyArgs> = z.object({
+  where: LinkedinResultWhereInputSchema.optional(),
 }).strict() ;

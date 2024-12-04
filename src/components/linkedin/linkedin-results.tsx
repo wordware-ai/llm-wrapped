@@ -1,34 +1,30 @@
 "use client";
 
 import { useStream } from "@/hooks/use-stream";
-import { useUser } from "@/hooks/use-user";
 import { api } from "@/trpc/react";
 import { type UserWithSpotifyResult } from "@/types/user";
-import { redirect } from "next/navigation";
 import { useEffect } from "react";
 import { useStreamContext } from "../stream-provider";
 
 import { convertDbToState, convertStateToDb } from "@/lib/convert-results";
 import WordwareInfo from "../wordware-info";
-import Navbar from "./navbar";
-import { SideCards } from "./side-cards";
-import { UserInfo } from "./user-info";
+import { type LinkedinResult } from "@prisma/client";
 
-export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
-  const previousRun = user.spotifyResult;
-  const { session } = useUser();
-  const { data } = api.spotifyApi.getAllUserData.useQuery(undefined, {
-    enabled: !previousRun && !!session?.provider_token,
-  });
+export function LinkedInResults({
+  linkedinResult,
+  linkedinData,
+}: {
+  linkedinResult: LinkedinResult | null;
+  linkedinData?: string;
+}) {
+  const previousRun = linkedinResult;
 
-  const spotifyData = data?.spotifyData;
-
-  const { mutate: createSpotifyResult } =
-    api.spotifyResults.createSpotifyResult.useMutation();
+  const { mutate: createLinkedinResult } =
+    api.linkedinResults.createLinkedinResult.useMutation();
 
   const onFinish = (results: Record<string, unknown>) => {
-    const spotifyResult = convertStateToDb(results);
-    createSpotifyResult(spotifyResult);
+    const linkedinResult = convertStateToDb(results);
+    createLinkedinResult(linkedinResult);
   };
 
   const { setResults } = useStreamContext();
@@ -50,18 +46,13 @@ export function SpotifyResults({ user }: { user: UserWithSpotifyResult }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previousRun, spotifyData]);
 
-  if (!previousRun && !session?.provider_token) {
-    redirect("/");
-  }
-
   return (
     <div className="flex flex-col">
-      <Navbar />
-      <div className="mb-20 flex flex-col gap-4 p-8 lg:h-[calc(100vh-56px)] lg:flex-row">
+      {/* <Navbar />
+      <div className="flex flex-col gap-4 sm:pb-16 lg:h-[calc(100vh-56px)] lg:flex-row">
         <UserInfo user={user} />
         <SideCards />
-      </div>
-
+      </div> */}
       <WordwareInfo />
     </div>
   );

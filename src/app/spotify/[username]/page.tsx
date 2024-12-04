@@ -1,7 +1,7 @@
 import { SpotifyResults } from "@/components/spotify/spotify-results";
 import { api } from "@/trpc/server";
 
-export default async function ResultsPage({
+export default async function SpotifyResultsPage({
   params,
 }: {
   params: Promise<{ username: string }>;

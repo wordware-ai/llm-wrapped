@@ -33,7 +33,7 @@ export function UserInfo({ user }: { user: User }) {
             className="size-36 p-1 lg:size-48 lg:p-2"
             src={user.imageUrl}
             alt="Spotify 1"
-            href={`/${user.username}?slide=1`}
+            href={`/spotify/${user.username}?slide=1`}
           />
           <p className="text-center text-xl font-semibold">
             {" "}

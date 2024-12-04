@@ -1,7 +1,9 @@
 import { spotifyApiRouter } from "@/server/api/routers/spotify-api";
-import { spotifyUserRouter } from "@/server/api/routers/spotify-user";
+import { spotifyResultsRouter } from "@/server/api/routers/spotify-results";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 import { usersRouter } from "./routers/users";
+import { linkedinResultsRouter } from "./routers/linkedin-results";
+import { linkedinApiRouter } from "./routers/linkedin-api";
 /**
  * This is the primary router for your server.
  *
@@ -10,7 +12,9 @@ import { usersRouter } from "./routers/users";
 export const appRouter = createTRPCRouter({
   users: usersRouter,
   spotifyApi: spotifyApiRouter,
-  spotifyUser: spotifyUserRouter,
+  spotifyResults: spotifyResultsRouter,
+  linkedinApi: linkedinApiRouter,
+  linkedinResults: linkedinResultsRouter,
 });
 
 // export type definition of API

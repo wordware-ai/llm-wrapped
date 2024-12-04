@@ -56,3 +56,27 @@ model SpotifyResult {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
 }
+
+model LinkedinResult {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  imageUrl  String?
+  short_summary String
+  current_position String
+  actual_position String
+  position_mother String
+  accidental_success String
+  ambition Json
+  delusional Json
+  performance Json
+  career_trajectory String
+  next_endeavor String
+  job_description String
+  buzzword_bingo String
+  skills String
+  reason_for_firing String
+  recommendation String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+

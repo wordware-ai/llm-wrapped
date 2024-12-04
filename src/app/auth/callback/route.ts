@@ -11,12 +11,10 @@ export async function GET(request: Request) {
     const supabase = await createClient();
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
-    console.log("dating", data);
-
     if (!error && data.user) {
       const existingUser = await api.users.getCurrent();
       if (existingUser) {
-        next = `/${existingUser.username}`;
+        next = `/spotify/${existingUser.username}`;
       } else {
         const user = await api.users.create({
           id: "n/a",
@@ -37,7 +35,7 @@ export async function GET(request: Request) {
             ).avatar_url ??
             null,
         });
-        next = `/${user.username}`;
+        next = `/spotify/${user.username}`;
       }
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";
