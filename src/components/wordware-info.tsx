@@ -5,24 +5,55 @@ import { buttonVariants } from "./ui/button";
 export default function WordwareInfo() {
   return (
     <div className="flex flex-col gap-12 px-4">
-      <div className="mx-auto flex max-w-3xl flex-col gap-4 text-left text-3xl font-light leading-10">
-        <h1 className="font-medium">Why did we build #LLMwrapped?</h1>
+      <section className="mx-auto flex max-w-3xl flex-col gap-8 text-left">
+        <h1 className="text-3xl font-medium">Why did we build #LLMwrapped?</h1>
 
-        <p className="text-gray-400">
-          <br />
-          This project was built to showcase the power of effective prompting on
-          Wordware. using our platform, we orchestrated LLMs to build results
-          designed for you to enjoy. In just 2 days, 4 team members completed
-          3,529 prompt iterations (including chains) and tested 7
-          models—achieving a level of efficiency and creativity that
-          wouldn&apos;t have been possible without Wordware.
-          <br /> <br /> explore the final prompts in this WordApp (and try
-          building your own version!). <br /> <br />
-          ps: this isn&apos;t our first Wordware showcase—check out our other
-          projects: twitter.wordware.ai <br />
-          audioscribe.wordware.ai
-        </p>
-      </div>
+        <div className="flex flex-col gap-8 text-3xl font-light leading-10 text-gray-400">
+          <p>
+            we created this project to showcase the power of effective prompting
+            on wordware.
+          </p>
+
+          <h2 className="font-medium text-black">word... what?</h2>
+
+          <p>
+            wordware – the ultimate AI operating system, designed to build AI
+            agents using natural language. we used it for LLM orchestration.
+          </p>
+
+          <p>
+            in just 2 days, our team of 4 completed exactly 3,529 prompt
+            iterations (using different techniques) and tested 7
+            models—unlocking efficiency and creativity that wouldn&apos;t have
+            been possible without wordware. (seriously, without a proper
+            solution, we&apos;d still be drowning in endless back-and-forths and
+            getting those classic passive-aggressive &quot;noted&quot; replies
+            from engineers every time we needed a tiny prompt tweak.)
+          </p>
+
+          <div>
+            <p className="mb-4">
+              this isn&apos;t our first wordware showcase—check out what else
+              we&apos;ve built:
+            </p>
+            <div className="flex flex-col gap-2">
+              <Link
+                href="https://twitter.wordware.ai"
+                className="hover:underline"
+              >
+                twitter.wordware.ai
+              </Link>
+              <Link
+                href="https://audioscribe.wordware.ai"
+                className="hover:underline"
+              >
+                audioscribe.wordware.ai
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center gap-4 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-600/20 py-6 text-center text-2xl font-light">
         <h2 className="font-medium">Ready to build your own AI agents?</h2>
         <p className="max-w-xl text-gray-600">

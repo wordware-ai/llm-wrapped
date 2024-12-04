@@ -155,7 +155,7 @@ export default function SlideShow() {
       >
         <WordwareCard
           className={cn(
-            "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-w-md lg:rounded-xl",
+            "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] lg:rounded-xl",
           )}
           hideShare={!username}
           hideHashtag
