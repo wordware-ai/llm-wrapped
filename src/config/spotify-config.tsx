@@ -1,279 +1,346 @@
-import Image from "next/image";
-import Link from "next/link";
-
-type CardData = {
-  id: string;
-  title: string;
-};
-
-export type CardComponentProps = {
-  result: Record<string, unknown>;
-  profileData?: Record<string, string | null>;
-};
-
-export type CardItem = {
-  data: CardData;
-  Component?: React.ComponentType<CardComponentProps>;
-};
-
-const TopArtist = ({ result, profileData }: CardComponentProps) => {
-  return (
-    <div className="flex h-max w-full flex-col gap-8 text-center text-white">
-      {profileData?.topArtistImageUrl && profileData.topArtistUrl && (
-        <Link
-          href={profileData.topArtistUrl}
-          className="my-2 flex justify-center"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Image
-            src={profileData.topArtistImageUrl}
-            alt="Top Artist"
-            className="aspect-square rounded-lg object-cover"
-            width={200}
-            height={200}
-          />
-        </Link>
-      )}
-      <p className="text-4xl">{result.value as string}</p>
-    </div>
-  );
-};
-
-const IdentityCrisisLevel = ({ result }: CardComponentProps) => {
-  return (
-    <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
-      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
-        Identity Crisis Level
-      </p>
-      <div className="text-[7vh] font-semibold italic leading-tight text-[#F8D4D7] sm:text-[6vh]">
-        {String(result.level)}
-      </div>
-      <p className="text-[4vh] leading-tight sm:text-[3vh]">
-        {String(result.description)}
-      </p>
-    </div>
-  );
-};
-
-const EmotionalStability = ({ result }: CardComponentProps) => {
-  return (
-    <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
-      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
-        Emotional Stability
-      </p>
-      <div className="text-[7vh] font-semibold italic leading-tight text-[#F8D4D7] sm:text-[6vh]">
-        {String(result.level)}
-      </div>
-      <p className="text-[4vh] leading-tight sm:text-[3vh]">
-        {String(result.description)}
-      </p>
-    </div>
-  );
-};
-
-const Achievement = ({ result }: CardComponentProps) => {
-  return (
-    <div className="flex flex-col gap-[3vh] text-center text-white sm:gap-4">
-      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
-        Achievement
-      </p>
-      <div className="text-[7vh] font-semibold italic leading-tight text-[#F8D4D7] sm:text-[6vh]">
-        {String(result.title)}
-      </div>
-      <p className="text-[4vh] leading-tight sm:text-[3vh]">
-        {String(result.description)}
-      </p>
-    </div>
-  );
-};
-
-const LeastPopularArtist = ({ result, profileData }: CardComponentProps) => {
-  return (
-    <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
-      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
-        Least Popular Artist
-      </p>
-      {profileData?.leastPopularImageUrl && profileData.leastPopularUrl && (
-        <Link
-          href={profileData.leastPopularUrl}
-          className="my-[2vh] flex justify-center sm:my-2"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Image
-            src={profileData.leastPopularImageUrl}
-            alt="Least Popular Artist"
-            className="aspect-square h-[18vh] w-[18vh] rounded-lg object-cover sm:h-[15vh] sm:w-[15vh]"
-            width={200}
-            height={200}
-          />
-        </Link>
-      )}
-      <p className="text-[4vh] leading-tight sm:text-[3vh]">
-        {typeof result === "object" && result !== null
-          ? (result.value as string)
-          : (result as string)}
-      </p>
-    </div>
-  );
-};
-
-const MostPopularArtist = ({ result, profileData }: CardComponentProps) => {
-  return (
-    <div className="flex h-max w-full flex-col text-center text-white">
-      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
-        Most Popular Artist
-      </p>
-      {profileData?.mostPopularImageUrl && profileData.mostPopularUrl && (
-        <Link
-          href={profileData.mostPopularUrl}
-          className="my-[2vh] flex justify-center sm:my-2"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <Image
-            src={profileData.mostPopularImageUrl}
-            alt="Most Popular Artist"
-            className="aspect-square h-[18vh] w-[18vh] rounded-lg object-cover sm:h-[15vh] sm:w-[15vh]"
-            width={200}
-            height={200}
-          />
-        </Link>
-      )}
-      <p className="text-[4vh] leading-tight sm:text-[3vh]">
-        {typeof result === "object" && result !== null
-          ? (result.value as string)
-          : (result as string)}
-      </p>
-    </div>
-  );
-};
-
-const Recommendation = ({ result }: CardComponentProps) => {
-  return (
-    <div className="flex h-full flex-col justify-center gap-[4vh] text-center sm:gap-[3vh]">
-      <h3 className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]">
-        Recommendation
-      </h3>
-      <p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
-        {String(result.value)}
-      </p>
-    </div>
-  );
-};
+import {
+  type CardComponentProps,
+  type CardItem,
+  ImageCard,
+  MetricCard,
+  TextCard,
+  TitleCard,
+} from "@/components/story-cards";
+import { animationConfig } from "./animation-config";
+import { Animation } from "@/components/animation";
 
 export const spotifyConfig: CardItem[] = [
   {
     data: {
       id: "short_summary",
-      title: "",
+      bgColor: "#378C77",
+      fillColor: "#43937F",
     },
+    Component: TextCard,
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "music_taste_analysis_1",
-      title: "",
+      bgColor: "#D46FA8",
+      fillColor: "#D673AB",
     },
-    Component: TopArtist,
+    Component: TextCard,
+    Animation: (
+      <Animation
+        className="right-20 top-20 size-[200px]"
+        animationData={animationConfig.animation2}
+      />
+    ),
   },
   {
     data: {
       id: "music_taste_analysis_2",
-      title: "",
+      bgColor: "#637BC4",
+      fillColor: "#6D87D7",
     },
+    Component: ({ result, profileData }: CardComponentProps) => (
+      <ImageCard
+        imageUrl={profileData?.topArtistImageUrl ?? ""}
+        url={profileData?.topArtistUrl ?? ""}
+        title="Top Artist"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="right-0 top-0 size-[250px]"
+        animationData={animationConfig.animation3}
+      />
+    ),
   },
   {
     data: {
       id: "music_taste_analysis_3",
-      title: "",
+      bgColor: "#D68E49",
+      fillColor: "#D8924C",
     },
+    Component: TextCard,
+    Animation: (
+      <Animation
+        className="-bottom-[350px] size-[500px]"
+        animationData={animationConfig.animation4}
+      />
+    ),
   },
   {
     data: {
       id: "lyric_therapy_needed",
-      title: "",
+      bgColor: "#D17974",
+      fillColor: "#D47D78",
     },
+    Component: ({ result }: CardComponentProps) => (
+      <TitleCard
+        title="Lyric Therapy Needed"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="-bottom-36 right-0 size-[400px]"
+        animationData={animationConfig.animation5}
+      />
+    ),
   },
   {
     data: {
       id: "identity_crisis_level",
-      title: "Identity Crisis Level",
+      bgColor: "#8C68C8",
+      fillColor: "#906CCB",
     },
-    Component: IdentityCrisisLevel,
+    Component: ({ result }: CardComponentProps) => (
+      <MetricCard
+        title="Identity Crisis Level"
+        value={String(result.level)}
+        description={String(result.description)}
+        valueColor="#6F0FA7"
+      />
+    ),
+    Animation: (
+      <Animation
+        className="-left-40 top-40 size-[1000px]"
+        animationData={animationConfig.animation6}
+      />
+    ),
   },
   {
     data: {
       id: "emotional_stability_rating",
-      title: "Emotional Stability",
+      bgColor: "#C0D46F",
+      fillColor: "#C3D673",
     },
-    Component: EmotionalStability,
+    Component: ({ result }: CardComponentProps) => (
+      <MetricCard
+        title="Emotional Stability"
+        value={String(result.level)}
+        description={String(result.description)}
+        valueColor="#5F7118"
+      />
+    ),
+    Animation: (
+      <Animation
+        className="right-0 top-0 size-[300px]"
+        animationData={animationConfig.animation7}
+      />
+    ),
   },
   {
     data: {
       id: "achievement",
-      title: "Achievement",
+      bgColor: "#6FCFD4",
+      fillColor: "#73D1D6",
     },
-    Component: Achievement,
+    Component: ({ result }: CardComponentProps) => (
+      <MetricCard
+        title="Achievement"
+        value={String(result.title)}
+        description={String(result.description)}
+        valueColor="#182571"
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "dance_floor_credibility",
-      title: "Dance Floor Credibility",
+      bgColor: "#5D9266",
+      fillColor: "#61966A",
     },
+    Component: ({ result }: CardComponentProps) => (
+      <TitleCard
+        title="Dance Floor Credibility"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "song_you_would_hit_the_dance_floor",
-      title: "Song You'd Hit The Dance Floor To",
+      bgColor: "#6A2B63",
+      fillColor: "#6E2D67",
     },
+    Component: ({ result }: CardComponentProps) => (
+      <TitleCard
+        title="Song You Would Hit the Dance Floor To"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "songs_you_secretly_think_are_about_you",
-      title: "Song You Secretly Think Is About You",
+      bgColor: "#F3A373",
+      fillColor: "#F4A677",
     },
+    Component: ({ result }: CardComponentProps) => (
+      <TitleCard
+        title="Songs You Secretly Think Are About You"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "guilty_pleasure_song",
-      title: "Guilty Pleasure Song",
+      bgColor: "#2C8E94",
+      fillColor: "#2E9298",
     },
+    Component: ({ result }: CardComponentProps) => (
+      <TitleCard
+        title="Guilty Pleasure Song"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "least_popular_artist",
-      title: "Rare Finds, Rare Listens",
+      bgColor: "#8A423D",
+      fillColor: "#8E4440",
     },
-    Component: LeastPopularArtist,
+    Component: ({ result, profileData }: CardComponentProps) => (
+      <ImageCard
+        imageUrl={profileData?.leastPopularImageUrl ?? ""}
+        url={profileData?.leastPopularUrl ?? ""}
+        title="Least Popular Artist"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "most_popular_artist",
-      title: "Overplayed and Overhyped",
+      bgColor: "#BD68C8",
+      fillColor: "#C06CCB",
     },
-    Component: MostPopularArtist,
+    Component: ({ result, profileData }: CardComponentProps) => (
+      <ImageCard
+        imageUrl={profileData?.mostPopularImageUrl ?? ""}
+        url={profileData?.mostPopularUrl ?? ""}
+        title="Most Popular Artist"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "time_machine_status",
-      title: "Lost Between Decades, Like Your Taste",
+      bgColor: "#414A0D",
+      fillColor: "#444D0D",
     },
+    Component: ({ result }: CardComponentProps) => (
+      <TitleCard
+        title="Time Machine Status"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "titles_that_need_therapy",
-      title: "Names So Random Even AI's Confused",
+      bgColor: "#5A91D5",
+      fillColor: "#5E95D7",
     },
+    Component: ({ result }: CardComponentProps) => (
+      <TitleCard
+        title="Titles That Need Therapy"
+        description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "final_diagnosis",
-      title: "Musical Taste Diagnosis",
+      bgColor: "#AB8E40",
+      fillColor: "#AE9243",
     },
+    Component: ({ result }: CardComponentProps) => (
+      <TitleCard title="Final Diagnosis" description={result.value as string} />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
       id: "recommendation",
-      title: "Recommendation",
+      bgColor: "#B3C868",
+      fillColor: "#B6CB6C",
     },
-    Component: Recommendation,
+    Component: ({ result }: CardComponentProps) => (
+      <TitleCard title="Recommendation" description={result.value as string} />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
 ];
