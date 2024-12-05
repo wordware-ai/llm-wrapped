@@ -6,7 +6,8 @@ import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
-import React, { useEffect, useMemo, useState } from "react";
+import type React from "react";
+import { useEffect, useMemo, useState } from "react";
 import SlideIndicator from "./slide-indicator";
 import WordwareCard from "./spotify/wordware-card";
 import { useStreamContext } from "./stream-provider";
@@ -30,13 +31,16 @@ export default function SlideShow() {
   const pathname = usePathname();
 
   const getServiceType = useMemo(() => {
-    if (!pathname) return type;
+    if (!pathname || pathname === "/") return type;
     const path = pathname.split("/");
-    return path[1] as "spotify" | "linkedin" | null;
+
+    return path[1] ?? type;
   }, [pathname, type]);
 
   // Prevent scrolling when the slideshow is open
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
     if (currentSlide) {
       document.body.style.overflow = "hidden";
       return () => {
@@ -45,27 +49,30 @@ export default function SlideShow() {
     }
   }, [currentSlide]);
 
-  const slides = useMemo(() => {
-    const serviceCards =
-      getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
-    const serviceExamples =
-      getServiceType === "linkedin" ? linkedinExamples : spotifyExamples;
+  const serviceCards =
+    getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
+  const serviceExamples =
+    getServiceType === "linkedin" ? linkedinExamples : spotifyExamples;
 
+  const slides = useMemo(() => {
     if (name) {
       const staticSlideshow =
         serviceExamples[name as keyof typeof serviceExamples];
       if (!staticSlideshow) return [];
-      return Object.entries(staticSlideshow).map(([key, value]) => {
-        const card = serviceCards.find((card) => card.data.id === key);
-        return {
-          id: key,
-          value,
-          bgColor: card?.data.bgColor,
-          fillColor: card?.data.fillColor,
-          Component: card?.Component,
-          Animation: card?.Animation,
-        };
-      });
+      return Object.entries(staticSlideshow)
+        .map(([key, value]) => {
+          const card = serviceCards.find((card) => card.data.id === key);
+          if (!card) return null;
+          return {
+            id: key,
+            value,
+            bgColor: card?.data.bgColor,
+            fillColor: card?.data.fillColor,
+            Component: card?.Component,
+            Animation: card?.Animation,
+          };
+        })
+        .filter(Boolean);
     }
     return Object.entries(results).map(([key, value]) => {
       // Find the card config for this result
@@ -81,7 +88,7 @@ export default function SlideShow() {
         Animation: cardConfig?.Animation,
       };
     });
-  }, [getServiceType, name, results]);
+  }, [name, results, serviceCards, serviceExamples]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -142,7 +149,6 @@ export default function SlideShow() {
       await previousSlide();
     }
   };
-
   return (
     <div
       className="fixed z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 sm:items-center md:p-6"
@@ -184,12 +190,12 @@ export default function SlideShow() {
           fillColor={currentSlideData.fillColor}
         >
           <div className="absolute left-0 top-0 z-20 w-full">
-            {/* <SlideIndicator
+            <SlideIndicator
               currentSlide={currentSlide}
               totalSlides={slides.length}
               nextSlide={nextSlide}
               isPaused={isPaused}
-            /> */}
+            />
           </div>
           {currentSlideData.Component && (
             <currentSlideData.Component
@@ -199,8 +205,11 @@ export default function SlideShow() {
                   : { value: currentSlideData.value }
               }
               profileData={
-                spotifyExamples[name as keyof typeof spotifyExamples]
-                  ?.profileData ?? profileData
+                (
+                  serviceExamples[name as keyof typeof serviceExamples] as {
+                    profileData: Record<string, string | null>;
+                  }
+                )?.profileData ?? profileData
               }
             />
           )}
