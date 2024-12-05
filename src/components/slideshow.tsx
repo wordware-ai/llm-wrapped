@@ -46,16 +46,18 @@ export default function SlideShow() {
   const slides = useMemo(() => {
     return Object.entries(results).map(([key, value]) => {
       // Find the card config for this result
-      const serviceCards =
-        getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
+      // const serviceCards =
+      //   getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
+      const serviceCards = spotifyConfig;
 
       const cardConfig = serviceCards.find((card) => card.data.id === key);
 
       return {
         id: key,
         value,
+        bgColor: cardConfig?.data.bgColor,
+        fillColor: cardConfig?.data.fillColor,
         Component: cardConfig?.Component,
-        title: cardConfig?.data.title,
       };
     });
   }, [results, getServiceType]);
@@ -156,17 +158,19 @@ export default function SlideShow() {
           className={cn(
             "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] lg:rounded-xl",
           )}
+          backgroundColor={currentSlideData.bgColor}
+          fillColor={currentSlideData.fillColor}
           hideShare={!username}
         >
           <div className="absolute left-0 top-0 z-20 w-full">
-            <SlideIndicator
+            {/* <SlideIndicator
               currentSlide={currentSlide}
               totalSlides={slides.length}
               nextSlide={nextSlide}
               isPaused={isPaused}
-            />
+            /> */}
           </div>
-          {currentSlideData.Component ? (
+          {currentSlideData.Component && (
             <currentSlideData.Component
               result={
                 typeof currentSlideData.value === "object"
@@ -175,15 +179,6 @@ export default function SlideShow() {
               }
               profileData={profileData}
             />
-          ) : (
-            <div className="flex flex-col gap-[3vh] text-center sm:gap-[2vh]">
-              <h3 className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]">
-                {currentSlideData.title}
-              </h3>
-              <p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
-                {String(currentSlideData.value)}
-              </p>
-            </div>
           )}
         </WordwareCard>
       </div>
