@@ -23,7 +23,6 @@ export function SideCards({
     <div className="flex flex-col justify-between gap-4 lg:h-full lg:w-1/2">
       <WordwareCard
         wide
-        hideHashtag
         hideShare
         show={!!card1text}
         className="w-full rounded-xl bg-[#1A1A1A] md:h-[400px] lg:h-1/3"
@@ -32,7 +31,6 @@ export function SideCards({
       </WordwareCard>
       <div className="flex w-full flex-col gap-4 rounded-xl sm:flex-row md:h-2/3">
         <WordwareCard
-          hideHashtag
           hideShare
           show={!!card2.text}
           className="h-full w-full rounded-xl bg-[#1A1A1A]"
@@ -68,7 +66,6 @@ export function SideCards({
         <div className="h-full w-full rounded-xl">
           <div className="flex h-full w-full flex-col gap-4">
             <WordwareCard
-              hideHashtag
               hideShare
               show={!!card3text}
               className="h-2/3 w-full rounded-xl bg-[#1A1A1A]"

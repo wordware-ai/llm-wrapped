@@ -164,12 +164,12 @@ export default function SlideShow() {
           hideShare={!username}
         >
           <div className="absolute left-0 top-0 z-20 w-full">
-            {/* <SlideIndicator
+            <SlideIndicator
               currentSlide={currentSlide}
               totalSlides={slides.length}
               nextSlide={nextSlide}
               isPaused={isPaused}
-            /> */}
+            />
           </div>
           {currentSlideData.Component && (
             <currentSlideData.Component
