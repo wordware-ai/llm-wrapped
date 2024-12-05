@@ -6,7 +6,7 @@ import {
   FaTwitter,
   FaWhatsapp,
 } from "react-icons/fa";
-import { BaseStory } from "./stories/base";
+import { BaseStory } from "./base-story";
 
 export function UserInfo({
   username,

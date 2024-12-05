@@ -65,7 +65,7 @@ export function LinkedInResults({
 
           // Then handle the stream response
           return streamResponse({
-            promptId: "81464643-a0e0-4982-9370-9bc37fd9a4a5",
+            promptId: "eb98a6bb-d867-42a3-a475-1e0546c9f638",
             data: data.linkedinData,
             onFinish: (results: Record<string, unknown>) => {
               const linkedinResult = {

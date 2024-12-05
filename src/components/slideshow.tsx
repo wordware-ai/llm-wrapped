@@ -10,13 +10,15 @@ import React, { useEffect, useMemo, useState } from "react";
 import SlideIndicator from "./slide-indicator";
 import WordwareCard from "./spotify/wordware-card";
 import { useStreamContext } from "./stream-provider";
+import { spotifyExamples } from "@/config/spotify-examples";
+import { linkedinExamples } from "@/config/linkedin-examples";
 
 export default function SlideShow() {
   const [currentSlide, setCurrentSlide] = useQueryState(
     "slide",
     parseAsInteger,
   );
-  // const [name] = useQueryState("name", parseAsString);
+  const [name] = useQueryState("name", parseAsString);
   const [type] = useQueryState("type", parseAsString);
 
   const [isPaused, setIsPaused] = useState(false);
@@ -44,10 +46,29 @@ export default function SlideShow() {
   }, [currentSlide]);
 
   const slides = useMemo(() => {
+    const serviceCards =
+      getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
+    const serviceExamples =
+      getServiceType === "linkedin" ? linkedinExamples : spotifyExamples;
+
+    if (name) {
+      const staticSlideshow =
+        serviceExamples[name as keyof typeof serviceExamples];
+      if (!staticSlideshow) return [];
+      return Object.entries(staticSlideshow).map(([key, value]) => {
+        const card = serviceCards.find((card) => card.data.id === key);
+        return {
+          id: key,
+          value,
+          bgColor: card?.data.bgColor,
+          fillColor: card?.data.fillColor,
+          Component: card?.Component,
+          Animation: card?.Animation,
+        };
+      });
+    }
     return Object.entries(results).map(([key, value]) => {
       // Find the card config for this result
-      const serviceCards =
-        getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
 
       const cardConfig = serviceCards.find((card) => card.data.id === key);
 
@@ -60,7 +81,7 @@ export default function SlideShow() {
         Animation: cardConfig?.Animation,
       };
     });
-  }, [results, getServiceType]);
+  }, [getServiceType, name, results]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -161,15 +182,14 @@ export default function SlideShow() {
           Animation={currentSlideData.Animation}
           backgroundColor={currentSlideData.bgColor}
           fillColor={currentSlideData.fillColor}
-          hideShare={!username}
         >
           <div className="absolute left-0 top-0 z-20 w-full">
-            <SlideIndicator
+            {/* <SlideIndicator
               currentSlide={currentSlide}
               totalSlides={slides.length}
               nextSlide={nextSlide}
               isPaused={isPaused}
-            />
+            /> */}
           </div>
           {currentSlideData.Component && (
             <currentSlideData.Component
@@ -178,7 +198,10 @@ export default function SlideShow() {
                   ? (currentSlideData.value as Record<string, unknown>)
                   : { value: currentSlideData.value }
               }
-              profileData={profileData}
+              profileData={
+                spotifyExamples[name as keyof typeof spotifyExamples]
+                  ?.profileData ?? profileData
+              }
             />
           )}
         </WordwareCard>

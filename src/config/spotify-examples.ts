@@ -1,4 +1,4 @@
-export const homepageSlideshows = {
+export const spotifyExamples = {
   brian: {
     short_summary:
       "Ah, the CEO who built an empire renting air mattresses while listening to Hotel California on repeat. Your playlist screams 'mid-life crisis meets tech millionaire trying to stay relatable'",
@@ -45,12 +45,14 @@ export const homepageSlideshows = {
       "Chronic case of Silicon Valley Success Syndrome with acute symptoms of musical basic-ness. Treatment recommended: Actually living in a van down by the river instead of just singing about it",
     recommendation:
       "Maybe try listening to music made after 2015? Or just embrace being the guy who made billions while having the music taste of a retired geography teacher",
-    top_artist_image_url:
-      "https://www.thisdayinmusic.com/wp-content/uploads/2016/01/hotel-california.jpg",
-    most_popular_artist_image_url:
-      "https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Beatles_-_Abbey_Road.jpg/220px-Beatles_-_Abbey_Road.jpg",
-    least_popular_artist_image_url:
-      "https://store.bluenote.com/cdn/shop/files/NJVisionscoverFinal.jpg?v=1705586453",
+    profileData: {
+      topArtistImageUrl:
+        "https://www.thisdayinmusic.com/wp-content/uploads/2016/01/hotel-california.jpg",
+      mostPopularImageUrl:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Beatles_-_Abbey_Road.jpg/220px-Beatles_-_Abbey_Road.jpg",
+      leastPopularImageUrl:
+        "https://store.bluenote.com/cdn/shop/files/NJVisionscoverFinal.jpg?v=1705586453",
+    },
   },
   trump: {
     short_summary:
@@ -98,12 +100,14 @@ export const homepageSlideshows = {
       "Severe case of Musical Narcissistic Personality Disorder, complicated by chronic nostalgia and an inability to accept that 1969 is over.",
     recommendation:
       "Try listening to 'Jailhouse Rock' - consider it research for future accommodations.",
-    top_artist_image_url:
-      "https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2015/12/GettyImages-85339538-1024x889.jpg",
-    most_popular_artist_image_url:
-      "https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2015/12/GettyImages-85339538-1024x889.jpg",
-    least_popular_artist_image_url:
-      "https://media.newyorker.com/photos/5909771c2179605b11ad8664/3:4/w_1612,h_2149,c_limit/Petrusich-Sinead-OConnor.jpg",
+    profileData: {
+      topArtistImageUrl:
+        "https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2015/12/GettyImages-85339538-1024x889.jpg",
+      mostPopularImageUrl:
+        "https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2015/12/GettyImages-85339538-1024x889.jpg",
+      leastPopularImageUrl:
+        "https://media.newyorker.com/photos/5909771c2179605b11ad8664/3:4/w_1612,h_2149,c_limit/Petrusich-Sinead-OConnor.jpg",
+    },
   },
   elon: {
     short_summary:
@@ -151,12 +155,13 @@ export const homepageSlideshows = {
       "Severe case of Main Character Syndrome complicated by space obsession and unresolved ex issues. Prognosis: Terminal try-hard.",
     recommendation:
       "Maybe spend less time curating playlists and more time learning how to run the companies you keep buying. Also, therapy. Lots of therapy.",
-    top_artist_image_url:
-      "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/20018845/seeso_Monty_Python_And_The_Holy_Grail_Mov_Full_Image_GalleryBackground_en_US_1483993549331._RI_.jpg?quality=90&strip=all&crop=21.875,0,56.25,100",
-    most_popular_artist_image_url:
-      "https://assets.soundgym.co/posts/9UECJ9.jpg",
-    least_popular_artist_image_url:
-      "https://hips.hearstapps.com/hmg-prod/images/johann-sebastian-bach-gettyimages-51246888.jpg?crop=1xw:0.74971450323563xh;center,top&resize=1200:*",
+    profileData: {
+      topArtistImageUrl:
+        "https://platform.polygon.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/20018845/seeso_Monty_Python_And_The_Holy_Grail_Mov_Full_Image_GalleryBackground_en_US_1483993549331._RI_.jpg?quality=90&strip=all&crop=21.875,0,56.25,100",
+      mostPopularImageUrl: "https://assets.soundgym.co/posts/9UECJ9.jpg",
+      leastPopularImageUrl:
+        "https://hips.hearstapps.com/hmg-prod/images/johann-sebastian-bach-gettyimages-51246888.jpg?crop=1xw:0.74971450323563xh;center,top&resize=1200:*",
+    },
   },
   kanye: {
     short_summary:
@@ -204,12 +209,13 @@ export const homepageSlideshows = {
       "Severe case of main character syndrome complicated by chronic self-sampling and acute god complex. Prognosis: Terminal uniqueness.",
     recommendation:
       "Consider listening to literally anyone else's music. Maybe start a playlist called 'Songs Not About Me' - it'll be a challenge, but I believe in you.",
-    top_artist_image_url:
-      "https://ew.com/thmb/1qOQY-fHmKznauBqAZXTyPswhIY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Kanye-West-9187f0273e7e43a2866b6ec2b5aa7ae2.jpg",
-    most_popular_artist_image_url:
-      "https://ew.com/thmb/1qOQY-fHmKznauBqAZXTyPswhIY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Kanye-West-9187f0273e7e43a2866b6ec2b5aa7ae2.jpg",
-    least_popular_artist_image_url:
-      "https://i.ytimg.com/vi/zYwCmcB0XMw/hqdefault.jpg",
+    profileData: {
+      topArtistImageUrl:
+        "https://ew.com/thmb/1qOQY-fHmKznauBqAZXTyPswhIY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Kanye-West-9187f0273e7e43a2866b6ec2b5aa7ae2.jpg",
+      mostPopularImageUrl:
+        "https://ew.com/thmb/1qOQY-fHmKznauBqAZXTyPswhIY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Kanye-West-9187f0273e7e43a2866b6ec2b5aa7ae2.jpg",
+      leastPopularImageUrl: "https://i.ytimg.com/vi/zYwCmcB0XMw/hqdefault.jpg",
+    },
   },
   sam: {
     short_summary:
@@ -257,12 +263,14 @@ export const homepageSlideshows = {
       "Severe case of Silicon Valley Protagonist Syndrome, complicated by an addiction to dramatic background music and an allergic reaction to lyrics.",
     recommendation:
       "Try listening to music with actual words sometimes. Maybe start with 'Help!' by The Beatles - seems appropriate.",
-    top_artist_image_url:
-      "https://images.squarespace-cdn.com/content/v1/5745d9f137013b9d0a627c60/1682149408814-OZKE3ZBJH7EJ64G7TMSA/max-richter-the-creative-process-podcast-SQ.jpg?format=1500w",
-    most_popular_artist_image_url:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh_z7Y9bjWL__fUbn3vDeVvktMQc0p_xPuGg&s",
-    least_popular_artist_image_url:
-      "https://travel.home.sndimg.com/content/dam/images/travel/fullrights/2018/6/25/Original_Jessica-Yonker_Bonnaroo-Arts-Music-Festival-2018_Glitch-Mob.jpg.rend.hgtvcom.616.462.suffix/1529947735886.jpeg",
+    profileData: {
+      topArtistImageUrl:
+        "https://images.squarespace-cdn.com/content/v1/5745d9f137013b9d0a627c60/1682149408814-OZKE3ZBJH7EJ64G7TMSA/max-richter-the-creative-process-podcast-SQ.jpg?format=1500w",
+      mostPopularImageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh_z7Y9bjWL__fUbn3vDeVvktMQc0p_xPuGg&s",
+      leastPopularImageUrl:
+        "https://travel.home.sndimg.com/content/dam/images/travel/fullrights/2018/6/25/Original_Jessica-Yonker_Bonnaroo-Arts-Music-Festival-2018_Glitch-Mob.jpg.rend.hgtvcom.616.462.suffix/1529947735886.jpeg",
+    },
   },
   taylor: {
     short_summary:
@@ -310,31 +318,46 @@ export const homepageSlideshows = {
       "Chronic Main Character Syndrome complicated by severe genre-hopping and an unhealthy obsession with Taylor Swift's dating history",
     recommendation:
       "Try listening to something that isn't about breakups or feeling misunderstood. Maybe some white noise? It might be less emotionally damaging.",
-    top_artist_image_url:
-      "https://upload.wikimedia.org/wikipedia/en/1/1f/Taylor_Swift_-_Taylor_Swift.png",
-    most_popular_artist_image_url:
-      "https://upload.wikimedia.org/wikipedia/en/1/1f/Taylor_Swift_-_Taylor_Swift.png",
-    least_popular_artist_image_url:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDktOlAniJYGUbbIVgCiV6-lwkj-rWXD79Lg&s",
-  },
-  wordware: {
-    what_is_wordware:
-      "Wordware is your AI operating system, enabling anyone to build AI agents seamlessly. no coding? no problem. you’re a dev? you’ll love how fast and flexible it is.",
-    all_the_models:
-      "we’ve got all the most important models on our platform—GPT-4o, O1, Claude 3.5, Haiku, Mistral, Gemini, Sonar Large, and more—ready for you to use. experiment, compare, and find the perfect fit for your project without the hassle.",
-    multi_modal:
-      "Wordware isn’t just about text. prompts can include images, audio, and soon, video. build agents that work across multiple modes, all in one place.",
-    deploy_with_api:
-      "turn your flows into standalone WordApps. share them, embed them, connect via APIs, or trigger them through Zapier. build agents that work wherever you do.",
-    functions:
-      "Wordware lets you create smarter, more adaptable agents. with loops, you can repeat steps dynamically. if-else nodes bring decision-making into your flows. structured generations ensure your outputs are ready for APIs or databases. and with code execution, you can integrate Python or JavaScript to do whatever you need—all within your flow.",
-    tools:
-      "feel unstoppable with tools that take your WordApps to the next level. from web searches to image generation, text-to-speech, PDF parsing, and more—you can do so much, so quickly. /n ready to add one? just type / in the editor and explore the tool section.",
-    get_started:
-      "whether you’re new to AI or ready to create complex AI agents, Wordware is here for you. try for free at wordware.ai or book a demo call to see it in action.",
-    // we usally have the images so this fixes that. Horrible solution will think of something better
-    stupid1: "Stupid",
-    stupid2: "Stupid",
-    stupid3: "Stupid",
+    profileData: {
+      topArtistImageUrl:
+        "https://upload.wikimedia.org/wikipedia/en/1/1f/Taylor_Swift_-_Taylor_Swift.png",
+      mostPopularImageUrl:
+        "https://upload.wikimedia.org/wikipedia/en/1/1f/Taylor_Swift_-_Taylor_Swift.png",
+      leastPopularImageUrl:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDktOlAniJYGUbbIVgCiV6-lwkj-rWXD79Lg&s",
+    },
   },
 };
+
+export const spotifyStorys = [
+  {
+    src: "/images/stories/brian.webp",
+    alt: "Brian Chesky",
+    href: "/?name=brian&slide=1&type=spotify",
+  },
+  {
+    src: "/images/stories/trump.webp",
+    alt: "Donald Trump",
+    href: "/?name=trump&slide=1&type=spotify",
+  },
+  {
+    src: "/images/stories/elon.jpg",
+    alt: "Elon Musk",
+    href: "/?name=elon&slide=1&type=spotify",
+  },
+  {
+    src: "/images/stories/kanye.webp",
+    alt: "Kanye West",
+    href: "/?name=kanye&slide=1&type=spotify",
+  },
+  // {
+  //   src: "/images/stories/sam.webp",
+  //   alt: "Sam Altman",
+  //   href: "/?name=sam&slide=1",
+  // },
+  {
+    src: "/images/stories/taylor.jpg",
+    alt: "Taylor Swift",
+    href: "/?name=taylor&slide=1&type=spotify",
+  },
+];

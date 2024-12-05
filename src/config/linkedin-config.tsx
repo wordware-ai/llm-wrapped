@@ -25,7 +25,7 @@ export const linkedinConfig: CardItem[] = [
     Component: ({ result, profileData }: CardComponentProps) => (
       <ImageCard
         imageUrl={profileData?.currentPositionImageUrl ?? ""}
-        title="Current Position"
+        title="What You Call Work"
         description={result.value as string}
       />
     ),
@@ -37,7 +37,10 @@ export const linkedinConfig: CardItem[] = [
       fillColor: "#6D87D7",
     },
     Component: ({ result }: CardComponentProps) => (
-      <TitleCard title="Actual Position" description={result.value as string} />
+      <TitleCard
+        title="What You're Actually Doing"
+        description={result.value as string}
+      />
     ),
   },
   {
@@ -48,7 +51,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="What Your Mother Thinks You Do"
+        title="How Mom Sees Your Job"
         description={result.value as string}
       />
     ),
@@ -61,7 +64,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Accidental Success Story"
+        title="Any Success in Your Career?"
         description={result.value as string}
       />
     ),
@@ -74,7 +77,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
-        title="Ambition Level"
+        title="How Ambitious You Are"
         value={result.ambition_score as string}
         description={result.description as string}
         valueColor="#6F0FA7"
@@ -89,7 +92,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
-        title="Delusion Level"
+        title="Delusional Score"
         value={result.score as string}
         description={result.description as string}
         valueColor="#5F7118"
@@ -104,7 +107,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
-        title="Performance Rating"
+        title="How You're Performing"
         value={result.score as string}
         description={result.performance_review as string}
         valueColor="#182571"
@@ -119,7 +122,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Career Trajectory"
+        title="Your Career Trajectory"
         description={result.value as string}
       />
     ),
@@ -132,7 +135,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Next Career Endeavor"
+        title="What You'll Do Next"
         description={result.value as string}
       />
     ),
@@ -145,7 +148,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Job Description Translation"
+        title="Your Ideal Job Match"
         description={result.value as string}
       />
     ),
@@ -157,7 +160,10 @@ export const linkedinConfig: CardItem[] = [
       fillColor: "#2E9298",
     },
     Component: ({ result }: CardComponentProps) => (
-      <TitleCard title="Buzzword Bingo" description={result.value as string} />
+      <TitleCard
+        title="Your Buzzword Bingo"
+        description={result.value as string}
+      />
     ),
   },
   {
@@ -168,7 +174,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Skills Assessment"
+        title="Your Actual Skillset"
         description={result.value as string}
       />
     ),
@@ -181,7 +187,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Potential Reason for Firing"
+        title="Why You Won't Last Here"
         description={result.value as string}
       />
     ),
@@ -194,7 +200,7 @@ export const linkedinConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="AI Recommendation"
+        title="The Honest Feedback You Need"
         description={result.value as string}
       />
     ),

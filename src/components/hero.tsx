@@ -11,13 +11,15 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import { SpotifyLogo } from "./logos/spotify";
-import { SpotifyStorys } from "./stories/spotify";
+import { ExampleStories } from "./example-stories";
 import { LinkedinLogo } from "./logos/linkedin";
 import { TwitterXLogo } from "./logos/twitter";
 import { GitHubLogo } from "./logos/github";
 import { TinderLogo } from "./logos/tinder";
 import Link from "next/link";
 import { LinkedinInput } from "./linkedin/linkedin-input";
+import { spotifyStorys } from "@/config/spotify-examples";
+import { linkedinStorys } from "@/config/linkedin-examples";
 
 type TabValue = "spotify" | "linkedin" | "twitter" | "github" | "tinder";
 
@@ -163,7 +165,12 @@ export function Hero() {
           </p>
         </div>
       </div>
-      {tab === "spotify" && <SpotifyStorys />}
+      {tab === "spotify" && (
+        <ExampleStories title="Spotify Examples" stories={spotifyStorys} />
+      )}
+      {tab === "linkedin" && (
+        <ExampleStories title="LinkedIn Examples" stories={linkedinStorys} />
+      )}
     </div>
   );
 }
