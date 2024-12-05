@@ -16,7 +16,7 @@ export default function SlideShow() {
     "slide",
     parseAsInteger,
   );
-  const [name] = useQueryState("name", parseAsString);
+  // const [name] = useQueryState("name", parseAsString);
   const [type] = useQueryState("type", parseAsString);
 
   const [isPaused, setIsPaused] = useState(false);

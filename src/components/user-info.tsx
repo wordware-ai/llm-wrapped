@@ -1,13 +1,12 @@
-import { type User } from "@prisma/client";
-import { BaseStory } from "./stories/base";
 import {
-  FaTwitter,
   FaInstagram,
   FaLinkedin,
-  FaTiktok,
   FaReddit,
+  FaTiktok,
+  FaTwitter,
   FaWhatsapp,
 } from "react-icons/fa";
+import { BaseStory } from "./stories/base";
 
 export function UserInfo({
   username,
