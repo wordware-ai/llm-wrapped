@@ -5,7 +5,7 @@ export default function InfiniteBanner() {
     <>
       <span className="text-gray-400">This is a</span>
       <span className="text-black"> WordApp</span>
-      <span className="text-gray-400">— A Wordware Application —</span>
+      <span className="text-gray-400">— a Wordware Application —</span>
     </>
   );
 
