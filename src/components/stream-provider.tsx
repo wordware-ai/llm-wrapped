@@ -12,6 +12,8 @@ interface StreamContextType {
   isLoading: boolean;
   setResults: (results: Record<string, unknown>) => void;
   setIsLoading: (loading: boolean) => void;
+  profileData: Record<string, string | null>;
+  setProfileData: (profileData: Record<string, string | null>) => void;
 }
 
 const StreamContext = createContext<StreamContextType | undefined>(undefined);
@@ -23,7 +25,9 @@ interface StreamProviderProps {
 export function StreamProvider({ children }: StreamProviderProps) {
   const [results, setResults] = useState<Record<string, unknown>>({});
   const [isLoading, setIsLoading] = useState(false);
-
+  const [profileData, setProfileData] = useState<Record<string, string | null>>(
+    {},
+  );
   return (
     <StreamContext.Provider
       value={{
@@ -31,6 +35,8 @@ export function StreamProvider({ children }: StreamProviderProps) {
         isLoading,
         setResults,
         setIsLoading,
+        profileData,
+        setProfileData,
       }}
     >
       {children}

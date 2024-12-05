@@ -51,7 +51,7 @@ export function SpotifyResults({
     createSpotifyResult(spotifyResult);
   };
 
-  const { results, setResults } = useStreamContext();
+  const { results, setResults, setProfileData } = useStreamContext();
   const { streamResponse } = useStream();
 
   useEffect(() => {
@@ -65,6 +65,7 @@ export function SpotifyResults({
         onFinish,
       });
     }
+    setProfileData(profileData ?? {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previousRun, llmData]);
 

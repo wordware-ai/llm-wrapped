@@ -7,7 +7,7 @@ type CardData = {
 
 export type CardComponentProps = {
   result: Record<string, unknown>;
-  imageUrl?: string;
+  profileData?: Record<string, string | null>;
 };
 
 export type CardItem = {
@@ -28,31 +28,49 @@ const Recommendation = ({ result }: CardComponentProps) => {
   );
 };
 
-const CurrentPosition = ({ result }: CardComponentProps) => {
+const CurrentPosition = ({ result, profileData }: CardComponentProps) => {
   return (
     <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
       <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
         Current Position
       </p>
-      <p className="text-[4vh] leading-tight sm:text-[3vh]">{String(result)}</p>
+      {profileData?.currentPositionImageUrl && (
+        <div className="my-2 flex justify-center">
+          <Image
+            src={profileData.currentPositionImageUrl}
+            alt="Current Position"
+            className="aspect-square rounded-lg object-cover"
+            width={200}
+            height={200}
+          />
+        </div>
+      )}
+      <p className="text-[4vh] leading-tight sm:text-[3vh]">
+        {result.value as string}
+      </p>
     </div>
   );
 };
 
 const JsonMetricCard = ({
-  result,
   title,
-}: CardComponentProps & { title: string }) => {
+  value,
+  description,
+}: {
+  title: string;
+  value: string;
+  description: string;
+}) => {
   return (
     <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
       <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
         {title}
       </p>
       <div className="text-[7vh] font-semibold italic leading-tight text-[#F8D4D7] sm:text-[6vh]">
-        {String(result.level)}
+        {String(value)}
       </div>
       <p className="text-[4vh] leading-tight sm:text-[3vh]">
-        {String(result.description)}
+        {String(description)}
       </p>
     </div>
   );
@@ -96,7 +114,11 @@ export const linkedinConfig: CardItem[] = [
       title: "Ambition Level",
     },
     Component: ({ result }) => (
-      <JsonMetricCard result={result} title="Ambition Level" />
+      <JsonMetricCard
+        title="Ambition Level"
+        value={result.ambition_score as string}
+        description={result.description as string}
+      />
     ),
   },
   {
@@ -105,7 +127,11 @@ export const linkedinConfig: CardItem[] = [
       title: "Reality Check Rating",
     },
     Component: ({ result }) => (
-      <JsonMetricCard result={result} title="Reality Check Rating" />
+      <JsonMetricCard
+        title="Reality Check Rating"
+        value={result.score as string}
+        description={result.description as string}
+      />
     ),
   },
   {
@@ -114,7 +140,11 @@ export const linkedinConfig: CardItem[] = [
       title: "Performance Rating",
     },
     Component: ({ result }) => (
-      <JsonMetricCard result={result} title="Performance Rating" />
+      <JsonMetricCard
+        title="Performance Rating"
+        value={result.score as string}
+        description={result.performance_review as string}
+      />
     ),
   },
   {

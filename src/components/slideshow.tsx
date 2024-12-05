@@ -1,17 +1,15 @@
 "use client";
 
-import { spotifyConfig } from "@/config/spotify-config";
 import { linkedinConfig } from "@/config/linkedin-config";
-import { homepageSlideshows } from "@/config/examples-config";
+import { spotifyConfig } from "@/config/spotify-config";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import React, { useEffect, useMemo, useState } from "react";
+import SlideIndicator from "./slide-indicator";
 import WordwareCard from "./spotify/wordware-card";
 import { useStreamContext } from "./stream-provider";
-import { getImageUrl } from "@/lib/get-image-url";
-import SlideIndicator from "./slide-indicator";
 
 export default function SlideShow() {
   const [currentSlide, setCurrentSlide] = useQueryState(
@@ -19,19 +17,21 @@ export default function SlideShow() {
     parseAsInteger,
   );
   const [name] = useQueryState("name", parseAsString);
+  const [type] = useQueryState("type", parseAsString);
+
   const [isPaused, setIsPaused] = useState(false);
 
-  const { results } = useStreamContext();
+  const { results, profileData } = useStreamContext();
   const router = useRouter();
   const { username } = useParams();
 
   const pathname = usePathname();
 
   const getServiceType = useMemo(() => {
-    if (!pathname) return null;
+    if (!pathname) return type;
     const path = pathname.split("/");
     return path[1] as "spotify" | "linkedin" | null;
-  }, [pathname]);
+  }, [pathname, type]);
 
   // Prevent scrolling when the slideshow is open
   useEffect(() => {
@@ -173,16 +173,7 @@ export default function SlideShow() {
                   ? (currentSlideData.value as Record<string, unknown>)
                   : { value: currentSlideData.value }
               }
-              imageUrl={
-                username
-                  ? getImageUrl(currentSlideData.id, results)
-                  : getImageUrl(
-                      currentSlideData.id,
-                      homepageSlideshows[
-                        name as keyof typeof homepageSlideshows
-                      ],
-                    )
-              }
+              profileData={profileData}
             />
           ) : (
             <div className="flex flex-col gap-[3vh] text-center sm:gap-[2vh]">

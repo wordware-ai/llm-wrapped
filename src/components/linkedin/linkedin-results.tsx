@@ -40,7 +40,7 @@ export function LinkedInResults({
     createLinkedinResult(linkedinResult);
   };
 
-  const { results, setResults } = useStreamContext();
+  const { results, setResults, setProfileData } = useStreamContext();
   const { streamResponse } = useStream();
 
   useEffect(() => {
@@ -54,6 +54,7 @@ export function LinkedInResults({
         onFinish,
       });
     }
+    setProfileData(profileData ?? {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedinResult]);
 
