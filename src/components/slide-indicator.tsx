@@ -25,32 +25,32 @@ export default function SlideIndicator({
     setPausedTime(null);
   }, [currentSlide]);
 
-  // useEffect(() => {
-  //   if (isPaused) {
-  //     // Store the current progress time when paused
-  //     setPausedTime(Date.now());
-  //     return;
-  //   } else if (pausedTime) {
-  //     // Adjust the start time to account for the pause duration
-  //     const pauseDuration = Date.now() - pausedTime;
-  //     setStartTime((prev) => prev + pauseDuration);
-  //     setPausedTime(null);
-  //   }
+  useEffect(() => {
+    if (isPaused) {
+      // Store the current progress time when paused
+      setPausedTime(Date.now());
+      return;
+    } else if (pausedTime) {
+      // Adjust the start time to account for the pause duration
+      const pauseDuration = Date.now() - pausedTime;
+      setStartTime((prev) => prev + pauseDuration);
+      setPausedTime(null);
+    }
 
-  //   const timer = setInterval(() => {
-  //     const elapsed = Date.now() - startTime;
-  //     const newProgress = Math.min((elapsed / SLIDE_DURATION) * 100, 100);
+    const timer = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const newProgress = Math.min((elapsed / SLIDE_DURATION) * 100, 100);
 
-  //     if (newProgress >= 100) {
-  //       clearInterval(timer);
-  //       void nextSlide();
-  //     } else {
-  //       setProgress(newProgress);
-  //     }
-  //   }, 16);
+      if (newProgress >= 100) {
+        clearInterval(timer);
+        void nextSlide();
+      } else {
+        setProgress(newProgress);
+      }
+    }, 16);
 
-  //   return () => clearInterval(timer);
-  // }, [currentSlide, nextSlide, isPaused, pausedTime, startTime]);
+    return () => clearInterval(timer);
+  }, [currentSlide, nextSlide, isPaused, pausedTime, startTime]);
 
   return (
     <div className="flex gap-1 px-2 py-4">

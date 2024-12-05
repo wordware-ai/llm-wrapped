@@ -26,7 +26,14 @@ model User {
 }
 
 model SpotifyResult {
-  id                                     String  @id @default(cuid())
+  id                   String  @id @default(cuid())
+  leastPopularImageUrl String?
+  mostPopularImageUrl  String?
+  topArtistImageUrl    String?
+  leastPopularUrl      String?
+  mostPopularUrl       String?
+  topArtistUrl         String?
+
   short_summary                          String
   music_taste_analysis_1                 String
   music_taste_analysis_2                 String
@@ -45,9 +52,6 @@ model SpotifyResult {
   titles_that_need_therapy               String
   final_diagnosis                        String
   recommendation                         String
-  least_popular_artist_image_url         String?
-  most_popular_artist_image_url          String?
-  top_artist_image_url                   String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -55,4 +59,31 @@ model SpotifyResult {
   // Relations
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
+}
+
+model LinkedinResult {
+  id                      String  @id @default(cuid())
+  username                String  @unique
+  name                    String?
+  imageUrl                String?
+  currentPositionImageUrl String?
+
+  short_summary      String
+  current_position   String
+  actual_position    String
+  position_mother    String
+  accidental_success String
+  ambition           Json
+  delusional         Json
+  performance        Json
+  career_trajectory  String
+  next_endeavor      String
+  job_description    String
+  buzzword_bingo     String
+  skills             String
+  reason_for_firing  String
+  recommendation     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

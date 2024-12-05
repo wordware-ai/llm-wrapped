@@ -1,9 +1,20 @@
 import { type SpotifyResult } from "@prisma/client";
 
-export function convertDbToState(
+export function convertSpotifyDbToState(
   previousRun: Partial<SpotifyResult>,
 ): Record<string, unknown> {
-  const fieldsToRemove = ["createdAt", "updatedAt", "userId", "id"];
+  const fieldsToRemove = [
+    "createdAt",
+    "updatedAt",
+    "userId",
+    "id",
+    "leastPopularImageUrl",
+    "mostPopularImageUrl",
+    "topArtistImageUrl",
+    "leastPopularUrl",
+    "mostPopularUrl",
+    "topArtistUrl",
+  ];
   const cleanedPreviousRun = Object.fromEntries(
     Object.entries(previousRun).filter(
       ([key]) => !fieldsToRemove.includes(key),
@@ -12,7 +23,7 @@ export function convertDbToState(
   return { ...cleanedPreviousRun };
 }
 
-export function convertStateToDb(results: Record<string, unknown>) {
+export function convertSpotifyToDb(results: Record<string, unknown>) {
   return {
     short_summary: String(results.short_summary) ?? "",
     music_taste_analysis_1: String(results.music_taste_analysis_1) ?? "",
@@ -34,11 +45,5 @@ export function convertStateToDb(results: Record<string, unknown>) {
     titles_that_need_therapy: String(results.titles_that_need_therapy) ?? "",
     final_diagnosis: String(results.final_diagnosis) ?? "",
     recommendation: String(results.recommendation) ?? "",
-    least_popular_artist_image_url:
-      String(results.least_popular_artist_image_url) ?? null,
-    most_popular_artist_image_url:
-      String(results.most_popular_artist_image_url) ?? null,
-    top_artist_image_url: String(results.top_artist_image_url) ?? null,
-    user: {}, // Handled in procedure
   };
 }

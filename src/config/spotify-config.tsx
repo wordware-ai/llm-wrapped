@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type CardData = {
   id: string;
@@ -7,12 +8,35 @@ type CardData = {
 
 export type CardComponentProps = {
   result: Record<string, unknown>;
-  imageUrl?: string;
+  profileData?: Record<string, string | null>;
 };
 
 export type CardItem = {
   data: CardData;
   Component?: React.ComponentType<CardComponentProps>;
+};
+
+const TopArtist = ({ result, profileData }: CardComponentProps) => {
+  return (
+    <div className="flex h-max w-full flex-col gap-8 text-center text-white">
+      {profileData?.topArtistImageUrl && profileData.topArtistUrl && (
+        <Link
+          href={profileData.topArtistUrl}
+          className="my-2 flex justify-center"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Image
+            src={profileData.topArtistImageUrl}
+            alt="Top Artist"
+            className="aspect-square rounded-lg object-cover"
+            width={200}
+            height={200}
+          />
+        </Link>
+      )}
+      <p className="text-4xl">{result.value as string}</p>
+    </div>
+  );
 };
 
 const IdentityCrisisLevel = ({ result }: CardComponentProps) => {
@@ -63,22 +87,26 @@ const Achievement = ({ result }: CardComponentProps) => {
   );
 };
 
-const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
+const LeastPopularArtist = ({ result, profileData }: CardComponentProps) => {
   return (
     <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
       <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
         Least Popular Artist
       </p>
-      {imageUrl && (
-        <div className="my-[2vh] flex justify-center sm:my-[1vh]">
+      {profileData?.leastPopularImageUrl && profileData.leastPopularUrl && (
+        <Link
+          href={profileData.leastPopularUrl}
+          className="my-[2vh] flex justify-center sm:my-2"
+          onClick={(e) => e.stopPropagation()}
+        >
           <Image
-            src={imageUrl}
+            src={profileData.leastPopularImageUrl}
             alt="Least Popular Artist"
             className="aspect-square h-[18vh] w-[18vh] rounded-lg object-cover sm:h-[15vh] sm:w-[15vh]"
             width={200}
             height={200}
           />
-        </div>
+        </Link>
       )}
       <p className="text-[4vh] leading-tight sm:text-[3vh]">
         {typeof result === "object" && result !== null
@@ -89,22 +117,26 @@ const LeastPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
   );
 };
 
-const MostPopularArtist = ({ result, imageUrl }: CardComponentProps) => {
+const MostPopularArtist = ({ result, profileData }: CardComponentProps) => {
   return (
     <div className="flex h-max w-full flex-col text-center text-white">
       <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
         Most Popular Artist
       </p>
-      {imageUrl && (
-        <div className="my-[2vh] flex justify-center sm:my-2">
+      {profileData?.mostPopularImageUrl && profileData.mostPopularUrl && (
+        <Link
+          href={profileData.mostPopularUrl}
+          className="my-[2vh] flex justify-center sm:my-2"
+          onClick={(e) => e.stopPropagation()}
+        >
           <Image
-            src={imageUrl}
+            src={profileData.mostPopularImageUrl}
             alt="Most Popular Artist"
             className="aspect-square h-[18vh] w-[18vh] rounded-lg object-cover sm:h-[15vh] sm:w-[15vh]"
             width={200}
             height={200}
           />
-        </div>
+        </Link>
       )}
       <p className="text-[4vh] leading-tight sm:text-[3vh]">
         {typeof result === "object" && result !== null
@@ -128,7 +160,38 @@ const Recommendation = ({ result }: CardComponentProps) => {
   );
 };
 
-export const cards: CardItem[] = [
+export const spotifyConfig: CardItem[] = [
+  {
+    data: {
+      id: "short_summary",
+      title: "",
+    },
+  },
+  {
+    data: {
+      id: "music_taste_analysis_1",
+      title: "",
+    },
+    Component: TopArtist,
+  },
+  {
+    data: {
+      id: "music_taste_analysis_2",
+      title: "",
+    },
+  },
+  {
+    data: {
+      id: "music_taste_analysis_3",
+      title: "",
+    },
+  },
+  {
+    data: {
+      id: "lyric_therapy_needed",
+      title: "",
+    },
+  },
   {
     data: {
       id: "identity_crisis_level",

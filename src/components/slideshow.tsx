@@ -1,28 +1,37 @@
 "use client";
 
-import { slideshowCards } from "@/config/slideshow-card-config";
-import { homepageSlideshows } from "@/config/examples-config";
+import { linkedinConfig } from "@/config/linkedin-config";
+import { spotifyConfig } from "@/config/spotify-config";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import React, { useEffect, useMemo, useState } from "react";
+import SlideIndicator from "./slide-indicator";
 import WordwareCard from "./spotify/wordware-card";
 import { useStreamContext } from "./stream-provider";
-import { getImageUrl } from "@/lib/get-image-url";
-import SlideIndicator from "./slide-indicator";
 
 export default function SlideShow() {
   const [currentSlide, setCurrentSlide] = useQueryState(
     "slide",
     parseAsInteger,
   );
-  const [name] = useQueryState("name", parseAsString);
+  // const [name] = useQueryState("name", parseAsString);
+  const [type] = useQueryState("type", parseAsString);
+
   const [isPaused, setIsPaused] = useState(false);
 
-  const { results } = useStreamContext();
+  const { results, profileData } = useStreamContext();
   const router = useRouter();
   const { username } = useParams();
+
+  const pathname = usePathname();
+
+  const getServiceType = useMemo(() => {
+    if (!pathname) return type;
+    const path = pathname.split("/");
+    return path[1] as "spotify" | "linkedin" | null;
+  }, [pathname, type]);
 
   // Prevent scrolling when the slideshow is open
   useEffect(() => {
@@ -35,33 +44,21 @@ export default function SlideShow() {
   }, [currentSlide]);
 
   const slides = useMemo(() => {
-    if (name) {
-      const staticSlideshow =
-        homepageSlideshows[name as keyof typeof homepageSlideshows];
-      if (!staticSlideshow) return [];
-      return Object.entries(staticSlideshow).map(([key, value]) => ({
+    return Object.entries(results).map(([key, value]) => {
+      // Find the card config for this result
+      const serviceCards =
+        getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
+
+      const cardConfig = serviceCards.find((card) => card.data.id === key);
+
+      return {
         id: key,
         value,
-        Component: slideshowCards.find((card) => card.data.id === key)
-          ?.Component,
-        title: slideshowCards.find((card) => card.data.id === key)?.data.title,
-      }));
-    } else if (username && results) {
-      // Filter out metadata fields before mapping
-      return Object.entries(results).map(([key, value]) => {
-        // Find the card config for this result
-        const cardConfig = slideshowCards.find((card) => card.data.id === key);
-
-        return {
-          id: key,
-          value,
-          Component: cardConfig?.Component,
-          title: cardConfig?.data.title,
-        };
-      });
-    }
-    return [];
-  }, [username, name, results]);
+        Component: cardConfig?.Component,
+        title: cardConfig?.data.title,
+      };
+    });
+  }, [results, getServiceType]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -87,14 +84,16 @@ export default function SlideShow() {
 
   const exit = () => {
     if (username) {
-      router.push(`/${username as string}`);
+      // Get the current pathname and remove query parameters
+      const currentPath = window.location.pathname;
+      router.push(currentPath);
     } else {
       router.push("/", { scroll: false });
     }
   };
 
   const nextSlide = async () => {
-    if (currentSlide === slides.length - 3) {
+    if (currentSlide === slides.length) {
       exit();
     } else {
       await setCurrentSlide(currentSlide + 1);
@@ -162,7 +161,7 @@ export default function SlideShow() {
           <div className="absolute left-0 top-0 z-20 w-full">
             <SlideIndicator
               currentSlide={currentSlide}
-              totalSlides={slides.length - 3}
+              totalSlides={slides.length}
               nextSlide={nextSlide}
               isPaused={isPaused}
             />
@@ -174,16 +173,7 @@ export default function SlideShow() {
                   ? (currentSlideData.value as Record<string, unknown>)
                   : { value: currentSlideData.value }
               }
-              imageUrl={
-                username
-                  ? getImageUrl(currentSlideData.id, results)
-                  : getImageUrl(
-                      currentSlideData.id,
-                      homepageSlideshows[
-                        name as keyof typeof homepageSlideshows
-                      ],
-                    )
-              }
+              profileData={profileData}
             />
           ) : (
             <div className="flex flex-col gap-[3vh] text-center sm:gap-[2vh]">
@@ -200,7 +190,6 @@ export default function SlideShow() {
       <ChevronRight
         className={cn(
           "hidden size-7 rounded-full bg-zinc-600 pl-0.5 hover:cursor-pointer sm:block",
-          currentSlide === slides.length && "invisible",
         )}
         onClick={async (e) => {
           e.stopPropagation();

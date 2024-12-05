@@ -17,6 +17,7 @@ import { TwitterXLogo } from "./logos/twitter";
 import { GitHubLogo } from "./logos/github";
 import { TinderLogo } from "./logos/tinder";
 import Link from "next/link";
+import { LinkedinInput } from "./linkedin/linkedin-input";
 
 type TabValue = "spotify" | "linkedin" | "twitter" | "github" | "tinder";
 
@@ -114,7 +115,7 @@ export function Hero() {
           </p>
         </div>
 
-        <div className="z-10 flex w-full flex-col items-center gap-4">
+        <div className="z-10 flex w-full flex-col items-center gap-6">
           <div className="flex h-10 items-stretch rounded-lg bg-muted p-1">
             {tabs.map((tabItem, index) => (
               <div key={tabItem.value} className="flex items-stretch">
@@ -146,7 +147,7 @@ export function Hero() {
           <div className="h-10 w-full">
             <div className="absolute flex w-full justify-center">
               {tab === "spotify" && <SpotifyButton />}
-              {tab === "linkedin" && <Button disabled>LinkedIn</Button>}
+              {tab === "linkedin" && <LinkedinInput />}
               {tab === "twitter" && <Button disabled>Twitter</Button>}
               {tab === "github" && <Button disabled>GitHub</Button>}
             </div>

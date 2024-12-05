@@ -114,11 +114,8 @@ export default function HomeCards() {
                 !isScrolling && "snap-start",
               )}
             >
-              <WordwareCard
-                className={cn("w-full lg:items-start xl:items-center")}
-                hideShare
-              >
-                <div className="z-10 self-start text-2xl text-white lg:text-base xl:text-2xl">
+              <WordwareCard className={cn("w-full items-center")} hideShare>
+                <div className="z-10 self-start text-2xl text-white xl:text-2xl">
                   {content}
                 </div>
               </WordwareCard>

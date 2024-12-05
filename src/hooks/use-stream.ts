@@ -1,24 +1,20 @@
 import { useStreamContext } from "@/components/stream-provider";
 import { parsePartialJSON } from "@/lib/parse-partial-json";
 
-export function useStream({
-  promptId,
-  data,
-  onFinish,
-}: {
-  promptId: string;
-  data: string;
-  onFinish?: (results: Record<string, unknown>) => void;
-}) {
+export function useStream() {
   const { setResults, setIsLoading } = useStreamContext();
 
   async function streamResponse({
-    initialState,
+    promptId,
+    data,
+    onFinish,
   }: {
-    initialState?: Record<string, unknown>;
+    promptId: string;
+    data: string;
+    onFinish?: (results: Record<string, unknown>) => void;
   }) {
     setIsLoading(true);
-    setResults(initialState ?? {}); // Clear previous results
+    setResults({}); // Clear previous results
 
     const response = await fetch(`/stream/${promptId}`, {
       method: "POST",
@@ -64,7 +60,7 @@ export function useStream({
             string,
             unknown
           >;
-          finalResults = { ...initialState, ...parsedResults };
+          finalResults = parsedResults;
           setResults(finalResults);
         } catch {
           // Continue if parsing fails
