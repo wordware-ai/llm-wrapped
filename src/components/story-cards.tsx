@@ -15,7 +15,8 @@ export type CardComponentProps = {
 
 export type CardItem = {
   data: CardData;
-  Component?: React.ComponentType<CardComponentProps>;
+  Component: React.ComponentType<CardComponentProps>;
+  Animation?: JSX.Element;
 };
 
 export const MetricCard = ({
@@ -30,13 +31,13 @@ export const MetricCard = ({
   valueColor?: string;
 }) => {
   return (
-    <div className="flex h-full flex-col justify-center gap-[3vh] text-center text-white sm:gap-[2vh]">
+    <div className="flex h-full flex-col justify-center gap-[3vh] text-white sm:gap-[2vh]">
       <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
         {title}
       </p>
       <div
         style={{ color: valueColor }}
-        className="text-[7vh] font-semibold italic leading-tight sm:text-[6vh]"
+        className="text-[8vh] font-semibold italic leading-tight sm:text-[8vh]"
       >
         {value}
       </div>
@@ -67,8 +68,8 @@ export const ImageCard = ({
   );
 
   return (
-    <div>
-      <div className="my-2 flex justify-center">
+    <div className="flex flex-col gap-[3vh] sm:gap-[2vh]">
+      <div className="flex">
         {url ? (
           <Link
             href={url}
@@ -81,8 +82,12 @@ export const ImageCard = ({
           ImageComponent
         )}
       </div>
-      <p className="text-4xl text-white">{title}</p>
-      <p className="text-2xl text-white">{description}</p>
+      <h3 className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]">
+        {title}
+      </h3>
+      <p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
+        {description}
+      </p>
     </div>
   );
 };
@@ -95,7 +100,7 @@ export const TitleCard = ({
   description: string;
 }) => {
   return (
-    <div className="flex flex-col gap-[3vh] text-center sm:gap-[2vh]">
+    <div className="flex flex-col gap-[3vh] sm:gap-[2vh]">
       <h3 className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]">
         {title}
       </h3>
@@ -108,7 +113,7 @@ export const TitleCard = ({
 
 export const TextCard = ({ result }: { result: Record<string, unknown> }) => {
   return (
-    <div className="flex flex-col gap-[3vh] text-center sm:gap-[2vh]">
+    <div className="flex flex-col gap-[3vh] sm:gap-[2vh]">
       <p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
         {result.value as string}
       </p>

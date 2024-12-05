@@ -97,13 +97,14 @@ export default function ShareButton({
       <DialogTrigger asChild>
         <Button
           variant="ghost"
+          size="lg"
           className={cn(
-            "flex items-center gap-2 rounded-full bg-white/20 px-6 py-3 backdrop-blur-sm hover:bg-white/30",
+            "flex items-center gap-2 rounded-full bg-white/20 px-6 backdrop-blur-sm hover:bg-white/30",
             className,
           )}
         >
-          <Share className="h-5 w-5" />
-          <span>Share this story</span>
+          <Share className="h-6 w-6" />
+          <span>Share </span>
         </Button>
       </DialogTrigger>
       <DialogContent className="w-[300px] p-0">

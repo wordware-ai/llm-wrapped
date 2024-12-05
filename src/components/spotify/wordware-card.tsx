@@ -1,27 +1,26 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import { type ReactNode } from "react";
 import ShareButton from "../share";
 
 export default function WordwareCard({
   children,
+  Animation,
   fillColor,
   backgroundColor,
   className,
   show = true,
   wide = false,
-  hideHashtag = false,
   hideShare = false,
 }: {
   children: ReactNode;
+  Animation?: JSX.Element;
   fillColor?: string;
   backgroundColor?: string;
   className: string;
   show?: boolean;
   wide?: boolean;
-  hideHashtag?: boolean;
   hideShare?: boolean;
 }) {
   return (
@@ -33,45 +32,33 @@ export default function WordwareCard({
         )}
         style={{ backgroundColor }}
       >
-        <motion.div
+        {Animation && <div className="z-10">{Animation}</div>}
+        <div
           className={cn(
             "absolute left-0 top-0 w-full gap-[7px] px-2",
             wide ? "grid md:grid-cols-2" : "flex flex-col",
           )}
-          initial={{ x: "-100%" }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
         >
           {Array.from({ length: 15 }).map((_, i) => (
             <WordwareLogo key={i} fillColor={fillColor} />
           ))}
-        </motion.div>
-        <div className={cn("z-10", (!hideShare || !hideHashtag) && "pb-24")}>
-          {children}
         </div>
-
-        {!hideShare && (
-          <div
-            className={cn(
-              "absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center",
+        <div className="z-10 flex h-full flex-col justify-between">
+          <p className="text-[2.5vh] text-white">#LLMwrapped</p>
+          <div className="flex flex-col gap-20">
+            {children}
+            {!hideShare && (
+              <div
+                className={cn("flex w-full items-center justify-center")}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <ShareButton className="text-white hover:text-white/80">
+                  Share
+                </ShareButton>
+              </div>
             )}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <ShareButton className="text-white hover:text-white/80">
-              Share
-            </ShareButton>
           </div>
-        )}
-        {!hideHashtag && (
-          <p
-            className={cn(
-              "absolute left-8 z-[10] text-white",
-              !hideShare ? "bottom-20 text-lg" : "bottom-8",
-            )}
-          >
-            #LLMwrapped
-          </p>
-        )}
+        </div>
       </div>
     )
   );

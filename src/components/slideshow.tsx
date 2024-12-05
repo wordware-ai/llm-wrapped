@@ -46,9 +46,8 @@ export default function SlideShow() {
   const slides = useMemo(() => {
     return Object.entries(results).map(([key, value]) => {
       // Find the card config for this result
-      // const serviceCards =
-      //   getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
-      const serviceCards = spotifyConfig;
+      const serviceCards =
+        getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
 
       const cardConfig = serviceCards.find((card) => card.data.id === key);
 
@@ -58,6 +57,7 @@ export default function SlideShow() {
         bgColor: cardConfig?.data.bgColor,
         fillColor: cardConfig?.data.fillColor,
         Component: cardConfig?.Component,
+        Animation: cardConfig?.Animation,
       };
     });
   }, [results, getServiceType]);
@@ -158,6 +158,7 @@ export default function SlideShow() {
           className={cn(
             "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] lg:rounded-xl",
           )}
+          Animation={currentSlideData.Animation}
           backgroundColor={currentSlideData.bgColor}
           fillColor={currentSlideData.fillColor}
           hideShare={!username}

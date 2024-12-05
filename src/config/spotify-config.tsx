@@ -6,6 +6,8 @@ import {
   TextCard,
   TitleCard,
 } from "@/components/story-cards";
+import { animationConfig } from "./animation-config";
+import { Animation } from "@/components/animation";
 
 export const spotifyConfig: CardItem[] = [
   {
@@ -15,6 +17,12 @@ export const spotifyConfig: CardItem[] = [
       fillColor: "#43937F",
     },
     Component: TextCard,
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
@@ -23,6 +31,12 @@ export const spotifyConfig: CardItem[] = [
       fillColor: "#D673AB",
     },
     Component: TextCard,
+    Animation: (
+      <Animation
+        className="right-20 top-20 size-[200px]"
+        animationData={animationConfig.animation2}
+      />
+    ),
   },
   {
     data: {
@@ -38,6 +52,12 @@ export const spotifyConfig: CardItem[] = [
         description={result.value as string}
       />
     ),
+    Animation: (
+      <Animation
+        className="right-0 top-0 size-[250px]"
+        animationData={animationConfig.animation3}
+      />
+    ),
   },
   {
     data: {
@@ -46,6 +66,12 @@ export const spotifyConfig: CardItem[] = [
       fillColor: "#D8924C",
     },
     Component: TextCard,
+    Animation: (
+      <Animation
+        className="-bottom-[350px] size-[500px]"
+        animationData={animationConfig.animation4}
+      />
+    ),
   },
   {
     data: {
@@ -57,6 +83,12 @@ export const spotifyConfig: CardItem[] = [
       <TitleCard
         title="Lyric Therapy Needed"
         description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="-bottom-36 right-0 size-[400px]"
+        animationData={animationConfig.animation5}
       />
     ),
   },
@@ -74,6 +106,12 @@ export const spotifyConfig: CardItem[] = [
         valueColor="#6F0FA7"
       />
     ),
+    Animation: (
+      <Animation
+        className="-left-40 top-40 size-[1000px]"
+        animationData={animationConfig.animation6}
+      />
+    ),
   },
   {
     data: {
@@ -87,6 +125,12 @@ export const spotifyConfig: CardItem[] = [
         value={String(result.level)}
         description={String(result.description)}
         valueColor="#5F7118"
+      />
+    ),
+    Animation: (
+      <Animation
+        className="right-0 top-0 size-[300px]"
+        animationData={animationConfig.animation7}
       />
     ),
   },
@@ -104,6 +148,12 @@ export const spotifyConfig: CardItem[] = [
         valueColor="#182571"
       />
     ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
@@ -115,6 +165,12 @@ export const spotifyConfig: CardItem[] = [
       <TitleCard
         title="Dance Floor Credibility"
         description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
       />
     ),
   },
@@ -130,6 +186,12 @@ export const spotifyConfig: CardItem[] = [
         description={result.value as string}
       />
     ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
@@ -143,6 +205,12 @@ export const spotifyConfig: CardItem[] = [
         description={result.value as string}
       />
     ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
@@ -154,6 +222,12 @@ export const spotifyConfig: CardItem[] = [
       <TitleCard
         title="Guilty Pleasure Song"
         description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
       />
     ),
   },
@@ -171,6 +245,12 @@ export const spotifyConfig: CardItem[] = [
         description={result.value as string}
       />
     ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
@@ -186,6 +266,12 @@ export const spotifyConfig: CardItem[] = [
         description={result.value as string}
       />
     ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
@@ -197,6 +283,12 @@ export const spotifyConfig: CardItem[] = [
       <TitleCard
         title="Time Machine Status"
         description={result.value as string}
+      />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
       />
     ),
   },
@@ -212,6 +304,12 @@ export const spotifyConfig: CardItem[] = [
         description={result.value as string}
       />
     ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
@@ -222,6 +320,12 @@ export const spotifyConfig: CardItem[] = [
     Component: ({ result }: CardComponentProps) => (
       <TitleCard title="Final Diagnosis" description={result.value as string} />
     ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
+    ),
   },
   {
     data: {
@@ -231,6 +335,12 @@ export const spotifyConfig: CardItem[] = [
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard title="Recommendation" description={result.value as string} />
+    ),
+    Animation: (
+      <Animation
+        className="top-20"
+        animationData={animationConfig.animation1}
+      />
     ),
   },
 ];
