@@ -4,15 +4,19 @@ import { z } from "zod";
 import { type Experience, LinkedInProfileSchema } from "./schemas";
 import { convertLinkedinDataToMarkdown } from "@/lib/convert-to-markdown";
 
+const triggerScrapeResponseSchema = z.object({
+  snapshot_id: z.string(),
+});
+
 export const linkedinApiRouter = createTRPCRouter({
-  getUserData: publicProcedure
+  // First endpoint to trigger the scraping
+  triggerScrape: publicProcedure
     .input(
       z.object({
         linkedinUrl: z.string(),
       }),
     )
-    .query(async ({ input }) => {
-      // First request to trigger the scraping
+    .mutation(async ({ input }) => {
       const triggerResponse = await fetch(
         "https://api.brightdata.com/datasets/v3/trigger?dataset_id=gd_l1viktl72bvl7bjuj0&include_errors=true",
         {
@@ -25,18 +29,22 @@ export const linkedinApiRouter = createTRPCRouter({
         },
       );
 
-      const triggerData = (await triggerResponse.json()) as unknown;
-      const snapshotId = triggerData.snapshot_id;
+      const rawData = (await triggerResponse.json()) as unknown;
+      const triggerData = triggerScrapeResponseSchema.parse(rawData);
 
-      console.log(triggerData);
-      console.log(snapshotId);
+      return triggerData.snapshot_id;
+    }),
 
-      // Wait 10 seconds before fetching the snapshot data
-      await new Promise((resolve) => setTimeout(resolve, 40000));
-
-      // Second request to get the data using the snapshot ID
+  // Second endpoint to fetch the scraped data
+  getScrapedData: publicProcedure
+    .input(
+      z.object({
+        snapshotId: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
       const dataResponse = await fetch(
-        `https://api.brightdata.com/datasets/v3/snapshot/${snapshotId}?format=json`,
+        `https://api.brightdata.com/datasets/v3/snapshot/${input.snapshotId}?format=json`,
         {
           headers: {
             Authorization: `Bearer ${env.BRIGHTDATA_API_KEY}`,
@@ -44,12 +52,20 @@ export const linkedinApiRouter = createTRPCRouter({
         },
       );
 
-      const rawData = (await dataResponse.json()) as unknown[];
-      console.log(rawData);
+      // If status is 202, data is not ready yet
+      if (dataResponse.status === 202) {
+        return null;
+      }
 
-      // Parse the response with our schema
+      const rawData = (await dataResponse.json()) as unknown[];
+
+      // If no data, throw an error
+      if (!rawData || rawData.length === 0) {
+        throw new Error("No data found");
+      }
+
+      // Rest of your existing processing logic
       const linkedinData = LinkedInProfileSchema.parse(rawData[0]);
-      console.log(linkedinData);
 
       const getCurrentCompanyImageUrl = (experience?: Experience[]) => {
         if (!experience) return null;

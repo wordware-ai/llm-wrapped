@@ -1,6 +1,5 @@
 import { LinkedInResults } from "@/components/linkedin/linkedin-results";
 import { api } from "@/trpc/server";
-import { Suspense } from "react";
 
 export default async function LinkedInResultsPage({
   params,
@@ -13,18 +12,11 @@ export default async function LinkedInResultsPage({
   });
 
   let profileData;
-  let llmData;
+  let snapshotId: string | undefined;
   if (!linkedinResult) {
-    const allData = await api.linkedinApi.getUserData({
+    snapshotId = await api.linkedinApi.triggerScrape({
       linkedinUrl: `https://www.linkedin.com/in/${(await params).username}`,
     });
-    llmData = allData?.linkedinData;
-    profileData = {
-      imageUrl: allData?.imageUrl ?? undefined,
-      name: allData?.name ?? undefined,
-      username,
-      currentPositionImageUrl: allData?.currentCompanyImageUrl ?? undefined,
-    };
   } else {
     profileData = {
       imageUrl: linkedinResult.imageUrl ?? undefined,
@@ -35,15 +27,11 @@ export default async function LinkedInResultsPage({
     };
   }
 
-  console.log("profileData", profileData);
-
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <LinkedInResults
-        linkedinResult={linkedinResult}
-        llmData={llmData}
-        profileData={profileData}
-      />
-    </Suspense>
+    <LinkedInResults
+      linkedinResult={linkedinResult}
+      snapshotId={snapshotId}
+      initialProfileData={profileData}
+    />
   );
 }
