@@ -99,7 +99,7 @@ export const TitleCard = ({
   description: string;
 }) => {
   return (
-    <div className="flex flex-col gap-[3vh] sm:gap-[2vh]">
+    <div className="z-10 flex flex-col gap-[3vh] sm:gap-[2vh]">
       <h3 className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]">
         {title}
       </h3>

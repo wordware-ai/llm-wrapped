@@ -4,6 +4,7 @@ import { wordwareConfig } from "@/config/wordware-config";
 import { parseAsInteger, useQueryState } from "nuqs";
 import SlideshowShell from "./slideshow-shell";
 import Image from "next/image";
+import { TextCard, TitleCard } from "./story-cards";
 
 export default function WordwareSlideshow() {
   const [currentSlide] = useQueryState("slide", parseAsInteger);
@@ -18,7 +19,7 @@ export default function WordwareSlideshow() {
   if (!slideData) return null;
 
   const slideContent = (
-    <div className="relative flex aspect-[4/7] items-center overflow-hidden rounded-lg bg-[#1A1A1A] p-8">
+    <div className="relative flex aspect-[4/7] items-start overflow-hidden rounded-lg bg-[#1A1A1A] p-8 pt-56">
       <Image
         src={"/images/story-background.png"}
         alt={slideData.title}
@@ -26,11 +27,7 @@ export default function WordwareSlideshow() {
         className="object-cover"
         priority
       />
-      <div className="absolute inset-0 bg-black/40" />
-      <div className="relative z-10">
-        <h2 className="text-2xl font-bold text-white">{slideData.title}</h2>
-        <p className="max-w-2xl text-gray-200">{slideData.description}</p>
-      </div>
+      <TitleCard title={slideData.title} description={slideData.description} />
     </div>
   );
 

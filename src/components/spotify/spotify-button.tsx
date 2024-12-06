@@ -27,7 +27,7 @@ export function SpotifyButton() {
 
   return session ? (
     <Link
-      href={`/${session.user.user_metadata.name}`}
+      href={`/spotify/${session.user.user_metadata.name}`}
       className={cn(buttonVariants(), "w-min bg-green-500 hover:bg-green-600")}
     >
       View Your Results
