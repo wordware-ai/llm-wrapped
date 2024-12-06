@@ -86,11 +86,11 @@ export function SpotifyResults({
         card1text: results.short_summary as string,
         card2: {
           title: "Top Artist",
-          text: results.music_taste_analysis_2 as string,
+          text: results.music_taste_analysis_1 as string,
           imageUrl: profileData?.topArtistImageUrl ?? "",
           href: profileData?.topArtistUrl ?? undefined,
         },
-        card3text: results.music_taste_analysis_1 as string,
+        card3text: results.music_taste_analysis_2 as string,
         storyHref: `/spotify/${user.username}?name=wordware&slide=1`,
       }}
     />

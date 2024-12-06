@@ -33,7 +33,7 @@ export function SideCards({
         <WordwareCard
           hideShare
           show={!!card2.text}
-          className="h-full w-full rounded-xl bg-[#1A1A1A]"
+          className="h-full w-1/2 rounded-xl bg-[#1A1A1A]"
         >
           <div className="flex flex-col items-center justify-center gap-4">
             <h3 className="text-4xl font-semibold text-white">{card2.title}</h3>
@@ -63,22 +63,31 @@ export function SideCards({
             <p className="text-center text-2xl text-white">{card2.text}</p>
           </div>
         </WordwareCard>
-        <div className="h-full w-full rounded-xl">
+        <div className="h-full w-1/2 rounded-xl">
           <div className="flex h-full w-full flex-col gap-4">
             <WordwareCard
               hideShare
               show={!!card3text}
-              className="h-2/3 w-full rounded-xl bg-[#1A1A1A]"
+              className="h-full w-full rounded-xl bg-[#1A1A1A]"
             >
               <p className="text-center text-2xl text-white">{card3text}</p>
             </WordwareCard>
             {!!card3text && (
-              <div className="flex h-1/3 w-full items-center justify-between gap-4 rounded-xl border p-4">
-                <p className="">
-                  LLMwrapped has been built with Wordware - the ultimate AI
-                  operating system
-                </p>
-                <WordwareStory href={storyHref} />
+              <div className="relative flex h-40 w-full items-center justify-between gap-4 overflow-hidden rounded-xl border p-4">
+                <Image
+                  src="/images/card-background.png"
+                  alt="Background"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="relative z-10 flex w-full items-center justify-between gap-4">
+                  <p className="text-white">
+                    LLMwrapped has been built with Wordware - the ultimate AI
+                    operating system
+                  </p>
+                  <WordwareStory href={storyHref} />
+                </div>
               </div>
             )}
           </div>
