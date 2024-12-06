@@ -52,6 +52,9 @@ export const spotifyExamples = {
         "https://upload.wikimedia.org/wikipedia/en/thumb/4/42/Beatles_-_Abbey_Road.jpg/220px-Beatles_-_Abbey_Road.jpg",
       leastPopularImageUrl:
         "https://store.bluenote.com/cdn/shop/files/NJVisionscoverFinal.jpg?v=1705586453",
+      topArtistUrl: "https://open.spotify.com/artist/0ECwFtbIWEVNwjlrfc6xoL",
+      leastPopularUrl: "https://open.spotify.com/artist/2Kx7MNY7cI1ENniW7vT30N",
+      mostPopularUrl: "https://open.spotify.com/artist/3WrFJ7ztbogyGnTHbHJFl2",
     },
   },
   trump: {
@@ -107,6 +110,9 @@ export const spotifyExamples = {
         "https://d3i6fh83elv35t.cloudfront.net/newshour/app/uploads/2015/12/GettyImages-85339538-1024x889.jpg",
       leastPopularImageUrl:
         "https://media.newyorker.com/photos/5909771c2179605b11ad8664/3:4/w_1612,h_2149,c_limit/Petrusich-Sinead-OConnor.jpg",
+      topArtistUrl: "https://open.spotify.com/artist/1Mxqyy3pSjf8kZZL4QVxS0",
+      leastPopularUrl: "https://open.spotify.com/artist/4sD9znwiVFx9cgRPZ42aQ1",
+      mostPopularUrl: "https://open.spotify.com/artist/1Mxqyy3pSjf8kZZL4QVxS0",
     },
   },
   elon: {
@@ -161,6 +167,9 @@ export const spotifyExamples = {
       mostPopularImageUrl: "https://assets.soundgym.co/posts/9UECJ9.jpg",
       leastPopularImageUrl:
         "https://hips.hearstapps.com/hmg-prod/images/johann-sebastian-bach-gettyimages-51246888.jpg?crop=1xw:0.74971450323563xh;center,top&resize=1200:*",
+      topArtistUrl: "https://open.spotify.com/artist/5IxfhXIHjAOAqibxl90NZO",
+      leastPopularUrl: "https://open.spotify.com/artist/5aIqB5nVVvmFsvSdExz408",
+      mostPopularUrl: "https://open.spotify.com/artist/1dfeR4HaWDbWqFHLkxsg1d",
     },
   },
   kanye: {
@@ -215,63 +224,12 @@ export const spotifyExamples = {
       mostPopularImageUrl:
         "https://ew.com/thmb/1qOQY-fHmKznauBqAZXTyPswhIY=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Kanye-West-9187f0273e7e43a2866b6ec2b5aa7ae2.jpg",
       leastPopularImageUrl: "https://i.ytimg.com/vi/zYwCmcB0XMw/hqdefault.jpg",
+      topArtistUrl: "https://open.spotify.com/artist/5K4W6rqBFWDnAN6FQUkS6x",
+      leastPopularUrl: "https://open.spotify.com/artist/4tIho9pMqcQ2EBSwwblrse",
+      mostPopularUrl: "https://open.spotify.com/artist/5K4W6rqBFWDnAN6FQUkS6x",
     },
   },
-  // sam: {
-  //   short_summary:
-  //     "Ah, the Silicon Valley's most pretentious playlist curator! Your music taste screams 'I think I'm too intellectual for lyrics' while secretly practicing robot dance moves to Daft Punk in your office.",
-  //   music_taste_analysis_1:
-  //     "Max Richter? Really? Nothing says 'I'm a tech CEO with an existential crisis' quite like recomposed classical music.",
-  //   music_taste_analysis_2:
-  //     "Your playlist is what an AI would create if you asked it to 'make music that sounds important'.",
-  //   music_taste_analysis_3:
-  //     "More instrumental tracks than a dentist's waiting room. At least your AI won't interrupt the background music.",
-  //   lyric_therapy_needed:
-  //     "When your most emotional song is literally called 'An Ending', you might want to talk to someone about that. And not ChatGPT.",
-  //   identity_crisis_level: {
-  //     level: "CATASTROPHIC",
-  //     description:
-  //       "You're listening to 'Robot Rock' while trying to convince the world AI won't replace humans. The irony is delicious.",
-  //   },
-  //   emotional_stability_rating: {
-  //     level: "23/100",
-  //     description:
-  //       "Your playlists are named things like 'Machine Minds and Electronic Rhythms'. You're one Hans Zimmer track away from a supervillain origin story.",
-  //   },
-  //   achievement: {
-  //     title: "MOST PRETENTIOUS PLAYLIST CURATOR 2024",
-  //     description:
-  //       "Successfully created playlists that make even classical music sound like a tech startup pitch deck",
-  //   },
-  //   dance_floor_credibility:
-  //     "The only dancing you should do is the nervous shuffle at Congressional hearings about AI safety.",
-  //   song_you_would_hit_the_dance_floor:
-  //     "'Computer World' by Kraftwerk, but only because you think it's a PowerPoint presentation about binary code.",
-  //   songs_you_secretly_think_are_about_you:
-  //     "'Time' by Hans Zimmer - because nothing says 'I think I'm saving humanity' quite like dramatic orchestral swells while coding.",
-  //   guilty_pleasure_song:
-  //     "'Robot Rock' by Daft Punk - You probably think it's a documentary about OpenAI's workplace culture.",
-  //   least_popular_artist:
-  //     "The Glitch Mob - Your hot take on experimental electronic music that nobody asked for, just like your opinions on cryptocurrency.",
-  //   most_popular_artist:
-  //     "Hans Zimmer - Because apparently even your background music needs to feel like you're making world-changing decisions.",
-  //   time_machine_status:
-  //     "Stuck between pretending to appreciate 18th-century classical music and trying to sound futuristic with electronic beats. The present just isn't dramatic enough for you, is it?",
-  //   titles_that_need_therapy:
-  //     "'Machine Minds and Electronic Rhythms'? 'AI & Tech: A Soundscape'? Your playlist titles sound like rejected Black Mirror episodes.",
-  //   final_diagnosis:
-  //     "Severe case of Silicon Valley Protagonist Syndrome, complicated by an addiction to dramatic background music and an allergic reaction to lyrics.",
-  //   recommendation:
-  //     "Try listening to music with actual words sometimes. Maybe start with 'Help!' by The Beatles - seems appropriate.",
-  //   profileData: {
-  //     topArtistImageUrl:
-  //       "https://images.squarespace-cdn.com/content/v1/5745d9f137013b9d0a627c60/1682149408814-OZKE3ZBJH7EJ64G7TMSA/max-richter-the-creative-process-podcast-SQ.jpg?format=1500w",
-  //     mostPopularImageUrl:
-  //       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh_z7Y9bjWL__fUbn3vDeVvktMQc0p_xPuGg&s",
-  //     leastPopularImageUrl:
-  //       "https://travel.home.sndimg.com/content/dam/images/travel/fullrights/2018/6/25/Original_Jessica-Yonker_Bonnaroo-Arts-Music-Festival-2018_Glitch-Mob.jpg.rend.hgtvcom.616.462.suffix/1529947735886.jpeg",
-  //   },
-  // },
+
   taylor: {
     short_summary:
       "Ah, Taylor Swift - the queen of turning every minor inconvenience into a chart-topping breakup song while cosplaying as different music genres.",
@@ -325,6 +283,9 @@ export const spotifyExamples = {
         "https://upload.wikimedia.org/wikipedia/en/1/1f/Taylor_Swift_-_Taylor_Swift.png",
       leastPopularImageUrl:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDktOlAniJYGUbbIVgCiV6-lwkj-rWXD79Lg&s",
+      topArtistUrl: "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
+      leastPopularUrl: "https://open.spotify.com/artist/0Fq3mKaCm9ZtVABzgXeicF",
+      mostPopularUrl: "https://open.spotify.com/artist/06HL4z0CvFAxyc27GXpf02",
     },
   },
 };
