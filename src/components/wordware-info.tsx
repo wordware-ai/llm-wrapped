@@ -65,11 +65,11 @@ export default function WordwareInfo() {
         </div>
       </section>
 
-      <div className="mx-auto flex w-full max-w-3xl flex-col items-center justify-center gap-4 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-600/20 py-6 text-center text-2xl font-light">
+      <div className="mx-auto flex w-full max-w-3xl flex-col gap-6 rounded-xl bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-600/20 px-12 py-10 text-3xl font-light">
         <h2 className="font-medium">Ready to build your own AI agents?</h2>
-        <p className="max-w-xl text-gray-600">
-          Start building with Wordware today and create powerful AI applications
-          in record time.
+        <p className="max-w-xl text-2xl text-gray-600">
+          Start creating with Wordware today and design intelligent, powerful AI
+          agents in record time.
         </p>
       </div>
       <div className="flex flex-col justify-center gap-4 pb-20 sm:flex-row">

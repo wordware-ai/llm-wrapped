@@ -53,7 +53,7 @@ export default function SlideIndicator({
   }, [currentSlide, nextSlide, isPaused, pausedTime, startTime]);
 
   return (
-    <div className="absolute left-0 top-0 z-30 flex w-full gap-1 px-2 py-4">
+    <div className="fixed left-0 top-0 z-40 flex w-full gap-1 px-2 py-4 sm:absolute sm:px-6">
       {Array.from({ length: totalSlides }).map((_, index) => (
         <div
           key={index}

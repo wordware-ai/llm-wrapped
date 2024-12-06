@@ -73,10 +73,11 @@ export default function SlideShow() {
       Animation={currentSlideData.Animation}
       backgroundColor={currentSlideData.bgColor}
       fillColor={currentSlideData.fillColor}
-      className="fixed left-0 top-0 z-20 h-screen w-full select-none overflow-hidden rounded-none sm:relative sm:aspect-[4/7] sm:h-auto sm:w-auto sm:rounded-xl"
+      className="fixed left-0 top-0 -z-20 h-screen w-full select-none overflow-hidden rounded-none sm:relative sm:aspect-[4/7] sm:h-auto sm:w-auto sm:rounded-xl"
     >
       {currentSlideData.Component && (
         <currentSlideData.Component
+          key={currentSlideData.id}
           result={
             typeof currentSlideData.value === "object"
               ? (currentSlideData.value as Record<string, unknown>)

@@ -86,27 +86,24 @@ export default function SlideshowShell({
   const handleClick = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    const { clientX, currentTarget } = e;
-    const third = currentTarget.clientWidth / 3;
 
-    if (clientX > third * 2) {
-      await nextSlide();
-    } else if (clientX < third) {
+    // Calculate if click is in the left third of the screen
+    const clickX = e.clientX;
+    const screenWidth = window.innerWidth;
+    const isLeftThird = clickX < screenWidth / 3;
+
+    if (isLeftThird) {
       await previousSlide();
+    } else {
+      await nextSlide();
     }
   };
+
   return (
     <div
       className="fixed left-0 top-0 z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 sm:items-center md:p-6"
       onClick={exit}
     >
-      <X
-        className="absolute right-4 top-8 z-20 size-8 text-white hover:cursor-pointer md:top-4"
-        onClick={(e) => {
-          e.stopPropagation();
-          exit();
-        }}
-      />
       <ChevronLeft
         className={cn(
           "hidden size-7 rounded-full bg-zinc-600 pr-0.5 hover:cursor-pointer sm:block",
@@ -127,8 +124,15 @@ export default function SlideshowShell({
         onTouchEnd={() => setIsPaused(false)}
         className="h-[100dvh] sm:h-auto"
       >
-        <div className="aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] lg:rounded-xl">
-          <div className="relative">
+        <div className="relative aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] sm:rounded-xl">
+          <div className="relative z-40">
+            <X
+              className="fixed right-4 top-8 z-40 size-8 text-white hover:cursor-pointer md:top-4"
+              onClick={(e) => {
+                e.stopPropagation();
+                exit();
+              }}
+            />
             <SlideIndicator
               currentSlide={currentSlide}
               totalSlides={slidesLength}
