@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import WordwareCard from "./spotify/wordware-card";
 import WordwareStory from "./wordware-story";
+import { colorConfig } from "@/config/color-config";
 
 export function SideCards({
   card1text,
@@ -25,7 +26,9 @@ export function SideCards({
         wide
         hideShare
         show={!!card1text}
-        className="w-full rounded-xl bg-[#1A1A1A] md:h-[400px] lg:h-1/3"
+        backgroundColor={colorConfig.color1.bgColor}
+        fillColor={colorConfig.color1.fillColor}
+        className="w-full rounded-xl md:h-[400px] lg:h-1/3"
       >
         <p className="text-center text-2xl text-white">{card1text}</p>
       </WordwareCard>
@@ -33,7 +36,9 @@ export function SideCards({
         <WordwareCard
           hideShare
           show={!!card2.text}
-          className="h-full w-1/2 rounded-xl bg-[#1A1A1A]"
+          backgroundColor={colorConfig.color2.bgColor}
+          fillColor={colorConfig.color2.fillColor}
+          className="h-full w-1/2 rounded-xl"
         >
           <div className="flex flex-col items-center justify-center gap-4">
             <h3 className="text-4xl font-semibold text-white">{card2.title}</h3>
@@ -68,7 +73,9 @@ export function SideCards({
             <WordwareCard
               hideShare
               show={!!card3text}
-              className="h-full w-full rounded-xl bg-[#1A1A1A]"
+              backgroundColor={colorConfig.color3.bgColor}
+              fillColor={colorConfig.color3.fillColor}
+              className="h-full w-full rounded-xl"
             >
               <p className="text-center text-2xl text-white">{card3text}</p>
             </WordwareCard>

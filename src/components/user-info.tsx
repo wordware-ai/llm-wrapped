@@ -7,6 +7,8 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { BaseStory } from "./base-story";
+import { useStreamContext } from "./stream-provider";
+import Image from "next/image";
 
 export function UserInfo({
   username,
@@ -31,19 +33,33 @@ export function UserInfo({
     whatsapp: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`,
   };
 
+  const { results } = useStreamContext();
+
   return (
     <div className="flex flex-col justify-between gap-4 lg:w-1/2">
       <h1 className="text-5xl font-semibold text-muted-foreground xs:text-6xl sm:text-7xl md:text-8xl lg:text-7xl xl:text-8xl">
         #LLMwrapped
       </h1>
       <div className="flex gap-8 lg:gap-20">
-        <div className="flex w-min flex-col gap-4">
-          <BaseStory
-            className="size-36 p-1 lg:size-48 lg:p-2"
-            src={imageUrl}
-            alt="Spotify 1"
-            href={storyHref}
-          />
+        <div className="relative flex w-min flex-col gap-4">
+          {Object.keys(results || {}).length > 4 ? (
+            <BaseStory
+              className="size-36 p-1 lg:size-48 lg:p-2"
+              src={imageUrl}
+              alt="Spotify 1"
+              href={storyHref}
+            />
+          ) : (
+            <div className="aspect-square size-36 rounded-full bg-background object-cover lg:size-48">
+              <Image
+                src={imageUrl}
+                alt={name}
+                width={200}
+                height={200}
+                className="aspect-square h-full w-full rounded-full object-cover"
+              />
+            </div>
+          )}
           <p className="text-center text-xl font-semibold">{name}</p>
         </div>
         <div className="flex flex-col gap-8 lg:pt-[4.15em]">

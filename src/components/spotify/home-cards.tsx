@@ -4,17 +4,50 @@ import React, { useRef, useEffect, useState } from "react";
 import WordwareCard from "./wordware-card";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { colorConfig } from "@/config/color-config";
 
 const SCROLL_INTERVAL = 7000;
 const cards = [
-  "Your playlist screams'I learned about music from my mom's aerobics DVD collection.' You've got Madonna next to Zach Bryan - it's like putting caviar on a gas station hot dog.",
-  "The fact that you're listening to both 'Without Me' and 'My Heart Will Go On' suggests you're the kind of person who can't decide if they want to fight someone or dramatically stare out a rainy window.",
-  "Your career is like a DJ Khaled song - you just keep saying 'Another one' while moving from job to job. At least you're consistent at being inconsistent!",
-  "You'd probably try to mosh to 'This Charming Man' while attempting to hit the griddy to The Smiths. Please stay at least 100 feet away from any dance floor",
-  "Your playlist is like a time machine, but it's stuck in reverse. You've got more 80s hits than a high school reunion.",
-  "Listening to your playlist is like watching a movie with too many plot twists. One minute it's heavy metal, the next it's a Disney soundtrack.",
-  "Your music taste is so eclectic, it's like you threw a dart at a genre chart and decided to listen to whatever it landed on.",
-  "Your playlist is the musical equivalent of a mixed bag of jellybeans - you never know if you're going to get a sweet pop hit or a bitter breakup ballad.",
+  {
+    content:
+      "Your playlist screams'I learned about music from my mom's aerobics DVD collection.' You've got Madonna next to Zach Bryan - it's like putting caviar on a gas station hot dog.",
+    ...colorConfig.color1,
+  },
+  {
+    content:
+      "The fact that you're listening to both 'Without Me' and 'My Heart Will Go On' suggests you're the kind of person who can't decide if they want to fight someone or dramatically stare out a rainy window.",
+    ...colorConfig.color2,
+  },
+  {
+    content:
+      "Your career is like a DJ Khaled song - you just keep saying 'Another one' while moving from job to job. At least you're consistent at being inconsistent!",
+    ...colorConfig.color3,
+  },
+  {
+    content:
+      "You'd probably try to mosh to 'This Charming Man' while attempting to hit the griddy to The Smiths. Please stay at least 100 feet away from any dance floor",
+    ...colorConfig.color4,
+  },
+  {
+    content:
+      "Your playlist is like a time machine, but it's stuck in reverse. You've got more 80s hits than a high school reunion.",
+    ...colorConfig.color5,
+  },
+  {
+    content:
+      "Listening to your playlist is like watching a movie with too many plot twists. One minute it's heavy metal, the next it's a Disney soundtrack.",
+    ...colorConfig.color6,
+  },
+  {
+    content:
+      "Your music taste is so eclectic, it's like you threw a dart at a genre chart and decided to listen to whatever it landed on.",
+    ...colorConfig.color7,
+  },
+  {
+    content:
+      "Your playlist is the musical equivalent of a mixed bag of jellybeans - you never know if you're going to get a sweet pop hit or a bitter breakup ballad.",
+    ...colorConfig.color8,
+  },
 ];
 
 export default function HomeCards() {
@@ -133,7 +166,7 @@ export default function HomeCards() {
         }}
       >
         <div className="flex w-fit">
-          {duplicatedCards.map((content, index) => (
+          {duplicatedCards.map((card, index) => (
             <div
               key={`card-${index}`}
               className={cn(
@@ -141,9 +174,13 @@ export default function HomeCards() {
                 !isScrolling && "snap-start",
               )}
             >
-              <WordwareCard className={cn("w-full items-center")}>
+              <WordwareCard
+                className={cn("w-full items-center")}
+                backgroundColor={card.bgColor}
+                fillColor={card.fillColor}
+              >
                 <div className="z-10 self-start text-2xl text-white xl:text-2xl">
-                  {content}
+                  {card.content}
                 </div>
               </WordwareCard>
             </div>
