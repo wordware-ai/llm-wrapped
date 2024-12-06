@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 type CardData = {
   id: string;
@@ -18,6 +19,18 @@ export type CardItem = {
   Animation?: JSX.Element;
 };
 
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6 },
+};
+
+const scaleIn = {
+  initial: { scale: 0.9, opacity: 0 },
+  animate: { scale: 1, opacity: 1 },
+  transition: { duration: 0.5 },
+};
+
 export const MetricCard = ({
   title,
   value,
@@ -30,18 +43,35 @@ export const MetricCard = ({
   valueColor?: string;
 }) => {
   return (
-    <div className="flex h-full flex-col justify-center gap-[3vh] text-white sm:gap-[2vh]">
-      <p className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]">
+    <motion.div
+      className="flex h-full flex-col justify-center gap-[3vh] text-white sm:gap-[2vh]"
+      initial="initial"
+      animate="animate"
+      variants={{
+        initial: { opacity: 0 },
+        animate: { opacity: 1, transition: { staggerChildren: 0.1 } },
+      }}
+    >
+      <motion.p
+        variants={fadeInUp}
+        className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]"
+      >
         {title}
-      </p>
-      <div
+      </motion.p>
+      <motion.div
+        variants={scaleIn}
         style={{ color: valueColor }}
-        className="text-[8vh] font-semibold italic leading-tight sm:text-[8vh]"
+        className="break-all text-[6vh] font-semibold italic leading-tight"
       >
         {value}
-      </div>
-      <p className="text-[4vh] leading-tight sm:text-[3vh]">{description}</p>
-    </div>
+      </motion.div>
+      <motion.p
+        variants={fadeInUp}
+        className="text-[4vh] leading-tight sm:text-[3vh]"
+      >
+        {description}
+      </motion.p>
+    </motion.div>
   );
 };
 
@@ -57,18 +87,28 @@ export const ImageCard = ({
   description: string;
 }) => {
   const ImageComponent = (
-    <Image
-      src={imageUrl}
-      alt={title}
-      className="aspect-square rounded-lg object-cover"
-      width={200}
-      height={200}
-    />
+    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+      <Image
+        src={imageUrl}
+        alt={title}
+        className="aspect-square rounded-lg object-cover"
+        width={200}
+        height={200}
+      />
+    </motion.div>
   );
 
   return (
-    <div className="flex flex-col gap-[3vh] sm:gap-[2vh]">
-      <div className="flex">
+    <motion.div
+      className="flex flex-col gap-[3vh] sm:gap-[2vh]"
+      initial="initial"
+      animate="animate"
+      variants={{
+        initial: { opacity: 0 },
+        animate: { opacity: 1, transition: { staggerChildren: 0.1 } },
+      }}
+    >
+      <motion.div variants={scaleIn} className="flex">
         {url ? (
           <Link
             href={url}
@@ -80,14 +120,20 @@ export const ImageCard = ({
         ) : (
           ImageComponent
         )}
-      </div>
-      <h3 className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]">
+      </motion.div>
+      <motion.h3
+        variants={fadeInUp}
+        className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]"
+      >
         {title}
-      </h3>
-      <p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
+      </motion.h3>
+      <motion.p
+        variants={fadeInUp}
+        className="text-[4vh] leading-tight text-white sm:text-[3vh]"
+      >
         {description}
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
   );
 };
 
@@ -99,23 +145,42 @@ export const TitleCard = ({
   description: string;
 }) => {
   return (
-    <div className="z-10 flex flex-col gap-[3vh] sm:gap-[2vh]">
-      <h3 className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]">
+    <motion.div
+      className="z-10 flex flex-col gap-[3vh] sm:gap-[2vh]"
+      initial="initial"
+      animate="animate"
+      variants={{
+        initial: { opacity: 0 },
+        animate: { opacity: 1, transition: { staggerChildren: 0.1 } },
+      }}
+    >
+      <motion.h3
+        variants={fadeInUp}
+        className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]"
+      >
         {title}
-      </h3>
-      <p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
+      </motion.h3>
+      <motion.p
+        variants={fadeInUp}
+        className="text-[4vh] leading-tight text-white sm:text-[3vh]"
+      >
         {String(description)}
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
   );
 };
 
 export const TextCard = ({ result }: { result: Record<string, unknown> }) => {
   return (
-    <div className="flex flex-col gap-[3vh] sm:gap-[2vh]">
-      <p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
+    <motion.div
+      className="flex flex-col gap-[3vh] sm:gap-[2vh]"
+      initial="initial"
+      animate="animate"
+      variants={fadeInUp}
+    >
+      <motion.p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
         {result.value as string}
-      </p>
-    </div>
+      </motion.p>
+    </motion.div>
   );
 };

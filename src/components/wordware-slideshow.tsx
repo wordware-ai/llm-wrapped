@@ -19,7 +19,7 @@ export default function WordwareSlideshow() {
   if (!slideData) return null;
 
   const slideContent = (
-    <div className="relative flex aspect-[4/7] items-start overflow-hidden rounded-xl bg-[#1A1A1A] p-8 pt-56">
+    <div className="relative flex h-screen items-start overflow-hidden bg-[#1A1A1A] p-8 pt-56 sm:aspect-[4/7] sm:rounded-xl">
       <Image
         src={"/images/story-background.png"}
         alt={slideData.title}
@@ -28,7 +28,11 @@ export default function WordwareSlideshow() {
         className="object-cover object-[center_20%]"
         priority
       />
-      <TitleCard title={slideData.title} description={slideData.description} />
+      <TitleCard
+        key={currentSlide}
+        title={slideData.title}
+        description={slideData.description}
+      />
     </div>
   );
 

@@ -25,12 +25,12 @@ export const spotifyConfig: CardItem[] = [
       fillColor: "#43937F",
     },
     Component: TextCard,
-    Animation: (
-      <ClientAnimation
-        className="top-20"
-        animationData={animationConfig.animation1}
-      />
-    ),
+    // Animation: (
+    //   <ClientAnimation
+    //     className="top-20"
+    //     animationData={animationConfig.animation1}
+    //   />
+    // ),
   },
   {
     data: {
@@ -39,12 +39,12 @@ export const spotifyConfig: CardItem[] = [
       fillColor: "#D673AB",
     },
     Component: TextCard,
-    Animation: (
-      <ClientAnimation
-        className="right-20 top-20 size-[200px]"
-        animationData={animationConfig.animation2}
-      />
-    ),
+    // Animation: (
+    //   <ClientAnimation
+    //     className="right-20 top-20 size-[200px]"
+    //     animationData={animationConfig.animation2}
+    //   />
+    // ),
   },
   {
     data: {
@@ -60,12 +60,12 @@ export const spotifyConfig: CardItem[] = [
         description={result.value as string}
       />
     ),
-    Animation: (
-      <ClientAnimation
-        className="right-0 top-0 size-[250px]"
-        animationData={animationConfig.animation3}
-      />
-    ),
+    // Animation: (
+    //   <ClientAnimation
+    //     className="right-0 top-0 size-[250px]"
+    //     animationData={animationConfig.animation3}
+    //   />
+    // ),
   },
   {
     data: {
@@ -74,12 +74,12 @@ export const spotifyConfig: CardItem[] = [
       fillColor: "#D8924C",
     },
     Component: TextCard,
-    Animation: (
-      <ClientAnimation
-        className="-bottom-[350px] size-[500px]"
-        animationData={animationConfig.animation4}
-      />
-    ),
+    // Animation: (
+    //   <ClientAnimation
+    //     className="-bottom-[350px] size-[500px]"
+    //     animationData={animationConfig.animation4}
+    //   />
+    // ),
   },
   {
     data: {
@@ -93,12 +93,12 @@ export const spotifyConfig: CardItem[] = [
         description={result.value as string}
       />
     ),
-    Animation: (
-      <ClientAnimation
-        className="-bottom-36 right-0 size-[400px]"
-        animationData={animationConfig.animation5}
-      />
-    ),
+    // Animation: (
+    //   <ClientAnimation
+    //     className="-bottom-36 right-0 size-[400px]"
+    //     animationData={animationConfig.animation5}
+    //   />
+    // ),
   },
   {
     data: {
@@ -114,12 +114,12 @@ export const spotifyConfig: CardItem[] = [
         valueColor="#6F0FA7"
       />
     ),
-    Animation: (
-      <ClientAnimation
-        className="-left-40 top-40 size-[1000px]"
-        animationData={animationConfig.animation6}
-      />
-    ),
+    // Animation: (
+    //   <ClientAnimation
+    //     className="-left-40 top-40 size-[1000px]"
+    //     animationData={animationConfig.animation6}
+    //   />
+    // ),
   },
   {
     data: {
@@ -135,12 +135,12 @@ export const spotifyConfig: CardItem[] = [
         valueColor="#5F7118"
       />
     ),
-    Animation: (
-      <ClientAnimation
-        className="right-0 top-0 size-[300px]"
-        animationData={animationConfig.animation7}
-      />
-    ),
+    // Animation: (
+    //   <ClientAnimation
+    //     className="right-0 top-0 size-[300px]"
+    //     animationData={animationConfig.animation7}
+    //   />
+    // ),
   },
   {
     data: {
