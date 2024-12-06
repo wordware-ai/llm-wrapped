@@ -179,17 +179,15 @@ export default function ShareButton({
       </Button>
 
       {isOpen && (
-        <div className="absolute bottom-60 left-1/2 z-[10] w-[325px] -translate-x-1/2 translate-y-full rounded-xl bg-zinc-900 pb-10 shadow-lg">
-          <div className="flex items-center justify-between border-b border-zinc-800 p-4">
-            <h2 className="text-white">Share</h2>
-            <Button
-              variant="ghost"
-              className="h-auto p-0"
+        <div className="absolute bottom-52 left-1/2 z-[10] w-[90vw] max-w-[500px] -translate-x-1/2 translate-y-full rounded-xl bg-zinc-900 pb-10 shadow-lg">
+          <div className="flex justify-center pt-4">
+            <button
               onClick={() => setIsOpen(false)}
-            >
-              <X className="h-6 w-6 text-white" />
-            </Button>
+              className="h-1 w-10 rounded-full bg-zinc-600 hover:bg-zinc-500"
+              aria-label="Close share menu"
+            />
           </div>
+
           <div className="grid gap-4 p-4">
             {shareOptions.map((row, rowIndex) => (
               <div key={rowIndex} className="flex justify-center gap-4">
