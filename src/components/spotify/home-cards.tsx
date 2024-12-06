@@ -98,7 +98,7 @@ export default function HomeCards() {
   return (
     <div className="relative sm:px-4 xl:px-16">
       <button
-        className="absolute left-0 top-1/2 z-[20] block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+        className="absolute left-0 top-1/2 z-[10] block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
         onClick={() => {
           if (!scrollRef.current) return;
           const cardElement = scrollRef.current.firstElementChild
@@ -111,7 +111,7 @@ export default function HomeCards() {
       </button>
 
       <button
-        className="absolute right-0 top-1/2 z-[20] block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+        className="absolute right-0 top-1/2 z-[10] block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
         onClick={() => {
           if (!scrollRef.current) return;
           const cardElement = scrollRef.current.firstElementChild
