@@ -15,7 +15,13 @@ export default function Navbar() {
       </Link>
       <div className="hidden gap-2 md:flex">
         <Button variant="outline">See rankings</Button>
-        <Button>How was it made?</Button>
+        <Link
+          className={cn(buttonVariants({ variant: "default" }))}
+          target="_blank"
+          href="https://app.wordware.ai/explore/apps/45bf050b-4223-45c1-9fd6-a2d6c6b2ac1d"
+        >
+          Build your own
+        </Link>
         {/* <DeleteAccountButton /> */}
       </div>
       <Sheet open={open} onOpenChange={setOpen}>
@@ -31,7 +37,13 @@ export default function Navbar() {
             <Button variant="outline" onClick={() => setOpen(false)}>
               See rankings
             </Button>
-            <Button onClick={() => setOpen(false)}>How was it made?</Button>
+            <Link
+              className={cn(buttonVariants({ variant: "default" }))}
+              target="_blank"
+              href="https://app.wordware.ai/explore/apps/45bf050b-4223-45c1-9fd6-a2d6c6b2ac1d"
+            >
+              Build your own
+            </Link>
           </div>
         </SheetContent>
       </Sheet>

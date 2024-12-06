@@ -6,7 +6,9 @@ export default function WordwareInfo() {
   return (
     <div className="flex flex-col gap-12 px-4">
       <section className="mx-auto flex max-w-3xl flex-col gap-8 text-left">
-        <h1 className="text-3xl font-medium">Why did we build #LLMwrapped?</h1>
+        <h1 className="text-4xl font-medium text-zinc-600">
+          Why did we build #LLMwrapped?
+        </h1>
 
         <div className="flex flex-col gap-8 text-3xl font-light leading-10 text-gray-400">
           <p>
@@ -14,7 +16,7 @@ export default function WordwareInfo() {
             on wordware.
           </p>
 
-          <h2 className="font-medium text-black">word... what?</h2>
+          <h2 className="text-4xl font-medium text-zinc-600">word... what?</h2>
 
           <p>
             wordware – the ultimate AI operating system, designed to build AI
@@ -25,10 +27,13 @@ export default function WordwareInfo() {
             in just 2 days, our team of 4 completed exactly 3,529 prompt
             iterations (using different techniques) and tested 7
             models—unlocking efficiency and creativity that wouldn&apos;t have
-            been possible without wordware. (seriously, without a proper
-            solution, we&apos;d still be drowning in endless back-and-forths and
-            getting those classic passive-aggressive &quot;noted&quot; replies
-            from engineers every time we needed a tiny prompt tweak.)
+            been possible without wordware.
+            <br />
+            <br />
+            seriously, without a proper solution, we&apos;d still be drowning in
+            endless back-and-forths and getting those classic passive-aggressive
+            &quot;noted&quot; replies from engineers every time we needed a tiny
+            prompt tweak.
           </p>
 
           <div>
@@ -36,19 +41,25 @@ export default function WordwareInfo() {
               this isn&apos;t our first wordware showcase—check out what else
               we&apos;ve built:
             </p>
-            <div className="flex flex-col gap-2">
-              <Link
-                href="https://twitter.wordware.ai"
-                className="hover:underline"
-              >
-                • twitter.wordware.ai
-              </Link>
-              <Link
-                href="https://audioscribe.wordware.ai"
-                className="hover:underline"
-              >
-                • audioscribe.wordware.ai
-              </Link>
+            <div className="flex flex-col gap-2 pl-8">
+              <div className="flex items-center gap-2">
+                <span>•</span>
+                <Link
+                  href="https://twitter.wordware.ai"
+                  className="hover:underline"
+                >
+                  twitter.wordware.ai
+                </Link>
+              </div>
+              <div className="flex items-center gap-2">
+                <span>•</span>
+                <Link
+                  href="https://audioscribe.wordware.ai"
+                  className="hover:underline"
+                >
+                  audioscribe.wordware.ai
+                </Link>
+              </div>
             </div>
           </div>
         </div>

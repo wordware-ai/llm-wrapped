@@ -26,7 +26,6 @@ export function SideCards({
   return (
     <div className="flex flex-col justify-between gap-4 lg:h-full lg:w-1/2">
       <WordwareCard
-        wide
         hideShare
         show={!!card1text}
         backgroundColor={colorConfig.color1.bgColor}

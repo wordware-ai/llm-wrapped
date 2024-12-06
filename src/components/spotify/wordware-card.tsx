@@ -12,8 +12,8 @@ export default function WordwareCard({
   backgroundColor,
   className,
   show = true,
-  wide = false,
   hideShare = false,
+  hideHashtag = false,
 }: {
   children: ReactNode;
   Animation?: JSX.Element;
@@ -21,8 +21,8 @@ export default function WordwareCard({
   backgroundColor?: string;
   className?: string;
   show?: boolean;
-  wide?: boolean;
   hideShare?: boolean;
+  hideHashtag?: boolean;
 }) {
   const baseClasses = cn(
     "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
@@ -46,7 +46,7 @@ export default function WordwareCard({
       <div
         className={cn(
           "absolute left-0 top-0 w-full gap-[7px] px-2",
-          wide ? "grid md:grid-cols-2" : "flex flex-col",
+          "flex flex-col",
         )}
       >
         {Array.from({ length: 15 }).map((_, i) => (
@@ -54,7 +54,7 @@ export default function WordwareCard({
         ))}
       </div>
       <div className="z-10 flex h-full flex-col justify-between">
-        <p className="text-[2.5vh] text-white">#LLMwrapped</p>
+        {!hideHashtag && <p className="text-[2.5vh] text-white">#LLMwrapped</p>}
         <div className="flex flex-col gap-20">
           {children}
           {!hideShare && (

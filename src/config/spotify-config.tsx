@@ -6,16 +6,16 @@ import {
   TextCard,
   TitleCard,
 } from "@/components/story-cards";
-import { animationConfig } from "./animation-config";
+// import { animationConfig } from "./animation-config";
 
-import dynamic from "next/dynamic";
+// import dynamic from "next/dynamic";
 
-const ClientAnimation = dynamic(
-  () => import("@/components/animation").then((mod) => mod.Animation),
-  {
-    ssr: false,
-  },
-);
+// const ClientAnimation = dynamic(
+//   () => import("@/components/animation").then((mod) => mod.Animation),
+//   {
+//     ssr: false,
+//   },
+// );
 
 export const spotifyConfig: CardItem[] = [
   {

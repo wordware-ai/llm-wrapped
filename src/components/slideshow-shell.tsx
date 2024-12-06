@@ -129,12 +129,12 @@ export default function SlideshowShell({
       >
         <div className="aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] lg:rounded-xl">
           <div className="relative">
-            {/* <SlideIndicator
+            <SlideIndicator
               currentSlide={currentSlide}
               totalSlides={slidesLength}
               nextSlide={nextSlide}
               isPaused={isPaused}
-            /> */}
+            />
             {children}
           </div>
         </div>
