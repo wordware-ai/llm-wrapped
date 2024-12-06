@@ -98,7 +98,7 @@ export default function HomeCards() {
   return (
     <div className="relative sm:px-4 xl:px-16">
       <button
-        className="absolute left-0 top-1/2 z-10 block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+        className="absolute left-0 top-1/2 z-[20] block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
         onClick={() => {
           if (!scrollRef.current) return;
           const cardElement = scrollRef.current.firstElementChild
@@ -107,11 +107,11 @@ export default function HomeCards() {
           scrollRef.current.scrollBy({ left: -cardWidth, behavior: "smooth" });
         }}
       >
-        <ChevronLeft className="h-6 w-6 text-black" />
+        <ChevronLeft className="z-[99] h-6 w-6 text-black" />
       </button>
 
       <button
-        className="absolute right-0 top-1/2 z-10 block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+        className="absolute right-0 top-1/2 z-[20] block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
         onClick={() => {
           if (!scrollRef.current) return;
           const cardElement = scrollRef.current.firstElementChild
@@ -141,7 +141,7 @@ export default function HomeCards() {
                 !isScrolling && "snap-start",
               )}
             >
-              <WordwareCard className={cn("w-full items-center")} hideShare>
+              <WordwareCard className={cn("w-full items-center")}>
                 <div className="z-10 self-start text-2xl text-white xl:text-2xl">
                   {content}
                 </div>
