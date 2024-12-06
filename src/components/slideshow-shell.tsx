@@ -139,7 +139,7 @@ export default function SlideshowShell({
               nextSlide={nextSlide}
               isPaused={isPaused}
             />
-            {children}
+            <div>{children}</div>
           </div>
         </div>
       </div>

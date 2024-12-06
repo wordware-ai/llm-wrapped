@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils";
 import { type ReactNode } from "react";
 import ShareButton from "../share";
-import { Skeleton } from "@/components/ui/skeleton";
 
 export default function WordwareCard({
   children,
@@ -11,7 +10,6 @@ export default function WordwareCard({
   fillColor,
   backgroundColor,
   className,
-  show = true,
   hideShare = false,
   hideHashtag = false,
 }: {
@@ -20,7 +18,6 @@ export default function WordwareCard({
   fillColor?: string;
   backgroundColor?: string;
   className?: string;
-  show?: boolean;
   hideShare?: boolean;
   hideHashtag?: boolean;
 }) {
@@ -28,14 +25,6 @@ export default function WordwareCard({
     "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
     className,
   );
-
-  if (!show) {
-    return (
-      <div className={baseClasses}>
-        <Skeleton className="absolute inset-0" />
-      </div>
-    );
-  }
 
   return (
     <div

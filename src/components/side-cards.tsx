@@ -27,7 +27,6 @@ export function SideCards({
     <div className="flex flex-col justify-between gap-4 lg:h-full lg:w-1/2">
       <WordwareCard
         hideShare
-        show={!!card1text}
         backgroundColor={colorConfig.color1.bgColor}
         fillColor={colorConfig.color1.fillColor}
         className="w-full rounded-xl md:h-[400px] lg:h-1/3"
@@ -37,7 +36,6 @@ export function SideCards({
       <div className="flex w-full flex-col gap-4 rounded-xl sm:flex-row md:h-2/3">
         <WordwareCard
           hideShare
-          show={!!card2.text}
           backgroundColor={colorConfig.color2.bgColor}
           fillColor={colorConfig.color2.fillColor}
           className="h-full w-1/2 rounded-xl"
@@ -74,7 +72,6 @@ export function SideCards({
           <div className="flex h-full w-full flex-col gap-4">
             <WordwareCard
               hideShare
-              show={!!card3text}
               backgroundColor={colorConfig.color3.bgColor}
               fillColor={colorConfig.color3.fillColor}
               className="h-full w-full rounded-xl"

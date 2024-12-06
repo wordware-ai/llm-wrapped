@@ -178,6 +178,8 @@ export default function HomeCards() {
                 className={cn("w-full items-center")}
                 backgroundColor={card.bgColor}
                 fillColor={card.fillColor}
+                hideHashtag
+                hideShare
               >
                 <div className="z-10 self-start text-2xl text-white xl:text-2xl">
                   {card.content}

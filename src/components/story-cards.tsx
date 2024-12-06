@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { DynamicText } from "./dynamic-text";
 
 type CardData = {
   id: string;
@@ -61,9 +62,9 @@ export const MetricCard = ({
       <motion.div
         variants={scaleIn}
         style={{ color: valueColor }}
-        className="break-all text-[6vh] font-semibold italic leading-tight"
+        className="break-words font-semibold italic leading-tight"
       >
-        {value}
+        <DynamicText text={value} />
       </motion.div>
       <motion.p
         variants={fadeInUp}

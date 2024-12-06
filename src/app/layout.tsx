@@ -31,7 +31,7 @@ export default async function RootLayout({
           <AuthProvider user={user ?? undefined} session={session ?? undefined}>
             <StreamProvider>
               <NuqsAdapter>
-                <Suspense fallback={<div>Loading...</div>}>
+                <Suspense>
                   <SlideShow />
                 </Suspense>
                 {children}
