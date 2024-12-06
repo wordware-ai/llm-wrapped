@@ -1,10 +1,10 @@
 "use client";
 
 import { wordwareConfig } from "@/config/wordware-config";
+import Image from "next/image";
 import { parseAsInteger, useQueryState } from "nuqs";
 import SlideshowShell from "./slideshow-shell";
-import Image from "next/image";
-import { TextCard, TitleCard } from "./story-cards";
+import { TitleCard } from "./story-cards";
 
 export default function WordwareSlideshow() {
   const [currentSlide] = useQueryState("slide", parseAsInteger);

@@ -150,9 +150,9 @@ export default function ShareButton({
           </svg>
         ),
         label: "More",
-        action: () => {
+        action: async () => {
           if (navigator.share) {
-            navigator.share({
+            await navigator.share({
               title: "Share",
               text: cardContent,
               url: shareUrl,
