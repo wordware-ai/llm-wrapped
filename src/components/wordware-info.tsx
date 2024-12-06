@@ -41,13 +41,13 @@ export default function WordwareInfo() {
                 href="https://twitter.wordware.ai"
                 className="hover:underline"
               >
-                twitter.wordware.ai
+                • twitter.wordware.ai
               </Link>
               <Link
                 href="https://audioscribe.wordware.ai"
                 className="hover:underline"
               >
-                audioscribe.wordware.ai
+                • audioscribe.wordware.ai
               </Link>
             </div>
           </div>
