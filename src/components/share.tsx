@@ -65,7 +65,7 @@ export default function ShareButton({
         label: "Stories",
         action: () => {
           window.open(
-            `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
+            `instagram://story-camera?url=${encodeURIComponent(shareUrl)}`,
             "_blank",
           );
         },
