@@ -29,9 +29,9 @@ export default function Privacy() {
           <h3 className="mb-3 text-xl font-semibold">2.1 Personal Data</h3>
           <p className="mb-3">
             While using our Services, we may ask you to provide certain
-            personally identifiable information ("Personal Data") that can be
-            used to contact or identify you. Personal Data may include, but is
-            not limited to:
+            personally identifiable information (&quot;Personal Data&quot;) that
+            can be used to contact or identify you. Personal Data may include,
+            but is not limited to:
           </p>
           <ul className="list-disc space-y-2 pl-6">
             <li>
