@@ -16,7 +16,6 @@ export function LinkedinInput() {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const username = getUsername(url);
-    console.log(username);
     router.push(`/linkedin/${username}`);
   };
 
