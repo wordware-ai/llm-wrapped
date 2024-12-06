@@ -63,13 +63,13 @@ export default function WordwareInfo() {
       </div>
       <div className="flex flex-col justify-center gap-4 pb-20 sm:flex-row">
         <Link
-          href="https://wordware.ai"
+          href="https://app.wordware.ai/register"
           className={cn(buttonVariants({ variant: "default", size: "lg" }))}
         >
           Sign up for free
         </Link>
         <Link
-          href="https://wordware.ai"
+          href="https://app.wordware.ai/explore/apps/45bf050b-4223-45c1-9fd6-a2d6c6b2ac1d"
           className={cn(
             buttonVariants({ variant: "default", size: "lg" }),
             "bg-gradient-to-r from-yellow-400 via-pink-500 to-purple-600 hover:opacity-90",
