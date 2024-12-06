@@ -21,10 +21,7 @@ export const spotifyApiRouter = createTRPCRouter({
         },
       })
         .then((res) => res.json())
-        .then((data) => {
-          console.log(topArtistsResponseSchema.parse(data));
-          return topArtistsResponseSchema.parse(data);
-        }),
+        .then((data) => topArtistsResponseSchema.parse(data)),
 
       // Top Tracks
       fetch(`https://api.spotify.com/v1/me/top/tracks?${params}`, {

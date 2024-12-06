@@ -6,6 +6,7 @@ import { useUser } from "@/hooks/use-user";
 import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import DeleteAccountButton from "./delete-account-button";
 
 export function SpotifyButton() {
   const supabase = createClient();
@@ -26,12 +27,18 @@ export function SpotifyButton() {
   const { session } = useUser();
 
   return session ? (
-    <Link
-      href={`/spotify/${session.user.user_metadata.name}`}
-      className={cn(buttonVariants(), "w-min bg-green-500 hover:bg-green-600")}
-    >
-      View Your Results
-    </Link>
+    <div className="flex gap-4">
+      <Link
+        href={`/spotify/${session.user.user_metadata.name}`}
+        className={cn(
+          buttonVariants(),
+          "w-min bg-green-500 hover:bg-green-600",
+        )}
+      >
+        View Your Results
+      </Link>
+      <DeleteAccountButton />
+    </div>
   ) : (
     <Button
       className="w-min bg-green-500 hover:bg-green-600"

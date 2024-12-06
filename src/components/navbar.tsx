@@ -16,6 +16,7 @@ export default function Navbar() {
       <div className="hidden gap-2 md:flex">
         <Button variant="outline">See rankings</Button>
         <Button>How was it made?</Button>
+        {/* <DeleteAccountButton /> */}
       </div>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild className="md:hidden">
