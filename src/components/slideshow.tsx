@@ -4,13 +4,12 @@ import { linkedinConfig } from "@/config/linkedin-config";
 import { linkedinExamples } from "@/config/linkedin-examples";
 import { spotifyConfig } from "@/config/spotify-config";
 import { spotifyExamples } from "@/config/spotify-examples";
-import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 import SlideshowShell from "./slideshow-shell";
-import { useStreamContext } from "./stream-provider";
 import WordwareCard from "./spotify/wordware-card";
+import { useStreamContext } from "./stream-provider";
 
 export default function SlideShow() {
   const [currentSlide] = useQueryState("slide", parseAsInteger);

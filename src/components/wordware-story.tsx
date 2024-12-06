@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { BaseStory } from "./base-story";
 import WordwareSlideshow from "./wordware-slideshow";
 
@@ -10,7 +11,9 @@ export default function WordwareStory({ href }: { href: string }) {
         href={href}
         imageClassName="pt-1.5"
       />
-      <WordwareSlideshow />
+      <Suspense>
+        <WordwareSlideshow />
+      </Suspense>
     </>
   );
 }

@@ -1,7 +1,6 @@
 import Image from "next/image";
-import WordwareCard from "./spotify/wordware-card";
-import { BaseStory } from "./base-story";
 import Link from "next/link";
+import WordwareCard from "./spotify/wordware-card";
 import WordwareStory from "./wordware-story";
 
 export function SideCards({
