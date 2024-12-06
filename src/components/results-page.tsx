@@ -23,6 +23,7 @@ export function ResultsPage({
     };
     card3text: string;
     storyHref: string;
+    showWordwareCard: boolean;
   };
 }) {
   return (

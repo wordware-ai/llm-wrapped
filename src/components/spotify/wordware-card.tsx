@@ -3,6 +3,7 @@
 import { cn } from "@/lib/utils";
 import { type ReactNode } from "react";
 import ShareButton from "../share";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function WordwareCard({
   children,
@@ -23,44 +24,52 @@ export default function WordwareCard({
   wide?: boolean;
   hideShare?: boolean;
 }) {
+  const baseClasses = cn(
+    "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
+    className,
+  );
+
+  if (!show) {
+    return (
+      <div className={baseClasses}>
+        <Skeleton className="absolute inset-0" />
+      </div>
+    );
+  }
+
   return (
-    show && (
+    <div
+      className={cn(baseClasses, "bg-[#1A1A1A]")}
+      style={{ backgroundColor }}
+    >
+      {Animation && <div className="z-10">{Animation}</div>}
       <div
         className={cn(
-          "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg bg-[#1A1A1A] p-8",
-          className,
+          "absolute left-0 top-0 w-full gap-[7px] px-2",
+          wide ? "grid md:grid-cols-2" : "flex flex-col",
         )}
-        style={{ backgroundColor }}
       >
-        {Animation && <div className="z-10">{Animation}</div>}
-        <div
-          className={cn(
-            "absolute left-0 top-0 w-full gap-[7px] px-2",
-            wide ? "grid md:grid-cols-2" : "flex flex-col",
+        {Array.from({ length: 15 }).map((_, i) => (
+          <WordwareLogo key={i} fillColor={fillColor} />
+        ))}
+      </div>
+      <div className="z-10 flex h-full flex-col justify-between">
+        <p className="text-[2.5vh] text-white">#LLMwrapped</p>
+        <div className="flex flex-col gap-20">
+          {children}
+          {!hideShare && (
+            <div
+              className={cn("flex w-full items-center justify-center")}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ShareButton className="text-white hover:text-white/80">
+                Share
+              </ShareButton>
+            </div>
           )}
-        >
-          {Array.from({ length: 15 }).map((_, i) => (
-            <WordwareLogo key={i} fillColor={fillColor} />
-          ))}
-        </div>
-        <div className="z-10 flex h-full flex-col justify-between">
-          <p className="text-[2.5vh] text-white">#LLMwrapped</p>
-          <div className="flex flex-col gap-20">
-            {children}
-            {!hideShare && (
-              <div
-                className={cn("flex w-full items-center justify-center")}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <ShareButton className="text-white hover:text-white/80">
-                  Share
-                </ShareButton>
-              </div>
-            )}
-          </div>
         </div>
       </div>
-    )
+    </div>
   );
 }
 

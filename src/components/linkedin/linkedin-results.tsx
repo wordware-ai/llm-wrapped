@@ -13,6 +13,7 @@ import {
 import { type LinkedinResult } from "@prisma/client";
 import { ResultsPage } from "../results-page";
 import { useParams } from "next/navigation";
+import LinkedinLoadingPage from "./linkedin-loading-page";
 
 export function LinkedInResults({
   linkedinResult,
@@ -86,7 +87,7 @@ export function LinkedInResults({
   }, [linkedinResult, snapshotId]);
 
   if (Object.keys(results).length === 0) {
-    return <p>loading...</p>;
+    return <LinkedinLoadingPage />;
   }
 
   return (
@@ -106,6 +107,7 @@ export function LinkedInResults({
         },
         card3text: results.actual_position as string,
         storyHref: `/linkedin/${profileData?.username}?slide=1`,
+        showWordwareCard: !!results.position_mother,
       }}
     />
   );

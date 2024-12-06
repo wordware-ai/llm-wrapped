@@ -3,12 +3,14 @@ import Link from "next/link";
 import WordwareCard from "./spotify/wordware-card";
 import WordwareStory from "./wordware-story";
 import { colorConfig } from "@/config/color-config";
+import { Skeleton } from "./ui/skeleton";
 
 export function SideCards({
   card1text,
   card2,
   card3text,
   storyHref,
+  showWordwareCard,
 }: {
   card1text: string;
   card2: {
@@ -19,6 +21,7 @@ export function SideCards({
   };
   card3text: string;
   storyHref: string;
+  showWordwareCard: boolean;
 }) {
   return (
     <div className="flex flex-col justify-between gap-4 lg:h-full lg:w-1/2">
@@ -79,7 +82,7 @@ export function SideCards({
             >
               <p className="text-center text-2xl text-white">{card3text}</p>
             </WordwareCard>
-            {!!card3text && (
+            {showWordwareCard ? (
               <div className="relative flex h-40 w-full items-center justify-between gap-4 overflow-hidden rounded-xl border p-4">
                 <Image
                   src="/images/card-background.png"
@@ -96,6 +99,8 @@ export function SideCards({
                   <WordwareStory href={storyHref} />
                 </div>
               </div>
+            ) : (
+              <Skeleton className="h-40 w-full" />
             )}
           </div>
         </div>

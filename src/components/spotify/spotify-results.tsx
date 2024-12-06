@@ -92,6 +92,7 @@ export function SpotifyResults({
         },
         card3text: results.music_taste_analysis_2 as string,
         storyHref: `/spotify/${user.username}?name=wordware&slide=1`,
+        showWordwareCard: !!results.music_taste_analysis_3,
       }}
     />
   );
