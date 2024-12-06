@@ -3,6 +3,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import WordwareCard from "./wordware-card";
 import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const SCROLL_INTERVAL = 7000;
 const cards = [
@@ -96,6 +97,32 @@ export default function HomeCards() {
 
   return (
     <div className="relative sm:px-4 xl:px-16">
+      <button
+        className="absolute left-0 top-1/2 z-10 block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+        onClick={() => {
+          if (!scrollRef.current) return;
+          const cardElement = scrollRef.current.firstElementChild
+            ?.firstElementChild as HTMLElement;
+          const cardWidth = cardElement?.clientWidth ?? 0;
+          scrollRef.current.scrollBy({ left: -cardWidth, behavior: "smooth" });
+        }}
+      >
+        <ChevronLeft className="h-6 w-6 text-black" />
+      </button>
+
+      <button
+        className="absolute right-0 top-1/2 z-10 block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+        onClick={() => {
+          if (!scrollRef.current) return;
+          const cardElement = scrollRef.current.firstElementChild
+            ?.firstElementChild as HTMLElement;
+          const cardWidth = cardElement?.clientWidth ?? 0;
+          scrollRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
+        }}
+      >
+        <ChevronRight className="h-6 w-6 text-black" />
+      </button>
+
       <div
         ref={scrollRef}
         className="scrollbar-hide snap-x snap-mandatory overflow-x-auto"

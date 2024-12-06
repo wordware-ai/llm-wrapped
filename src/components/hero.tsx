@@ -100,12 +100,14 @@ export function Hero() {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-12">
       <div className="relative z-0 flex h-[500px] w-full flex-col items-center justify-center gap-12 overflow-hidden bg-black sm:rounded-xl">
-        <Image
-          src="/blobs/background.svg"
-          className="absolute left-0 top-0 -z-10 h-full w-full object-cover opacity-20"
-          alt="Background"
-          width={1000}
-          height={1000}
+        <div 
+          className="absolute left-0 top-0 -z-10 h-full w-full"
+          style={{
+            backgroundImage: "url('/blobs/background.svg')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.2
+          }}
         />
         <div className="z-10 flex flex-col items-center justify-center">
           <h1 className="text-5xl font-medium text-white sm:text-7xl lg:text-9xl">

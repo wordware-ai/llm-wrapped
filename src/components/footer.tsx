@@ -29,16 +29,10 @@ export default function Footer() {
       <div className="flex flex-wrap items-center justify-between border-t border-white/20 pt-4 text-sm text-white/60">
         <p>© 2024 Wordware. All Right reserved.</p>
         <div className="flex gap-4">
-          <Link
-            href="https://www.wordware.ai/privacy-policy"
-            className="hover:text-white"
-          >
+          <Link href="/privacy" className="hover:text-white">
             Privacy Policy
           </Link>
-          <Link
-            href="https://www.wordware.ai/terms-and-conditions"
-            className="hover:text-white"
-          >
+          <Link href="/terms" className="hover:text-white">
             Terms and Conditions
           </Link>
         </div>
