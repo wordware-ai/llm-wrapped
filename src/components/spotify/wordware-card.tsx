@@ -18,7 +18,7 @@ export default function WordwareCard({
   Animation?: JSX.Element;
   fillColor?: string;
   backgroundColor?: string;
-  className: string;
+  className?: string;
   show?: boolean;
   wide?: boolean;
   hideShare?: boolean;

@@ -1,4 +1,5 @@
 import { BaseStory } from "./base-story";
+import WordwareStory from "./wordware-story";
 
 type StoryConfig = {
   src: string;
@@ -25,12 +26,7 @@ export function ExampleStories({
           </div>
         ))}
         <div className="flex flex-col items-center gap-2 rounded-lg border bg-white p-4">
-          <BaseStory
-            src="/brand/w-black.png"
-            alt="Wordware"
-            href="/?name=wordware&slide=1"
-            imageClassName="pt-1.5"
-          />
+          <WordwareStory href="/?name=wordware&slide=1" />
           <p className="text-center">Wordware </p>
         </div>
       </div>

@@ -9,10 +9,11 @@ export default function Terms() {
       <section className="mb-8">
         <h2 className="mb-4 text-2xl font-semibold">1. Acceptance of Terms</h2>
         <p className="mb-4">
-          By accessing and using Wordware's services at app.wordware.ai ("the
-          Service"), provided by Wordware ("Wordware", "we", "us"), you agree to
-          comply with and be bound by these terms and conditions. If you do not
-          agree to these terms, please do not use the Service.
+          By accessing and using Wordware&apos;s services at app.wordware.ai
+          (&ldquo;the Service&rdquo;), provided by Wordware
+          (&ldquo;Wordware&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;), you
+          agree to comply with and be bound by these terms and conditions. If
+          you do not agree to these terms, please do not use the Service.
         </p>
       </section>
 

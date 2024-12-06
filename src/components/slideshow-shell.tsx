@@ -7,28 +7,15 @@ import { parseAsInteger, useQueryState } from "nuqs";
 import type React from "react";
 import { useEffect, useState } from "react";
 import SlideIndicator from "./slide-indicator";
-import WordwareCard from "./spotify/wordware-card";
-import { type CardComponentProps } from "./story-cards";
-
-type Slide = {
-  id: string;
-  value: unknown;
-  bgColor: string;
-  fillColor: string;
-  Component: React.ComponentType<CardComponentProps>;
-  Animation: JSX.Element | undefined;
-};
-
-type ProfileData = Record<string, string | null>;
 
 type SlideshowShellProps = {
-  slides: Slide[];
-  profileData: ProfileData;
+  children: React.ReactNode;
+  slidesLength: number;
 };
 
 export default function SlideshowShell({
-  slides,
-  profileData,
+  children,
+  slidesLength,
 }: SlideshowShellProps) {
   const [currentSlide, setCurrentSlide] = useQueryState(
     "slide",
@@ -69,11 +56,6 @@ export default function SlideshowShell({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSlide]);
 
-  if (!currentSlide || !slides.length) return null;
-
-  const currentSlideData = slides[currentSlide - 1];
-  if (!currentSlideData) return null;
-
   const exit = () => {
     if (username) {
       // Get the current pathname and remove query parameters
@@ -84,8 +66,10 @@ export default function SlideshowShell({
     }
   };
 
+  if (!currentSlide || !slidesLength) return null;
+
   const nextSlide = async () => {
-    if (currentSlide === slides.length) {
+    if (currentSlide === slidesLength) {
       exit();
     } else {
       await setCurrentSlide(currentSlide + 1);
@@ -113,7 +97,7 @@ export default function SlideshowShell({
   };
   return (
     <div
-      className="fixed z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 sm:items-center md:p-6"
+      className="fixed left-0 top-0 z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 sm:items-center md:p-6"
       onClick={exit}
     >
       <X
@@ -143,33 +127,17 @@ export default function SlideshowShell({
         onTouchEnd={() => setIsPaused(false)}
         className="h-[100dvh] sm:h-auto"
       >
-        <WordwareCard
-          className={cn(
-            "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] lg:rounded-xl",
-          )}
-          Animation={currentSlideData.Animation}
-          backgroundColor={currentSlideData.bgColor}
-          fillColor={currentSlideData.fillColor}
-        >
-          <div className="absolute left-0 top-0 z-20 w-full">
+        <div className="aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] lg:rounded-xl">
+          <div className="relative">
             <SlideIndicator
               currentSlide={currentSlide}
-              totalSlides={slides.length}
+              totalSlides={slidesLength}
               nextSlide={nextSlide}
               isPaused={isPaused}
             />
+            {children}
           </div>
-          {currentSlideData.Component && (
-            <currentSlideData.Component
-              result={
-                typeof currentSlideData.value === "object"
-                  ? (currentSlideData.value as Record<string, unknown>)
-                  : { value: currentSlideData.value }
-              }
-              profileData={profileData}
-            />
-          )}
-        </WordwareCard>
+        </div>
       </div>
       <ChevronRight
         className={cn(

@@ -8,18 +8,17 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import Image from "next/image";
-import { useState } from "react";
-import { SpotifyLogo } from "./logos/spotify";
-import { ExampleStories } from "./example-stories";
-import { LinkedinLogo } from "./logos/linkedin";
-import { TwitterXLogo } from "./logos/twitter";
-import { GitHubLogo } from "./logos/github";
-import { TinderLogo } from "./logos/tinder";
-import Link from "next/link";
-import { LinkedinInput } from "./linkedin/linkedin-input";
-import { spotifyStorys } from "@/config/spotify-examples";
 import { linkedinStorys } from "@/config/linkedin-examples";
+import { spotifyStorys } from "@/config/spotify-examples";
+import Link from "next/link";
+import { useState } from "react";
+import { ExampleStories } from "./example-stories";
+import { LinkedinInput } from "./linkedin/linkedin-input";
+import { GitHubLogo } from "./logos/github";
+import { LinkedinLogo } from "./logos/linkedin";
+import { SpotifyLogo } from "./logos/spotify";
+import { TinderLogo } from "./logos/tinder";
+import { TwitterXLogo } from "./logos/twitter";
 
 type TabValue = "spotify" | "linkedin" | "twitter" | "github" | "tinder";
 
@@ -100,13 +99,13 @@ export function Hero() {
   return (
     <div className="flex w-full flex-col items-center justify-center gap-12">
       <div className="relative z-0 flex h-[500px] w-full flex-col items-center justify-center gap-12 overflow-hidden bg-black sm:rounded-xl">
-        <div 
+        <div
           className="absolute left-0 top-0 -z-10 h-full w-full"
           style={{
             backgroundImage: "url('/blobs/background.svg')",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            opacity: 0.2
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            opacity: 0.2,
           }}
         />
         <div className="z-10 flex flex-col items-center justify-center">

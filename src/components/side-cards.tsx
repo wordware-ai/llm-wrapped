@@ -1,7 +1,7 @@
 import Image from "next/image";
-import WordwareCard from "./spotify/wordware-card";
-import { BaseStory } from "./base-story";
 import Link from "next/link";
+import WordwareCard from "./spotify/wordware-card";
+import WordwareStory from "./wordware-story";
 
 export function SideCards({
   card1text,
@@ -78,13 +78,7 @@ export function SideCards({
                   LLMwrapped has been built with Wordware - the ultimate AI
                   operating system
                 </p>
-                <BaseStory
-                  src="/brand/w-black.png"
-                  alt="Wordware"
-                  href={storyHref}
-                  imageClassName="pt-1.5"
-                  className="shrink-0"
-                />
+                <WordwareStory href={storyHref} />
               </div>
             )}
           </div>
