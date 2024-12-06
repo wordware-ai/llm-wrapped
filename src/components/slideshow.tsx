@@ -13,6 +13,7 @@ import WordwareCard from "./spotify/wordware-card";
 import { useStreamContext } from "./stream-provider";
 import { spotifyExamples } from "@/config/spotify-examples";
 import { linkedinExamples } from "@/config/linkedin-examples";
+import SlideshowShell from "./slideshow-shell";
 
 export default function SlideShow() {
   const [currentSlide, setCurrentSlide] = useQueryState(
@@ -149,81 +150,5 @@ export default function SlideShow() {
       await previousSlide();
     }
   };
-  return (
-    <div
-      className="fixed z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 sm:items-center md:p-6"
-      onClick={exit}
-    >
-      <X
-        className="absolute right-4 top-8 z-20 size-8 text-white hover:cursor-pointer md:top-4"
-        onClick={(e) => {
-          e.stopPropagation();
-          exit();
-        }}
-      />
-      <ChevronLeft
-        className={cn(
-          "hidden size-7 rounded-full bg-zinc-600 pr-0.5 hover:cursor-pointer sm:block",
-          currentSlide === 1 && "invisible",
-        )}
-        onClick={async (e) => {
-          e.stopPropagation();
-          await previousSlide();
-        }}
-      />
-      <div
-        onClick={handleClick}
-        // Pause the slideshow when the user holds a card
-        onMouseDown={() => setIsPaused(true)}
-        onMouseUp={() => setIsPaused(false)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={() => setIsPaused(true)}
-        onTouchEnd={() => setIsPaused(false)}
-        className="h-[100dvh] sm:h-auto"
-      >
-        <WordwareCard
-          className={cn(
-            "aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] lg:rounded-xl",
-          )}
-          Animation={currentSlideData.Animation}
-          backgroundColor={currentSlideData.bgColor}
-          fillColor={currentSlideData.fillColor}
-        >
-          <div className="absolute left-0 top-0 z-20 w-full">
-            <SlideIndicator
-              currentSlide={currentSlide}
-              totalSlides={slides.length}
-              nextSlide={nextSlide}
-              isPaused={isPaused}
-            />
-          </div>
-          {currentSlideData.Component && (
-            <currentSlideData.Component
-              result={
-                typeof currentSlideData.value === "object"
-                  ? (currentSlideData.value as Record<string, unknown>)
-                  : { value: currentSlideData.value }
-              }
-              profileData={
-                (
-                  serviceExamples[name as keyof typeof serviceExamples] as {
-                    profileData: Record<string, string | null>;
-                  }
-                )?.profileData ?? profileData
-              }
-            />
-          )}
-        </WordwareCard>
-      </div>
-      <ChevronRight
-        className={cn(
-          "hidden size-7 rounded-full bg-zinc-600 pl-0.5 hover:cursor-pointer sm:block",
-        )}
-        onClick={async (e) => {
-          e.stopPropagation();
-          await nextSlide();
-        }}
-      />
-    </div>
-  );
+  return <SlideshowShell slides={slides} profileData={profileData} />;
 }
