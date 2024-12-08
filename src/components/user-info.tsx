@@ -1,11 +1,4 @@
-import {
-  FaInstagram,
-  FaLinkedin,
-  FaReddit,
-  FaTiktok,
-  FaTwitter,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { BaseStory } from "./base-story";
 import { useStreamContext } from "./stream-provider";
 import Image from "next/image";
@@ -42,6 +35,18 @@ export function UserInfo({
       </h1>
       <div className="flex gap-8 lg:gap-20">
         <div className="relative flex w-min flex-col gap-4">
+          <div className="absolute -top-12 right-[-320px] hidden items-center whitespace-nowrap lg:flex">
+            <Image
+              src="/arrow.png"
+              alt="Curved arrow"
+              width={80}
+              height={80}
+              className="rotate-[20deg]"
+            />
+            <p className="ml-6 max-w-[250px] text-wrap font-medium italic text-gray-600">
+              Catch the full reel-tap the profile picture now.
+            </p>
+          </div>
           {Object.keys(results || {}).length > 4 ? (
             <BaseStory
               className="size-36 p-1 lg:size-48 lg:p-2"
@@ -50,7 +55,7 @@ export function UserInfo({
               href={storyHref}
             />
           ) : (
-            <div className="aspect-square size-36 rounded-full bg-background object-cover lg:size-48">
+            <div className="size-42 aspect-square rounded-full bg-background object-cover lg:size-48">
               <Image
                 src={imageUrl}
                 alt={name}
@@ -63,70 +68,101 @@ export function UserInfo({
           <p className="text-center text-xl font-semibold">{name}</p>
         </div>
         <div className="flex flex-col gap-8 lg:pt-[4.15em]">
-          <p className="text-xl sm:text-2xl">Share your results</p>
-          <div className="grid grid-cols-2 gap-4">
-            <a
-              href={shareLinks.twitter}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:opacity-80"
-            >
-              <FaTwitter className="text-xl text-[#1DA1F2]" />
-              <p>Twitter</p>
-            </a>
+          <div className="flex flex-col gap-4">
+            <div>
+              <h2 className="text-2xl font-semibold">Share your results</h2>
+              <p className="text-gray-600">
+                Unwrap your LLM-crafted journey with friends.
+              </p>
+            </div>
 
-            <button
-              onClick={() => {
-                void navigator.clipboard.writeText(shareUrl);
-                alert("Link copied! Share it on Instagram");
-              }}
-              className="flex items-center gap-2 hover:opacity-80"
-            >
-              <FaInstagram className="text-xl text-[#E4405F]" />
-              <p>Instagram</p>
-            </button>
-            <button
-              onClick={() => {
-                void navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
-                alert(
-                  'Link copied!\n\nTo share on LinkedIn:\n1. Open LinkedIn\n2. Click "Start a post"\n3. Paste the copied text',
-                );
-              }}
-              className="flex items-center gap-2 hover:opacity-80"
-            >
-              <FaLinkedin className="text-xl text-[#0A66C2]" />
-              <p>LinkedIn</p>
-            </button>
-            <button
-              onClick={() => {
-                void navigator.clipboard.writeText(`${shareText} ${shareUrl}`);
-                alert(
-                  'Link copied!\n\nTo share on TikTok:\n1. Open TikTok\n2. Tap the "+" to create a new post\n3. Paste the copied text in the caption',
-                );
-              }}
-              className="flex items-center gap-2 hover:opacity-80"
-            >
-              <FaTiktok className="text-xl text-[#000000]" />
-              <p>TikTok</p>
-            </button>
-            <a
-              href={shareLinks.reddit}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:opacity-80"
-            >
-              <FaReddit className="text-xl text-[#FF4500]" />
-              <p>Reddit</p>
-            </a>
-            <a
-              href={shareLinks.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:opacity-80"
-            >
-              <FaWhatsapp className="text-xl text-[#25D366]" />
-              <p>WhatsApp</p>
-            </a>
+            {/* Share buttons grid */}
+            <div className="flex gap-4 lg:flex-wrap lg:gap-6">
+              <a
+                href={shareLinks.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
+              >
+                <FaTwitter className="text-lg sm:text-xl" />
+                <span className="sr-only">Twitter</span>
+              </a>
+
+              <a
+                href={shareLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
+              >
+                <FaLinkedin className="text-lg sm:text-xl" />
+                <span className="sr-only">LinkedIn</span>
+              </a>
+
+              <a
+                href={shareLinks.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
+              >
+                <FaWhatsapp className="text-lg sm:text-xl" />
+                <span className="sr-only">WhatsApp</span>
+              </a>
+
+              <button
+                onClick={() => {
+                  void navigator.clipboard.writeText(shareUrl);
+                  alert("Link copied! Share it on Instagram");
+                }}
+                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
+              >
+                <FaInstagram className="text-lg sm:text-xl" />
+                <span className="sr-only">Instagram</span>
+              </button>
+
+              <a
+                href={storyHref}
+                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
+              >
+                <Image
+                  src="/stories-icon.png"
+                  alt="Stories"
+                  width={20}
+                  height={20}
+                  className="sm:h-6 sm:w-6"
+                />
+                <span className="sr-only">Stories</span>
+              </a>
+            </div>
+
+            {/* Share link input */}
+            <div className="flex items-center gap-2 rounded-lg border p-3">
+              <input
+                type="text"
+                value={shareUrl}
+                readOnly
+                className="flex-1 bg-transparent text-gray-600 outline-none"
+              />
+              <button
+                onClick={() => {
+                  void navigator.clipboard.writeText(shareUrl);
+                  alert("Link copied to clipboard!");
+                }}
+                className="flex items-center justify-center"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                <span className="sr-only">Copy link</span>
+              </button>
+            </div>
           </div>
         </div>
       </div>

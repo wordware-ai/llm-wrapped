@@ -31,7 +31,7 @@ export default function WordwareCard({
       className={cn(baseClasses, "bg-[#1A1A1A]")}
       style={{ backgroundColor }}
     >
-      {Animation && <div className="z-10">{Animation}</div>}
+      {Animation && <div className="z-[99]">{Animation}</div>}
       <div
         className={cn(
           "absolute left-0 top-0 w-full gap-[7px] px-2",
