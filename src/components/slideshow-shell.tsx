@@ -122,7 +122,7 @@ export default function SlideshowShell({
         onTouchEnd={() => setIsPaused(false)}
         className="h-[100dvh] sm:h-auto"
       >
-        <div className="relative aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[80dvh] sm:rounded-xl">
+        <div className="relative aspect-auto h-full w-full rounded-none sm:aspect-[4/7] sm:max-h-[90dvh] sm:rounded-xl">
           <div className="relative z-40">
             <X
               className="fixed right-4 top-8 z-40 size-8 text-white hover:cursor-pointer md:top-4"

@@ -45,7 +45,7 @@ export const MetricCard = ({
 }) => {
   return (
     <motion.div
-      className="flex h-full flex-col justify-center gap-[3vh] text-white sm:gap-[2vh]"
+      className="flex h-full flex-col justify-end gap-[3vh] text-white sm:gap-[2vh]"
       initial="initial"
       animate="animate"
       variants={{
@@ -179,7 +179,7 @@ export const TextCard = ({ result }: { result: Record<string, unknown> }) => {
       animate="animate"
       variants={fadeInUp}
     >
-      <motion.p className="text-[4vh] leading-tight text-white sm:text-[3vh]">
+      <motion.p className="text-[4vh] leading-tight text-white sm:text-[3.5vh]">
         {result.value as string}
       </motion.p>
     </motion.div>

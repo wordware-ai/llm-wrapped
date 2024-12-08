@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 export const DynamicText = ({
   text,
-  minFontSize = 12,
+  minFontSize = 30,
   maxFontSize = 80,
 }: {
   text: string;
@@ -13,11 +13,23 @@ export const DynamicText = ({
 
   useEffect(() => {
     const calculateFontSize = () => {
-      const length = text.length;
+      // Calculate size based on total text length
+      const totalLengthSize = Math.max(
+        minFontSize,
+        maxFontSize - text.length * 1.5,
+      );
 
-      // Increased scaling factor from 0.5 to 2 for faster size reduction
-      // Added a baseline of maxFontSize to start bigger
-      const newSize = Math.max(minFontSize, maxFontSize - length * 2);
+      // Calculate size based on longest word
+      const longestWordLength = text
+        .split(/\s+/)
+        .reduce((max, word) => Math.max(max, word.length), 0);
+      const wordLengthSize = Math.max(
+        minFontSize,
+        maxFontSize - longestWordLength * 3,
+      );
+
+      // Use the smaller of the two calculated sizes
+      const newSize = Math.min(totalLengthSize, wordLengthSize);
 
       setFontSize(Math.min(maxFontSize, newSize));
     };

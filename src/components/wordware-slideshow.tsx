@@ -28,7 +28,7 @@ export default function WordwareSlideshow() {
         alt={slideData.title}
         fill
         quality={100}
-        className="object-cover"
+        className="object-cover opacity-50"
         priority
       />
       <TitleCard
