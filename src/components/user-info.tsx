@@ -43,7 +43,7 @@ export function UserInfo({
                 alt="Spotify 1"
                 href={storyHref}
               />{" "}
-              <div className="absolute -top-12 right-[-320px] hidden items-center whitespace-nowrap lg:flex">
+              <div className="absolute -top-14 right-[-320px] hidden items-center whitespace-nowrap lg:flex">
                 <Image
                   src="/arrow.png"
                   alt="Curved arrow"
@@ -51,7 +51,7 @@ export function UserInfo({
                   height={80}
                   className="rotate-[20deg]"
                 />
-                <p className="ml-6 max-w-[250px] text-wrap font-medium italic text-gray-600">
+                <p className="-mt-10 ml-8 max-w-[250px] text-wrap font-medium italic text-gray-600">
                   Catch the full reel-tap the profile picture now.
                 </p>
               </div>
@@ -69,7 +69,7 @@ export function UserInfo({
           )}
           <p className="text-center text-xl font-semibold">{name}</p>
         </div>
-        <div className="flex flex-col gap-8 lg:pt-[4.15em]">
+        <div className="flex flex-col justify-start gap-8">
           <div className="flex flex-col gap-4">
             <div>
               <h2 className="text-2xl font-semibold">Share your results</h2>
@@ -120,20 +120,6 @@ export function UserInfo({
                 <FaInstagram className="text-lg sm:text-xl" />
                 <span className="sr-only">Instagram</span>
               </button>
-
-              <a
-                href={storyHref}
-                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
-              >
-                <Image
-                  src="/stories-icon.png"
-                  alt="Stories"
-                  width={20}
-                  height={20}
-                  className="sm:h-6 sm:w-6"
-                />
-                <span className="sr-only">Stories</span>
-              </a>
             </div>
 
             {/* Share link input */}
