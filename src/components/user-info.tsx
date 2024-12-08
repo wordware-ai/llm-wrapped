@@ -35,25 +35,27 @@ export function UserInfo({
       </h1>
       <div className="flex gap-8 lg:gap-20">
         <div className="relative flex w-min flex-col gap-4">
-          <div className="absolute -top-12 right-[-320px] hidden items-center whitespace-nowrap lg:flex">
-            <Image
-              src="/arrow.png"
-              alt="Curved arrow"
-              width={80}
-              height={80}
-              className="rotate-[20deg]"
-            />
-            <p className="ml-6 max-w-[250px] text-wrap font-medium italic text-gray-600">
-              Catch the full reel-tap the profile picture now.
-            </p>
-          </div>
           {Object.keys(results || {}).length > 4 ? (
-            <BaseStory
-              className="size-36 p-1 lg:size-48 lg:p-2"
-              src={imageUrl}
-              alt="Spotify 1"
-              href={storyHref}
-            />
+            <>
+              <BaseStory
+                className="size-36 p-1 lg:size-48 lg:p-2"
+                src={imageUrl}
+                alt="Spotify 1"
+                href={storyHref}
+              />{" "}
+              <div className="absolute -top-12 right-[-320px] hidden items-center whitespace-nowrap lg:flex">
+                <Image
+                  src="/arrow.png"
+                  alt="Curved arrow"
+                  width={80}
+                  height={80}
+                  className="rotate-[20deg]"
+                />
+                <p className="ml-6 max-w-[250px] text-wrap font-medium italic text-gray-600">
+                  Catch the full reel-tap the profile picture now.
+                </p>
+              </div>
+            </>
           ) : (
             <div className="size-42 aspect-square rounded-full bg-background object-cover lg:size-48">
               <Image

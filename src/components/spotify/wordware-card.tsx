@@ -44,7 +44,7 @@ export default function WordwareCard({
       </div>
       <div className="z-10 flex h-full flex-col justify-between">
         {!hideHashtag && <p className="text-[2.5vh] text-white">#LLMwrapped</p>}
-        <div className="flex h-full flex-col gap-20">
+        <div className="flex h-full flex-col justify-end gap-10">
           {children}
           {!hideShare && (
             <div

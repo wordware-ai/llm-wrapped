@@ -29,7 +29,7 @@ export function SideCards({
         hideHashtag
         backgroundColor={colorConfig.color1.bgColor}
         fillColor={colorConfig.color1.fillColor}
-        className="aspect-auto h-min w-full rounded-xl lg:h-1/3"
+        className="aspect-auto h-min min-h-40 w-full rounded-xl lg:h-1/3"
       >
         <div className="flex h-full items-center justify-center">
           <p className="text-center text-4xl text-white lg:text-2xl">
@@ -43,12 +43,14 @@ export function SideCards({
           hideHashtag
           backgroundColor={colorConfig.color2.bgColor}
           fillColor={colorConfig.color2.fillColor}
-          className="aspect-auto h-min w-1/2 rounded-xl lg:h-full"
+          className="aspect-auto h-min min-h-40 rounded-xl lg:h-full lg:w-1/2"
         >
-          <div className="flex flex-col items-center justify-center gap-4">
-            <h3 className="text-4xl font-semibold text-white lg:text-3xl xl:text-4xl">
-              {card2.title}
-            </h3>
+          <div className="flex h-full flex-col items-center justify-center gap-4">
+            {card2.text && (
+              <h3 className="text-4xl font-semibold text-white lg:text-3xl xl:text-4xl">
+                {card2.title}
+              </h3>
+            )}
             {card2.imageUrl !== "null" && card2.text && (
               <>
                 {card2.href ? (
@@ -77,14 +79,14 @@ export function SideCards({
             </p>
           </div>
         </WordwareCard>
-        <div className="h-full w-1/2 rounded-xl">
+        <div className="h-full rounded-xl lg:w-1/2">
           <div className="flex h-full w-full flex-col gap-4">
             <WordwareCard
               hideShare
               hideHashtag
               backgroundColor={colorConfig.color3.bgColor}
               fillColor={colorConfig.color3.fillColor}
-              className="flex w-full items-center justify-center rounded-xl"
+              className="flex aspect-auto h-min min-h-40 w-full items-center justify-center rounded-xl lg:h-full"
             >
               <div className="flex h-full w-full items-center justify-center">
                 <p className="grow text-center text-2xl text-white">
@@ -102,7 +104,7 @@ export function SideCards({
                   priority
                 />
                 <div className="relative z-10 flex w-full items-center justify-between gap-4">
-                  <p className="text-sm text-white">
+                  <p className="text-xl text-white lg:text-sm">
                     LLMwrapped has been built with Wordware - the ultimate AI
                     operating system
                   </p>
