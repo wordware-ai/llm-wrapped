@@ -91,14 +91,12 @@ export default function SlideshowShell({
     const clickX = e.clientX;
     const screenWidth = window.innerWidth;
     const isLeftThird = clickX < screenWidth / 3;
-
     if (isLeftThird) {
       await previousSlide();
     } else {
       await nextSlide();
     }
   };
-
   return (
     <div
       className="fixed left-0 top-0 z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 sm:items-center md:p-6"
@@ -139,7 +137,7 @@ export default function SlideshowShell({
               nextSlide={nextSlide}
               isPaused={isPaused}
             />
-            <div>{children}</div>
+            {children}
           </div>
         </div>
       </div>

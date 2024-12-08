@@ -1,11 +1,4 @@
-import {
-  FaInstagram,
-  FaLinkedin,
-  FaReddit,
-  FaTiktok,
-  FaTwitter,
-  FaWhatsapp,
-} from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { BaseStory } from "./base-story";
 import { useStreamContext } from "./stream-provider";
 import Image from "next/image";
@@ -78,9 +71,11 @@ export function UserInfo({
           <div className="flex flex-col gap-4">
             <div>
               <h2 className="text-2xl font-semibold">Share your results</h2>
-              <p className="text-gray-600">Unwrap your LLM-crafted journey with friends.</p>
+              <p className="text-gray-600">
+                Unwrap your LLM-crafted journey with friends.
+              </p>
             </div>
-            
+
             {/* Share buttons grid */}
             <div className="flex gap-4 lg:flex-wrap lg:gap-6">
               <a
@@ -96,7 +91,7 @@ export function UserInfo({
               <a
                 href={shareLinks.linkedin}
                 target="_blank"
-                rel="noopener noreferrer" 
+                rel="noopener noreferrer"
                 className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
               >
                 <FaLinkedin className="text-lg sm:text-xl" />
@@ -128,18 +123,24 @@ export function UserInfo({
                 href={storyHref}
                 className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
               >
-                <Image src="/stories-icon.png" alt="Stories" width={20} height={20} className="sm:h-6 sm:w-6" />
+                <Image
+                  src="/stories-icon.png"
+                  alt="Stories"
+                  width={20}
+                  height={20}
+                  className="sm:h-6 sm:w-6"
+                />
                 <span className="sr-only">Stories</span>
               </a>
             </div>
 
             {/* Share link input */}
             <div className="flex items-center gap-2 rounded-lg border p-3">
-              <input 
-                type="text" 
-                value={shareUrl} 
-                readOnly 
-                className="flex-1 bg-transparent outline-none text-gray-600"
+              <input
+                type="text"
+                value={shareUrl}
+                readOnly
+                className="flex-1 bg-transparent text-gray-600 outline-none"
               />
               <button
                 onClick={() => {
@@ -148,7 +149,14 @@ export function UserInfo({
                 }}
                 className="flex items-center justify-center"
               >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
                   <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
                   <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
                 </svg>

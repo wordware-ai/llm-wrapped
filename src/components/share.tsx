@@ -136,9 +136,8 @@ export default function ShareButton({
         ),
         label: "Telegram",
         action: () => {
-          const text = cardContent ? `${cardContent}\n\n${shareUrl}` : shareUrl;
           window.open(
-            `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(cardContent || "")}`,
+            `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(cardContent ?? "")}`,
             "_blank",
           );
         },
@@ -174,7 +173,7 @@ export default function ShareButton({
   ];
 
   return (
-    <div className="relative w-full">
+    <div className="relative w-[10em]">
       <Button
         variant="ghost"
         size="lg"

@@ -5,7 +5,6 @@ import Image from "next/image";
 import { parseAsInteger, useQueryState } from "nuqs";
 import SlideshowShell from "./slideshow-shell";
 import { TitleCard } from "./story-cards";
-import WordwareCard from "./spotify/wordware-card";
 
 export default function WordwareSlideshow() {
   const [currentSlide] = useQueryState("slide", parseAsInteger);
