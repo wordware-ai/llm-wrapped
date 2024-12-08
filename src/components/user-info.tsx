@@ -36,8 +36,8 @@ export function UserInfo({
   const { results } = useStreamContext();
 
   return (
-    <div className="flex flex-col justify-between gap-4 lg:w-1/2">
-      <h1 className="text-5xl font-semibold text-muted-foreground xs:text-6xl sm:text-7xl md:text-8xl lg:text-7xl xl:text-8xl">
+    <div className="flex w-full flex-col justify-between gap-4 lg:min-w-0 lg:flex-1">
+      <h1 className="text-5xl font-semibold text-muted-foreground xs:text-6xl sm:text-7xl md:text-8xl lg:text-6xl xl:text-8xl">
         #LLMwrapped
       </h1>
       <div className="flex gap-8 lg:gap-20">
