@@ -3,7 +3,6 @@
 import { cn } from "@/lib/utils";
 import { type ReactNode } from "react";
 import ShareButton from "../share";
-import { useState } from "react";
 
 export default function WordwareCard({
   children,
@@ -22,8 +21,6 @@ export default function WordwareCard({
   hideShare?: boolean;
   hideHashtag?: boolean;
 }) {
-  const [showShare, setShowShare] = useState(!hideShare);
-
   const baseClasses = cn(
     "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg p-8",
     className,
@@ -34,7 +31,7 @@ export default function WordwareCard({
       className={cn(baseClasses, "bg-[#1A1A1A]")}
       style={{ backgroundColor }}
     >
-      {Animation && <div className="z-0">{Animation}</div>}
+      {Animation && <div className="z-10">{Animation}</div>}
       <div
         className={cn(
           "absolute left-0 top-0 w-full gap-[7px] px-2",
@@ -49,13 +46,16 @@ export default function WordwareCard({
         {!hideHashtag && <p className="text-[2.5vh] text-white">#LLMwrapped</p>}
         <div className="flex flex-col gap-20">
           {children}
-          {/* {!hideShare && showShare && ( */}
-          <div className="flex w-full items-center justify-center">
-            <ShareButton className="absolute bottom-5 z-[99] text-white hover:text-white/80">
-              Share
-            </ShareButton>
-          </div>
-          {/* )} */}
+          {!hideShare && (
+            <div
+              className={cn("flex w-full items-center justify-center")}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <ShareButton className="text-white hover:text-white/80">
+                Share
+              </ShareButton>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@ function WordwareLogo({ fillColor }: { fillColor?: string }) {
       height="44"
       viewBox="0 0 275 44"
       xmlns="http://www.w3.org/2000/svg"
-      className="-z-[1] h-min w-full"
+      className="h-min w-full"
       style={{ fill: fillColor ?? "#000000" }}
     >
       <g clipPath="url(#clip0_7_154)">
