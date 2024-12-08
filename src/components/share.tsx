@@ -188,7 +188,7 @@ export default function ShareButton({
       </Button>
 
       {isOpen && (
-        <div className="absolute bottom-52 left-1/2 z-[99] w-[90vw] -translate-x-1/2 translate-y-full rounded-xl bg-zinc-900 pb-10 shadow-lg">
+        <div className="absolute bottom-52 left-1/2 z-[99] w-[110vw] -translate-x-1/2 translate-y-full rounded-xl bg-zinc-900 pb-10 shadow-lg">
           <div className="flex justify-center pt-4">
             <button
               onClick={() => setIsOpen(false)}
