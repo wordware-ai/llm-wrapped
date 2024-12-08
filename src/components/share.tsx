@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Link2, Share } from "lucide-react";
 import { useState } from "react";
-import { takeScreenshot } from "@/lib/screenshot";
 
 interface ShareButtonProps {
   url?: string;
@@ -14,31 +13,6 @@ interface ShareButtonProps {
   cardImage?: string;
 }
 
-const dataUrlToFile = async (
-  base64: string,
-  fileName: string,
-): Promise<File> => {
-  const res = await fetch(base64);
-  const blob = await res.blob();
-  return new File([blob], fileName, { type: "image/png" });
-};
-
-const shareFile = async (file: File, title?: string, text?: string) => {
-  if (navigator.canShare && navigator.canShare({ files: [file] })) {
-    try {
-      await navigator.share({
-        files: [file],
-        title,
-        text,
-      });
-    } catch (error) {
-      console.error("Error sharing:", error);
-    }
-  } else {
-    console.warn("Web Share API not supported");
-  }
-};
-
 export default function ShareButton({
   url,
   className,
@@ -47,7 +21,6 @@ export default function ShareButton({
   const [isOpen, setIsOpen] = useState(false);
   const shareUrl =
     url ?? (typeof window !== "undefined" ? window.location.href : "");
-  const shareText = cardContent ? `${cardContent}\n\n${shareUrl}` : shareUrl;
 
   const shareOptions = [
     // First row

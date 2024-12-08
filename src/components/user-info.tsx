@@ -42,6 +42,18 @@ export function UserInfo({
       </h1>
       <div className="flex gap-8 lg:gap-20">
         <div className="relative flex w-min flex-col gap-4">
+          <div className="absolute -top-12 right-[-100px] flex items-center whitespace-nowrap">
+            <Image
+              src="/arrow.png"
+              alt="Curved arrow"
+              width={60}
+              height={60}
+              className="rotate-[20deg]"
+            />
+            <p className="ml-3 font-medium italic text-gray-600">
+              Catch the full reel-tap the profile picture now.
+            </p>
+          </div>
           {Object.keys(results || {}).length > 4 ? (
             <BaseStory
               className="size-36 p-1 lg:size-48 lg:p-2"
