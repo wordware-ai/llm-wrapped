@@ -66,11 +66,6 @@ export function TinderResults({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previousRun]);
 
-  // might not need this have to think about it
-  if (!previousRun && !session?.provider_token) {
-    redirect("/");
-  }
-
   return (
     <ResultsPage
       user={{
@@ -84,11 +79,11 @@ export function TinderResults({
         card1text: results.short_summary as string,
         card2: {
           title: "Top Artist",
-          text: results.music_taste_analysis_1 as string,
+          text: results.alternative as string,
           imageUrl: "",
           href: undefined,
         },
-        card3text: results.music_taste_analysis_2 as string,
+        card3text: results.roast_bio as string,
         storyHref: `/spotify/${id as string}?name=wordware&slide=1`,
         showWordwareCard: !!results.music_taste_analysis_3,
       }}

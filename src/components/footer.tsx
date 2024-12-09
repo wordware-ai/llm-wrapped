@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="mt-auto flex flex-col gap-8 bg-black p-8 py-16 text-white">
-      <div className="flex items-center">
+    <footer className="mt-auto flex flex-col gap-8 bg-black p-8 pb-24 pt-16 text-white">
+      <div className="flex items-center pb-12">
         <Image
           src="/brand/wordware-black.svg"
           alt="Wordware Logo"
@@ -15,6 +15,9 @@ export default function Footer() {
       </div>
 
       <div className="flex flex-wrap gap-8">
+        <Link href="https://wordware.ai" className="hover:underline">
+          Wordware Homepage
+        </Link>
         <Link href="https://discord.gg/wordware" className="hover:underline">
           Join Discord
         </Link>

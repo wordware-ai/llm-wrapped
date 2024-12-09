@@ -68,6 +68,10 @@ const config = {
         protocol: "https",
         hostname: "travel.home.sndimg.com",
       },
+      {
+        protocol: "https",
+        hostname: "logos-world.net",
+      },
     ],
   },
 };
