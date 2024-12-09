@@ -68,6 +68,7 @@ export function useStream() {
       }
 
       // Use finalResults for logging and callback
+      console.log(finalResults);
       onFinish?.(finalResults);
     } catch (error) {
       console.error("Stream error:", error);

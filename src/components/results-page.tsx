@@ -16,9 +16,9 @@ export function ResultsPage({
   cards: {
     card1text: string;
     card2: {
-      title: string;
+      title?: string;
       text: string;
-      imageUrl: string;
+      imageUrl?: string;
       href?: string;
     };
     card3text: string;

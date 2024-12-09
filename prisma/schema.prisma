@@ -94,8 +94,8 @@ model TinderResult {
   personality_insights String
   theme_song_analysis  String
   bold_text_moves      String
-  bold_text_moves2     String
-  bold_text_moves3     String
+  bold_text_moves_2     String
+  bold_text_moves_3     String
   message_style        Json
   red_flags            String
   final_recommendation String

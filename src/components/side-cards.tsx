@@ -13,9 +13,9 @@ export function SideCards({
 }: {
   card1text: string;
   card2: {
-    title: string;
+    title?: string;
     text: string;
-    imageUrl: string;
+    imageUrl?: string;
     href?: string;
   };
   card3text: string;
@@ -46,18 +46,18 @@ export function SideCards({
           className="aspect-auto h-min min-h-80 rounded-xl lg:h-full lg:w-1/2"
         >
           <div className="flex h-full flex-col items-center justify-center gap-4">
-            {card2.text && (
+            {card2.text && card2.title && (
               <h3 className="text-4xl font-semibold text-white lg:text-3xl xl:text-4xl">
                 {card2.title}
               </h3>
             )}
-            {card2.imageUrl !== "null" && card2.text && (
+            {card2.imageUrl !== "null" && card2.imageUrl && card2.text && (
               <>
                 {card2.href ? (
                   <Link href={card2.href}>
                     <Image
                       src={card2.imageUrl}
-                      alt={card2.title}
+                      alt={card2.title ?? ""}
                       className="rounded-lg object-cover"
                       width={120}
                       height={120}
@@ -66,7 +66,7 @@ export function SideCards({
                 ) : (
                   <Image
                     src={card2.imageUrl}
-                    alt={card2.title}
+                    alt={card2.title ?? ""}
                     className="rounded-lg object-cover"
                     width={120}
                     height={120}

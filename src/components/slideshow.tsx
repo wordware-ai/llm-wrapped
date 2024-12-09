@@ -4,6 +4,8 @@ import { linkedinConfig } from "@/config/linkedin-config";
 import { linkedinExamples } from "@/config/linkedin-examples";
 import { spotifyConfig } from "@/config/spotify-config";
 import { spotifyExamples } from "@/config/spotify-examples";
+import { tinderConfig } from "@/config/tinder-config";
+import { tinderExamples } from "@/config/tinder-examples";
 import { usePathname } from "next/navigation";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
@@ -26,9 +28,18 @@ export default function SlideShow() {
   }, [pathname, type]);
 
   const serviceCards =
-    getServiceType === "linkedin" ? linkedinConfig : spotifyConfig;
+    getServiceType === "linkedin"
+      ? linkedinConfig
+      : getServiceType === "tinder"
+        ? tinderConfig
+        : spotifyConfig;
+
   const serviceExamples =
-    getServiceType === "linkedin" ? linkedinExamples : spotifyExamples;
+    getServiceType === "linkedin"
+      ? linkedinExamples
+      : getServiceType === "tinder"
+        ? tinderExamples
+        : spotifyExamples;
 
   const slides = useMemo(() => {
     if (name) {

@@ -1,15 +1,16 @@
 "use client";
 
 import { useStream } from "@/hooks/use-stream";
-import { useUser } from "@/hooks/use-user";
 import { api } from "@/trpc/react";
 import { type TinderResult } from "@prisma/client";
-import { redirect, useParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useStreamContext } from "../stream-provider";
 
-import { convertSpotifyDbToState } from "@/lib/convert-spotify";
-import { convertTinderToDb } from "@/lib/convert-tinder";
+import {
+  convertTinderDbToState,
+  convertTinderToDb,
+} from "@/lib/convert-tinder";
 import { ResultsPage } from "../results-page";
 
 interface StoredTinderData {
@@ -26,26 +27,21 @@ export function TinderResults({
     name?: string;
   };
 }) {
-  const { session } = useUser();
   const { id } = useParams();
 
   const { mutate: createTinderResult } = api.tinderResults.create.useMutation();
 
-  const onFinish = (results: Record<string, unknown>) => {
-    const tinderResult = {
-      ...convertTinderToDb(results),
-      name: profileData?.name ?? null,
-      id: id as string,
-    };
-    createTinderResult(tinderResult);
-  };
-
-  const { results, setResults, setProfileData } = useStreamContext();
+  const {
+    results,
+    setResults,
+    profileData: newProfileData,
+    setProfileData,
+  } = useStreamContext();
   const { streamResponse } = useStream();
 
   useEffect(() => {
     if (previousRun) {
-      const displayResults = convertSpotifyDbToState(previousRun);
+      const displayResults = convertTinderDbToState(previousRun);
       setResults(displayResults);
       setProfileData(profileData ?? {});
     } else {
@@ -59,7 +55,14 @@ export function TinderResults({
       void streamResponse({
         promptId: "923167a9-b36a-4b01-a7f6-7cad56357653",
         data: llmdata ?? "",
-        onFinish,
+        onFinish: (results: Record<string, unknown>) => {
+          const tinderResult = {
+            ...convertTinderToDb(results),
+            name,
+            id: id as string,
+          };
+          createTinderResult(tinderResult);
+        },
       });
     }
 
@@ -70,7 +73,7 @@ export function TinderResults({
     <ResultsPage
       user={{
         username: id as string,
-        name: profileData?.name ?? "",
+        name: newProfileData?.name ?? "",
         imageUrl:
           "https://logos-world.net/wp-content/uploads/2020/09/Tinder-Emblem.png",
         storyHref: `/tinder/${id as string}?slide=1`,
@@ -78,9 +81,7 @@ export function TinderResults({
       cards={{
         card1text: results.short_summary as string,
         card2: {
-          title: "Top Artist",
           text: results.alternative as string,
-          imageUrl: "",
           href: undefined,
         },
         card3text: results.roast_bio as string,
