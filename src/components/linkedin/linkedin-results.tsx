@@ -86,10 +86,6 @@ export function LinkedInResults({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedinResult, snapshotId]);
 
-  if (Object.keys(results).length === 0 && !linkedinResult) {
-    return <LinkedinLoadingPage />;
-  }
-
   return (
     <ResultsPage
       user={{
@@ -109,6 +105,11 @@ export function LinkedInResults({
         storyHref: `/linkedin/${profileData?.username}?slide=1`,
         showWordwareCard: !!results.position_mother,
       }}
+      LoadingState={
+        Object.keys(results).length === 0 && !linkedinResult ? (
+          <LinkedinLoadingPage />
+        ) : null
+      }
     />
   );
 }

@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { parseAsInteger, useQueryState } from "nuqs";
+import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import type React from "react";
 import { useEffect, useState } from "react";
 import SlideIndicator from "./slide-indicator";
@@ -21,6 +21,7 @@ export default function SlideshowShell({
     "slide",
     parseAsInteger,
   );
+  const [type] = useQueryState("type", parseAsString);
 
   const [isPaused, setIsPaused] = useState(false);
 
@@ -62,7 +63,7 @@ export default function SlideshowShell({
       const currentPath = window.location.pathname;
       router.push(currentPath);
     } else {
-      router.push("/", { scroll: false });
+      router.push(`/?tab=${type}`, { scroll: false });
     }
   };
 

@@ -11,7 +11,7 @@ import {
 import { linkedinStorys } from "@/config/linkedin-examples";
 import { spotifyStorys } from "@/config/spotify-examples";
 import Link from "next/link";
-import { useState } from "react";
+import { useQueryState } from "nuqs";
 import { ExampleStories } from "./example-stories";
 import { LinkedinInput } from "./linkedin/linkedin-input";
 import { GitHubLogo } from "./logos/github";
@@ -63,7 +63,15 @@ const DisabledTab = ({ children }: { children: React.ReactNode }) => (
 );
 
 export function Hero() {
-  const [tab, setTab] = useState<TabValue>("spotify");
+  const [tab, setTab] = useQueryState<TabValue>("tab", {
+    defaultValue: "spotify",
+    parse: (value): TabValue => {
+      const validTabs = ["spotify", "linkedin", "twitter", "github", "tinder"];
+      return validTabs.includes(value as TabValue)
+        ? (value as TabValue)
+        : "spotify";
+    },
+  });
 
   const tabs = [
     {

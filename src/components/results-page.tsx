@@ -6,6 +6,7 @@ import WordwareInfo from "./wordware-info";
 export function ResultsPage({
   user,
   cards,
+  LoadingState,
 }: {
   user: {
     username: string;
@@ -25,12 +26,13 @@ export function ResultsPage({
     storyHref: string;
     showWordwareCard: boolean;
   };
+  LoadingState?: React.ReactNode;
 }) {
   return (
     <div className="flex flex-col">
       <Navbar />
       <div className="mb-20 flex flex-col gap-4 p-8 lg:h-[calc(100vh-56px)] lg:flex-row">
-        <UserInfo {...user} />
+        {LoadingState ? LoadingState : <UserInfo {...user} />}
         <SideCards {...cards} />
       </div>
 

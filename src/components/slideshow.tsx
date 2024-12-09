@@ -45,7 +45,6 @@ export default function SlideShow() {
     if (name) {
       const staticSlideshow =
         serviceExamples[name as keyof typeof serviceExamples];
-      console.log(staticSlideshow);
       if (!staticSlideshow) return [];
       return Object.entries(staticSlideshow)
         .map(([key, value]) => {

@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { createTinderId } from "@/lib/create-tinder-id";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
+import DownloadPopover from "./download-popover";
 
 interface StoredTinderData {
   id: string;
@@ -52,7 +53,6 @@ export function TinderInput() {
           const name = parsedData?.user?.name;
           const id = createTinderId(name);
           const markdown = convertTinderDataToMarkdown(parsedData);
-          console.log(markdown);
           const dataToStore = { name, llmdata: markdown, id };
           localStorage.setItem("tinderData", JSON.stringify(dataToStore));
           router.push(`/tinder/${id}`);
@@ -78,7 +78,7 @@ export function TinderInput() {
   });
 
   return (
-    <div className="px-8">
+    <div className="">
       {existingId ? (
         <Link
           href={`/tinder/${existingId}`}
@@ -90,33 +90,25 @@ export function TinderInput() {
           View Your Previous Results
         </Link>
       ) : (
-        <div
-          {...getRootProps()}
-          className={cn(
-            "cursor-pointer rounded-lg border-2 border-dashed p-8 text-center transition-colors",
-            isDragging
-              ? "border-blue-500 bg-blue-50"
-              : "border-gray-300 hover:border-gray-400",
-            "focus:outline-none focus:ring-2 focus:ring-blue-500",
-          )}
-        >
-          <input {...getInputProps()} />
-          <p className="text-muted-foreground">
-            Drag and drop your Tinder data file here, or click to select
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Don&apos;t have your data?{" "}
-            <a
-              href="https://account.gotinder.com/data"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-500 hover:underline"
-              onClick={(e) => e.stopPropagation()}
-            >
-              Download it from Tinder
-            </a>
-          </p>
-          {error && <p className="mt-2 text-red-500">{error}</p>}
+        <div className="flex flex-col gap-2 px-8">
+          <DownloadPopover />
+          <div
+            {...getRootProps()}
+            className={cn(
+              "cursor-pointer rounded-lg border-2 border-dashed bg-[#111] p-8 text-center transition-all",
+              isDragging
+                ? "border-blue-500 bg-blue-500/10"
+                : "border-gray-300 hover:border-gray-200 hover:bg-[#222]",
+              "focus:outline-none focus:ring-2 focus:ring-blue-500",
+            )}
+          >
+            <input {...getInputProps()} />
+            <p className="text-muted-foreground">
+              Drag and drop your Tinder data file here, or click to select
+            </p>
+
+            {error && <p className="mt-2 text-red-500">{error}</p>}
+          </div>
         </div>
       )}
     </div>
