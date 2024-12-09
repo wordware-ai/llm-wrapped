@@ -31,38 +31,41 @@ export function TinderInput() {
     }
   }, []);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    setError(null);
-    if (acceptedFiles.length === 0) return;
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      setError(null);
+      if (acceptedFiles.length === 0) return;
 
-    const file = acceptedFiles[0];
-    if (!file) return;
+      const file = acceptedFiles[0];
+      if (!file) return;
 
-    if (!file.type.includes("json")) {
-      setError("Please upload a JSON file");
-      return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const jsonData = JSON.parse(e.target?.result as string) as unknown;
-        const parsedData = TinderDataSchema.parse(jsonData);
-        const name = parsedData?.user?.name;
-        const id = createTinderId(name);
-        const markdown = convertTinderDataToMarkdown(parsedData);
-        console.log(markdown);
-        const dataToStore = { name, llmdata: markdown, id };
-        localStorage.setItem("tinderData", JSON.stringify(dataToStore));
-        router.push(`/tinder/${id}`);
-      } catch (err) {
-        setError("Invalid JSON file");
-        console.error("Error parsing JSON:", err);
+      if (!file.type.includes("json")) {
+        setError("Please upload a JSON file");
+        return;
       }
-    };
 
-    reader.readAsText(file);
-  }, []);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const jsonData = JSON.parse(e.target?.result as string) as unknown;
+          const parsedData = TinderDataSchema.parse(jsonData);
+          const name = parsedData?.user?.name;
+          const id = createTinderId(name);
+          const markdown = convertTinderDataToMarkdown(parsedData);
+          console.log(markdown);
+          const dataToStore = { name, llmdata: markdown, id };
+          localStorage.setItem("tinderData", JSON.stringify(dataToStore));
+          router.push(`/tinder/${id}`);
+        } catch (err) {
+          setError("Invalid JSON file");
+          console.error("Error parsing JSON:", err);
+        }
+      };
+
+      reader.readAsText(file);
+    },
+    [router],
+  );
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
