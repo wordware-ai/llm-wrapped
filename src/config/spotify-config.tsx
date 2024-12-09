@@ -35,20 +35,6 @@ export const spotifyConfig: CardItem[] = [
   {
     data: {
       id: "music_taste_analysis_1",
-      bgColor: "#D46FA8",
-      fillColor: "#D673AB",
-    },
-    Component: TextCard,
-    // Animation: (
-    //   <ClientAnimation
-    //     className="right-20 top-20 size-[200px]"
-    //     animationData={animationConfig.animation2}
-    //   />
-    // ),
-  },
-  {
-    data: {
-      id: "music_taste_analysis_2",
       bgColor: "#637BC4",
       fillColor: "#6D87D7",
     },
@@ -67,6 +53,21 @@ export const spotifyConfig: CardItem[] = [
     //   />
     // ),
   },
+  {
+    data: {
+      id: "music_taste_analysis_2",
+      bgColor: "#D46FA8",
+      fillColor: "#D673AB",
+    },
+    Component: TextCard,
+    // Animation: (
+    //   <ClientAnimation
+    //     className="right-20 top-20 size-[200px]"
+    //     animationData={animationConfig.animation2}
+    //   />
+    // ),
+  },
+
   {
     data: {
       id: "music_taste_analysis_3",

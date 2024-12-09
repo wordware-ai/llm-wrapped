@@ -5,7 +5,7 @@ export const colorConfig = {
   },
   color2: {
     bgColor: "#D46FA8",
-    fillColor: "#D673AB",
+    fillColor: "#D875AE",
   },
   color3: {
     bgColor: "#637BC4",
@@ -25,11 +25,11 @@ export const colorConfig = {
   },
   color7: {
     bgColor: "#C0D46F",
-    fillColor: "#C3D673",
+    fillColor: "#C5D875",
   },
   color8: {
     bgColor: "#6FCFD4",
-    fillColor: "#73D1D6",
+    fillColor: "#75D3D8",
   },
   color9: {
     bgColor: "#5D9266",
@@ -41,7 +41,7 @@ export const colorConfig = {
   },
   color11: {
     bgColor: "#F3A373",
-    fillColor: "#F4A677",
+    fillColor: "#F4A979",
   },
   color12: {
     bgColor: "#2C8E94",

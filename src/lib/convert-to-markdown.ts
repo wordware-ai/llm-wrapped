@@ -111,13 +111,11 @@ export const convertTinderDataToMarkdown = (
 ): string => {
   if (!data) return "No data available";
 
-  const getTop3DatesWithValues = (record: Record<string, number | null>) => {
-    return Object.entries(record)
+  const getTopDayWithValue = (record: Record<string, number | null>) => {
+    const topEntry = Object.entries(record)
       .filter(([_, value]) => value !== null)
-      .sort(([_, a], [__, b]) => (b || 0) - (a || 0))
-      .slice(0, 3)
-      .map(([date, value]) => `${date}: ${value}`)
-      .join(", ");
+      .sort(([_, a], [__, b]) => (b || 0) - (a || 0))[0];
+    return topEntry ? `${topEntry[0]}: ${topEntry[1]}` : "No data available";
   };
 
   const sections = [
@@ -134,30 +132,29 @@ export const convertTinderDataToMarkdown = (
     // Usage Statistics
     `## Usage Statistics
 - Total App Opens: ${data.stats.totalAppOpens}
-  - Top Days: ${getTop3DatesWithValues(data.stats.appOpensByDate)}
+  - Top Day: ${getTopDayWithValue(data.stats.appOpensByDate)}
 - Days App Opened: ${data.stats.daysWithAppOpens}
 - Days with Messages: ${data.stats.daysWithMessages}
 
 ## Swipe Statistics
 - Likes: ${data.stats.totalSwipesLikes}
-  - Top Days: ${getTop3DatesWithValues(data.stats.swipeLikesByDate)}
+  - Top Day: ${getTopDayWithValue(data.stats.swipeLikesByDate)}
 - Passes: ${data.stats.totalSwipesPasses}
-  - Top Days: ${getTop3DatesWithValues(data.stats.swipePassesByDate)}
+  - Top Day: ${getTopDayWithValue(data.stats.swipePassesByDate)}
 - Average Swipes per Day: ${data.stats.averageSwipesPerDay}
-- Right to Left Ratio: ${data.stats.swipeRightToLeftRatio}%
-- Matches to Right Swipe Ratio: ${data.stats.matchesToSwipeRightRatio}%
+- Swipe ratio: ${data.stats.swipeRightToLeftRatio}%
 - Total Superlikes: ${data.stats.totalSuperlikes}
 
 ## Match Statistics
 - Total Matches: ${data.stats.totalMatches}
-  - Top Days: ${getTop3DatesWithValues(data.stats.matchesByDate)}
+  - Top Day: ${getTopDayWithValue(data.stats.matchesByDate)}
 - Match Ratio: ${data.stats.matchesRatio}%
 
 ## Message Statistics
 - Messages Sent: ${data.stats.totalMessagesSent}
-  - Top Days: ${getTop3DatesWithValues(data.stats.messagesSentByDate)}
+  - Top Day: ${getTopDayWithValue(data.stats.messagesSentByDate)}
 - Messages Received: ${data.stats.totalMessagesReceived}
-  - Top Days: ${getTop3DatesWithValues(data.stats.messagesReceivedByDate)}
+  - Top Day: ${getTopDayWithValue(data.stats.messagesReceivedByDate)}
 
 ## User Profile
 - Age Range: ${data.user.age_filter_min} - ${data.user.age_filter_max}

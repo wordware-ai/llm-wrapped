@@ -27,7 +27,9 @@ export function LinkedinInput() {
         value={url}
         onChange={(e) => setUrl(e.target.value)}
       />
-      <Button type="submit">View</Button>
+      <Button className="bg-[#0A66C2] hover:bg-[#0A66C2]/90" type="submit">
+        View
+      </Button>
     </form>
   );
 }
