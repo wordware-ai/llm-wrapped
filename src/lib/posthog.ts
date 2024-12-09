@@ -18,6 +18,7 @@ interface VisitData {
 export interface MostVisitedData {
   spotify: VisitData[];
   linkedin: VisitData[];
+  tinder: VisitData[];
 }
 
 export const getMostVisited = async (): Promise<MostVisitedData> => {
@@ -35,7 +36,9 @@ export const getMostVisited = async (): Promise<MostVisitedData> => {
     const data = (await response.json()) as PostHogResponse;
     const insights = data.result;
 
-    const processInsights = (platform: "spotify" | "linkedin"): VisitData[] => {
+    const processInsights = (
+      platform: "spotify" | "linkedin" | "tinder",
+    ): VisitData[] => {
       return insights
         .filter(
           (item) =>
@@ -43,20 +46,22 @@ export const getMostVisited = async (): Promise<MostVisitedData> => {
         )
         .map((item) => ({
           name: item.label.split(`/${platform}/`)[1], // Only get the username part
-          visits: item.count, // Changed from aggregated_value to count
+          visits: item.count,
         }))
-        .filter((item): item is VisitData => item.name !== undefined); // Type guard to ensure name is defined
+        .filter((item): item is VisitData => item.name !== undefined);
     };
 
     return {
       spotify: processInsights("spotify"),
       linkedin: processInsights("linkedin"),
+      tinder: processInsights("tinder"),
     };
   } catch (error) {
     console.error("🥲 Error fetching visited data:", error);
     return {
       spotify: [],
       linkedin: [],
+      tinder: [],
     };
   }
 };
