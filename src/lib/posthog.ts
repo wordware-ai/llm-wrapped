@@ -1,14 +1,29 @@
 import { env } from "@/env";
 import "server-only";
 
-// import { unstable_cache as cache } from 'next/cache'
+interface PostHogInsightResult {
+  count: number;
+  label: string;
+}
 
-export const getTraffic = async (): Promise<{
-  trafficData: Array<{ timestamp: string; traffic: number }>;
-}> => {
+interface PostHogResponse {
+  result: PostHogInsightResult[];
+}
+
+interface VisitData {
+  name: string;
+  visits: number;
+}
+
+export interface MostVisitedData {
+  spotify: VisitData[];
+  linkedin: VisitData[];
+}
+
+export const getMostVisited = async (): Promise<MostVisitedData> => {
   try {
     const response = await fetch(
-      `https://app.posthog.com/api/projects/${env.POSTHOG_PROJECT_ID}/insights/1771705?date_from=2024-08-01`,
+      `https://app.posthog.com/api/projects/${env.POSTHOG_PROJECT_ID}/insights/2150575`,
       {
         method: "GET",
         headers: {
@@ -17,75 +32,31 @@ export const getTraffic = async (): Promise<{
         },
       },
     );
-    const data = await response.json();
-    const insights = data.result[0];
+    const data = (await response.json()) as PostHogResponse;
+    const insights = data.result;
 
-    const startDate = new Date("2024-12-10T05:00:00Z");
-    const trafficData = insights.data
-      .map((traffic: number, index: number) => {
-        const [date, time] = insights.days[index].split(" ");
-        const timestamp = `${date}T${time}Z`;
+    const processInsights = (platform: "spotify" | "linkedin"): VisitData[] => {
+      return insights
+        .filter(
+          (item) =>
+            item.label !== "open" && item.label.startsWith(`/${platform}/`),
+        )
+        .map((item) => ({
+          name: item.label.split(`/${platform}/`)[1], // Only get the username part
+          visits: item.count, // Changed from aggregated_value to count
+        }))
+        .filter((item): item is VisitData => item.name !== undefined); // Type guard to ensure name is defined
+    };
 
-        return {
-          timestamp,
-          traffic,
-        };
-      })
-      .filter(
-        (item: { timestamp: string; traffic: number }) =>
-          new Date(item.timestamp) >= startDate,
-      )
-      .slice(0, -1);
-
-    return { trafficData };
+    return {
+      spotify: processInsights("spotify"),
+      linkedin: processInsights("linkedin"),
+    };
   } catch (error) {
-    console.error("🥲 Error fetching traffic data:", error);
-    return { trafficData: [] };
+    console.error("🥲 Error fetching visited data:", error);
+    return {
+      spotify: [],
+      linkedin: [],
+    };
   }
 };
-//   ['traffic'],
-//   { revalidate: 3600 }, // Cache for 1 hour (3600 seconds).
-//   // Posthog Insights won't be refetched until someone opens the insight via UI.
-// )
-
-export const getMostVisited =
-  // cache(
-  async (): Promise<{
-    mostVisited: Array<{ name: string; visits: number }>;
-  }> => {
-    try {
-      const response = await fetch(
-        `https://app.posthog.com/api/projects/${process.env.POSTHOG_PROJECT_ID}/insights/1771725`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.POSTHOG_PERSONAL_API_KEY}`,
-          },
-        },
-      );
-      const data = await response.json();
-      const insights = data.result;
-      const filteredInsights = insights.filter(
-        (item: any) => item.label !== "open",
-      );
-      const mostVisited = filteredInsights
-        .map((item: any) => ({
-          name: item.label.replace("/", ""),
-          visits: item.aggregated_value,
-        }))
-        .filter(
-          (item: { name: string; visits: number }) => item.name !== undefined,
-        );
-
-      return { mostVisited };
-    } catch (error) {
-      console.error(" 🥲 Error fetching most visited data:", error);
-      return { mostVisited: [] };
-    }
-  };
-//   ,
-//   ['visits'],
-//   { revalidate: 3600 }, // Cache for 1 hour (3600 seconds)
-//   // Posthog Insights won't be refetched until someone opens the insight via UI.
-// )

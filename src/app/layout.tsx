@@ -11,6 +11,7 @@ import { NuqsAdapter } from "nuqs/adapters/next/app";
 import SlideShow from "@/components/slideshow";
 import Footer from "@/components/footer";
 import { Suspense } from "react";
+import { CSPostHogProvider } from "@/components/posthog-provider";
 
 export const metadata: Metadata = {
   title: "LLMwrapped - AI agent by Wordware",
@@ -29,15 +30,17 @@ export default async function RootLayout({
       <body className="flex min-h-screen flex-col">
         <TRPCReactProvider>
           <AuthProvider user={user ?? undefined} session={session ?? undefined}>
-            <StreamProvider>
-              <NuqsAdapter>
-                <Suspense>
-                  <SlideShow />
-                </Suspense>
-                {children}
-                <Footer />
-              </NuqsAdapter>
-            </StreamProvider>
+            <CSPostHogProvider>
+              <StreamProvider>
+                <NuqsAdapter>
+                  <Suspense>
+                    <SlideShow />
+                  </Suspense>
+                  {children}
+                  <Footer />
+                </NuqsAdapter>
+              </StreamProvider>
+            </CSPostHogProvider>
           </AuthProvider>
         </TRPCReactProvider>
       </body>

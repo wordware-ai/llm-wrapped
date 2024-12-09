@@ -1,9 +1,12 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import { ChevronLeft, Menu } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "./ui/sheet";
+import posthog from "posthog-js";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -14,7 +17,15 @@ export default function Navbar() {
         Home
       </Link>
       <div className="hidden gap-2 md:flex">
-        <Button variant="outline">See rankings</Button>
+        <Link
+          className={cn(buttonVariants({ variant: "outline" }))}
+          href="/rankings"
+          onClick={() => {
+            posthog.capture("rankings_clicked");
+          }}
+        >
+          See rankings
+        </Link>
         <Link
           className={cn(buttonVariants({ variant: "default" }))}
           target="_blank"
@@ -22,7 +33,6 @@ export default function Navbar() {
         >
           Build your own
         </Link>
-        {/* <DeleteAccountButton /> */}
       </div>
       <Sheet open={open} onOpenChange={setOpen}>
         <SheetTrigger asChild className="md:hidden">

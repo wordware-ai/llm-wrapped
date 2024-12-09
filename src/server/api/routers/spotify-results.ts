@@ -17,6 +17,15 @@ export const spotifyResultsRouter = createTRPCRouter({
       return user;
     }),
 
+  getByUsernames: publicProcedure
+    .input(z.object({ usernames: z.array(z.string()) }))
+    .query(async ({ ctx, input }) => {
+      const users = await ctx.db.spotifyResult.findMany({
+        where: { username: { in: input.usernames } },
+      });
+      return users;
+    }),
+
   create: privateProcedure
     .input(SpotifyResultCreateInputSchema)
     .mutation(async ({ ctx, input }) => {

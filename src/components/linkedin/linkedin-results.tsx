@@ -86,7 +86,7 @@ export function LinkedInResults({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [linkedinResult, snapshotId]);
 
-  if (Object.keys(results).length === 0) {
+  if (Object.keys(results).length === 0 && !linkedinResult) {
     return <LinkedinLoadingPage />;
   }
 
