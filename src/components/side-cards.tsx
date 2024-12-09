@@ -30,9 +30,13 @@ export function SideCards({
         className="aspect-auto h-min min-h-[400px] w-full rounded-xl sm:min-h-80 lg:h-1/3 lg:min-h-56"
       >
         <div className="flex h-full items-center justify-center">
-          <p className="text-center text-4xl text-white lg:text-2xl">
-            {card1text}
-          </p>
+          {card1text ? (
+            <p className="text-center text-4xl text-white lg:text-2xl">
+              {card1text}
+            </p>
+          ) : (
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#1F5A4A] border-t-transparent" />
+          )}
         </div>
       </WordwareCard>
       <div className="flex min-h-[550px] w-full flex-col gap-4 rounded-xl sm:flex-row lg:h-2/3 lg:min-h-0">
@@ -41,40 +45,46 @@ export function SideCards({
           hideHashtag
           backgroundColor={colorConfig.color2.bgColor}
           fillColor={colorConfig.color2.fillColor}
-          className="aspect-auto min-h-[400px] rounded-xl bg-blue-500 sm:min-h-full sm:w-1/2 lg:min-h-0"
+          className="aspect-auto min-h-[400px] w-full rounded-xl sm:min-h-full sm:w-1/2 lg:min-h-0"
         >
-          <div className="flex h-full flex-col items-center justify-center gap-4">
-            {card2.text && card2.title && (
-              <h3 className="text-4xl font-semibold text-white lg:text-3xl xl:text-4xl">
-                {card2.title}
-              </h3>
-            )}
-            {card2.imageUrl !== "null" && card2.imageUrl && card2.text && (
+          <div className="flex h-full w-full flex-col items-center justify-center gap-4">
+            {card2.text ? (
               <>
-                {card2.href ? (
-                  <Link href={card2.href}>
-                    <Image
-                      src={card2.imageUrl}
-                      alt={card2.title ?? ""}
-                      className="rounded-lg object-cover"
-                      width={120}
-                      height={120}
-                    />
-                  </Link>
-                ) : (
-                  <Image
-                    src={card2.imageUrl}
-                    alt={card2.title ?? ""}
-                    className="rounded-lg object-cover"
-                    width={120}
-                    height={120}
-                  />
+                {card2.text && card2.title && (
+                  <h3 className="text-4xl font-semibold text-white lg:text-3xl xl:text-4xl">
+                    {card2.title}
+                  </h3>
                 )}
+                {card2.imageUrl !== "null" && card2.imageUrl && card2.text && (
+                  <>
+                    {card2.href ? (
+                      <Link href={card2.href}>
+                        <Image
+                          src={card2.imageUrl}
+                          alt={card2.title ?? ""}
+                          className="rounded-lg object-cover"
+                          width={120}
+                          height={120}
+                        />
+                      </Link>
+                    ) : (
+                      <Image
+                        src={card2.imageUrl}
+                        alt={card2.title ?? ""}
+                        className="rounded-lg object-cover"
+                        width={120}
+                        height={120}
+                      />
+                    )}
+                  </>
+                )}
+                <p className="text-center text-2xl text-white lg:text-xl xl:text-2xl">
+                  {card2.text}
+                </p>
               </>
+            ) : (
+              <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#A03C6C] border-t-transparent" />
             )}
-            <p className="text-center text-2xl text-white lg:text-xl xl:text-2xl">
-              {card2.text}
-            </p>
           </div>
         </WordwareCard>
         <div className="flex h-full w-full flex-col gap-4 sm:w-1/2">
@@ -86,9 +96,13 @@ export function SideCards({
             className="flex aspect-auto h-min min-h-[400px] w-full items-center justify-center rounded-xl lg:h-full lg:min-h-0"
           >
             <div className="flex h-full w-full items-center justify-center">
-              <p className="grow text-center text-2xl text-white">
-                {card3text}
-              </p>
+              {card3text ? (
+                <p className="grow text-center text-2xl text-white">
+                  {card3text}
+                </p>
+              ) : (
+                <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#4A5E9A] border-t-transparent" />
+              )}
             </div>
           </WordwareCard>
           <div className="relative flex h-40 w-full items-center justify-between gap-4 overflow-hidden rounded-xl border p-4">

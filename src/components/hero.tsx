@@ -20,6 +20,7 @@ import { SpotifyLogo } from "./logos/spotify";
 import { TinderLogo } from "./logos/tinder";
 import { TwitterXLogo } from "./logos/twitter";
 import { TinderInput } from "./tinder/tinder-input";
+import { tinderStorys } from "@/config/tinder-examples";
 
 type TabValue = "spotify" | "linkedin" | "twitter" | "github" | "tinder";
 
@@ -175,6 +176,9 @@ export function Hero() {
       )}
       {tab === "linkedin" && (
         <ExampleStories title="LinkedIn Examples" stories={linkedinStorys} />
+      )}
+      {tab === "tinder" && (
+        <ExampleStories title="Tinder Examples" stories={tinderStorys} />
       )}
     </div>
   );

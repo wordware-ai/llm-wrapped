@@ -45,6 +45,7 @@ export default function SlideShow() {
     if (name) {
       const staticSlideshow =
         serviceExamples[name as keyof typeof serviceExamples];
+      console.log(staticSlideshow);
       if (!staticSlideshow) return [];
       return Object.entries(staticSlideshow)
         .map(([key, value]) => {
@@ -78,6 +79,8 @@ export default function SlideShow() {
 
   const currentSlideData = slides[currentSlide - 1];
   if (!currentSlideData) return null;
+
+  console.log(currentSlideData.value);
 
   const slideContent = (
     <WordwareCard

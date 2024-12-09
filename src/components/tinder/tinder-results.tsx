@@ -51,9 +51,8 @@ export function TinderResults({
       const { llmdata, name } = storedData;
 
       setProfileData({ name });
-
       void streamResponse({
-        promptId: "d2f64ea6-832a-4d28-96af-0b9e76770e73",
+        promptId: "786ef77a-b8b7-4951-9f4d-b58d6253dcb8",
         data: llmdata ?? "",
         onFinish: (results: Record<string, unknown>) => {
           const tinderResult = {
