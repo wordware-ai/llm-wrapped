@@ -5,25 +5,26 @@ import {
   TitleCard,
   MetricCard,
 } from "@/components/story-cards";
+import { colorConfig } from "./color-config";
 
 export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "short_summary",
-      bgColor: "#378C77",
-      fillColor: "#43937F",
+      bgColor: colorConfig.color1.bgColor,
+      fillColor: colorConfig.color1.fillColor,
     },
     Component: TextCard,
   },
   {
     data: {
       id: "alternative",
-      bgColor: "#D46FA8",
-      fillColor: "#D673AB",
+      bgColor: colorConfig.color2.bgColor,
+      fillColor: colorConfig.color2.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Your Alternative Reality"
+        title="What You Could've Done Instead"
         description={result.value as string}
       />
     ),
@@ -31,12 +32,12 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "roast_bio",
-      bgColor: "#637BC4",
-      fillColor: "#6D87D7",
+      bgColor: colorConfig.color3.bgColor,
+      fillColor: colorConfig.color3.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Your Bio Roasted"
+        title="How You Market Yourself on Tinder"
         description={result.value as string}
       />
     ),
@@ -44,12 +45,12 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "age_preferences",
-      bgColor: "#D68E49",
-      fillColor: "#D8924C",
+      bgColor: colorConfig.color4.bgColor,
+      fillColor: colorConfig.color4.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Your Age Preferences Say..."
+        title="Who You're Hoping Will Swipe Back"
         description={result.value as string}
       />
     ),
@@ -57,13 +58,13 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "swipe_ratios",
-      bgColor: "#D17974",
-      fillColor: "#D47D78",
+      bgColor: colorConfig.color5.bgColor,
+      fillColor: colorConfig.color5.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
-        title="Your Swipe Game"
-        value={result.score as string}
+        title="How Selective You Think You Are"
+        value={result.ratio as string}
         description={result.description as string}
         valueColor="#A13D37"
       />
@@ -72,13 +73,13 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "match_ratios",
-      bgColor: "#8C68C8",
-      fillColor: "#906CCB",
+      bgColor: colorConfig.color6.bgColor,
+      fillColor: colorConfig.color6.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
-        title="Match Success Rate"
-        value={result.score as string}
+        title="Your Match Game by the Numbers"
+        value={result.ratio as string}
         description={result.description as string}
         valueColor="#6F0FA7"
       />
@@ -87,13 +88,13 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "message_peak_day",
-      bgColor: "#C0D46F",
-      fillColor: "#C3D673",
+      bgColor: colorConfig.color7.bgColor,
+      fillColor: colorConfig.color7.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
-        title="Peak Messaging Hours"
-        value={result.time as string}
+        title="That One Day You Really Tried"
+        value={result.date as string}
         description={result.description as string}
         valueColor="#5F7118"
       />
@@ -102,14 +103,14 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "total_messages_sent",
-      bgColor: "#6FCFD4",
-      fillColor: "#73D1D6",
+      bgColor: colorConfig.color8.bgColor,
+      fillColor: colorConfig.color8.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
-        title="Message Count"
-        value={result.count as string}
-        description={result.analysis as string}
+        title="How Many Messages Are Too Many? (Spoiler: This Many)"
+        value={result.number as string}
+        description={result.description as string}
         valueColor="#182571"
       />
     ),
@@ -117,14 +118,14 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "chat_heavy_days",
-      bgColor: "#5D9266",
-      fillColor: "#61966A",
+      bgColor: colorConfig.color9.bgColor,
+      fillColor: colorConfig.color9.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
-        title="Your Chattiest Days"
-        value={result.peak_day as string}
-        description={result.analysis as string}
+        title="The Number of Days You Tried to Make It Work"
+        value={result.days as string}
+        description={result.description as string}
         valueColor="#2B4E31"
       />
     ),
@@ -132,12 +133,12 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "personality_insights",
-      bgColor: "#6A2B63",
-      fillColor: "#6E2D67",
+      bgColor: colorConfig.color10.bgColor,
+      fillColor: colorConfig.color10.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Personality Analysis"
+        title="How You Tried to Seem Interesting"
         description={result.value as string}
       />
     ),
@@ -145,60 +146,48 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "theme_song_analysis",
-      bgColor: "#F3A373",
-      fillColor: "#F4A677",
+      bgColor: colorConfig.color11.bgColor,
+      fillColor: colorConfig.color11.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
-      <TitleCard
-        title="Your Dating Theme Song"
-        description={result.value as string}
-      />
+      <TitleCard title="Your Theme Song" description={result.value as string} />
     ),
   },
   {
     data: {
       id: "bold_text_moves",
-      bgColor: "#2C8E94",
-      fillColor: "#2E9298",
+      bgColor: colorConfig.color12.bgColor,
+      fillColor: colorConfig.color12.fillColor,
     },
-    Component: ({ result }: CardComponentProps) => (
-      <TitleCard title="Your Bold Moves" description={result.value as string} />
-    ),
+    Component: TextCard,
   },
   {
     data: {
       id: "bold_text_moves_2",
-      bgColor: "#8A423D",
-      fillColor: "#8E4440",
+      bgColor: colorConfig.color13.bgColor,
+      fillColor: colorConfig.color13.fillColor,
     },
-    Component: ({ result }: CardComponentProps) => (
-      <TitleCard title="More Bold Moves" description={result.value as string} />
-    ),
+    Component: TextCard,
   },
   {
     data: {
       id: "bold_text_moves_3",
-      bgColor: "#BD68C8",
-      fillColor: "#C06CCB",
+      bgColor: colorConfig.color14.bgColor,
+      fillColor: colorConfig.color14.fillColor,
     },
-    Component: ({ result }: CardComponentProps) => (
-      <TitleCard
-        title="Even More Bold Moves"
-        description={result.value as string}
-      />
-    ),
+    Component: TextCard,
   },
   {
     data: {
       id: "message_style",
-      bgColor: "#414A0D",
-      fillColor: "#444D0D",
+      bgColor: colorConfig.color15.bgColor,
+      fillColor: colorConfig.color15.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
-        title="Your Messaging Style"
+        title="The Messaging Style That Got You Here"
         value={result.style as string}
-        description={result.analysis as string}
+        description={result.description as string}
         valueColor="#202405"
       />
     ),
@@ -206,22 +195,25 @@ export const tinderConfig: CardItem[] = [
   {
     data: {
       id: "red_flags",
-      bgColor: "#D46F6F",
-      fillColor: "#D67373",
+      bgColor: colorConfig.color17.bgColor,
+      fillColor: colorConfig.color17.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
-      <TitleCard title="Your Red Flags" description={result.value as string} />
+      <TitleCard
+        title="Things That Make Matches Swipe Left"
+        description={result.value as string}
+      />
     ),
   },
   {
     data: {
       id: "final_recommendation",
-      bgColor: "#6F8CD4",
-      fillColor: "#7390D6",
+      bgColor: colorConfig.color18.bgColor,
+      fillColor: colorConfig.color18.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
-        title="Final Dating Advice"
+        title="What to Fix Before You Swipe Again"
         description={result.value as string}
       />
     ),

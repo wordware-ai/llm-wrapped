@@ -64,7 +64,8 @@ export const MetricCard = ({
         style={{ color: valueColor }}
         className="break-words font-semibold italic leading-tight"
       >
-        <DynamicText text={value} />
+        {/* <DynamicText text={value} /> */}
+        <p className="text-[4vh]">{value}</p>
       </motion.div>
       <motion.p
         variants={fadeInUp}

@@ -25,7 +25,7 @@ export default function SlideshowShell({
   const [isPaused, setIsPaused] = useState(false);
 
   const router = useRouter();
-  const { username } = useParams();
+  const { username, id } = useParams();
 
   // Prevent scrolling when the slideshow is open
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function SlideshowShell({
   }, [currentSlide]);
 
   const exit = () => {
-    if (username) {
+    if (username || id) {
       // Get the current pathname and remove query parameters
       const currentPath = window.location.pathname;
       router.push(currentPath);

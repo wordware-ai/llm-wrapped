@@ -46,7 +46,7 @@ export function TinderResults({
       setProfileData(profileData ?? {});
     } else {
       const storedData = JSON.parse(
-        sessionStorage.getItem("tinderData") ?? "{}",
+        localStorage.getItem("tinderData") ?? "{}",
       ) as StoredTinderData;
       const { llmdata, name } = storedData;
 
@@ -85,8 +85,8 @@ export function TinderResults({
           href: undefined,
         },
         card3text: results.roast_bio as string,
-        storyHref: `/spotify/${id as string}?name=wordware&slide=1`,
-        showWordwareCard: !!results.music_taste_analysis_3,
+        storyHref: `/tinder/${id as string}?name=wordware&slide=1`,
+        showWordwareCard: !!results.swipe_ratios,
       }}
     />
   );

@@ -6,21 +6,22 @@ import {
   TextCard,
   TitleCard,
 } from "@/components/story-cards";
+import { colorConfig } from "./color-config";
 
 export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "short_summary",
-      bgColor: "#378C77",
-      fillColor: "#43937F",
+      bgColor: colorConfig.color1.bgColor,
+      fillColor: colorConfig.color1.fillColor,
     },
     Component: TextCard,
   },
   {
     data: {
       id: "current_position",
-      bgColor: "#D46FA8",
-      fillColor: "#D673AB",
+      bgColor: colorConfig.color2.bgColor,
+      fillColor: colorConfig.color2.fillColor,
     },
     Component: ({ result, profileData }: CardComponentProps) => (
       <ImageCard
@@ -33,8 +34,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "actual_position",
-      bgColor: "#637BC4",
-      fillColor: "#6D87D7",
+      bgColor: colorConfig.color3.bgColor,
+      fillColor: colorConfig.color3.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
@@ -46,8 +47,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "position_mother",
-      bgColor: "#D68E49",
-      fillColor: "#D8924C",
+      bgColor: colorConfig.color4.bgColor,
+      fillColor: colorConfig.color4.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
@@ -59,8 +60,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "accidental_success",
-      bgColor: "#D17974",
-      fillColor: "#D47D78",
+      bgColor: colorConfig.color5.bgColor,
+      fillColor: colorConfig.color5.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
@@ -72,8 +73,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "ambition",
-      bgColor: "#8C68C8",
-      fillColor: "#906CCB",
+      bgColor: colorConfig.color6.bgColor,
+      fillColor: colorConfig.color6.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
@@ -87,8 +88,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "delusional",
-      bgColor: "#C0D46F",
-      fillColor: "#C3D673",
+      bgColor: colorConfig.color7.bgColor,
+      fillColor: colorConfig.color7.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
@@ -102,8 +103,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "performance",
-      bgColor: "#6FCFD4",
-      fillColor: "#73D1D6",
+      bgColor: colorConfig.color8.bgColor,
+      fillColor: colorConfig.color8.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
@@ -117,8 +118,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "career_trajectory",
-      bgColor: "#5D9266",
-      fillColor: "#61966A",
+      bgColor: colorConfig.color9.bgColor,
+      fillColor: colorConfig.color9.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
@@ -130,8 +131,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "next_endeavor",
-      bgColor: "#6A2B63",
-      fillColor: "#6E2D67",
+      bgColor: colorConfig.color10.bgColor,
+      fillColor: colorConfig.color10.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
@@ -143,8 +144,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "job_description",
-      bgColor: "#F3A373",
-      fillColor: "#F4A677",
+      bgColor: colorConfig.color11.bgColor,
+      fillColor: colorConfig.color11.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
@@ -156,8 +157,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "buzzword_bingo",
-      bgColor: "#2C8E94",
-      fillColor: "#2E9298",
+      bgColor: colorConfig.color12.bgColor,
+      fillColor: colorConfig.color12.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
@@ -169,8 +170,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "skills",
-      bgColor: "#8A423D",
-      fillColor: "#8E4440",
+      bgColor: colorConfig.color13.bgColor,
+      fillColor: colorConfig.color13.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
@@ -182,8 +183,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "reason_for_firing",
-      bgColor: "#BD68C8",
-      fillColor: "#C06CCB",
+      bgColor: colorConfig.color14.bgColor,
+      fillColor: colorConfig.color14.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
@@ -195,8 +196,8 @@ export const linkedinConfig: CardItem[] = [
   {
     data: {
       id: "recommendation",
-      bgColor: "#414A0D",
-      fillColor: "#444D0D",
+      bgColor: colorConfig.color15.bgColor,
+      fillColor: colorConfig.color15.fillColor,
     },
     Component: ({ result }: CardComponentProps) => (
       <TitleCard

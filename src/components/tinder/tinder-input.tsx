@@ -2,7 +2,7 @@
 
 import { convertTinderDataToMarkdown } from "@/lib/convert-to-markdown";
 import { cn } from "@/lib/utils";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { TinderDataSchema } from "./schemas";
 import { useRouter } from "next/navigation";
@@ -11,8 +11,17 @@ import { createTinderId } from "@/lib/create-tinder-id";
 export function TinderInput() {
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [existingId, setExistingId] = useState<string | null>(null);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const storedData = localStorage.getItem("tinderData");
+    if (storedData) {
+      const { id } = JSON.parse(storedData);
+      setExistingId(id);
+    }
+  }, []);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setError(null);
@@ -34,9 +43,10 @@ export function TinderInput() {
         const name = parsedData?.user?.name;
         const id = createTinderId(name);
         const markdown = convertTinderDataToMarkdown(parsedData);
-        const dataToStore = { name, llmdata: markdown };
-        sessionStorage.setItem("tinderData", JSON.stringify(dataToStore));
-        router.push(`/tinder/${id}`);
+        console.log(markdown);
+        // const dataToStore = { name, llmdata: markdown, id };
+        // localStorage.setItem("tinderData", JSON.stringify(dataToStore));
+        // router.push(`/tinder/${id}`);
       } catch (err) {
         setError("Invalid JSON file");
         console.error("Error parsing JSON:", err);
@@ -74,6 +84,15 @@ export function TinderInput() {
         </p>
         {error && <p className="mt-2 text-red-500">{error}</p>}
       </div>
+
+      {existingId && (
+        <button
+          onClick={() => router.push(`/tinder/${existingId}`)}
+          className="mt-4 w-full rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600"
+        >
+          View Your Previous Results
+        </button>
+      )}
     </div>
   );
 }

@@ -30,6 +30,7 @@ export default function WordwareSlideshow() {
         quality={100}
         className="object-cover opacity-50"
         priority
+        fetchPriority="high"
       />
       <TitleCard
         key={currentSlide}
