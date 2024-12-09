@@ -3,8 +3,8 @@
 import { useStream } from "@/hooks/use-stream";
 import { useUser } from "@/hooks/use-user";
 import { api } from "@/trpc/react";
-import { type UserWithSpotifyResult } from "@/types/user";
-import { redirect } from "next/navigation";
+import { type SpotifyResult } from "@prisma/client";
+import { redirect, useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useStreamContext } from "../stream-provider";
 
@@ -15,11 +15,11 @@ import {
 import { ResultsPage } from "../results-page";
 
 export function SpotifyResults({
-  user,
+  previousRun,
   profileData,
   llmData,
 }: {
-  user: UserWithSpotifyResult;
+  previousRun?: SpotifyResult;
   profileData?: {
     leastPopularImageUrl: string | null;
     mostPopularImageUrl: string | null;
@@ -31,11 +31,10 @@ export function SpotifyResults({
 
   llmData?: string;
 }) {
-  const previousRun = user.spotifyResult;
   const { session } = useUser();
 
   const { mutate: createSpotifyResult } =
-    api.spotifyResults.createSpotifyResult.useMutation();
+    api.spotifyResults.create.useMutation();
 
   const onFinish = (results: Record<string, unknown>) => {
     const spotifyResult = {
@@ -46,7 +45,15 @@ export function SpotifyResults({
       leastPopularUrl: profileData?.leastPopularUrl ?? null,
       mostPopularUrl: profileData?.mostPopularUrl ?? null,
       topArtistUrl: profileData?.topArtistUrl ?? null,
-      user: {},
+      userId: session?.user.id ?? "",
+      username: username as string,
+      email: session?.user.email,
+      imageUrl:
+        (
+          session?.user.user_metadata as {
+            picture?: string;
+          }
+        ).picture ?? "",
     };
     createSpotifyResult(spotifyResult);
   };
@@ -57,6 +64,7 @@ export function SpotifyResults({
   useEffect(() => {
     if (previousRun) {
       const displayResults = convertSpotifyDbToState(previousRun);
+      console.log(displayResults);
       setResults(displayResults);
     } else {
       void streamResponse({
@@ -69,6 +77,8 @@ export function SpotifyResults({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [previousRun, llmData]);
 
+  const { username } = useParams();
+
   // might not need this have to think about it
   if (!previousRun && !session?.provider_token) {
     redirect("/");
@@ -77,10 +87,17 @@ export function SpotifyResults({
   return (
     <ResultsPage
       user={{
-        username: user.username ?? "",
-        name: user.username ?? "",
-        imageUrl: user.imageUrl ?? "",
-        storyHref: `/spotify/${user.username}?slide=1`,
+        username: username as string,
+        name: username as string,
+        imageUrl:
+          previousRun?.imageUrl ??
+          (
+            session?.user.user_metadata as {
+              picture?: string;
+            }
+          ).picture ??
+          "",
+        storyHref: `/spotify/${username as string}?slide=1`,
       }}
       cards={{
         card1text: results.short_summary as string,
@@ -91,7 +108,7 @@ export function SpotifyResults({
           href: profileData?.topArtistUrl ?? undefined,
         },
         card3text: results.music_taste_analysis_2 as string,
-        storyHref: `/spotify/${user.username}?name=wordware&slide=1`,
+        storyHref: `/spotify/${username as string}?name=wordware&slide=1`,
         showWordwareCard: !!results.music_taste_analysis_3,
       }}
     />

@@ -1,6 +1,5 @@
-import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { api } from "@/trpc/server";
+import { NextResponse } from "next/server";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
@@ -12,31 +11,8 @@ export async function GET(request: Request) {
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error && data.user) {
-      const existingUser = await api.users.getCurrent();
-      if (existingUser) {
-        next = `/spotify/${existingUser.username}`;
-      } else {
-        const user = await api.users.create({
-          id: "n/a",
-          username: (data.user.user_metadata as { name?: string }).name ?? null,
-          email: data.user.email,
-          imageUrl:
-            (
-              data.user.user_metadata as {
-                picture?: string;
-                avatar_url?: string;
-              }
-            ).picture ??
-            (
-              data.user.user_metadata as {
-                picture?: string;
-                avatar_url?: string;
-              }
-            ).avatar_url ??
-            null,
-        });
-        next = `/spotify/${user.username}`;
-      }
+      next = `/spotify/${(data.user.user_metadata as { name?: string }).name}`;
+
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";
       if (isLocalEnv) {

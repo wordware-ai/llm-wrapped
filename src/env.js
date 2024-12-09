@@ -14,6 +14,8 @@ export const env = createEnv({
     WORDWARE_API_KEY: z.string(),
     BRIGHTDATA_API_KEY: z.string(),
     SUPABASE_SERVICE_ROLE_KEY: z.string(),
+    POSTHOG_PERSONAL_API_KEY: z.string(),
+    POSTHOG_PROJECT_ID: z.string(),
   },
 
   /**
@@ -40,6 +42,8 @@ export const env = createEnv({
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL,
     NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+    POSTHOG_PERSONAL_API_KEY: process.env.POSTHOG_PERSONAL_API_KEY,
+    POSTHOG_PROJECT_ID: process.env.POSTHOG_PROJECT_ID,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
