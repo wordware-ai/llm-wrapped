@@ -14,7 +14,7 @@ datasource db {
 
 // Models
 model SpotifyResult {
-  id                   String  @id 
+  id                   String  @id @default(cuid())
   userId               String  @unique
   email                String?  @unique
   username             String?  @unique

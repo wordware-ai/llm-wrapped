@@ -14,6 +14,9 @@ export function convertSpotifyDbToState(
     "leastPopularUrl",
     "mostPopularUrl",
     "topArtistUrl",
+    "imageUrl",
+    "username",
+    "email",
   ];
   const cleanedPreviousRun = Object.fromEntries(
     Object.entries(previousRun).filter(

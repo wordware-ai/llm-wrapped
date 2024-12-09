@@ -1,7 +1,6 @@
 import { spotifyApiRouter } from "@/server/api/routers/spotify-api";
 import { spotifyResultsRouter } from "@/server/api/routers/spotify-results";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
-import { usersRouter } from "./routers/users";
 import { linkedinResultsRouter } from "./routers/linkedin-results";
 import { linkedinApiRouter } from "./routers/linkedin-api";
 /**
@@ -10,7 +9,6 @@ import { linkedinApiRouter } from "./routers/linkedin-api";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  users: usersRouter,
   spotifyApi: spotifyApiRouter,
   spotifyResults: spotifyResultsRouter,
   linkedinApi: linkedinApiRouter,

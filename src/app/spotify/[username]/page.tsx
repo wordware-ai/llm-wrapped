@@ -9,15 +9,16 @@ export default async function SpotifyResultsPage({
 }) {
   const username = (await params).username;
 
-  const user = await api.users.getByUsername({
+  const spotifyResult = await api.spotifyResults.getByUsername({
     username,
   });
 
   const { session } = await getSession();
 
+  // this can be improved
   let profileData;
   let llmData;
-  if (!user?.spotifyResult && session?.provider_token) {
+  if (!spotifyResult && session?.provider_token) {
     const allData = await api.spotifyApi.getAllUserData();
     llmData = allData?.spotifyData;
     profileData = {
@@ -30,18 +31,20 @@ export default async function SpotifyResultsPage({
     };
   } else {
     profileData = {
-      leastPopularImageUrl: user?.spotifyResult?.leastPopularImageUrl ?? null,
-      mostPopularImageUrl: user?.spotifyResult?.mostPopularImageUrl ?? null,
-      topArtistImageUrl: user?.spotifyResult?.topArtistImageUrl ?? null,
-      leastPopularUrl: user?.spotifyResult?.leastPopularUrl ?? null,
-      mostPopularUrl: user?.spotifyResult?.mostPopularUrl ?? null,
-      topArtistUrl: user?.spotifyResult?.topArtistUrl ?? null,
+      leastPopularImageUrl: spotifyResult?.leastPopularImageUrl ?? null,
+      mostPopularImageUrl: spotifyResult?.mostPopularImageUrl ?? null,
+      topArtistImageUrl: spotifyResult?.topArtistImageUrl ?? null,
+      leastPopularUrl: spotifyResult?.leastPopularUrl ?? null,
+      mostPopularUrl: spotifyResult?.mostPopularUrl ?? null,
+      topArtistUrl: spotifyResult?.topArtistUrl ?? null,
     };
   }
 
-  if (!user) return <p>User not found</p>;
-
   return (
-    <SpotifyResults user={user} profileData={profileData} llmData={llmData} />
+    <SpotifyResults
+      previousRun={spotifyResult ?? undefined}
+      profileData={profileData}
+      llmData={llmData}
+    />
   );
 }

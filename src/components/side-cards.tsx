@@ -29,7 +29,7 @@ export function SideCards({
         hideHashtag
         backgroundColor={colorConfig.color1.bgColor}
         fillColor={colorConfig.color1.fillColor}
-        className="aspect-auto h-min min-h-40 w-full rounded-xl lg:h-1/3"
+        className="aspect-auto h-min min-h-80 w-full rounded-xl lg:h-1/3"
       >
         <div className="flex h-full items-center justify-center">
           <p className="text-center text-4xl text-white lg:text-2xl">
@@ -43,7 +43,7 @@ export function SideCards({
           hideHashtag
           backgroundColor={colorConfig.color2.bgColor}
           fillColor={colorConfig.color2.fillColor}
-          className="aspect-auto h-min min-h-40 rounded-xl lg:h-full lg:w-1/2"
+          className="aspect-auto h-min min-h-80 rounded-xl lg:h-full lg:w-1/2"
         >
           <div className="flex h-full flex-col items-center justify-center gap-4">
             {card2.text && (
@@ -86,7 +86,7 @@ export function SideCards({
               hideHashtag
               backgroundColor={colorConfig.color3.bgColor}
               fillColor={colorConfig.color3.fillColor}
-              className="flex aspect-auto h-min min-h-40 w-full items-center justify-center rounded-xl lg:h-full"
+              className="flex aspect-auto h-min min-h-80 w-full items-center justify-center rounded-xl lg:h-full"
             >
               <div className="flex h-full w-full items-center justify-center">
                 <p className="grow text-center text-2xl text-white">
