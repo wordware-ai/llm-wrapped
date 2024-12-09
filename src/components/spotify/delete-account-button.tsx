@@ -17,7 +17,7 @@ import { Button } from "../ui/button";
 
 export default function DeleteAccountButton() {
   const supabase = createClient();
-  const { mutate: deleteUserData } = api.users.delete.useMutation({
+  const { mutate: deleteUserData } = api.spotifyResults.delete.useMutation({
     onSuccess: async () => {
       await supabase.auth.signOut();
       window.location.reload();
