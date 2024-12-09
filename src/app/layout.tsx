@@ -37,6 +37,7 @@ export default async function RootLayout({
                     <SlideShow />
                   </Suspense>
                   {children}
+
                   <Footer />
                 </NuqsAdapter>
               </StreamProvider>

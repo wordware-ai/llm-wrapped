@@ -19,6 +19,7 @@ import { LinkedinLogo } from "./logos/linkedin";
 import { SpotifyLogo } from "./logos/spotify";
 import { TinderLogo } from "./logos/tinder";
 import { TwitterXLogo } from "./logos/twitter";
+import { TinderInput } from "./tinder/tinder-input";
 
 type TabValue = "spotify" | "linkedin" | "twitter" | "github" | "tinder";
 
@@ -77,6 +78,12 @@ export function Hero() {
       disabled: false,
     },
     {
+      value: "tinder" as const,
+      icon: <TinderLogo className="h-7 w-auto" />,
+      label: "Tinder",
+      disabled: false,
+    },
+    {
       value: "twitter" as const,
       icon: <TwitterXLogo className="h-6 w-auto" />,
       label: "Twitter",
@@ -88,23 +95,19 @@ export function Hero() {
       label: "GitHub",
       disabled: true,
     },
-    {
-      value: "tinder" as const,
-      icon: <TinderLogo className="h-7 w-auto" />,
-      label: "Tinder",
-      disabled: true,
-    },
   ];
 
   return (
     <div className="flex w-full flex-col items-center justify-center gap-12">
-      <div className="relative z-0 flex h-[500px] w-full flex-col items-center justify-center gap-12 overflow-hidden bg-black sm:rounded-xl">
+      <div className="relative z-0 flex h-fit min-h-[500px] w-full flex-col items-center justify-center gap-12 overflow-hidden bg-black py-20 sm:rounded-xl">
         <div
-          className="absolute left-0 top-0 -z-10 h-full w-full"
+          className="absolute left-0 right-0 top-0 -z-10 h-[500px]"
           style={{
             backgroundImage: "url('/blobs/background.svg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: "100% 100%",
+            backgroundRepeat: "no-repeat",
+            backgroundPosition: "center top",
+            transform: "scale(1.5)",
             opacity: 0.2,
           }}
         />
@@ -147,10 +150,11 @@ export function Hero() {
             ))}
           </div>
 
-          <div className="h-10 w-full">
-            <div className="absolute flex w-full justify-center">
+          <div className="w-full">
+            <div className="flex w-full justify-center">
               {tab === "spotify" && <SpotifyButton />}
               {tab === "linkedin" && <LinkedinInput />}
+              {tab === "tinder" && <TinderInput />}
               {tab === "twitter" && <Button disabled>Twitter</Button>}
               {tab === "github" && <Button disabled>GitHub</Button>}
             </div>

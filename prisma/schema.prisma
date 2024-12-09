@@ -14,11 +14,11 @@ datasource db {
 
 // Models
 model SpotifyResult {
-  id                   String  @id @default(cuid())
-  userId               String  @unique
-  email                String?  @unique
-  username             String?  @unique
-  imageUrl             String?
+  id       String  @id @default(cuid())
+  userId   String  @unique
+  email    String? @unique
+  username String? @unique
+  imageUrl String?
 
   leastPopularImageUrl String?
   mostPopularImageUrl  String?
@@ -51,7 +51,7 @@ model SpotifyResult {
 }
 
 model LinkedinResult {
-  id                      String  @id @default(cuid())
+  id String @id @default(cuid())
 
   username                String  @unique
   name                    String?
@@ -73,6 +73,32 @@ model LinkedinResult {
   skills             String
   reason_for_firing  String
   recommendation     String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model TinderResult {
+  id   String  @id
+  name String?
+
+  short_summary        String
+  alternative          String
+  roast_bio            String
+  age_preferences      String
+  swipe_ratios         Json
+  match_ratios         Json
+  message_peak_day     Json
+  total_messages_sent  Json
+  chat_heavy_days      Json
+  personality_insights String
+  theme_song_analysis  String
+  bold_text_moves      String
+  bold_text_moves2     String
+  bold_text_moves3     String
+  message_style        Json
+  red_flags            String
+  final_recommendation String
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

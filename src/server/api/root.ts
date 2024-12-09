@@ -3,6 +3,7 @@ import { spotifyResultsRouter } from "@/server/api/routers/spotify-results";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 import { linkedinResultsRouter } from "./routers/linkedin-results";
 import { linkedinApiRouter } from "./routers/linkedin-api";
+import { tinderResultsRouter } from "./routers/tinder";
 /**
  * This is the primary router for your server.
  *
@@ -13,6 +14,7 @@ export const appRouter = createTRPCRouter({
   spotifyResults: spotifyResultsRouter,
   linkedinApi: linkedinApiRouter,
   linkedinResults: linkedinResultsRouter,
+  tinderResults: tinderResultsRouter,
 });
 
 // export type definition of API

@@ -60,6 +60,8 @@ export const SpotifyResultScalarFieldEnumSchema = z.enum(['id','userId','email',
 
 export const LinkedinResultScalarFieldEnumSchema = z.enum(['id','username','name','imageUrl','currentPositionImageUrl','short_summary','current_position','actual_position','position_mother','accidental_success','ambition','delusional','performance','career_trajectory','next_endeavor','job_description','buzzword_bingo','skills','reason_for_firing','recommendation','createdAt','updatedAt']);
 
+export const TinderResultScalarFieldEnumSchema = z.enum(['id','name','short_summary','alternative','roast_bio','age_preferences','swipe_ratios','match_ratios','message_peak_day','total_messages_sent','chat_heavy_days','personality_insights','theme_song_analysis','bold_text_moves','bold_text_moves2','bold_text_moves3','message_style','red_flags','final_recommendation','createdAt','updatedAt']);
+
 export const SortOrderSchema = z.enum(['asc','desc']);
 
 export const JsonNullValueInputSchema = z.enum(['JsonNull',]).transform((value) => (value === 'JsonNull' ? Prisma.JsonNull : value));
@@ -145,6 +147,36 @@ export const LinkedinResultSchema = z.object({
 export type LinkedinResult = z.infer<typeof LinkedinResultSchema>
 
 /////////////////////////////////////////
+// TINDER RESULT SCHEMA
+/////////////////////////////////////////
+
+export const TinderResultSchema = z.object({
+  id: z.string(),
+  name: z.string().nullable(),
+  short_summary: z.string(),
+  alternative: z.string(),
+  roast_bio: z.string(),
+  age_preferences: z.string(),
+  swipe_ratios: JsonValueSchema,
+  match_ratios: JsonValueSchema,
+  message_peak_day: JsonValueSchema,
+  total_messages_sent: JsonValueSchema,
+  chat_heavy_days: JsonValueSchema,
+  personality_insights: z.string(),
+  theme_song_analysis: z.string(),
+  bold_text_moves: z.string(),
+  bold_text_moves2: z.string(),
+  bold_text_moves3: z.string(),
+  message_style: JsonValueSchema,
+  red_flags: z.string(),
+  final_recommendation: z.string(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+})
+
+export type TinderResult = z.infer<typeof TinderResultSchema>
+
+/////////////////////////////////////////
 // SELECT & INCLUDE
 /////////////////////////////////////////
 
@@ -209,6 +241,33 @@ export const LinkedinResultSelectSchema: z.ZodType<Prisma.LinkedinResultSelect> 
   skills: z.boolean().optional(),
   reason_for_firing: z.boolean().optional(),
   recommendation: z.boolean().optional(),
+  createdAt: z.boolean().optional(),
+  updatedAt: z.boolean().optional(),
+}).strict()
+
+// TINDER RESULT
+//------------------------------------------------------
+
+export const TinderResultSelectSchema: z.ZodType<Prisma.TinderResultSelect> = z.object({
+  id: z.boolean().optional(),
+  name: z.boolean().optional(),
+  short_summary: z.boolean().optional(),
+  alternative: z.boolean().optional(),
+  roast_bio: z.boolean().optional(),
+  age_preferences: z.boolean().optional(),
+  swipe_ratios: z.boolean().optional(),
+  match_ratios: z.boolean().optional(),
+  message_peak_day: z.boolean().optional(),
+  total_messages_sent: z.boolean().optional(),
+  chat_heavy_days: z.boolean().optional(),
+  personality_insights: z.boolean().optional(),
+  theme_song_analysis: z.boolean().optional(),
+  bold_text_moves: z.boolean().optional(),
+  bold_text_moves2: z.boolean().optional(),
+  bold_text_moves3: z.boolean().optional(),
+  message_style: z.boolean().optional(),
+  red_flags: z.boolean().optional(),
+  final_recommendation: z.boolean().optional(),
   createdAt: z.boolean().optional(),
   updatedAt: z.boolean().optional(),
 }).strict()
@@ -609,6 +668,141 @@ export const LinkedinResultScalarWhereWithAggregatesInputSchema: z.ZodType<Prism
   skills: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   reason_for_firing: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   recommendation: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
+}).strict();
+
+export const TinderResultWhereInputSchema: z.ZodType<Prisma.TinderResultWhereInput> = z.object({
+  AND: z.union([ z.lazy(() => TinderResultWhereInputSchema),z.lazy(() => TinderResultWhereInputSchema).array() ]).optional(),
+  OR: z.lazy(() => TinderResultWhereInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => TinderResultWhereInputSchema),z.lazy(() => TinderResultWhereInputSchema).array() ]).optional(),
+  id: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  name: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
+  short_summary: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  alternative: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  roast_bio: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  age_preferences: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  swipe_ratios: z.lazy(() => JsonFilterSchema).optional(),
+  match_ratios: z.lazy(() => JsonFilterSchema).optional(),
+  message_peak_day: z.lazy(() => JsonFilterSchema).optional(),
+  total_messages_sent: z.lazy(() => JsonFilterSchema).optional(),
+  chat_heavy_days: z.lazy(() => JsonFilterSchema).optional(),
+  personality_insights: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  theme_song_analysis: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  bold_text_moves: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  bold_text_moves2: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  bold_text_moves3: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  message_style: z.lazy(() => JsonFilterSchema).optional(),
+  red_flags: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  final_recommendation: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+}).strict();
+
+export const TinderResultOrderByWithRelationInputSchema: z.ZodType<Prisma.TinderResultOrderByWithRelationInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  name: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  alternative: z.lazy(() => SortOrderSchema).optional(),
+  roast_bio: z.lazy(() => SortOrderSchema).optional(),
+  age_preferences: z.lazy(() => SortOrderSchema).optional(),
+  swipe_ratios: z.lazy(() => SortOrderSchema).optional(),
+  match_ratios: z.lazy(() => SortOrderSchema).optional(),
+  message_peak_day: z.lazy(() => SortOrderSchema).optional(),
+  total_messages_sent: z.lazy(() => SortOrderSchema).optional(),
+  chat_heavy_days: z.lazy(() => SortOrderSchema).optional(),
+  personality_insights: z.lazy(() => SortOrderSchema).optional(),
+  theme_song_analysis: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves2: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves3: z.lazy(() => SortOrderSchema).optional(),
+  message_style: z.lazy(() => SortOrderSchema).optional(),
+  red_flags: z.lazy(() => SortOrderSchema).optional(),
+  final_recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional()
+}).strict();
+
+export const TinderResultWhereUniqueInputSchema: z.ZodType<Prisma.TinderResultWhereUniqueInput> = z.object({
+  id: z.string()
+})
+.and(z.object({
+  id: z.string().optional(),
+  AND: z.union([ z.lazy(() => TinderResultWhereInputSchema),z.lazy(() => TinderResultWhereInputSchema).array() ]).optional(),
+  OR: z.lazy(() => TinderResultWhereInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => TinderResultWhereInputSchema),z.lazy(() => TinderResultWhereInputSchema).array() ]).optional(),
+  name: z.union([ z.lazy(() => StringNullableFilterSchema),z.string() ]).optional().nullable(),
+  short_summary: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  alternative: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  roast_bio: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  age_preferences: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  swipe_ratios: z.lazy(() => JsonFilterSchema).optional(),
+  match_ratios: z.lazy(() => JsonFilterSchema).optional(),
+  message_peak_day: z.lazy(() => JsonFilterSchema).optional(),
+  total_messages_sent: z.lazy(() => JsonFilterSchema).optional(),
+  chat_heavy_days: z.lazy(() => JsonFilterSchema).optional(),
+  personality_insights: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  theme_song_analysis: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  bold_text_moves: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  bold_text_moves2: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  bold_text_moves3: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  message_style: z.lazy(() => JsonFilterSchema).optional(),
+  red_flags: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  final_recommendation: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+  updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
+}).strict());
+
+export const TinderResultOrderByWithAggregationInputSchema: z.ZodType<Prisma.TinderResultOrderByWithAggregationInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  name: z.union([ z.lazy(() => SortOrderSchema),z.lazy(() => SortOrderInputSchema) ]).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  alternative: z.lazy(() => SortOrderSchema).optional(),
+  roast_bio: z.lazy(() => SortOrderSchema).optional(),
+  age_preferences: z.lazy(() => SortOrderSchema).optional(),
+  swipe_ratios: z.lazy(() => SortOrderSchema).optional(),
+  match_ratios: z.lazy(() => SortOrderSchema).optional(),
+  message_peak_day: z.lazy(() => SortOrderSchema).optional(),
+  total_messages_sent: z.lazy(() => SortOrderSchema).optional(),
+  chat_heavy_days: z.lazy(() => SortOrderSchema).optional(),
+  personality_insights: z.lazy(() => SortOrderSchema).optional(),
+  theme_song_analysis: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves2: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves3: z.lazy(() => SortOrderSchema).optional(),
+  message_style: z.lazy(() => SortOrderSchema).optional(),
+  red_flags: z.lazy(() => SortOrderSchema).optional(),
+  final_recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional(),
+  _count: z.lazy(() => TinderResultCountOrderByAggregateInputSchema).optional(),
+  _max: z.lazy(() => TinderResultMaxOrderByAggregateInputSchema).optional(),
+  _min: z.lazy(() => TinderResultMinOrderByAggregateInputSchema).optional()
+}).strict();
+
+export const TinderResultScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.TinderResultScalarWhereWithAggregatesInput> = z.object({
+  AND: z.union([ z.lazy(() => TinderResultScalarWhereWithAggregatesInputSchema),z.lazy(() => TinderResultScalarWhereWithAggregatesInputSchema).array() ]).optional(),
+  OR: z.lazy(() => TinderResultScalarWhereWithAggregatesInputSchema).array().optional(),
+  NOT: z.union([ z.lazy(() => TinderResultScalarWhereWithAggregatesInputSchema),z.lazy(() => TinderResultScalarWhereWithAggregatesInputSchema).array() ]).optional(),
+  id: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  name: z.union([ z.lazy(() => StringNullableWithAggregatesFilterSchema),z.string() ]).optional().nullable(),
+  short_summary: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  alternative: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  roast_bio: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  age_preferences: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  swipe_ratios: z.lazy(() => JsonWithAggregatesFilterSchema).optional(),
+  match_ratios: z.lazy(() => JsonWithAggregatesFilterSchema).optional(),
+  message_peak_day: z.lazy(() => JsonWithAggregatesFilterSchema).optional(),
+  total_messages_sent: z.lazy(() => JsonWithAggregatesFilterSchema).optional(),
+  chat_heavy_days: z.lazy(() => JsonWithAggregatesFilterSchema).optional(),
+  personality_insights: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  theme_song_analysis: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  bold_text_moves: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  bold_text_moves2: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  bold_text_moves3: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  message_style: z.lazy(() => JsonWithAggregatesFilterSchema).optional(),
+  red_flags: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  final_recommendation: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   createdAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
 }).strict();
@@ -1026,6 +1220,174 @@ export const LinkedinResultUncheckedUpdateManyInputSchema: z.ZodType<Prisma.Link
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
 }).strict();
 
+export const TinderResultCreateInputSchema: z.ZodType<Prisma.TinderResultCreateInput> = z.object({
+  id: z.string(),
+  name: z.string().optional().nullable(),
+  short_summary: z.string(),
+  alternative: z.string(),
+  roast_bio: z.string(),
+  age_preferences: z.string(),
+  swipe_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  match_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  message_peak_day: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  total_messages_sent: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  chat_heavy_days: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  personality_insights: z.string(),
+  theme_song_analysis: z.string(),
+  bold_text_moves: z.string(),
+  bold_text_moves2: z.string(),
+  bold_text_moves3: z.string(),
+  message_style: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  red_flags: z.string(),
+  final_recommendation: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional()
+}).strict();
+
+export const TinderResultUncheckedCreateInputSchema: z.ZodType<Prisma.TinderResultUncheckedCreateInput> = z.object({
+  id: z.string(),
+  name: z.string().optional().nullable(),
+  short_summary: z.string(),
+  alternative: z.string(),
+  roast_bio: z.string(),
+  age_preferences: z.string(),
+  swipe_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  match_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  message_peak_day: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  total_messages_sent: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  chat_heavy_days: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  personality_insights: z.string(),
+  theme_song_analysis: z.string(),
+  bold_text_moves: z.string(),
+  bold_text_moves2: z.string(),
+  bold_text_moves3: z.string(),
+  message_style: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  red_flags: z.string(),
+  final_recommendation: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional()
+}).strict();
+
+export const TinderResultUpdateInputSchema: z.ZodType<Prisma.TinderResultUpdateInput> = z.object({
+  id: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  alternative: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  roast_bio: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  age_preferences: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  swipe_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  match_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  message_peak_day: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  total_messages_sent: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  chat_heavy_days: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  personality_insights: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  theme_song_analysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves2: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves3: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  message_style: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  red_flags: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  final_recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+}).strict();
+
+export const TinderResultUncheckedUpdateInputSchema: z.ZodType<Prisma.TinderResultUncheckedUpdateInput> = z.object({
+  id: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  alternative: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  roast_bio: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  age_preferences: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  swipe_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  match_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  message_peak_day: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  total_messages_sent: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  chat_heavy_days: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  personality_insights: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  theme_song_analysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves2: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves3: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  message_style: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  red_flags: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  final_recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+}).strict();
+
+export const TinderResultCreateManyInputSchema: z.ZodType<Prisma.TinderResultCreateManyInput> = z.object({
+  id: z.string(),
+  name: z.string().optional().nullable(),
+  short_summary: z.string(),
+  alternative: z.string(),
+  roast_bio: z.string(),
+  age_preferences: z.string(),
+  swipe_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  match_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  message_peak_day: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  total_messages_sent: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  chat_heavy_days: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  personality_insights: z.string(),
+  theme_song_analysis: z.string(),
+  bold_text_moves: z.string(),
+  bold_text_moves2: z.string(),
+  bold_text_moves3: z.string(),
+  message_style: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]),
+  red_flags: z.string(),
+  final_recommendation: z.string(),
+  createdAt: z.coerce.date().optional(),
+  updatedAt: z.coerce.date().optional()
+}).strict();
+
+export const TinderResultUpdateManyMutationInputSchema: z.ZodType<Prisma.TinderResultUpdateManyMutationInput> = z.object({
+  id: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  alternative: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  roast_bio: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  age_preferences: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  swipe_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  match_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  message_peak_day: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  total_messages_sent: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  chat_heavy_days: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  personality_insights: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  theme_song_analysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves2: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves3: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  message_style: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  red_flags: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  final_recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+}).strict();
+
+export const TinderResultUncheckedUpdateManyInputSchema: z.ZodType<Prisma.TinderResultUncheckedUpdateManyInput> = z.object({
+  id: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  name: z.union([ z.string(),z.lazy(() => NullableStringFieldUpdateOperationsInputSchema) ]).optional().nullable(),
+  short_summary: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  alternative: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  roast_bio: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  age_preferences: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  swipe_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  match_ratios: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  message_peak_day: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  total_messages_sent: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  chat_heavy_days: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  personality_insights: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  theme_song_analysis: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves2: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  bold_text_moves3: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  message_style: z.union([ z.lazy(() => JsonNullValueInputSchema),InputJsonValueSchema ]).optional(),
+  red_flags: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  final_recommendation: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+  updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
+}).strict();
+
 export const StringFilterSchema: z.ZodType<Prisma.StringFilter> = z.object({
   equals: z.string().optional(),
   in: z.string().array().optional(),
@@ -1322,6 +1684,66 @@ export const LinkedinResultMinOrderByAggregateInputSchema: z.ZodType<Prisma.Link
   updatedAt: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
+export const TinderResultCountOrderByAggregateInputSchema: z.ZodType<Prisma.TinderResultCountOrderByAggregateInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  name: z.lazy(() => SortOrderSchema).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  alternative: z.lazy(() => SortOrderSchema).optional(),
+  roast_bio: z.lazy(() => SortOrderSchema).optional(),
+  age_preferences: z.lazy(() => SortOrderSchema).optional(),
+  swipe_ratios: z.lazy(() => SortOrderSchema).optional(),
+  match_ratios: z.lazy(() => SortOrderSchema).optional(),
+  message_peak_day: z.lazy(() => SortOrderSchema).optional(),
+  total_messages_sent: z.lazy(() => SortOrderSchema).optional(),
+  chat_heavy_days: z.lazy(() => SortOrderSchema).optional(),
+  personality_insights: z.lazy(() => SortOrderSchema).optional(),
+  theme_song_analysis: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves2: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves3: z.lazy(() => SortOrderSchema).optional(),
+  message_style: z.lazy(() => SortOrderSchema).optional(),
+  red_flags: z.lazy(() => SortOrderSchema).optional(),
+  final_recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional()
+}).strict();
+
+export const TinderResultMaxOrderByAggregateInputSchema: z.ZodType<Prisma.TinderResultMaxOrderByAggregateInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  name: z.lazy(() => SortOrderSchema).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  alternative: z.lazy(() => SortOrderSchema).optional(),
+  roast_bio: z.lazy(() => SortOrderSchema).optional(),
+  age_preferences: z.lazy(() => SortOrderSchema).optional(),
+  personality_insights: z.lazy(() => SortOrderSchema).optional(),
+  theme_song_analysis: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves2: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves3: z.lazy(() => SortOrderSchema).optional(),
+  red_flags: z.lazy(() => SortOrderSchema).optional(),
+  final_recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional()
+}).strict();
+
+export const TinderResultMinOrderByAggregateInputSchema: z.ZodType<Prisma.TinderResultMinOrderByAggregateInput> = z.object({
+  id: z.lazy(() => SortOrderSchema).optional(),
+  name: z.lazy(() => SortOrderSchema).optional(),
+  short_summary: z.lazy(() => SortOrderSchema).optional(),
+  alternative: z.lazy(() => SortOrderSchema).optional(),
+  roast_bio: z.lazy(() => SortOrderSchema).optional(),
+  age_preferences: z.lazy(() => SortOrderSchema).optional(),
+  personality_insights: z.lazy(() => SortOrderSchema).optional(),
+  theme_song_analysis: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves2: z.lazy(() => SortOrderSchema).optional(),
+  bold_text_moves3: z.lazy(() => SortOrderSchema).optional(),
+  red_flags: z.lazy(() => SortOrderSchema).optional(),
+  final_recommendation: z.lazy(() => SortOrderSchema).optional(),
+  createdAt: z.lazy(() => SortOrderSchema).optional(),
+  updatedAt: z.lazy(() => SortOrderSchema).optional()
+}).strict();
+
 export const StringFieldUpdateOperationsInputSchema: z.ZodType<Prisma.StringFieldUpdateOperationsInput> = z.object({
   set: z.string().optional()
 }).strict();
@@ -1577,6 +1999,63 @@ export const LinkedinResultFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.Linkedi
   where: LinkedinResultWhereUniqueInputSchema,
 }).strict() ;
 
+export const TinderResultFindFirstArgsSchema: z.ZodType<Prisma.TinderResultFindFirstArgs> = z.object({
+  select: TinderResultSelectSchema.optional(),
+  where: TinderResultWhereInputSchema.optional(),
+  orderBy: z.union([ TinderResultOrderByWithRelationInputSchema.array(),TinderResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: TinderResultWhereUniqueInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+  distinct: z.union([ TinderResultScalarFieldEnumSchema,TinderResultScalarFieldEnumSchema.array() ]).optional(),
+}).strict() ;
+
+export const TinderResultFindFirstOrThrowArgsSchema: z.ZodType<Prisma.TinderResultFindFirstOrThrowArgs> = z.object({
+  select: TinderResultSelectSchema.optional(),
+  where: TinderResultWhereInputSchema.optional(),
+  orderBy: z.union([ TinderResultOrderByWithRelationInputSchema.array(),TinderResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: TinderResultWhereUniqueInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+  distinct: z.union([ TinderResultScalarFieldEnumSchema,TinderResultScalarFieldEnumSchema.array() ]).optional(),
+}).strict() ;
+
+export const TinderResultFindManyArgsSchema: z.ZodType<Prisma.TinderResultFindManyArgs> = z.object({
+  select: TinderResultSelectSchema.optional(),
+  where: TinderResultWhereInputSchema.optional(),
+  orderBy: z.union([ TinderResultOrderByWithRelationInputSchema.array(),TinderResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: TinderResultWhereUniqueInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+  distinct: z.union([ TinderResultScalarFieldEnumSchema,TinderResultScalarFieldEnumSchema.array() ]).optional(),
+}).strict() ;
+
+export const TinderResultAggregateArgsSchema: z.ZodType<Prisma.TinderResultAggregateArgs> = z.object({
+  where: TinderResultWhereInputSchema.optional(),
+  orderBy: z.union([ TinderResultOrderByWithRelationInputSchema.array(),TinderResultOrderByWithRelationInputSchema ]).optional(),
+  cursor: TinderResultWhereUniqueInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+}).strict() ;
+
+export const TinderResultGroupByArgsSchema: z.ZodType<Prisma.TinderResultGroupByArgs> = z.object({
+  where: TinderResultWhereInputSchema.optional(),
+  orderBy: z.union([ TinderResultOrderByWithAggregationInputSchema.array(),TinderResultOrderByWithAggregationInputSchema ]).optional(),
+  by: TinderResultScalarFieldEnumSchema.array(),
+  having: TinderResultScalarWhereWithAggregatesInputSchema.optional(),
+  take: z.number().optional(),
+  skip: z.number().optional(),
+}).strict() ;
+
+export const TinderResultFindUniqueArgsSchema: z.ZodType<Prisma.TinderResultFindUniqueArgs> = z.object({
+  select: TinderResultSelectSchema.optional(),
+  where: TinderResultWhereUniqueInputSchema,
+}).strict() ;
+
+export const TinderResultFindUniqueOrThrowArgsSchema: z.ZodType<Prisma.TinderResultFindUniqueOrThrowArgs> = z.object({
+  select: TinderResultSelectSchema.optional(),
+  where: TinderResultWhereUniqueInputSchema,
+}).strict() ;
+
 export const SpotifyResultCreateArgsSchema: z.ZodType<Prisma.SpotifyResultCreateArgs> = z.object({
   select: SpotifyResultSelectSchema.optional(),
   data: z.union([ SpotifyResultCreateInputSchema,SpotifyResultUncheckedCreateInputSchema ]),
@@ -1659,4 +2138,46 @@ export const LinkedinResultUpdateManyArgsSchema: z.ZodType<Prisma.LinkedinResult
 
 export const LinkedinResultDeleteManyArgsSchema: z.ZodType<Prisma.LinkedinResultDeleteManyArgs> = z.object({
   where: LinkedinResultWhereInputSchema.optional(),
+}).strict() ;
+
+export const TinderResultCreateArgsSchema: z.ZodType<Prisma.TinderResultCreateArgs> = z.object({
+  select: TinderResultSelectSchema.optional(),
+  data: z.union([ TinderResultCreateInputSchema,TinderResultUncheckedCreateInputSchema ]),
+}).strict() ;
+
+export const TinderResultUpsertArgsSchema: z.ZodType<Prisma.TinderResultUpsertArgs> = z.object({
+  select: TinderResultSelectSchema.optional(),
+  where: TinderResultWhereUniqueInputSchema,
+  create: z.union([ TinderResultCreateInputSchema,TinderResultUncheckedCreateInputSchema ]),
+  update: z.union([ TinderResultUpdateInputSchema,TinderResultUncheckedUpdateInputSchema ]),
+}).strict() ;
+
+export const TinderResultCreateManyArgsSchema: z.ZodType<Prisma.TinderResultCreateManyArgs> = z.object({
+  data: z.union([ TinderResultCreateManyInputSchema,TinderResultCreateManyInputSchema.array() ]),
+  skipDuplicates: z.boolean().optional(),
+}).strict() ;
+
+export const TinderResultCreateManyAndReturnArgsSchema: z.ZodType<Prisma.TinderResultCreateManyAndReturnArgs> = z.object({
+  data: z.union([ TinderResultCreateManyInputSchema,TinderResultCreateManyInputSchema.array() ]),
+  skipDuplicates: z.boolean().optional(),
+}).strict() ;
+
+export const TinderResultDeleteArgsSchema: z.ZodType<Prisma.TinderResultDeleteArgs> = z.object({
+  select: TinderResultSelectSchema.optional(),
+  where: TinderResultWhereUniqueInputSchema,
+}).strict() ;
+
+export const TinderResultUpdateArgsSchema: z.ZodType<Prisma.TinderResultUpdateArgs> = z.object({
+  select: TinderResultSelectSchema.optional(),
+  data: z.union([ TinderResultUpdateInputSchema,TinderResultUncheckedUpdateInputSchema ]),
+  where: TinderResultWhereUniqueInputSchema,
+}).strict() ;
+
+export const TinderResultUpdateManyArgsSchema: z.ZodType<Prisma.TinderResultUpdateManyArgs> = z.object({
+  data: z.union([ TinderResultUpdateManyMutationInputSchema,TinderResultUncheckedUpdateManyInputSchema ]),
+  where: TinderResultWhereInputSchema.optional(),
+}).strict() ;
+
+export const TinderResultDeleteManyArgsSchema: z.ZodType<Prisma.TinderResultDeleteManyArgs> = z.object({
+  where: TinderResultWhereInputSchema.optional(),
 }).strict() ;
