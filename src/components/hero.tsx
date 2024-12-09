@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/tooltip";
 import { linkedinStorys } from "@/config/linkedin-examples";
 import { spotifyStorys } from "@/config/spotify-examples";
+import { tinderStorys } from "@/config/tinder-examples";
 import Link from "next/link";
 import { useQueryState } from "nuqs";
 import { ExampleStories } from "./example-stories";
@@ -20,7 +21,6 @@ import { SpotifyLogo } from "./logos/spotify";
 import { TinderLogo } from "./logos/tinder";
 import { TwitterXLogo } from "./logos/twitter";
 import { TinderInput } from "./tinder/tinder-input";
-import { tinderStorys } from "@/config/tinder-examples";
 
 type TabValue = "spotify" | "linkedin" | "twitter" | "github" | "tinder";
 
