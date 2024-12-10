@@ -1,5 +1,5 @@
 import { getMostVisited } from "@/lib/posthog";
-import MostVisited from "@/app/rankings/most-visited";
+import { MostVisited } from "@/app/rankings/most-visited";
 import Navbar from "@/components/navbar";
 
 export const maxDuration = 180;
@@ -20,8 +20,7 @@ const Page = async () => {
               analytics data from Posthog.
             </p>
           </div>
-
-          <MostVisited mostVisited={data} />
+          {await MostVisited({ mostVisited: data })}
         </div>
       </div>
     </>

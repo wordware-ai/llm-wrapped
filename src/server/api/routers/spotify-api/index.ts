@@ -15,7 +15,7 @@ export const spotifyApiRouter = createTRPCRouter({
     // Fetch all data in parallel
     const [topArtists, topTracks, playlists] = await Promise.all([
       // Top Artists
-      fetch(`https://api.spotify.com/v1/me/top/artists?${params}`, {
+      fetch(`https://api.spotify.com/v1/me/top/artists?${params.toString()}`, {
         headers: {
           Authorization: `Bearer ${ctx.session?.provider_token}`,
         },
@@ -24,7 +24,7 @@ export const spotifyApiRouter = createTRPCRouter({
         .then((data) => topArtistsResponseSchema.parse(data)),
 
       // Top Tracks
-      fetch(`https://api.spotify.com/v1/me/top/tracks?${params}`, {
+      fetch(`https://api.spotify.com/v1/me/top/tracks?${params.toString()}`, {
         headers: {
           Authorization: `Bearer ${ctx.session?.provider_token}`,
         },
@@ -33,7 +33,7 @@ export const spotifyApiRouter = createTRPCRouter({
         .then((data) => topTracksResponseSchema.parse(data)),
 
       // Playlists
-      fetch(`https://api.spotify.com/v1/me/playlists?${params}`, {
+      fetch(`https://api.spotify.com/v1/me/playlists?${params.toString()}`, {
         headers: {
           Authorization: `Bearer ${ctx.session?.provider_token}`,
         },
