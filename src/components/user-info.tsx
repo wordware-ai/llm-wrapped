@@ -1,17 +1,13 @@
+import { Link2 } from "lucide-react";
+import Image from "next/image";
 import {
-  FaInstagram,
-  FaLinkedin,
-  FaTwitter as FaXTwitter,
   FaTelegram,
   FaWhatsapp,
-  FaFacebook,
+  FaTwitter as FaXTwitter,
 } from "react-icons/fa";
 import { FaAt } from "react-icons/fa6";
 import { BaseStory } from "./base-story";
 import { useStreamContext } from "./stream-provider";
-import Image from "next/image";
-import { Link } from "next/link";
-import { Link2 } from "lucide-react";
 
 export function UserInfo({
   username,

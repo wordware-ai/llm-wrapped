@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Link2, Share } from "lucide-react";
 import { useState } from "react";
-import { FaWhatsapp, FaTelegram, FaTwitter } from "react-icons/fa";
+import { FaTelegram, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import { FaAt } from "react-icons/fa6";
 
 interface ShareButtonProps {
@@ -19,7 +19,6 @@ interface ShareButtonProps {
 export default function ShareButton({
   url,
   className,
-  cardContent,
   username,
 }: ShareButtonProps) {
   const [isOpen, setIsOpen] = useState(false);

@@ -35,7 +35,7 @@ type TinderUser = BaseUser & {
 
 type PlatformUser = SpotifyUser | LinkedInUser | TinderUser;
 
-const MostVisited = async ({
+export const MostVisited = async ({
   mostVisited,
 }: {
   mostVisited: MostVisitedData;
@@ -189,5 +189,3 @@ const MostVisited = async ({
     </Card>
   );
 };
-
-export default MostVisited;
