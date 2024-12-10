@@ -7,7 +7,7 @@ export default function WordwareInfo() {
   return (
     <div className="flex flex-col gap-16 px-4 py-0">
       <section className="mx-auto flex max-w-3xl flex-col gap-12 text-left">
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 pt-48">
           <Image
             src="/brand/w-black-cropped.png"
             alt="Wordware Logo"
