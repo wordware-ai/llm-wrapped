@@ -111,55 +111,55 @@ export const convertTinderDataToMarkdown = (
 ): string => {
   if (!data) return "No data available";
 
-  const getTopDayWithValue = (record: Record<string, number | null>) => {
-    const topEntry = Object.entries(record)
-      .filter(([_, value]) => value !== null)
-      .sort(([_, a], [__, b]) => (b || 0) - (a || 0))[0];
-    return topEntry ? `${topEntry[0]}: ${topEntry[1]}` : "No data available";
-  };
-
   const sections = [
-    // Messages section
-    data.messages.length > 0
-      ? `## Messages\n${data.messages.map((msg) => `- ${msg}`).join("\n")}`
-      : "",
-
-    // Spotify
+    // Spotify Section
     data.spotify
-      ? `## Spotify\n- Song: ${data.spotify.name}\n- Artist: ${data.spotify.artists[0]?.name}`
+      ? `## Spotify
+- Song: ${data.spotify.name}
+- Artist: ${data.spotify.artists[0]?.name}
+- Album: ${data.spotify.album.name}`
       : "",
 
-    // Usage Statistics
+    // Messages Section (last 100 messages)
+    data.messages.length > 0
+      ? `## Recent Messages (Last 100)
+${data.messages.map((msg) => `- ${msg.message}`).join("\n")}`
+      : "",
+
+    // Statistics Section
     `## Usage Statistics
 - Total App Opens: ${data.stats.totalAppOpens}
-  - Top Day: ${getTopDayWithValue(data.stats.appOpensByDate)}
-- Days App Opened: ${data.stats.daysWithAppOpens}
+- Days with Activity: ${data.stats.daysWithAppOpens}
 - Days with Messages: ${data.stats.daysWithMessages}
 
 ## Swipe Statistics
-- Likes: ${data.stats.totalSwipesLikes}
-  - Top Day: ${getTopDayWithValue(data.stats.swipeLikesByDate)}
-- Passes: ${data.stats.totalSwipesPasses}
-  - Top Day: ${getTopDayWithValue(data.stats.swipePassesByDate)}
-- Average Swipes per Day: ${data.stats.averageSwipesPerDay}
-- Swipe ratio: ${data.stats.swipeRightToLeftRatio}%
+- Total Likes: ${data.stats.totalSwipesLikes}
+- Total Passes: ${data.stats.totalSwipesPasses}
 - Total Superlikes: ${data.stats.totalSuperlikes}
+- Average Swipes per Day: ${data.stats.averageSwipesPerDay}
+- Right Swipe Ratio: ${data.stats.swipeRightToLeftRatio}%
 
 ## Match Statistics
 - Total Matches: ${data.stats.totalMatches}
-  - Top Day: ${getTopDayWithValue(data.stats.matchesByDate)}
-- Match Ratio: ${data.stats.matchesRatio}%
+- Match to Like Ratio: ${data.stats.matchesToSwipeRightRatio}%
+- Overall Match Rate: ${data.stats.matchesRatio}%
 
-## Message Statistics
-- Messages Sent: ${data.stats.totalMessagesSent}
-  - Top Day: ${getTopDayWithValue(data.stats.messagesSentByDate)}
-- Messages Received: ${data.stats.totalMessagesReceived}
-  - Top Day: ${getTopDayWithValue(data.stats.messagesReceivedByDate)}
+## Peak Days
+- Most Active Day: ${data.stats.peakDays.appOpens.date} (${data.stats.peakDays.appOpens.value} opens)
+- Most Likes: ${data.stats.peakDays.swipesLikes.date} (${data.stats.peakDays.swipesLikes.value} likes)
+- Most Passes: ${data.stats.peakDays.swipesPasses.date} (${data.stats.peakDays.swipesPasses.value} passes)
+- Most Matches: ${data.stats.peakDays.matches.date} (${data.stats.peakDays.matches.value} matches)
+- Most Messages Sent: ${data.stats.peakDays.messagesSent.date} (${data.stats.peakDays.messagesSent.value} messages)
+- Most Messages Received: ${data.stats.peakDays.messagesReceived.date} (${data.stats.peakDays.messagesReceived.value} messages)
+
+## Messaging Statistics
+- Total Messages Sent: ${data.stats.totalMessagesSent}
+- Total Messages Received: ${data.stats.totalMessagesReceived}
 
 ## User Profile
-- Age Range: ${data.user.age_filter_min} - ${data.user.age_filter_max}
+- Name: ${data.user.name}
+- Age Preferences: ${data.user.age_filter_min} - ${data.user.age_filter_max}
 - Birth Date: ${new Date(data.user.birth_date).toLocaleDateString()}
-- Age: ${new Date().getFullYear() - new Date(data.user.birth_date).getFullYear()}
 - Gender: ${data.user.gender}
 - Bio: ${data.user.bio}
 - Interests: ${data.user.user_interests.join(", ")}`,

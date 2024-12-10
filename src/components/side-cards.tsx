@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import WordwareCard from "./spotify/wordware-card";
 import WordwareStory from "./wordware-story";
-import { StreamedText } from "./streamed-text";
 
 export function SideCards({
   card1text,
@@ -31,10 +30,9 @@ export function SideCards({
       >
         <div className="flex h-full items-center justify-center">
           {card1text ? (
-            <StreamedText
-              className="text-center text-4xl text-white lg:text-2xl"
-              text={card3text}
-            />
+            <p className="text-center text-4xl text-white lg:text-2xl">
+              {card1text}
+            </p>
           ) : (
             <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#1F5A4A] border-t-transparent" />
           )}
@@ -79,10 +77,9 @@ export function SideCards({
                   </>
                 )}
 
-                <StreamedText
-                  className="text-center text-2xl text-white lg:text-xl xl:text-2xl"
-                  text={card3text}
-                />
+                <p className="text-center text-2xl text-white lg:text-xl xl:text-2xl">
+                  {card2.text}
+                </p>
               </>
             ) : (
               <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#A03C6C] border-t-transparent" />
@@ -98,7 +95,9 @@ export function SideCards({
           >
             <div className="flex h-full w-full items-center justify-center">
               {card3text ? (
-                <StreamedText text={card3text} />
+                <p className="grow text-center text-2xl text-white">
+                  {card3text}
+                </p>
               ) : (
                 <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#4A5E9A] border-t-transparent" />
               )}

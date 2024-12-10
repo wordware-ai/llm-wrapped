@@ -64,12 +64,12 @@ export const cardConfig = {
   card13: {
     bgColor: "#8A423D",
     fillColor: "#8E4440",
-    svg: svgConfig.svg14,
+    svg: svgConfig.svg13,
   },
   card14: {
     bgColor: "#BD68C8",
     fillColor: "#C06CCB",
-    svg: svgConfig.svg16,
+    svg: svgConfig.svg14,
   },
   card15: {
     bgColor: "#414A0D",
@@ -79,16 +79,16 @@ export const cardConfig = {
   card16: {
     bgColor: "#5A91D5",
     fillColor: "#5E95D7",
-    svg: svgConfig.svg18,
+    svg: svgConfig.svg16,
   },
   card17: {
     bgColor: "#AB8E40",
     fillColor: "#AE9243",
-    svg: svgConfig.svg13,
+    svg: svgConfig.svg17,
   },
   card18: {
     bgColor: "#B3C868",
     fillColor: "#B6CB6C",
-    svg: svgConfig.svg17,
+    svg: svgConfig.svg18,
   },
 };

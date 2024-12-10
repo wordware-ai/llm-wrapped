@@ -1,15 +1,46 @@
 import { z } from "zod";
 
-// Helper schema for messages
-const MessageSchema = z.object({
-  to: z.union([z.number(), z.string()]).optional(),
-  from: z.string().optional(),
-  message: z.string().optional(),
-  sent_date: z.string().optional(),
-  type: z.string().optional(),
-  fixed_height: z.string().optional(),
+// User schema
+const UserSchema = z.object({
+  age_filter_max: z.number(),
+  age_filter_min: z.number(),
+  bio: z.string(),
+  birth_date: z.string(),
+  gender: z.string(),
+  user_interests: z.array(z.string()),
+  name: z.string(),
 });
 
+// Usage schema
+const UsageSchema = z.object({
+  app_opens: z.record(z.string(), z.number().nullable()),
+  swipes_likes: z.record(z.string(), z.number().nullable()),
+  swipes_passes: z.record(z.string(), z.number().nullable()),
+  superlikes: z.record(z.string(), z.number().nullable()),
+  matches: z.record(z.string(), z.number().nullable()),
+  messages_sent: z.record(z.string(), z.number().nullable()),
+  messages_received: z.record(z.string(), z.number().nullable()),
+});
+
+// Transform nested messages into array of message arrays, only keeping message content
+const MessagesSchema = z
+  .array(
+    z.object({
+      messages: z.array(
+        z.object({
+          message: z.string(),
+        }),
+      ),
+    }),
+  )
+  .transform((data) =>
+    // Transform to array of message arrays, only keeping message content
+    data.map((match) =>
+      match.messages.map((msg) => ({ message: msg.message })),
+    ),
+  );
+
+// Spotify schema
 const SpotifySchema = z.object({
   spotify_connected: z.boolean(),
   spotify_theme_track: z
@@ -39,85 +70,50 @@ const SpotifySchema = z.object({
     .optional(),
 });
 
-const UserSchema = z.object({
-  age_filter_max: z.number(),
-  age_filter_min: z.number(),
-  bio: z.string(),
-  birth_date: z.string(),
-  gender: z.string(),
-  user_interests: z.array(z.string()),
-  name: z.string(),
-});
-
-const UsageSchema = z.object({
-  app_opens: z.record(z.string(), z.number().nullable()),
-  swipes_likes: z.record(z.string(), z.number().nullable()),
-  swipes_passes: z.record(z.string(), z.number().nullable()),
-  superlikes: z.record(z.string(), z.number().nullable()),
-  matches: z.record(z.string(), z.number().nullable()),
-  messages_sent: z.record(z.string(), z.number().nullable()),
-  messages_received: z.record(z.string(), z.number().nullable()),
-  User: UserSchema,
-});
-
-// Main schema
+// Main schema with objects at root level
 export const TinderDataSchema = z
   .object({
-    Messages: z.array(
-      z.object({
-        match_id: z.string(),
-        messages: z.array(MessageSchema).optional().default([]),
-        Usage: UsageSchema.optional(),
-        Spotify: SpotifySchema.optional(),
-      }),
-    ),
+    User: UserSchema,
+    Usage: UsageSchema,
+    Spotify: SpotifySchema,
+    Messages: MessagesSchema,
   })
   .transform((data) => {
-    const lastMessage = data.Messages[data.Messages.length - 1];
-    const usage = lastMessage?.Usage;
-
-    if (!usage) return null;
-
-    // Collect all messages from all matches
-    const allMessages = data.Messages.flatMap(
-      (match) =>
-        match.messages?.map((msg) => msg.message).filter(Boolean) || [],
-    );
-
-    // Calculate totals and stats
-    const totalAppOpens = Object.values(usage.app_opens)
+    const allMessages = data.Messages.flat().slice(-100);
+    // Calculate totals from Usage data
+    const totalAppOpens = Object.values(data.Usage.app_opens)
       .filter((val): val is number => val !== null)
       .reduce((sum, val) => sum + val, 0);
 
-    const totalSwipesLikes = Object.values(usage.swipes_likes)
+    const totalSwipesLikes = Object.values(data.Usage.swipes_likes)
       .filter((val): val is number => val !== null)
       .reduce((sum, val) => sum + val, 0);
 
-    const totalSwipesPasses = Object.values(usage.swipes_passes)
+    const totalSwipesPasses = Object.values(data.Usage.swipes_passes)
       .filter((val): val is number => val !== null)
       .reduce((sum, val) => sum + val, 0);
 
-    const totalSuperlikes = Object.values(usage.superlikes)
+    const totalSuperlikes = Object.values(data.Usage.superlikes)
       .filter((val): val is number => val !== null)
       .reduce((sum, val) => sum + val, 0);
 
-    const totalMatches = Object.values(usage.matches)
+    const totalMatches = Object.values(data.Usage.matches)
       .filter((val): val is number => val !== null)
       .reduce((sum, val) => sum + val, 0);
 
-    const totalMessagesSent = Object.values(usage.messages_sent)
+    const totalMessagesSent = Object.values(data.Usage.messages_sent)
       .filter((val): val is number => val !== null)
       .reduce((sum, val) => sum + val, 0);
 
-    const totalMessagesReceived = Object.values(usage.messages_received)
+    const totalMessagesReceived = Object.values(data.Usage.messages_received)
       .filter((val): val is number => val !== null)
       .reduce((sum, val) => sum + val, 0);
 
-    const daysWithAppOpens = Object.values(usage.app_opens).filter(
+    const daysWithAppOpens = Object.values(data.Usage.app_opens).filter(
       (val) => val !== null && val > 0,
     ).length;
 
-    const daysWithMessages = Object.values(usage.messages_sent).filter(
+    const daysWithMessages = Object.values(data.Usage.messages_sent).filter(
       (val) => val !== null && val > 0,
     ).length;
 
@@ -140,8 +136,31 @@ export const TinderDataSchema = z
       (totalSwipesLikes + totalSwipesPasses) / daysWithAppOpens,
     );
 
+    const findPeakDay = (data: Record<string, number | null>) => {
+      let maxValue = -Infinity;
+      let peakDay = "";
+
+      Object.entries(data).forEach(([date, value]) => {
+        if (value !== null && value > maxValue) {
+          maxValue = value;
+          peakDay = date;
+        }
+      });
+
+      return { date: peakDay, value: maxValue };
+    };
+
+    const peakDays = {
+      appOpens: findPeakDay(data.Usage.app_opens),
+      swipesLikes: findPeakDay(data.Usage.swipes_likes),
+      swipesPasses: findPeakDay(data.Usage.swipes_passes),
+      matches: findPeakDay(data.Usage.matches),
+      messagesSent: findPeakDay(data.Usage.messages_sent),
+      messagesReceived: findPeakDay(data.Usage.messages_received),
+    };
+
     return {
-      spotify: lastMessage?.Spotify?.spotify_theme_track,
+      spotify: data.Spotify.spotify_theme_track,
       messages: allMessages,
       stats: {
         totalAppOpens,
@@ -157,14 +176,9 @@ export const TinderDataSchema = z
         matchesToSwipeRightRatio,
         matchesRatio,
         averageSwipesPerDay,
-        appOpensByDate: usage.app_opens,
-        swipeLikesByDate: usage.swipes_likes,
-        swipePassesByDate: usage.swipes_passes,
-        matchesByDate: usage.matches,
-        messagesSentByDate: usage.messages_sent,
-        messagesReceivedByDate: usage.messages_received,
+        peakDays,
       },
-      user: usage.User,
+      user: data.User,
     };
   });
 

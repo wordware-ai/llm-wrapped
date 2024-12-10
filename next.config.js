@@ -30,6 +30,10 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "i.pinimg.com",
+      },
+      {
+        protocol: "https",
         hostname: "d3i6fh83elv35t.cloudfront.net",
       },
       {

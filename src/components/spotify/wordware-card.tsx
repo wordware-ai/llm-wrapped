@@ -28,11 +28,7 @@ export default function WordwareCard({
       className={cn(baseClasses, "bg-[#1A1A1A]")}
       style={{ backgroundColor: cardData?.bgColor }}
     >
-      {cardData?.svg && (
-        <div className="absolute z-20">
-          <cardData.svg />
-        </div>
-      )}
+      {cardData?.svg && !hideHashtag && <cardData.svg />}
       <div
         className={cn(
           "absolute left-0 top-0 w-full gap-[7px] px-2",
