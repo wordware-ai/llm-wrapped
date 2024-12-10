@@ -47,9 +47,12 @@ export default function DownloadPopover() {
               the data.
             </li>
             <li>
-              After you log in, your data (myData.zip) automatically gets
-              downloaded. Now you can upload the zip file on Tinder Wrapped and
-              get your analysis!
+              After logging in, your data (myData.zip) will automatically
+              download. Please unzip and open the file.
+            </li>
+            <li>
+              Now, you can upload the data.json file to Tinder Wrapped and view
+              your analysis!
             </li>
           </ol>
         </div>
