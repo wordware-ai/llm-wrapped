@@ -1,4 +1,4 @@
-import { FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { FaFacebook, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { FaThreads, FaXTwitter } from "react-icons/fa6";
 
 export const shareOptions = [
@@ -51,6 +51,20 @@ export const shareOptions = [
         "Check out my #LLMWrapped results— prompted by an AI Agent powered by Wordware! 🤖\n\n";
       window.open(
         `https://wa.me/?text=${encodeURIComponent(`${shareText}${shareUrl}`)}`,
+        "_blank",
+      );
+    },
+  },
+  {
+    icon: <FaFacebook className="h-6 w-6" />,
+    label: "Facebook",
+    action: (shareUrl: string) => {
+      const shareText =
+        "Check out my #LLMWrapped results— prompted by an AI Agent powered by Wordware! 🤖\n\n";
+      window.open(
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+          shareUrl,
+        )}`,
         "_blank",
       );
     },

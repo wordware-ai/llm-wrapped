@@ -191,6 +191,7 @@ export function Hero() {
             <Link
               className="text-blue-600 hover:underline"
               href="https://jobs.ashbyhq.com/wordware.ai"
+              target="_blank"
             >
               hiring!
             </Link>

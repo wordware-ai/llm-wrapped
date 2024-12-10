@@ -26,7 +26,7 @@ export function SpotifyButton() {
 
   const { session } = useUser();
 
-  return session ? (
+  return session?.provider_token ? (
     <div className="flex gap-4">
       <Link
         href={`/spotify/${session.user.user_metadata.name}`}

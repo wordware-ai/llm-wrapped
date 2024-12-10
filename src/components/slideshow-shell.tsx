@@ -100,12 +100,12 @@ export default function SlideshowShell({
   };
   return (
     <div
-      className="fixed left-0 top-0 z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 sm:items-center md:p-6"
+      className="fixed left-0 top-0 z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 px-8 sm:items-center md:p-6"
       onClick={exit}
     >
       <ChevronLeft
         className={cn(
-          "hidden size-7 rounded-full bg-zinc-600 pr-0.5 hover:cursor-pointer sm:block",
+          "hidden size-7 shrink-0 rounded-full bg-zinc-600 pr-0.5 hover:cursor-pointer sm:block",
           currentSlide === 1 && "invisible",
         )}
         onClick={async (e) => {
@@ -144,7 +144,7 @@ export default function SlideshowShell({
       </div>
       <ChevronRight
         className={cn(
-          "hidden size-7 rounded-full bg-zinc-600 pl-0.5 hover:cursor-pointer sm:block",
+          "hidden size-7 shrink-0 rounded-full bg-zinc-600 pl-0.5 hover:cursor-pointer sm:block",
         )}
         onClick={async (e) => {
           e.stopPropagation();
