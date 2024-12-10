@@ -2,11 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { DynamicText } from "./dynamic-text";
+import { type SVGComponent } from "@/config/svg-config";
 
-type CardData = {
-  id: string;
+export type CardData = {
   bgColor: string;
   fillColor: string;
+  svg?: SVGComponent;
 };
 
 export type CardComponentProps = {
@@ -15,9 +16,9 @@ export type CardComponentProps = {
 };
 
 export type CardItem = {
-  data: CardData;
+  id: string;
+  card: CardData;
   Component: React.ComponentType<CardComponentProps>;
-  Animation?: JSX.Element;
 };
 
 const fadeInUp = {

@@ -48,28 +48,24 @@ export default function SlideShow() {
       if (!staticSlideshow) return [];
       return Object.entries(staticSlideshow)
         .map(([key, value]) => {
-          const card = serviceCards.find((card) => card.data.id === key);
+          const card = serviceCards.find((card) => card.id === key);
           if (!card) return null;
           return {
             id: key,
             value,
-            bgColor: card?.data.bgColor,
-            fillColor: card?.data.fillColor,
             Component: card?.Component,
-            Animation: card?.Animation,
+            cardData: card?.card,
           };
         })
         .filter(Boolean);
     }
     return Object.entries(results).map(([key, value]) => {
-      const cardConfig = serviceCards.find((card) => card.data.id === key);
+      const cardConfig = serviceCards.find((card) => card.id === key);
       return {
         id: key,
         value,
-        bgColor: cardConfig?.data.bgColor,
-        fillColor: cardConfig?.data.fillColor,
+        cardData: cardConfig?.card,
         Component: cardConfig?.Component,
-        Animation: cardConfig?.Animation,
       };
     });
   }, [name, results, serviceCards, serviceExamples]);
@@ -83,9 +79,7 @@ export default function SlideShow() {
 
   const slideContent = (
     <WordwareCard
-      Animation={currentSlideData.Animation}
-      backgroundColor={currentSlideData.bgColor}
-      fillColor={currentSlideData.fillColor}
+      cardData={currentSlideData.cardData}
       className="fixed left-0 top-0 -z-20 h-[100dvh] w-full select-none overflow-hidden rounded-none sm:relative sm:aspect-[4/7] sm:h-auto sm:w-auto sm:rounded-xl"
     >
       {currentSlideData.Component && (

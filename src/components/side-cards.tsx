@@ -1,4 +1,4 @@
-import { colorConfig } from "@/config/color-config";
+import { cardConfig } from "@/config/card-config";
 import Image from "next/image";
 import Link from "next/link";
 import WordwareCard from "./spotify/wordware-card";
@@ -26,15 +26,15 @@ export function SideCards({
       <WordwareCard
         hideShare
         hideHashtag
-        backgroundColor={colorConfig.color1.bgColor}
-        fillColor={colorConfig.color1.fillColor}
+        cardData={cardConfig.card1}
         className="aspect-auto h-min min-h-[400px] w-full rounded-xl sm:min-h-80 lg:h-1/3 lg:min-h-56"
       >
         <div className="flex h-full items-center justify-center">
           {card1text ? (
-            <p className="text-center text-4xl text-white lg:text-2xl">
-              {card1text}
-            </p>
+            <StreamedText
+              className="text-center text-4xl text-white lg:text-2xl"
+              text={card3text}
+            />
           ) : (
             <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#1F5A4A] border-t-transparent" />
           )}
@@ -44,18 +44,16 @@ export function SideCards({
         <WordwareCard
           hideShare
           hideHashtag
-          backgroundColor={colorConfig.color2.bgColor}
-          fillColor={colorConfig.color2.fillColor}
+          cardData={cardConfig.card2}
           className="aspect-auto min-h-[400px] w-full rounded-xl sm:min-h-full sm:w-1/2 lg:min-h-0"
         >
           <div className="flex h-full w-full flex-col items-center justify-center gap-4">
             {card2.text ? (
               <>
                 {card2.text && card2.title && (
-                  <StreamedText
-                    className="text-4xl font-semibold text-white lg:text-3xl xl:text-4xl"
-                    text={card2.text}
-                  />
+                  <h3 className="text-4xl font-semibold text-white lg:text-3xl xl:text-4xl">
+                    {card2.title}
+                  </h3>
                 )}
                 {card2.imageUrl !== "null" && card2.imageUrl && card2.text && (
                   <>
@@ -80,9 +78,11 @@ export function SideCards({
                     )}
                   </>
                 )}
-                <p className="text-center text-2xl text-white lg:text-xl xl:text-2xl">
-                  {card2.text}
-                </p>
+
+                <StreamedText
+                  className="text-center text-2xl text-white lg:text-xl xl:text-2xl"
+                  text={card3text}
+                />
               </>
             ) : (
               <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#A03C6C] border-t-transparent" />
@@ -93,8 +93,7 @@ export function SideCards({
           <WordwareCard
             hideShare
             hideHashtag
-            backgroundColor={colorConfig.color3.bgColor}
-            fillColor={colorConfig.color3.fillColor}
+            cardData={cardConfig.card3}
             className="flex aspect-auto h-min min-h-[400px] w-full items-center justify-center rounded-xl lg:h-full lg:min-h-0"
           >
             <div className="flex h-full w-full items-center justify-center">

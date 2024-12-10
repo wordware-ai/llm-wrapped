@@ -170,9 +170,12 @@ export function Hero() {
           </div>
 
           <p className="w-96 text-center text-xs text-muted-foreground">
-            By logging in you agree to our Terms and Conditions and acknowledge
-            our{" "}
-            <Link href="https://www.wordware.ai/privacy-policy">
+            By logging in you agree to our{" "}
+            <Link className="hover:underline" href="/terms">
+              Terms and Conditions
+            </Link>{" "}
+            and acknowledge our{" "}
+            <Link className="hover:underline" href="/privacy">
               Privacy Policy
             </Link>
             .

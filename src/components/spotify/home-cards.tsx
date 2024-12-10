@@ -4,49 +4,49 @@ import React, { useRef, useEffect, useState } from "react";
 import WordwareCard from "./wordware-card";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { colorConfig } from "@/config/color-config";
+import { cardConfig } from "@/config/card-config";
 
 const SCROLL_INTERVAL = 7000;
 const cards = [
   {
     content:
       "Your playlist screams'I learned about music from my mom's aerobics DVD collection.' You've got Madonna next to Zach Bryan - it's like putting caviar on a gas station hot dog.",
-    ...colorConfig.color1,
+    ...cardConfig.card1,
   },
   {
     content:
       "The fact that you're listening to both 'Without Me' and 'My Heart Will Go On' suggests you're the kind of person who can't decide if they want to fight someone or dramatically stare out a rainy window.",
-    ...colorConfig.color2,
+    ...cardConfig.card2,
   },
   {
     content:
       "Your career is like a DJ Khaled song - you just keep saying 'Another one' while moving from job to job. At least you're consistent at being inconsistent!",
-    ...colorConfig.color3,
+    ...cardConfig.card3,
   },
   {
     content:
       "You'd probably try to mosh to 'This Charming Man' while attempting to hit the griddy to The Smiths. Please stay at least 100 feet away from any dance floor",
-    ...colorConfig.color4,
+    ...cardConfig.card4,
   },
   {
     content:
       "Your playlist is like a time machine, but it's stuck in reverse. You've got more 80s hits than a high school reunion.",
-    ...colorConfig.color5,
+    ...cardConfig.card5,
   },
   {
     content:
       "Listening to your playlist is like watching a movie with too many plot twists. One minute it's heavy metal, the next it's a Disney soundtrack.",
-    ...colorConfig.color6,
+    ...cardConfig.card6,
   },
   {
     content:
       "Your music taste is so eclectic, it's like you threw a dart at a genre chart and decided to listen to whatever it landed on.",
-    ...colorConfig.color7,
+    ...cardConfig.card7,
   },
   {
     content:
       "Your playlist is the musical equivalent of a mixed bag of jellybeans - you never know if you're going to get a sweet pop hit or a bitter breakup ballad.",
-    ...colorConfig.color8,
+    ...cardConfig.card8,
   },
 ];
 
@@ -131,7 +131,7 @@ export default function HomeCards() {
   return (
     <div className="relative sm:px-4 xl:px-16">
       <button
-        className="absolute left-0 top-1/2 z-[10] block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+        className="absolute -left-4 top-1/2 z-[10] block -translate-y-1/2 rounded-full p-2 transition-all"
         onClick={() => {
           if (!scrollRef.current) return;
           const cardElement = scrollRef.current.firstElementChild
@@ -140,11 +140,11 @@ export default function HomeCards() {
           scrollRef.current.scrollBy({ left: -cardWidth, behavior: "smooth" });
         }}
       >
-        <ChevronLeft className="z-[99] h-6 w-6 text-black" />
+        <ChevronLeft className="h-6 w-6 text-black hover:text-muted-foreground" />
       </button>
 
       <button
-        className="absolute right-0 top-1/2 z-[10] block -translate-y-1/2 rounded-full bg-white/20 p-2 backdrop-blur-sm transition-all hover:bg-white/30"
+        className="absolute -right-4 top-1/2 z-[10] block -translate-y-1/2 rounded-full p-2 transition-all"
         onClick={() => {
           if (!scrollRef.current) return;
           const cardElement = scrollRef.current.firstElementChild
@@ -153,7 +153,7 @@ export default function HomeCards() {
           scrollRef.current.scrollBy({ left: cardWidth, behavior: "smooth" });
         }}
       >
-        <ChevronRight className="h-6 w-6 text-black" />
+        <ChevronRight className="h-6 w-6 text-black hover:text-muted-foreground" />
       </button>
 
       <div
@@ -176,8 +176,7 @@ export default function HomeCards() {
             >
               <WordwareCard
                 className={cn("w-full items-center")}
-                backgroundColor={card.bgColor}
-                fillColor={card.fillColor}
+                cardData={card}
                 hideHashtag
                 hideShare
               >

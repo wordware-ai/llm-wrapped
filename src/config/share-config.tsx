@@ -7,7 +7,7 @@ export const shareOptions = [
     label: "X",
     action: (shareUrl: string) => {
       const shareText =
-        "Check out my #LLMWrapped results— prompted by an AI Agent powered by @wordware_ai! 🤖\n\n";
+        "Check out my #LLMWrapped results — prompted by an AI Agent powered by @wordware_ai! 🤖\n\n";
       window.open(
         `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
         "_blank",
@@ -19,7 +19,7 @@ export const shareOptions = [
     label: "LinkedIn",
     action: (shareUrl: string) => {
       const shareText =
-        "Check out my #LLMWrapped results— prompted by an AI Agent powered by Wordware! 🤖\n\n";
+        "Check out my #LLMWrapped results — prompted by an AI Agent powered by Wordware! 🤖\n\n";
       window.open(
         `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(
           shareText + shareUrl,
@@ -29,26 +29,21 @@ export const shareOptions = [
     },
   },
   {
-    icon: <FaThreads className="h-6 w-6" />,
-    label: "Threads",
+    icon: <FaFacebook className="h-6 w-6" />,
+    label: "Facebook",
     action: (shareUrl: string) => {
-      const shareText =
-        "Check out my #LLMWrapped results— prompted by an AI Agent powered by Wordware! 🤖\n\n";
       window.open(
-        `https://www.threads.net/intent/post?text=${encodeURIComponent(
-          shareText + shareUrl,
-        )}`,
+        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
         "_blank",
       );
     },
   },
-
   {
     icon: <FaWhatsapp className="h-6 w-6" />,
     label: "WhatsApp",
     action: (shareUrl: string) => {
       const shareText =
-        "Check out my #LLMWrapped results— prompted by an AI Agent powered by Wordware! 🤖\n\n";
+        "Check out my #LLMWrapped results — prompted by an AI Agent powered by Wordware! 🤖\n\n";
       window.open(
         `https://wa.me/?text=${encodeURIComponent(`${shareText}${shareUrl}`)}`,
         "_blank",
@@ -56,15 +51,15 @@ export const shareOptions = [
     },
   },
   {
-    icon: <FaFacebook className="h-6 w-6" />,
-    label: "Facebook",
+    icon: <FaThreads className="h-6 w-6" />,
+    label: "Threads",
     action: (shareUrl: string) => {
       const shareText =
-        "Check out my #LLMWrapped results— prompted by an AI Agent powered by Wordware! 🤖\n\n";
+        "Check out my #LLMWrapped results — prompted by an AI Agent powered by Wordware! 🤖\n\n";
       window.open(
-        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-          shareUrl,
-        )}&quote=${encodeURIComponent(shareText)}`,
+        `https://www.threads.net/intent/post?text=${encodeURIComponent(
+          shareText + shareUrl,
+        )}`,
         "_blank",
       );
     },

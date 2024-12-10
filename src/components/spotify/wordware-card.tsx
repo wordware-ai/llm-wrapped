@@ -3,20 +3,17 @@
 import { cn } from "@/lib/utils";
 import { type ReactNode } from "react";
 import ShareButton from "../share";
+import { type CardData } from "../story-cards";
 
 export default function WordwareCard({
   children,
-  Animation,
-  fillColor,
-  backgroundColor,
+  cardData,
   className,
   hideShare = false,
   hideHashtag = false,
 }: {
   children: ReactNode;
-  Animation?: JSX.Element;
-  fillColor?: string;
-  backgroundColor?: string;
+  cardData?: CardData;
   className?: string;
   hideShare?: boolean;
   hideHashtag?: boolean;
@@ -29,9 +26,13 @@ export default function WordwareCard({
   return (
     <div
       className={cn(baseClasses, "bg-[#1A1A1A]")}
-      style={{ backgroundColor }}
+      style={{ backgroundColor: cardData?.bgColor }}
     >
-      {Animation && <div className="z-[99]">{Animation}</div>}
+      {cardData?.svg && (
+        <div className="absolute z-20">
+          <cardData.svg />
+        </div>
+      )}
       <div
         className={cn(
           "absolute left-0 top-0 w-full gap-[7px] px-2",
@@ -39,10 +40,10 @@ export default function WordwareCard({
         )}
       >
         {Array.from({ length: 15 }).map((_, i) => (
-          <WordwareLogo key={i} fillColor={fillColor} />
+          <WordwareLogo key={i} fillColor={cardData?.fillColor} />
         ))}
       </div>
-      <div className="z-10 flex h-full w-full flex-col justify-between p-8">
+      <div className="z-30 flex h-full w-full flex-col justify-between p-8">
         {!hideHashtag && <p className="text-[2.5vh] text-white">#LLMwrapped</p>}
         <div className="flex h-full w-full flex-col justify-end gap-10">
           {children}

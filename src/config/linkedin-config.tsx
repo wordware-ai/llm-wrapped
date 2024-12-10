@@ -6,23 +6,17 @@ import {
   TextCard,
   TitleCard,
 } from "@/components/story-cards";
-import { colorConfig } from "./color-config";
+import { cardConfig } from "./card-config";
 
 export const linkedinConfig: CardItem[] = [
   {
-    data: {
-      id: "short_summary",
-      bgColor: colorConfig.color1.bgColor,
-      fillColor: colorConfig.color1.fillColor,
-    },
+    id: "short_summary",
+    card: cardConfig.card1,
     Component: TextCard,
   },
   {
-    data: {
-      id: "current_position",
-      bgColor: colorConfig.color2.bgColor,
-      fillColor: colorConfig.color2.fillColor,
-    },
+    id: "current_position",
+    card: cardConfig.card2,
     Component: ({ result, profileData }: CardComponentProps) => (
       <ImageCard
         imageUrl={profileData?.currentPositionImageUrl ?? ""}
@@ -32,11 +26,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "actual_position",
-      bgColor: colorConfig.color3.bgColor,
-      fillColor: colorConfig.color3.fillColor,
-    },
+    id: "actual_position",
+    card: cardConfig.card3,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="What You're Actually Doing"
@@ -45,11 +36,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "position_mother",
-      bgColor: colorConfig.color4.bgColor,
-      fillColor: colorConfig.color4.fillColor,
-    },
+    id: "position_mother",
+    card: cardConfig.card4,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="How Mom Sees Your Job"
@@ -58,11 +46,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "accidental_success",
-      bgColor: colorConfig.color5.bgColor,
-      fillColor: colorConfig.color5.fillColor,
-    },
+    id: "accidental_success",
+    card: cardConfig.card5,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="Any Success in Your Career?"
@@ -71,11 +56,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "ambition",
-      bgColor: colorConfig.color6.bgColor,
-      fillColor: colorConfig.color6.fillColor,
-    },
+    id: "ambition",
+    card: cardConfig.card6,
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
         title="How Ambitious You Are"
@@ -86,11 +68,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "delusional",
-      bgColor: colorConfig.color7.bgColor,
-      fillColor: colorConfig.color7.fillColor,
-    },
+    id: "delusional",
+    card: cardConfig.card7,
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
         title="Delusional Score"
@@ -101,11 +80,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "performance",
-      bgColor: colorConfig.color8.bgColor,
-      fillColor: colorConfig.color8.fillColor,
-    },
+    id: "performance",
+    card: cardConfig.card8,
     Component: ({ result }: CardComponentProps) => (
       <MetricCard
         title="How You're Performing"
@@ -116,11 +92,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "career_trajectory",
-      bgColor: colorConfig.color9.bgColor,
-      fillColor: colorConfig.color9.fillColor,
-    },
+    id: "career_trajectory",
+    card: cardConfig.card9,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="Your Career Trajectory"
@@ -129,11 +102,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "next_endeavor",
-      bgColor: colorConfig.color10.bgColor,
-      fillColor: colorConfig.color10.fillColor,
-    },
+    id: "next_endeavor",
+    card: cardConfig.card10,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="What You'll Do Next"
@@ -142,11 +112,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "job_description",
-      bgColor: colorConfig.color11.bgColor,
-      fillColor: colorConfig.color11.fillColor,
-    },
+    id: "job_description",
+    card: cardConfig.card11,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="Your Ideal Job Match"
@@ -155,11 +122,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "buzzword_bingo",
-      bgColor: colorConfig.color12.bgColor,
-      fillColor: colorConfig.color12.fillColor,
-    },
+    id: "buzzword_bingo",
+    card: cardConfig.card12,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="Your Buzzword Bingo"
@@ -168,11 +132,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "skills",
-      bgColor: colorConfig.color13.bgColor,
-      fillColor: colorConfig.color13.fillColor,
-    },
+    id: "skills",
+    card: cardConfig.card13,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="Your Actual Skillset"
@@ -181,11 +142,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "reason_for_firing",
-      bgColor: colorConfig.color14.bgColor,
-      fillColor: colorConfig.color14.fillColor,
-    },
+    id: "reason_for_firing",
+    card: cardConfig.card14,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="Why You Won't Last Here"
@@ -194,11 +152,8 @@ export const linkedinConfig: CardItem[] = [
     ),
   },
   {
-    data: {
-      id: "recommendation",
-      bgColor: colorConfig.color15.bgColor,
-      fillColor: colorConfig.color15.fillColor,
-    },
+    id: "recommendation",
+    card: cardConfig.card15,
     Component: ({ result }: CardComponentProps) => (
       <TitleCard
         title="The Honest Feedback You Need"

@@ -100,7 +100,7 @@ export default function SlideshowShell({
   };
   return (
     <div
-      className="fixed left-0 top-0 z-20 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 px-8 sm:items-center md:p-6"
+      className="fixed left-0 top-0 z-40 flex h-screen w-full select-none items-start justify-center gap-4 bg-black/95 px-8 sm:items-center md:p-6"
       onClick={exit}
     >
       <ChevronLeft
