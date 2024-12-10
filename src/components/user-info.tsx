@@ -1,4 +1,5 @@
-import { FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp, FaFacebook } from "react-icons/fa";
+import { FaAt } from "react-icons/fa6";
 import { BaseStory } from "./base-story";
 import { useStreamContext } from "./stream-provider";
 import Image from "next/image";
@@ -14,16 +15,14 @@ export function UserInfo({
   imageUrl: string;
   storyHref: string;
 }) {
-  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/${username}`;
+  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/spotify/${username}`;
   const shareText = `Check out my #LLMwrapped results!`;
 
   const shareLinks = {
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
-    instagram: `https://instagram.com/`,
     linkedin: `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(shareText + " " + shareUrl)}`,
-    tiktok: `https://www.tiktok.com/`,
-    reddit: `https://reddit.com/submit?url=${encodeURIComponent(shareUrl)}&title=${encodeURIComponent(shareText)}`,
     whatsapp: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`,
+    threads: `https://www.threads.net/intent/post?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`,
   };
 
   const { results } = useStreamContext();
@@ -110,16 +109,15 @@ export function UserInfo({
                 <span className="sr-only">WhatsApp</span>
               </a>
 
-              <button
-                onClick={() => {
-                  void navigator.clipboard.writeText(shareUrl);
-                  alert("Link copied! Share it on Instagram");
-                }}
+              <a
+                href={shareLinks.threads}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
               >
-                <FaInstagram className="text-lg sm:text-xl" />
-                <span className="sr-only">Instagram</span>
-              </button>
+                <FaAt className="text-lg sm:text-xl" />
+                <span className="sr-only">Threads</span>
+              </a>
             </div>
 
             {/* Share link input */}
