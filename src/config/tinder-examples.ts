@@ -274,28 +274,28 @@ export const tinderExamples = {
 export const tinderStorys = [
   {
     src: "/images/stories/founder.png",
-    alt: "Founder",
+    alt: "Startup Founder",
     href: "/?name=startupFounder&slide=1&type=tinder",
   },
   {
-    src: "/images/stories/hot-girl.png",
-    alt: "Cat lover",
+    src: "/images/stories/french.png",
+    alt: "French Lover",
     href: "/?name=frenchLover&slide=1&type=tinder",
   },
   {
-    src: "/images/stories/hot-girl2.png",
-    alt: "Gen z",
+    src: "/images/stories/hot-girl.png",
+    alt: "Cat Lady",
     href: "/?name=catLady&slide=1&type=tinder",
   },
   {
-    src: "/images/stories/bartender.png",
-    alt: "Bartender",
+    src: "/images/stories/hot-girl2.png",
+    alt: "Gen Z Queen",
     href: "/?name=genZQueen&slide=1&type=tinder",
   },
 
   {
-    src: "/images/stories/french.png",
-    alt: "French",
+    src: "/images/stories/bartender.png",
+    alt: "Quirky Bartender",
     href: "/?name=quirkyBartender&slide=1&type=tinder",
   },
 ];
