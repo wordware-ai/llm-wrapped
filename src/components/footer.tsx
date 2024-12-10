@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function Footer() {
   return (
-    <footer className="mt-auto flex flex-col gap-8 bg-black p-8 pb-24 pt-16 text-white">
+    <footer className="mt-auto flex flex-col gap-8 bg-black p-8 pb-8 pt-16 text-white">
       <div className="flex items-center pb-12">
         <Image
           src="/brand/wordware-black.svg"

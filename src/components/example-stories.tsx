@@ -17,7 +17,9 @@ export function ExampleStories({
 }) {
   return (
     <div className="flex flex-col gap-4">
-      <p className="text-center text-2xl font-semibold">{title}</p>
+      <p className="text-center text-2xl font-semibold text-zinc-700">
+        {title}
+      </p>
       <div className="grid grid-cols-3 items-center gap-2 md:flex md:gap-8">
         {stories.map((story, index) => (
           <div key={index} className="flex flex-col items-center gap-2">

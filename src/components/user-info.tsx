@@ -1,7 +1,6 @@
-import { Link2 } from "lucide-react";
 import Image from "next/image";
 import {
-  FaTelegram,
+  FaLinkedin,
   FaWhatsapp,
   FaTwitter as FaXTwitter,
 } from "react-icons/fa";
@@ -26,7 +25,7 @@ export function UserInfo({
   const shareLinks = {
     whatsapp: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`,
     threads: `https://www.threads.net/intent/post?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`,
-    telegram: `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
+    linkedin: `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(shareText + " " + shareUrl)}`,
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
   };
 
@@ -37,31 +36,31 @@ export function UserInfo({
       <h1 className="text-5xl font-semibold text-muted-foreground xs:text-6xl sm:text-7xl md:text-8xl lg:text-6xl xl:text-8xl">
         #LLMwrapped
       </h1>
-      <div className="flex gap-8 lg:gap-20">
+      <div className="flex flex-col gap-8 sm:flex-row lg:flex-col-reverse lg:gap-12 xl:flex-row xl:gap-20">
         <div className="relative flex w-min flex-col gap-4 xl:pt-48">
           {Object.keys(results || {}).length > 4 ? (
             <>
               <BaseStory
-                className="size-36 p-1 lg:size-48 lg:p-2"
+                className="size-36 p-1 sm:size-48 md:p-2"
                 src={imageUrl}
                 alt="Spotify 1"
                 href={storyHref}
               />{" "}
-              <div className="absolute -top-44 right-[-340px] hidden items-center whitespace-nowrap lg:flex xl:-top-0">
+              <div className="absolute -right-48 -top-4 hidden flex-col-reverse items-center whitespace-nowrap lg:flex xl:-top-0 xl:right-[-340px] xl:flex-row">
                 <Image
                   src="/arrow.png"
                   alt="Curved arrow"
                   width={120}
                   height={120}
-                  className="mt-16 rotate-[0deg]"
+                  className="mr-16 mt-0 rotate-[110deg] scale-x-[-1] xl:mr-0 xl:mt-16 xl:rotate-[0deg] xl:scale-x-[1]"
                 />
-                <p className="-mt-0 ml-8 max-w-[250px] text-wrap font-medium text-black">
+                <p className="-mt-0 ml-8 max-w-[150px] text-wrap font-medium text-black xl:max-w-[250px] xl:text-lg">
                   Catch the full reel-tap the profile picture now.
                 </p>
               </div>
             </>
           ) : (
-            <div className="size-42 aspect-square rounded-full bg-background object-cover lg:size-48">
+            <div className="aspect-square size-36 rounded-full bg-background object-cover sm:size-48">
               <Image
                 src={imageUrl}
                 alt={name}
@@ -73,72 +72,96 @@ export function UserInfo({
           )}
           <p className="text-center text-xl font-semibold">{name}</p>
         </div>
-        <div className="flex flex-col justify-start gap-8">
+        <div className="flex w-min flex-col justify-end gap-8">
           <div className="flex flex-col gap-4">
-            <div className="flex flex-col gap-2 md:max-w-[250px] xl:mt-48 xl:max-w-full 2xl:mt-72">
+            <div className="flex flex-col gap-2">
               <h2 className="text-2xl font-semibold">Share your results</h2>
               <p className="text-gray-600">
                 Unwrap your LLM-crafted journey with friends.
               </p>
             </div>
 
-            {/* Share buttons grid */}
-            <div className="flex flex-wrap justify-center gap-6 lg:max-w-[250px] 2xl:max-w-full">
-              {/* Copy Link */}
-              <button
-                onClick={() => {
-                  void navigator.clipboard.writeText(shareUrl);
-                  alert("Link copied!");
-                }}
-                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
-              >
-                <Link2 className="text-lg sm:text-xl" />
-                <span className="sr-only">Copy link</span>
-              </button>
+            <div className="flex w-min flex-col gap-4">
+              <div className="flex gap-6">
+                {/* WhatsApp */}
+                <a
+                  href={shareLinks.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex size-14 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"
+                >
+                  <FaWhatsapp className="text-lg sm:text-xl" />
+                  <span className="sr-only">WhatsApp</span>
+                </a>
 
-              {/* WhatsApp */}
-              <a
-                href={shareLinks.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
-              >
-                <FaWhatsapp className="text-lg sm:text-xl" />
-                <span className="sr-only">WhatsApp</span>
-              </a>
+                {/* Threads */}
+                <a
+                  href={shareLinks.threads}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex size-14 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"
+                >
+                  <FaAt className="text-lg sm:text-xl" />
+                  <span className="sr-only">Threads</span>
+                </a>
 
-              {/* Threads */}
-              <a
-                href={shareLinks.threads}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
-              >
-                <FaAt className="text-lg sm:text-xl" />
-                <span className="sr-only">Threads</span>
-              </a>
+                {/* Telegram */}
+                <a
+                  href={shareLinks.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex size-14 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"
+                >
+                  <FaLinkedin className="text-lg sm:text-xl" />
+                  <span className="sr-only">LinkedIn</span>
+                </a>
 
-              {/* Telegram */}
-              <a
-                href={shareLinks.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
-              >
-                <FaTelegram className="text-lg sm:text-xl" />
-                <span className="sr-only">Telegram</span>
-              </a>
-
-              {/* X (Twitter) */}
-              <a
-                href={shareLinks.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
-              >
-                <FaXTwitter className="text-lg sm:text-xl" />
-                <span className="sr-only">X</span>
-              </a>
+                {/* X (Twitter) */}
+                <a
+                  href={shareLinks.twitter}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex size-14 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"
+                >
+                  <FaXTwitter className="text-lg sm:text-xl" />
+                  <span className="sr-only">X</span>
+                </a>
+              </div>
+              <div className="flex w-full items-center gap-2 rounded-lg border p-3">
+                <input
+                  type="text"
+                  value={shareUrl}
+                  readOnly
+                  className="flex-1 bg-transparent text-gray-600 outline-none"
+                />
+                <button
+                  onClick={() => {
+                    void navigator.clipboard.writeText(shareUrl);
+                    alert("Link copied to clipboard!");
+                  }}
+                  className="flex items-center justify-center"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                  >
+                    <rect
+                      x="9"
+                      y="9"
+                      width="13"
+                      height="13"
+                      rx="2"
+                      ry="2"
+                    ></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span className="sr-only">Copy link</span>
+                </button>
+              </div>
             </div>
           </div>
         </div>

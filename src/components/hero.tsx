@@ -183,7 +183,17 @@ export function Hero() {
         <ExampleStories title="Spotify Examples" stories={spotifyStorys} />
       )}
       {tab === "linkedin" && (
-        <ExampleStories title="LinkedIn Examples" stories={linkedinStorys} />
+        <div className="flex flex-col gap-4">
+          <ExampleStories title="LinkedIn Examples" stories={linkedinStorys} />
+          <p className="text-center text-muted-foreground">
+            By logging in you agree to our Terms and Conditions and acknowledge
+            our{" "}
+            <Link href="https://www.wordware.ai/privacy-policy">
+              Privacy Policy
+            </Link>
+            .
+          </p>
+        </div>
       )}
       {tab === "tinder" && (
         <ExampleStories title="Tinder Examples" stories={tinderStorys} />

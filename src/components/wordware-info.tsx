@@ -81,7 +81,7 @@ export default function WordwareInfo() {
         </p>
       </div>
 
-      <div className="flex flex-col justify-center gap-4 pb-20 sm:flex-row">
+      <div className="flex flex-col justify-center gap-4 pb-4 sm:flex-row">
         <Link
           href="https://app.wordware.ai/register"
           className={cn(

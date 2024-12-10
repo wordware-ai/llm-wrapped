@@ -22,12 +22,12 @@ export const wordwareConfig = [
   {
     title: "Functions That Work for You",
     description:
-      "Wordware lets you create smarter, more adaptable agents. with loops, you can repeat steps dynamically. if-else nodes bring decision-making into your flows. structured generations ensure your outputs are ready for APIs or databases. and with code execution, you can integrate Python or JavaScript to do whatever you need—all within your flow.",
+      "Wordware helps you build smarter agents using loops for repetition, if-else nodes for decisions, structured outputs for API/database integration, and code execution for Python/JavaScript—all within your flow",
   },
   {
     title: "Tools to Supercharge Your WordApps",
     description:
-      "feel unstoppable with tools that take your WordApps to the next level. from web searches to image generation, text-to-speech, PDF parsing, and more—you can do so much, so quickly. ready to add one? just type / in the editor and explore the tool section.",
+      "Enhance your WordApps with powerful tools: web search, image generation, text-to-speech, and PDF parsing. Simply type / in the editor to explore available tools.",
   },
   {
     title: "Ready to Build Something Amazing?",

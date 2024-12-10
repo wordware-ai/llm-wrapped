@@ -22,7 +22,7 @@ export function LinkedinInput() {
   return (
     <form className="flex gap-2" onSubmit={handleSubmit}>
       <Input
-        className="bg-white"
+        className="bg-white sm:w-96"
         placeholder="LinkedIn url"
         value={url}
         onChange={(e) => setUrl(e.target.value)}

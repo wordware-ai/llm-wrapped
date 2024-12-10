@@ -31,7 +31,7 @@ export function ResultsPage({
   return (
     <div className="flex flex-col">
       <Navbar />
-      <div className="mb-20 flex flex-col gap-4 p-8 lg:h-[calc(100vh-56px)] lg:flex-row">
+      <div className="mb-10 flex flex-col gap-12 p-8 lg:h-[calc(100vh-56px)] lg:flex-row lg:gap-4">
         {LoadingState ? LoadingState : <UserInfo {...user} />}
         <SideCards {...cards} />
       </div>

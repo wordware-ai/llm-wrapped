@@ -16,7 +16,7 @@ const Page = async () => {
           <div className="space-y-4 text-center">
             <h1 className="text-4xl font-bold tracking-tight">Rankings</h1>
             <p className="text-lg text-gray-600">
-              See which Twitter personalities are trending based on real-time
+              See which LLMwrapped profiles are trending based on real-time
               analytics data from Posthog.
             </p>
           </div>
