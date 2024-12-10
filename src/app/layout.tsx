@@ -12,6 +12,7 @@ import SlideShow from "@/components/slideshow";
 import Footer from "@/components/footer";
 import { Suspense } from "react";
 import { CSPostHogProvider } from "@/components/posthog-provider";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 
 export const metadata: Metadata = {
   title: "LLMwrapped - AI agent by Wordware",
@@ -33,12 +34,14 @@ export default async function RootLayout({
             <CSPostHogProvider>
               <StreamProvider>
                 <NuqsAdapter>
-                  <Suspense>
-                    <SlideShow />
-                  </Suspense>
-                  {children}
+                  <TooltipProvider>
+                    <Suspense>
+                      <SlideShow />
+                    </Suspense>
+                    {children}
 
-                  <Footer />
+                    <Footer />
+                  </TooltipProvider>
                 </NuqsAdapter>
               </StreamProvider>
             </CSPostHogProvider>

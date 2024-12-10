@@ -21,13 +21,13 @@ export default function Navbar() {
   const url = useMemo(() => {
     switch (getServiceType) {
       case "spotify":
-        return "https://app.wordware.ai/explore/apps/45bf050b-4223-45c1-9fd6-a2d6c6b2ac1d";
+        return "https://app.wordware.ai/explore/apps/fe79046c-6e72-4b7b-b9fc-e0d6657baa41";
       case "linkedin":
-        return "https://app.wordware.ai/explore/apps/eb98a6bb-d867-42a3-a475-1e0546c9f638";
+        return "https://app.wordware.ai/explore/apps/8799f6db-25c7-4bdc-bb1e-dde7b9b60767";
       case "tinder":
         return "https://app.wordware.ai/explore/apps/786ef77a-b8b7-4951-9f4d-b58d6253dcb8";
       default:
-        return "https://app.wordware.ai/explore/apps/45bf050b-4223-45c1-9fd6-a2d6c6b2ac1d";
+        return "https://app.wordware.ai/explore/apps/2b433778-0a9b-4443-b33c-945c68a74cb0";
     }
   }, [getServiceType]);
 
@@ -50,7 +50,7 @@ export default function Navbar() {
         <Link
           className={cn(buttonVariants({ variant: "default" }))}
           target="_blank"
-          href="https://app.wordware.ai/explore/apps/45bf050b-4223-45c1-9fd6-a2d6c6b2ac1d"
+          href={url}
         >
           Build your own version of LLMWrapped
         </Link>

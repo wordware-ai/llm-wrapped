@@ -1,11 +1,6 @@
 import Image from "next/image";
-import {
-  FaLinkedin,
-  FaWhatsapp,
-  FaTwitter as FaXTwitter,
-} from "react-icons/fa";
-import { FaAt } from "react-icons/fa6";
 import { BaseStory } from "./base-story";
+import { ShareButtons } from "./share-buttons";
 import { useStreamContext } from "./stream-provider";
 
 export function UserInfo({
@@ -20,14 +15,6 @@ export function UserInfo({
   storyHref: string;
 }) {
   const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/spotify/${username}`;
-  const shareText = `Check out my #LLMwrapped results!`;
-
-  const shareLinks = {
-    whatsapp: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`,
-    threads: `https://www.threads.net/intent/post?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`,
-    linkedin: `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(shareText + " " + shareUrl)}`,
-    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
-  };
 
   const { results } = useStreamContext();
 
@@ -82,51 +69,7 @@ export function UserInfo({
             </div>
 
             <div className="flex w-min flex-col gap-4">
-              <div className="flex gap-6">
-                {/* WhatsApp */}
-                <a
-                  href={shareLinks.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex size-14 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"
-                >
-                  <FaWhatsapp className="text-lg sm:text-xl" />
-                  <span className="sr-only">WhatsApp</span>
-                </a>
-
-                {/* Threads */}
-                <a
-                  href={shareLinks.threads}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex size-14 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"
-                >
-                  <FaAt className="text-lg sm:text-xl" />
-                  <span className="sr-only">Threads</span>
-                </a>
-
-                {/* Telegram */}
-                <a
-                  href={shareLinks.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex size-14 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"
-                >
-                  <FaLinkedin className="text-lg sm:text-xl" />
-                  <span className="sr-only">LinkedIn</span>
-                </a>
-
-                {/* X (Twitter) */}
-                <a
-                  href={shareLinks.twitter}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex size-14 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200"
-                >
-                  <FaXTwitter className="text-lg sm:text-xl" />
-                  <span className="sr-only">X</span>
-                </a>
-              </div>
+              <ShareButtons />
               <div className="flex w-full items-center gap-2 rounded-lg border p-3">
                 <input
                   type="text"

@@ -51,9 +51,7 @@ export default function WordwareCard({
               className={cn("flex w-full items-center justify-center")}
               onClick={(e) => e.stopPropagation()}
             >
-              <ShareButton className="text-white hover:text-white/80">
-                Share
-              </ShareButton>
+              <ShareButton />
             </div>
           )}
         </div>
