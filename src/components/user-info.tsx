@@ -1,8 +1,17 @@
-import { FaInstagram, FaLinkedin, FaTwitter, FaWhatsapp, FaFacebook } from "react-icons/fa";
+import {
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter as FaXTwitter,
+  FaTelegram,
+  FaWhatsapp,
+  FaFacebook,
+} from "react-icons/fa";
 import { FaAt } from "react-icons/fa6";
 import { BaseStory } from "./base-story";
 import { useStreamContext } from "./stream-provider";
 import Image from "next/image";
+import { Link } from "next/link";
+import { Link2 } from "lucide-react";
 
 export function UserInfo({
   username,
@@ -19,10 +28,10 @@ export function UserInfo({
   const shareText = `Check out my #LLMwrapped results!`;
 
   const shareLinks = {
-    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
-    linkedin: `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(shareText + " " + shareUrl)}`,
     whatsapp: `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`,
     threads: `https://www.threads.net/intent/post?text=${encodeURIComponent(`${shareText}\n${shareUrl}`)}`,
+    telegram: `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
+    twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`,
   };
 
   const { results } = useStreamContext();
@@ -78,27 +87,20 @@ export function UserInfo({
             </div>
 
             {/* Share buttons grid */}
-            <div className="flex gap-4 lg:flex-wrap lg:gap-6">
-              <a
-                href={shareLinks.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
+            <div className="flex justify-center gap-6">
+              {/* Copy Link */}
+              <button
+                onClick={() => {
+                  void navigator.clipboard.writeText(shareUrl);
+                  alert("Link copied!");
+                }}
                 className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
               >
-                <FaTwitter className="text-lg sm:text-xl" />
-                <span className="sr-only">Twitter</span>
-              </a>
+                <Link2 className="text-lg sm:text-xl" />
+                <span className="sr-only">Copy link</span>
+              </button>
 
-              <a
-                href={shareLinks.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
-              >
-                <FaLinkedin className="text-lg sm:text-xl" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-
+              {/* WhatsApp */}
               <a
                 href={shareLinks.whatsapp}
                 target="_blank"
@@ -109,6 +111,7 @@ export function UserInfo({
                 <span className="sr-only">WhatsApp</span>
               </a>
 
+              {/* Threads */}
               <a
                 href={shareLinks.threads}
                 target="_blank"
@@ -118,36 +121,28 @@ export function UserInfo({
                 <FaAt className="text-lg sm:text-xl" />
                 <span className="sr-only">Threads</span>
               </a>
-            </div>
 
-            {/* Share link input */}
-            <div className="flex items-center gap-2 rounded-lg border p-3">
-              <input
-                type="text"
-                value={shareUrl}
-                readOnly
-                className="flex-1 bg-transparent text-gray-600 outline-none"
-              />
-              <button
-                onClick={() => {
-                  void navigator.clipboard.writeText(shareUrl);
-                  alert("Link copied to clipboard!");
-                }}
-                className="flex items-center justify-center"
+              {/* Telegram */}
+              <a
+                href={shareLinks.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-                </svg>
-                <span className="sr-only">Copy link</span>
-              </button>
+                <FaTelegram className="text-lg sm:text-xl" />
+                <span className="sr-only">Telegram</span>
+              </a>
+
+              {/* X (Twitter) */}
+              <a
+                href={shareLinks.twitter}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex size-10 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 sm:size-14"
+              >
+                <FaXTwitter className="text-lg sm:text-xl" />
+                <span className="sr-only">X</span>
+              </a>
             </div>
           </div>
         </div>
