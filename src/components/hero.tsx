@@ -186,12 +186,14 @@ export function Hero() {
         <div className="flex flex-col gap-4">
           <ExampleStories title="LinkedIn Examples" stories={linkedinStorys} />
           <p className="text-center text-muted-foreground">
-            By logging in you agree to our Terms and Conditions and acknowledge
-            our{" "}
-            <Link href="https://www.wordware.ai/privacy-policy">
-              Privacy Policy
+            PS: The people you see are part of the Wordware team. If you&rsquo;d
+            like to join us, we&rsquo;re{" "}
+            <Link
+              className="text-blue-600 hover:underline"
+              href="https://jobs.ashbyhq.com/wordware.ai"
+            >
+              hiring!
             </Link>
-            .
           </p>
         </div>
       )}

@@ -226,21 +226,25 @@ export const linkedinStorys = [
     src: "/images/stories/filip.png",
     alt: "Filip",
     href: "/?name=filip&slide=1&type=linkedin",
+    externalUrl: "https://www.linkedin.com/in/filipkozera/",
   },
   {
     src: "/images/stories/robert.png",
     alt: "Robert",
     href: "/?name=robert&slide=1&type=linkedin",
+    externalUrl: "https://www.linkedin.com/in/robertjhchandler/",
   },
   {
     src: "/images/stories/kamil.png",
     alt: "Kamil",
     href: "/?name=kamil&slide=1&type=linkedin",
+    externalUrl: "https://www.linkedin.com/in/kamilruczynski0/",
   },
   {
     src: "/images/stories/tal.png",
     alt: "Tal",
     href: "/?name=tal&slide=1&type=linkedin",
+    externalUrl: "https://www.linkedin.com/in/talglobus/",
   },
   // {
   //   src: "/images/stories/sam.webp",
@@ -251,5 +255,6 @@ export const linkedinStorys = [
     src: "/images/stories/sebastian.png",
     alt: "Sebastian",
     href: "/?name=sebastian&slide=1&type=linkedin",
+    externalUrl: "https://www.linkedin.com/in/sebastian-karas/",
   },
 ];

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BaseStory } from "./base-story";
 import WordwareStory from "./wordware-story";
 
@@ -5,6 +6,7 @@ type StoryConfig = {
   src: string;
   alt: string;
   href: string;
+  externalUrl?: string;
 };
 
 // Update component to accept stories as a prop
@@ -24,12 +26,26 @@ export function ExampleStories({
         {stories.map((story, index) => (
           <div key={index} className="flex flex-col items-center gap-2">
             <BaseStory {...story} />
-            <p className="text-center">{story.alt}</p>
+            {story.externalUrl ? (
+              <Link
+                href={story.externalUrl}
+                className="text-center text-blue-600 hover:underline"
+              >
+                {story.alt}
+              </Link>
+            ) : (
+              <p className="text-center">{story.alt}</p>
+            )}
           </div>
         ))}
         <div className="flex flex-col items-center gap-2 rounded-lg border bg-white p-4">
           <WordwareStory href="/?name=wordware&slide=1" />
-          <p className="text-center">Wordware </p>
+          <Link
+            href="https://www.wordware.ai"
+            className="text-center text-blue-600 hover:underline"
+          >
+            Wordware
+          </Link>
         </div>
       </div>
     </div>
