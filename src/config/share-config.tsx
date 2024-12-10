@@ -7,7 +7,7 @@ export const shareOptions = [
     label: "X",
     action: (shareUrl: string) => {
       const shareText =
-        "Check out my #LLMWrapped results— prompted by an AI Agent powered by @wordware_ai! :rocket:";
+        "Check out my #LLMWrapped results— prompted by an AI Agent powered by @wordware_ai! 🤖\n\n";
       window.open(
         `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
         "_blank",
@@ -19,10 +19,10 @@ export const shareOptions = [
     label: "LinkedIn",
     action: (shareUrl: string) => {
       const shareText =
-        "Check out my #LLMWrapped results— prompted by an AI Agent powered by @wordware_ai! :rocket:";
+        "Check out my #LLMWrapped results— prompted by an AI Agent powered by Wordware! 🤖\n\n";
       window.open(
         `https://www.linkedin.com/feed/?shareActive=true&text=${encodeURIComponent(
-          shareText + " " + shareUrl,
+          shareText + shareUrl,
         )}`,
         "_blank",
       );
@@ -33,10 +33,10 @@ export const shareOptions = [
     label: "Threads",
     action: (shareUrl: string) => {
       const shareText =
-        "Check out my #LLMWrapped results— prompted by an AI Agent powered by @wordware_ai! :rocket:";
+        "Check out my #LLMWrapped results— prompted by an AI Agent powered by Wordware! 🤖\n\n";
       window.open(
         `https://www.threads.net/intent/post?text=${encodeURIComponent(
-          shareText + " " + shareUrl,
+          shareText + shareUrl,
         )}`,
         "_blank",
       );
@@ -48,9 +48,9 @@ export const shareOptions = [
     label: "WhatsApp",
     action: (shareUrl: string) => {
       const shareText =
-        "Check out my #LLMWrapped results— prompted by an AI Agent powered by @wordware_ai! :rocket:";
+        "Check out my #LLMWrapped results— prompted by an AI Agent powered by Wordware! 🤖\n\n";
       window.open(
-        `https://wa.me/?text=${encodeURIComponent(`${shareText} ${shareUrl}`)}`,
+        `https://wa.me/?text=${encodeURIComponent(`${shareText}${shareUrl}`)}`,
         "_blank",
       );
     },

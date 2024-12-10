@@ -1,10 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { Link2, Share } from "lucide-react";
-import { FaTelegram, FaTwitter, FaWhatsapp } from "react-icons/fa";
-import { FaAt } from "react-icons/fa6";
 import {
   Drawer,
   DrawerClose,
@@ -15,7 +11,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { shareOptions } from "@/config/share-config";
+import { Share } from "lucide-react";
 import { ShareButtons } from "./share-buttons";
 
 export default function ShareButton() {
@@ -34,8 +30,8 @@ export default function ShareButton() {
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
-            <DrawerTitle>Share</DrawerTitle>
-            <DrawerDescription>
+            <DrawerTitle className="text-center">Share</DrawerTitle>
+            <DrawerDescription className="text-center">
               Share your results with others
             </DrawerDescription>
           </DrawerHeader>
