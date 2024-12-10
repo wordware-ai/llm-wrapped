@@ -64,7 +64,7 @@ export const shareOptions = [
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
           shareUrl,
-        )}`,
+        )}&quote=${encodeURIComponent(shareText)}`,
         "_blank",
       );
     },
