@@ -42,7 +42,7 @@ export function UserInfo({
         #LLMwrapped
       </h1>
       <div className="flex gap-8 lg:gap-20">
-        <div className="relative flex w-min flex-col gap-4">
+        <div className="relative flex w-min flex-col gap-4 xl:pt-48">
           {Object.keys(results || {}).length > 4 ? (
             <>
               <BaseStory
@@ -51,7 +51,7 @@ export function UserInfo({
                 alt="Spotify 1"
                 href={storyHref}
               />{" "}
-              <div className="absolute -top-44 right-[-340px] hidden items-center whitespace-nowrap lg:flex">
+              <div className="absolute -top-44 right-[-340px] hidden items-center whitespace-nowrap lg:flex xl:-top-0">
                 <Image
                   src="/arrow.png"
                   alt="Curved arrow"
@@ -79,7 +79,7 @@ export function UserInfo({
         </div>
         <div className="flex flex-col justify-start gap-8">
           <div className="flex flex-col gap-4">
-            <div>
+            <div className="flex flex-col gap-2 md:max-w-[250px] xl:mt-48 xl:max-w-full 2xl:mt-72">
               <h2 className="text-2xl font-semibold">Share your results</h2>
               <p className="text-gray-600">
                 Unwrap your LLM-crafted journey with friends.
@@ -87,7 +87,7 @@ export function UserInfo({
             </div>
 
             {/* Share buttons grid */}
-            <div className="flex justify-center gap-6">
+            <div className="flex flex-wrap justify-center gap-6 lg:max-w-[250px] 2xl:max-w-full">
               {/* Copy Link */}
               <button
                 onClick={() => {
