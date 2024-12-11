@@ -30,15 +30,15 @@ export function UserInfo({
                 alt="Spotify 1"
                 href={storyHref}
               />{" "}
-              <div className="absolute -right-48 -top-4 hidden flex-col-reverse items-center whitespace-nowrap lg:flex xl:-top-0 xl:right-[-340px] xl:flex-row">
+              <div className="absolute -right-48 -top-4 flex-col-reverse items-center whitespace-nowrap sm:hidden lg:flex xl:-top-0 xl:right-[-340px] xl:flex-row">
                 <Image
                   src="/arrow.png"
                   alt="Curved arrow"
                   width={120}
                   height={120}
-                  className="mr-16 mt-0 rotate-[110deg] scale-x-[-1] xl:mr-0 xl:mt-16 xl:rotate-[0deg] xl:scale-x-[1]"
+                  className="mr-16 mt-0 rotate-[40deg] sm:rotate-[110deg] sm:scale-x-[-1] xl:mr-0 xl:mt-16 xl:rotate-[0deg] xl:scale-x-[1]"
                 />
-                <p className="-mt-0 ml-8 max-w-[150px] text-wrap font-medium text-black xl:max-w-[250px] xl:text-lg">
+                <p className="-mt-6 ml-10 max-w-[150px] text-wrap font-medium text-black sm:ml-8 sm:mt-0 xl:max-w-[250px] xl:text-lg">
                   Catch the full reel-tap the profile picture now.
                 </p>
               </div>

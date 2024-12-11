@@ -89,15 +89,19 @@ export const ImageCard = ({
   description: string;
 }) => {
   const ImageComponent = (
-    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-      <Image
-        src={imageUrl}
-        alt={title}
-        className="aspect-square rounded-lg object-cover"
-        width={200}
-        height={200}
-      />
-    </motion.div>
+    <>
+      {imageUrl !== "" && (
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          <Image
+            src={imageUrl}
+            alt={title}
+            className="aspect-square rounded-lg object-cover"
+            width={200}
+            height={200}
+          />
+        </motion.div>
+      )}
+    </>
   );
 
   return (

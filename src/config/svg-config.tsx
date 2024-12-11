@@ -252,7 +252,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg15: () => (
     <svg
-      className="absolute top-20 z-[10] size-[800px]"
+      className="absolute -top-60 z-[10] size-[800px]"
       width="188"
       height="71"
       viewBox="0 0 188 71"
