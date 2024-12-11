@@ -21,11 +21,31 @@ export const metadata: Metadata = {
     "Get a true look at yourself through the lens of large language models (LLMs) ",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   openGraph: {
-    images: [{ url: "https://llm-wrapped.vercel.app/og.png" }],
+    title: "LLMwrapped - AI agent by Wordware",
+    description:
+      "Get a true look at yourself through the lens of large language models (LLMs)",
+    images: [
+      {
+        url: "https://llm-wrapped.vercel.app/og.png",
+        width: 1200,
+        height: 630,
+        alt: "LLMwrapped Preview",
+      },
+    ],
+    type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    images: [{ url: "https://llm-wrapped.vercel.app/og.png" }],
+    title: "LLMwrapped - AI agent by Wordware",
+    description:
+      "Get a true look at yourself through the lens of large language models (LLMs)",
+    creator: "@yourtwitterhandle", // Optional: Add your Twitter handle if you have one
+    images: [
+      {
+        url: "https://llm-wrapped.vercel.app/og.png",
+        alt: "LLMwrapped Preview",
+      },
+    ],
   },
 };
 
