@@ -1,5 +1,7 @@
 import { env } from "@/env";
 
+export const maxDuration = 30;
+
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ promptId: string }> },
