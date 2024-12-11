@@ -1,10 +1,20 @@
+import { Link } from "lucide-react";
 import { FaFacebook, FaLinkedin, FaWhatsapp } from "react-icons/fa";
 import { FaThreads, FaXTwitter } from "react-icons/fa6";
+import { toast } from "sonner";
 
 export const shareOptions = [
   {
+    icon: <Link className="h-6 w-6" />,
+    label: "Copy Link",
+    action: (shareUrl: string) => {
+      void navigator.clipboard.writeText(shareUrl);
+      toast("Link copied to clipboard!");
+    },
+  },
+  {
     icon: <FaXTwitter className="h-6 w-6" />,
-    label: "X",
+    label: "Share on X",
     action: (shareUrl: string) => {
       const shareText =
         "Check out my #LLMWrapped results — prompted by an AI Agent powered by @wordware_ai! 🤖\n\n";
@@ -16,7 +26,7 @@ export const shareOptions = [
   },
   {
     icon: <FaLinkedin className="h-6 w-6" />,
-    label: "LinkedIn",
+    label: "Share onLinkedIn",
     action: (shareUrl: string) => {
       const shareText =
         "Check out my #LLMWrapped results — prompted by an AI Agent powered by Wordware! 🤖\n\n";
@@ -30,7 +40,7 @@ export const shareOptions = [
   },
   {
     icon: <FaFacebook className="h-6 w-6" />,
-    label: "Facebook",
+    label: "Share on Facebook",
     action: (shareUrl: string) => {
       window.open(
         `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`,
@@ -40,7 +50,7 @@ export const shareOptions = [
   },
   {
     icon: <FaWhatsapp className="h-6 w-6" />,
-    label: "WhatsApp",
+    label: "Share on WhatsApp",
     action: (shareUrl: string) => {
       const shareText =
         "Check out my #LLMWrapped results — prompted by an AI Agent powered by Wordware! 🤖\n\n";
@@ -52,7 +62,7 @@ export const shareOptions = [
   },
   {
     icon: <FaThreads className="h-6 w-6" />,
-    label: "Threads",
+    label: "Share on Threads",
     action: (shareUrl: string) => {
       const shareText =
         "Check out my #LLMWrapped results — prompted by an AI Agent powered by Wordware! 🤖\n\n";

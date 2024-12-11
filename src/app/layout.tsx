@@ -13,6 +13,7 @@ import Footer from "@/components/footer";
 import { Suspense } from "react";
 import { CSPostHogProvider } from "@/components/posthog-provider";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "LLMwrapped - AI agent by Wordware",
@@ -41,6 +42,7 @@ export default async function RootLayout({
                     {children}
 
                     <Footer />
+                    <Toaster />
                   </TooltipProvider>
                 </NuqsAdapter>
               </StreamProvider>

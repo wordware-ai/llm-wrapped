@@ -28,7 +28,7 @@ export default function ShareButton() {
         </Button>
       </DrawerTrigger>
       <DrawerContent>
-        <div className="mx-auto w-full max-w-sm">
+        <div className="mx-auto w-min">
           <DrawerHeader>
             <DrawerTitle className="text-center">Share</DrawerTitle>
             <DrawerDescription className="text-center">
@@ -36,7 +36,7 @@ export default function ShareButton() {
             </DrawerDescription>
           </DrawerHeader>
           <div className="p-4">
-            <ShareButtons />
+            <ShareButtons copyLink />
           </div>
           <DrawerFooter>
             <DrawerClose asChild>
