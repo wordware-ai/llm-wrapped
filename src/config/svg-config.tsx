@@ -12,7 +12,7 @@ export const svgConfig: Record<string, SVGComponent> = {
       viewBox="0 0 267 110"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute top-[0px] z-20 size-[60vh]"
+      className="absolute top-[0px] z-[10] size-[60vh]"
     >
       <path
         fill-rule="evenodd"
@@ -29,7 +29,7 @@ export const svgConfig: Record<string, SVGComponent> = {
       viewBox="0 0 129 310"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="absolute -top-40 z-20 size-[60vh] -rotate-90"
+      className="absolute -top-40 z-[10] size-[60vh] -rotate-90"
     >
       <path
         fill-rule="evenodd"
@@ -41,7 +41,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg3: () => (
     <svg
-      className="absolute right-0 top-0 z-20 size-[40vh]"
+      className="absolute right-0 top-0 z-[10] size-[40vh]"
       width="88"
       height="109"
       viewBox="0 0 88 109"
@@ -56,7 +56,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg4: () => (
     <svg
-      className="absolute top-20 z-20 size-[60vh]"
+      className="absolute top-20 z-[10] size-[60vh]"
       width="267"
       height="69"
       viewBox="0 0 267 69"
@@ -73,7 +73,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg5: () => (
     <svg
-      className="absolute top-20 z-20 size-[35vh]"
+      className="absolute top-20 z-[10] size-[35vh]"
       width="150"
       height="106"
       viewBox="0 0 150 106"
@@ -91,7 +91,7 @@ export const svgConfig: Record<string, SVGComponent> = {
 
   svg6: () => (
     <svg
-      className="absolute -top-20 z-20 size-[60vh]"
+      className="absolute -top-20 z-[10] size-[60vh]"
       width="267"
       height="111"
       viewBox="0 0 267 111"
@@ -108,7 +108,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg7: () => (
     <svg
-      className="absolute right-0 top-0 z-20 size-[30vh]"
+      className="absolute right-0 top-0 z-[10] size-[30vh]"
       width="156"
       height="108"
       viewBox="0 0 156 108"
@@ -123,7 +123,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg8: () => (
     <svg
-      className="absolute -right-40 top-0 z-20 size-[40vh] -rotate-90"
+      className="absolute -right-40 top-0 z-[10] size-[40vh] -rotate-90"
       width="241"
       height="68"
       viewBox="0 0 241 68"
@@ -158,7 +158,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg9: () => (
     <svg
-      className="absolute right-20 top-20 z-20 size-[30vh]"
+      className="absolute right-20 top-20 z-[10] size-[30vh]"
       width="105"
       height="71"
       viewBox="0 0 105 71"
@@ -173,7 +173,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg10: () => (
     <svg
-      className="absolute right-0 top-0 z-20 size-[30vh]"
+      className="absolute right-0 top-0 z-[10] size-[30vh]"
       width="114"
       height="116"
       viewBox="0 0 114 116"
@@ -188,7 +188,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg11: () => (
     <svg
-      className="absolute top-0 z-20 size-[60vh]"
+      className="absolute top-0 z-[10] size-[800px]"
       width="216"
       height="71"
       viewBox="0 0 216 71"
@@ -205,7 +205,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg12: () => (
     <svg
-      className="absolute right-0 top-0 z-20 size-[30vh]"
+      className="absolute right-0 top-0 z-[10] size-[30vh]"
       width="124"
       height="105"
       viewBox="0 0 124 105"
@@ -220,7 +220,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg13: () => (
     <svg
-      className="absolute right-0 top-0 z-20 size-[30vh] -rotate-90"
+      className="absolute right-0 top-0 z-[10] size-[30vh] -rotate-90"
       width="88"
       height="83"
       viewBox="0 0 88 83"
@@ -235,7 +235,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg14: () => (
     <svg
-      className="absolute right-0 top-20 z-20 size-[500px]"
+      className="absolute right-0 top-20 z-[10] size-[500px]"
       width="132"
       height="102"
       viewBox="0 0 132 102"
@@ -252,7 +252,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg15: () => (
     <svg
-      className="absolute top-20 z-20 size-[60vh]"
+      className="absolute top-20 z-[10] size-[800px]"
       width="188"
       height="71"
       viewBox="0 0 188 71"
@@ -269,7 +269,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg16: () => (
     <svg
-      className="absolute -top-20 right-0 z-20 size-[700px] scale-y-[-1]"
+      className="absolute -top-20 right-0 z-[10] size-[700px] scale-y-[-1]"
       width="184"
       height="65"
       viewBox="0 0 184 65"
@@ -284,7 +284,7 @@ export const svgConfig: Record<string, SVGComponent> = {
   ),
   svg17: () => (
     <svg
-      className="absolute top-20 z-20 size-[30vh]"
+      className="absolute top-20 z-[10] size-[30vh]"
       width="104"
       height="105"
       viewBox="0 0 104 105"
@@ -300,7 +300,7 @@ export const svgConfig: Record<string, SVGComponent> = {
 
   svg18: () => (
     <svg
-      className="absolute -top-20 z-20 size-[60vh]"
+      className="absolute -top-20 z-[10] size-[800px]"
       width="216"
       height="63"
       viewBox="0 0 216 63"
