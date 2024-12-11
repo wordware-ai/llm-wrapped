@@ -21,6 +21,7 @@ export function usePoll() {
 
       return poll();
     },
+
     [utils],
   );
 

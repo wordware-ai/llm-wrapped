@@ -62,14 +62,16 @@ export function LinkedInResults({
             imageUrl: data.imageUrl ?? null,
             name: data.name ?? null,
             currentPositionImageUrl: data.currentCompanyImageUrl ?? null,
-            username: profileData?.username ?? "",
+            username: username as string,
           };
+
           setProfileData(updatedProfileData);
 
           // Then handle the stream response
           return streamResponse({
             promptId: "eb98a6bb-d867-42a3-a475-1e0546c9f638",
-            data: data.linkedinData ?? "",
+            // data: data.linkedinData ?? "",
+            data: "software engineer at google",
             onFinish: (results: Record<string, unknown>) => {
               const linkedinResult = {
                 ...convertLinkedinToDb(results),
@@ -89,29 +91,33 @@ export function LinkedInResults({
   }, [linkedinResult, snapshotId]);
 
   return (
-    <ResultsPage
-      user={{
-        username: profileData?.username ?? "",
-        name: profileData?.name ?? "",
-        imageUrl: profileData?.imageUrl ?? "",
-        storyHref: `/linkedin/${profileData?.username}?slide=1`,
-      }}
-      cards={{
-        card1text: results.short_summary as string,
-        card2: {
-          title: "Current Position",
-          text: results.current_position as string,
-          imageUrl: profileData?.currentPositionImageUrl ?? "",
-        },
-        card3text: results.actual_position as string,
-        storyHref: `/linkedin/${profileData?.username}?name=wordware&slide=1`,
-        showWordwareCard: !!results.position_mother,
-      }}
-      LoadingState={
-        Object.keys(results).length === 0 && !linkedinResult ? (
-          <LinkedinLoadingPage />
-        ) : null
-      }
-    />
+    <>
+      <p>{profileData.username}</p>
+      <p>{profileData.name}</p>
+      <ResultsPage
+        user={{
+          username: profileData?.username ?? "",
+          name: profileData?.name ?? "",
+          imageUrl: profileData?.imageUrl ?? "",
+          storyHref: `/linkedin/${username as string}?slide=1`,
+        }}
+        cards={{
+          card1text: results.short_summary as string,
+          card2: {
+            title: "Current Position",
+            text: results.current_position as string,
+            imageUrl: profileData?.currentPositionImageUrl ?? "",
+          },
+          card3text: results.actual_position as string,
+          wordwareStoryHref: `/linkedin/${profileData?.username}?name=wordware&slide=1`,
+          showWordwareCard: !!results.position_mother,
+        }}
+        LoadingState={
+          Object.keys(results).length === 0 && !linkedinResult ? (
+            <LinkedinLoadingPage />
+          ) : null
+        }
+      />
+    </>
   );
 }

@@ -23,7 +23,7 @@ export function ResultsPage({
       href?: string;
     };
     card3text: string;
-    storyHref: string;
+    wordwareStoryHref: string;
     showWordwareCard: boolean;
   };
   LoadingState?: React.ReactNode;

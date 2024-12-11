@@ -8,7 +8,7 @@ export function SideCards({
   card1text,
   card2,
   card3text,
-  storyHref,
+  wordwareStoryHref,
 }: {
   card1text: string;
   card2: {
@@ -18,7 +18,7 @@ export function SideCards({
     href?: string;
   };
   card3text: string;
-  storyHref: string;
+  wordwareStoryHref: string;
 }) {
   return (
     <div className="flex flex-col justify-between gap-4 lg:h-full lg:w-1/2 lg:min-w-[550px]">
@@ -91,7 +91,7 @@ export function SideCards({
             hideShare
             hideHashtag
             cardData={cardConfig.card3}
-            className="flex aspect-auto h-min min-h-[400px] w-full items-center justify-center rounded-xl lg:h-full lg:min-h-0"
+            className="flex aspect-auto h-full min-h-[400px] w-full items-center justify-center rounded-xl lg:h-full lg:min-h-0"
           >
             <div className="flex h-full w-full items-center justify-center">
               {card3text ? (
@@ -116,7 +116,7 @@ export function SideCards({
                 LLMwrapped has been built with Wordware - the ultimate AI
                 operating system
               </p>
-              <WordwareStory href={storyHref} />
+              <WordwareStory href={wordwareStoryHref} />
             </div>
           </div>
         </div>

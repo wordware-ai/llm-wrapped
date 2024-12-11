@@ -2,6 +2,7 @@ import Image from "next/image";
 import { BaseStory } from "./base-story";
 import { ShareButtons } from "./share-buttons";
 import { useStreamContext } from "./stream-provider";
+import { toast } from "sonner";
 
 export function UserInfo({
   name,
@@ -76,7 +77,7 @@ export function UserInfo({
                 <button
                   onClick={() => {
                     void navigator.clipboard.writeText(window.location.href);
-                    alert("Link copied to clipboard!");
+                    toast("Link copied to clipboard!");
                   }}
                   className="flex items-center justify-center"
                 >
