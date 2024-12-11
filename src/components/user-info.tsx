@@ -11,7 +11,7 @@ export function UserInfo({
 }: {
   username: string;
   name: string;
-  imageUrl: string;
+  imageUrl?: string;
   storyHref: string;
 }) {
   const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/spotify/${username}`;
@@ -49,7 +49,7 @@ export function UserInfo({
           ) : (
             <div className="aspect-square size-36 rounded-full bg-background object-cover sm:size-48">
               <Image
-                src={imageUrl}
+                src={imageUrl ?? ""}
                 alt={name}
                 width={200}
                 height={200}

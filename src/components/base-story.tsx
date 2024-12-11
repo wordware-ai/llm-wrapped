@@ -9,7 +9,7 @@ export function BaseStory({
   className,
   imageClassName,
 }: {
-  src: string | null;
+  src?: string;
   alt: string;
   href: string;
   className?: string;

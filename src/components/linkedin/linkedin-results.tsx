@@ -102,7 +102,7 @@ export function LinkedInResults({
           imageUrl: profileData?.currentPositionImageUrl ?? "",
         },
         card3text: results.actual_position as string,
-        storyHref: `/linkedin/${profileData?.username}?slide=1`,
+        storyHref: `/linkedin/${profileData?.username}?name=wordware&slide=1`,
         showWordwareCard: !!results.position_mother,
       }}
       LoadingState={
