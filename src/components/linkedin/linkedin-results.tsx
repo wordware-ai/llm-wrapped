@@ -34,8 +34,13 @@ export function LinkedInResults({
   const utils = api.useUtils();
   const { mutate: createLinkedinResult } =
     api.linkedinResults.upsert.useMutation({
-      onSuccess: async () => {
+      onSuccess: async (data) => {
         await utils.linkedinResults.getByUsername.invalidate({ username });
+        setProfileData({
+          imageUrl: data.imageUrl,
+          name: data.name,
+          username: data.username,
+        });
       },
     });
 
@@ -125,6 +130,7 @@ export function LinkedInResults({
         void pollData(snapshotId)
           .then((data) => {
             if (data.noExperienceData) {
+              console.log("data", data);
               createLinkedinResult({
                 username: username,
                 scrapeFailed: true,
