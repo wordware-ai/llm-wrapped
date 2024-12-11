@@ -22,6 +22,10 @@ const config = {
       },
       {
         protocol: "https",
+        hostname: "static.licdn.com",
+      },
+      {
+        protocol: "https",
         hostname: "upload.wikimedia.org",
       },
       {

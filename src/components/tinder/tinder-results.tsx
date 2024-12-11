@@ -40,6 +40,8 @@ export function TinderResults({
   const { streamResponse } = useStream();
 
   useEffect(() => {
+    setResults({});
+    setProfileData({});
     if (previousRun) {
       const displayResults = convertTinderDbToState(previousRun);
       setResults(displayResults);

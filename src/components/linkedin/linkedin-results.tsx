@@ -40,6 +40,8 @@ export function LinkedInResults({
   const { pollData } = usePoll();
 
   useEffect(() => {
+    setResults({});
+    setProfileData({});
     if (linkedinResult) {
       const displayResults = convertLinkedinDbToState(linkedinResult);
       setResults(displayResults);
