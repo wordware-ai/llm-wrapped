@@ -20,6 +20,13 @@ export const metadata: Metadata = {
   description:
     "Get a true look at yourself through the lens of large language models (LLMs) ",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  openGraph: {
+    images: [{ url: "/og" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [{ url: "/og.png" }],
+  },
 };
 
 export default async function RootLayout({
