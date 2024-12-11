@@ -75,6 +75,7 @@ export async function POST(
                   content.value?.type === "chunk" &&
                   typeof content.value.value === "string"
                 ) {
+                  console.log(content.value.value);
                   controller.enqueue(encoder.encode(content.value.value));
                 }
 

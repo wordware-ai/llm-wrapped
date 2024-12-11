@@ -61,7 +61,6 @@ export function useStream() {
             string,
             unknown
           >;
-          console.log(parsedResults);
           finalResults = parsedResults;
           setResults(finalResults);
         } catch {
