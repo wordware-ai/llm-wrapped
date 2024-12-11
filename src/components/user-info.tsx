@@ -4,18 +4,14 @@ import { ShareButtons } from "./share-buttons";
 import { useStreamContext } from "./stream-provider";
 
 export function UserInfo({
-  username,
   name,
   imageUrl,
   storyHref,
 }: {
-  username: string;
   name: string;
   imageUrl?: string;
   storyHref: string;
 }) {
-  const shareUrl = `${process.env.NEXT_PUBLIC_APP_URL}/spotify/${username}`;
-
   const { results } = useStreamContext();
 
   return (
@@ -73,13 +69,13 @@ export function UserInfo({
               <div className="flex w-full items-center gap-2 rounded-lg border p-3">
                 <input
                   type="text"
-                  value={shareUrl}
+                  value={window.location.href}
                   readOnly
                   className="flex-1 bg-transparent text-gray-600 outline-none"
                 />
                 <button
                   onClick={() => {
-                    void navigator.clipboard.writeText(shareUrl);
+                    void navigator.clipboard.writeText(window.location.href);
                     alert("Link copied to clipboard!");
                   }}
                   className="flex items-center justify-center"
