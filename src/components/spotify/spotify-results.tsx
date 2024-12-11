@@ -110,7 +110,7 @@ export function SpotifyResults({
           href: profileData?.topArtistUrl ?? undefined,
         },
         card3text: results.music_taste_analysis_2 as string,
-        storyHref: `/spotify/${username as string}?name=wordware&slide=1`,
+        wordwareStoryHref: `/spotify/${username as string}?name=wordware&slide=1`,
         showWordwareCard: !!results.music_taste_analysis_3,
       }}
     />

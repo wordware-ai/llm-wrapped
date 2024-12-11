@@ -86,7 +86,7 @@ export function TinderResults({
           href: undefined,
         },
         card3text: results.roast_bio as string,
-        storyHref: `/tinder/${id as string}?name=wordware&slide=1`,
+        wordwareStoryHref: `/tinder/${id as string}?name=wordware&slide=1`,
         showWordwareCard: !!results.swipe_ratios,
       }}
     />
