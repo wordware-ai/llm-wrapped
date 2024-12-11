@@ -3,7 +3,7 @@ import { LinkedinResultCreateInputSchema } from "prisma/generated/zod";
 import { z } from "zod";
 
 export const linkedinResultsRouter = createTRPCRouter({
-  createLinkedinResult: publicProcedure
+  create: publicProcedure
     .input(LinkedinResultCreateInputSchema)
     .mutation(async ({ ctx, input }) => {
       return ctx.db.linkedinResult.create({

@@ -58,21 +58,23 @@ model LinkedinResult {
   imageUrl                String?
   currentPositionImageUrl String?
 
-  short_summary      String
-  current_position   String
-  actual_position    String
-  position_mother    String
-  accidental_success String
-  ambition           Json
-  delusional         Json
-  performance        Json
-  career_trajectory  String
-  next_endeavor      String
-  job_description    String
-  buzzword_bingo     String
-  skills             String
-  reason_for_firing  String
-  recommendation     String
+  short_summary      String?
+  current_position   String?
+  actual_position    String?
+  position_mother    String?
+  accidental_success String?
+  ambition           Json?
+  delusional         Json?
+  performance        Json?
+  career_trajectory  String?
+  next_endeavor      String?
+  job_description    String?
+  buzzword_bingo     String?
+  skills             String?
+  reason_for_firing  String?
+  recommendation     String?
+
+  scrapeFailed Boolean @default(false)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

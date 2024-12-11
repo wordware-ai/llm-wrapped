@@ -64,12 +64,12 @@ export const linkedinApiRouter = createTRPCRouter({
         throw new Error("No data found");
       }
 
-      console.log("rawData", rawData);
-
       // Rest of your existing processing logic
       const linkedinData = LinkedInProfileSchema.parse(rawData[0]);
 
-      console.log("linkedinData", linkedinData);
+      if (!linkedinData.experience) {
+        return { noExperienceData: true };
+      }
 
       const getCurrentCompanyImageUrl = (experience?: Experience[] | null) => {
         if (!experience) return null;

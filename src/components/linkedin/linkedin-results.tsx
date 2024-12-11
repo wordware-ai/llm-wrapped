@@ -2,7 +2,7 @@
 
 import { useStream } from "@/hooks/use-stream";
 import { api } from "@/trpc/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useStreamContext } from "../stream-provider";
 import { usePoll } from "@/hooks/use-poll";
 
@@ -14,6 +14,7 @@ import { type LinkedinResult } from "@prisma/client";
 import { ResultsPage } from "../results-page";
 import { useParams } from "next/navigation";
 import LinkedinLoadingPage from "./linkedin-loading-page";
+import { PDFInput } from "./pdf-input";
 
 export function LinkedInResults({
   linkedinResult,
@@ -30,91 +31,143 @@ export function LinkedInResults({
   };
 }) {
   const { mutate: createLinkedinResult } =
-    api.linkedinResults.createLinkedinResult.useMutation();
+    api.linkedinResults.create.useMutation();
 
-  const { username } = useParams();
+  const { username: usernameParam } = useParams();
+  const username = usernameParam as string;
 
   const { results, setResults, profileData, setProfileData } =
     useStreamContext();
   const { streamResponse } = useStream();
   const { pollData } = usePoll();
 
+  const [renderScrapeFailed, setRenderScrapeFailed] = useState(
+    linkedinResult?.scrapeFailed,
+  );
+  const [pdfData, setPdfData] = useState<string | null>(null);
+
   useEffect(() => {
     setResults({});
     setProfileData({});
-    if (linkedinResult) {
+    // if we have pdf data
+    if (linkedinResult && !pdfData) {
       const displayResults = convertLinkedinDbToState(linkedinResult);
       setResults(displayResults);
       // Set initial profile data
       if (initialProfileData) {
         setProfileData(initialProfileData);
       }
-    } else if (snapshotId) {
-      void pollData(snapshotId)
-        .then((data) => {
-          if (!data) {
-            console.warn("No data received from polling");
-            return;
-          }
-
-          // Update profile data first
-          const updatedProfileData = {
-            imageUrl:
-              data.imageUrl ??
-              "https://i.pinimg.com/originals/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg",
-            name: data.name ?? null,
-            currentPositionImageUrl: data.currentCompanyImageUrl ?? null,
-            username: username as string,
-          };
-
-          setProfileData(updatedProfileData);
-
-          // Then handle the stream response
-          return streamResponse({
-            promptId: "eb98a6bb-d867-42a3-a475-1e0546c9f638",
-            data: data.linkedinData ?? "",
-            onFinish: (results: Record<string, unknown>) => {
-              const linkedinResult = {
-                ...convertLinkedinToDb(results),
-                ...updatedProfileData,
-                username: (username as string) ?? "",
-              };
-              createLinkedinResult(linkedinResult);
-            },
-          });
-        })
-        .catch((error) => {
-          console.error("Error while polling or streaming:", error);
+    } else if (snapshotId || pdfData) {
+      const handleStreamAndCreateResult = (
+        data: string,
+        profileData: {
+          imageUrl?: string;
+          name?: string;
+          currentCompanyImageUrl?: string;
+        },
+      ) => {
+        return streamResponse({
+          promptId: "eb98a6bb-d867-42a3-a475-1e0546c9f638",
+          data,
+          onFinish: (results: Record<string, unknown>) => {
+            const linkedinResult = {
+              ...convertLinkedinToDb(results),
+              ...profileData,
+              username: username ?? "",
+            };
+            createLinkedinResult(linkedinResult);
+          },
         });
+      };
+
+      const createProfileData = (
+        data: {
+          imageUrl?: string;
+          name?: string;
+          currentCompanyImageUrl?: string;
+        } = {},
+      ) => {
+        const profileData = {
+          imageUrl:
+            data.imageUrl ??
+            "https://i.pinimg.com/originals/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg",
+          name: data.name ?? username ?? null,
+          currentPositionImageUrl: data.currentCompanyImageUrl ?? null,
+          username: username,
+        };
+        setProfileData(profileData);
+        return profileData;
+      };
+
+      if (pdfData) {
+        const profileData = createProfileData();
+        return void handleStreamAndCreateResult(pdfData, profileData);
+      } else if (snapshotId) {
+        void pollData(snapshotId)
+          .then((data) => {
+            if (!data || data.noExperienceData) {
+              createLinkedinResult({
+                username: username,
+                scrapeFailed: true,
+              });
+              setRenderScrapeFailed(true);
+              return;
+            }
+
+            const profileData = createProfileData({
+              imageUrl: data.imageUrl ?? undefined,
+              name: data.name ?? undefined,
+              currentCompanyImageUrl: data.currentCompanyImageUrl ?? undefined,
+            });
+
+            return void handleStreamAndCreateResult(
+              data.linkedinData ?? "",
+              profileData,
+            );
+          })
+          .catch((error) => {
+            console.error("Error while polling or streaming:", error);
+          });
+      }
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [linkedinResult, snapshotId]);
+  }, [linkedinResult, snapshotId, renderScrapeFailed]);
+
+  console.log(linkedinResult);
 
   return (
-    <ResultsPage
-      user={{
-        username: profileData?.username ?? "",
-        name: profileData?.name ?? "",
-        imageUrl: profileData?.imageUrl ?? "",
-        storyHref: `/linkedin/${username as string}?slide=1`,
-      }}
-      cards={{
-        card1text: results.short_summary as string,
-        card2: {
-          title: "Current Position",
-          text: results.current_position as string,
-          imageUrl: profileData?.currentPositionImageUrl ?? "",
-        },
-        card3text: results.actual_position as string,
-        wordwareStoryHref: `/linkedin/${profileData?.username}?name=wordware&slide=1`,
-        showWordwareCard: !!results.position_mother,
-      }}
-      LoadingState={
-        Object.keys(results).length === 0 && !linkedinResult ? (
-          <LinkedinLoadingPage />
-        ) : null
-      }
-    />
+    <>
+      <ResultsPage
+        user={{
+          username: profileData?.username ?? "",
+          name: profileData?.name ?? "",
+          imageUrl: profileData?.imageUrl ?? "",
+          storyHref: `/linkedin/${username}?slide=1`,
+        }}
+        cards={{
+          card1text: results.short_summary as string,
+          card2: {
+            title: "Current Position",
+            text: results.current_position as string,
+            imageUrl: profileData?.currentPositionImageUrl ?? "",
+          },
+          card3text: results.actual_position as string,
+          wordwareStoryHref: `/linkedin/${profileData?.username}?name=wordware&slide=1`,
+          showWordwareCard: !!results.position_mother,
+        }}
+        LoadingState={
+          Object.keys(results).length === 0 && !linkedinResult ? (
+            <LinkedinLoadingPage />
+          ) : null
+        }
+      />
+      {!renderScrapeFailed && (
+        <PDFInput
+          setRenderScrapeFailed={setRenderScrapeFailed}
+          setPdfData={setPdfData}
+        />
+      )}
+    </>
   );
 }
