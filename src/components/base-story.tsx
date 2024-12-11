@@ -25,32 +25,19 @@ export function BaseStory({
       )}
     >
       <div className="aspect-square h-full w-full rounded-full bg-background object-cover">
-        {src ? (
-          <Image
-            src={src}
-            alt={alt}
-            width={200}
-            height={200}
-            className={cn(
-              "h-full w-full rounded-full object-cover",
-              imageClassName,
-            )}
-          />
-        ) : (
-          <div className="relative h-full w-full">
-            {/* Main sphere with radial gradient */}
-            <div
-              className="bg-gradient-radial absolute inset-0 rounded-full from-white via-gray-300 to-gray-800"
-              style={{
-                backgroundImage:
-                  "radial-gradient(circle at 35% 35%, white 0%, #9ca3af 30%, #1f2937 70%, #111827 100%)",
-              }}
-            ></div>
-
-            {/* Subtle shadow for depth */}
-            <div className="h-1/8 absolute -bottom-2 left-1/2 w-5/6 -translate-x-1/2 transform rounded-full bg-black opacity-20 blur-md"></div>
-          </div>
-        )}
+        <Image
+          src={
+            src ??
+            "https://i.pinimg.com/originals/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg"
+          }
+          alt={alt}
+          width={200}
+          height={200}
+          className={cn(
+            "h-full w-full rounded-full object-cover",
+            imageClassName,
+          )}
+        />
       </div>
     </Link>
   );

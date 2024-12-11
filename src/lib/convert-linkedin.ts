@@ -11,6 +11,7 @@ export function convertLinkedinDbToState(
     "name",
     "imageUrl",
     "currentPositionImageUrl",
+    "scrapeFailed",
   ];
   const cleanedPreviousRun = Object.fromEntries(
     Object.entries(previousRun).filter(

@@ -17,11 +17,11 @@ import LinkedinLoadingPage from "./linkedin-loading-page";
 import { PDFInput } from "./pdf-input";
 
 export function LinkedInResults({
-  linkedinResult,
+  initialLinkedinResult,
   snapshotId,
   initialProfileData,
 }: {
-  linkedinResult: LinkedinResult | null;
+  initialLinkedinResult: LinkedinResult | null;
   snapshotId?: string;
   initialProfileData?: {
     imageUrl?: string;
@@ -30,19 +30,32 @@ export function LinkedInResults({
     currentPositionImageUrl?: string;
   };
 }) {
+  const utils = api.useUtils();
   const { mutate: createLinkedinResult } =
-    api.linkedinResults.create.useMutation();
+    api.linkedinResults.upsert.useMutation({
+      onSuccess: async () => {
+        await utils.linkedinResults.getByUsername.invalidate({ username });
+      },
+    });
 
   const { username: usernameParam } = useParams();
   const username = usernameParam as string;
 
-  const { results, setResults, profileData, setProfileData } =
+  const { results, setResults, profileData, setProfileData, isLoading } =
     useStreamContext();
   const { streamResponse } = useStream();
   const { pollData } = usePoll();
 
+  const { data: linkedinResult } = api.linkedinResults.getByUsername.useQuery(
+    { username },
+    {
+      initialData: initialLinkedinResult,
+      staleTime: Infinity, // Prevents refetching until invalidation
+    },
+  );
+
   const [renderScrapeFailed, setRenderScrapeFailed] = useState(
-    linkedinResult?.scrapeFailed,
+    linkedinResult?.scrapeFailed && !linkedinResult.short_summary,
   );
   const [pdfData, setPdfData] = useState<string | null>(null);
 
@@ -50,7 +63,7 @@ export function LinkedInResults({
     setResults({});
     setProfileData({});
     // if we have pdf data
-    if (linkedinResult && !pdfData) {
+    if (linkedinResult && !pdfData && !isLoading) {
       const displayResults = convertLinkedinDbToState(linkedinResult);
       setResults(displayResults);
       // Set initial profile data
@@ -132,15 +145,13 @@ export function LinkedInResults({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [linkedinResult, snapshotId, renderScrapeFailed]);
-
-  console.log(linkedinResult);
+  }, [snapshotId, renderScrapeFailed]);
 
   return (
     <>
       <ResultsPage
         user={{
-          username: profileData?.username ?? "",
+          username,
           name: profileData?.name ?? "",
           imageUrl: profileData?.imageUrl ?? "",
           storyHref: `/linkedin/${username}?slide=1`,
@@ -162,7 +173,7 @@ export function LinkedInResults({
           ) : null
         }
       />
-      {!renderScrapeFailed && (
+      {renderScrapeFailed && (
         <PDFInput
           setRenderScrapeFailed={setRenderScrapeFailed}
           setPdfData={setPdfData}

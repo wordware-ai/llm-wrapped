@@ -12,6 +12,23 @@ export const linkedinResultsRouter = createTRPCRouter({
         },
       });
     }),
+
+  upsert: publicProcedure
+    .input(LinkedinResultCreateInputSchema)
+    .mutation(async ({ ctx, input }) => {
+      return ctx.db.linkedinResult.upsert({
+        where: {
+          username: input.username, // Using username as the unique identifier
+        },
+        create: {
+          ...input,
+        },
+        update: {
+          ...input,
+        },
+      });
+    }),
+
   getByUsername: publicProcedure
     .input(z.object({ username: z.string() }))
     .query(async ({ ctx, input }) => {

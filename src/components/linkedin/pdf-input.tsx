@@ -37,7 +37,10 @@ export function PDFInput({
 
   const { username } = useParams();
 
-  const parsePDF = async (arrayBuffer: ArrayBuffer): Promise<string> => {
+  const parsePDF = async (arrayBuffer?: ArrayBuffer): Promise<string> => {
+    if (!arrayBuffer) {
+      throw new Error("No array buffer provided");
+    }
     try {
       // Load the PDF document
       const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
@@ -48,10 +51,16 @@ export function PDFInput({
       // Extract text from all pages
       let fullText = "";
       for (let i = 1; i <= numPages; i++) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const page = await pdf.getPage(i);
         const textContent = await page.getTextContent();
         const pageText = textContent.items
-          .map((item: any) => item.str)
+          .map((item) => {
+            if (typeof item === "object" && item !== null && "str" in item) {
+              return (item as { str: string }).str;
+            }
+            return "";
+          })
           .join(" ");
         fullText += pageText + "\n";
       }
@@ -63,24 +72,28 @@ export function PDFInput({
     }
   };
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
-    setError(null);
-    setIsLoading(true);
-    try {
-      const file = acceptedFiles[0];
-      const arrayBuffer = await file?.arrayBuffer();
-      const parsed = await parsePDF(arrayBuffer);
-      setPdfData(parsed);
-      setRenderScrapeFailed(false);
-    } catch (error) {
-      console.error("Error parsing PDF:", error);
-      setError(error instanceof Error ? error.message : "Error parsing PDF");
-    } finally {
-      setIsLoading(false);
-    }
-  }, []);
+  const onDrop = useCallback(
+    async (acceptedFiles: File[]) => {
+      setError(null);
+      setIsLoading(true);
+      try {
+        const file = acceptedFiles[0];
+        const arrayBuffer = await file?.arrayBuffer();
+        const parsed = await parsePDF(arrayBuffer);
+        setPdfData(parsed);
+        setRenderScrapeFailed(false);
+      } catch (error) {
+        console.error("Error parsing PDF:", error);
+        setError(error instanceof Error ? error.message : "Error parsing PDF");
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [setPdfData, setRenderScrapeFailed],
+  );
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     onDrop,
     accept: {
       "application/pdf": [".pdf"],

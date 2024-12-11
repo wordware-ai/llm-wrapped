@@ -29,7 +29,7 @@ export default async function LinkedInResultsPage({
 
   return (
     <LinkedInResults
-      linkedinResult={linkedinResult}
+      initialLinkedinResult={linkedinResult}
       snapshotId={snapshotId}
       initialProfileData={profileData}
     />
