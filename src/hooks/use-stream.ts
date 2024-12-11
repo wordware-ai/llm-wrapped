@@ -8,72 +8,96 @@ export function useStream() {
     promptId,
     data,
     onFinish,
+    timeout = 30000, // 30 second timeout
   }: {
     promptId: string;
     data: string;
     onFinish?: (results: Record<string, unknown>) => void;
+    timeout?: number;
   }) {
     setIsLoading(true);
     setResults({}); // Clear previous results
 
-    const response = await fetch(`/stream/${promptId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        inputs: {
-          data,
-        },
-        version: "^1.0",
-      }),
-    });
-
-    if (!response.ok) {
-      setIsLoading(false);
-      setResults({ error: `Error: ${response.status}` });
-      return;
-    }
-
-    const reader = response.body?.getReader();
-    const decoder = new TextDecoder();
-
-    if (!reader) {
-      setIsLoading(false);
-      setResults({ error: "Error: No reader available" });
-      return;
-    }
-
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), timeout);
+
+      const response = await fetch(`/stream/${promptId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          inputs: {
+            data,
+          },
+          version: "^1.0",
+        }),
+        signal: controller.signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const reader = response.body?.getReader();
+      if (!reader) {
+        throw new Error("No reader available");
+      }
+
+      const decoder = new TextDecoder();
       let accumulatedData = "";
       let finalResults: Record<string, unknown> = {};
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
+      try {
+        while (true) {
+          const { done, value } = await reader.read();
 
-        // Decode with {stream: true} to handle partial chunks correctly
-        accumulatedData += decoder.decode(value, { stream: true });
+          if (done) {
+            // Final decoder flush
+            accumulatedData += decoder.decode();
+            break;
+          }
 
-        // Try to parse any complete key-value pairs
+          accumulatedData += decoder.decode(value, { stream: true });
+
+          try {
+            const parsedResults = parsePartialJSON(accumulatedData) as Record<
+              string,
+              unknown
+            >;
+            console.log(parsedResults);
+            finalResults = parsedResults;
+            setResults(finalResults);
+          } catch {
+            // Continue if parsing fails
+          }
+        }
+
+        // Try one final parse after the stream is complete
         try {
           const parsedResults = parsePartialJSON(accumulatedData) as Record<
             string,
             unknown
           >;
-          console.log(parsedResults);
           finalResults = parsedResults;
           setResults(finalResults);
-        } catch {
-          // Continue if parsing fails
+        } catch (error) {
+          console.error("Final parse error:", error);
         }
-      }
 
-      // Use finalResults for logging and callback
-      console.log("done", finalResults);
-      onFinish?.(finalResults);
+        console.log("Stream complete:", finalResults);
+        onFinish?.(finalResults);
+      } finally {
+        reader.releaseLock();
+      }
     } catch (error) {
       console.error("Stream error:", error);
+      setResults({
+        error: error instanceof Error ? error.message : "Unknown error",
+      });
     } finally {
       setIsLoading(false);
     }
