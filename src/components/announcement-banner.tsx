@@ -16,6 +16,7 @@ export default function AnnouncementBanner() {
           "h-8 sm:h-9 md:h-10", // Height: small -> default -> large
           "px-3 sm:px-4 md:px-6", // Padding: small -> default -> large
         )}
+        target="_blank"
       >
         Try Wordware for free
       </Link>
