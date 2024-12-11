@@ -54,13 +54,10 @@ export const linkedinApiRouter = createTRPCRouter({
 
       // If status is 202, data is not ready yet
       if (dataResponse.status === 202) {
-        console.log("Data not ready yet");
         return {};
       }
 
       const rawData = (await dataResponse.json()) as unknown[];
-
-      console.log(rawData);
 
       // If no data, throw an error
       if (!rawData || rawData.length === 0) {
@@ -70,7 +67,7 @@ export const linkedinApiRouter = createTRPCRouter({
       // Rest of your existing processing logic
       const linkedinData = LinkedInProfileSchema.parse(rawData[0]);
 
-      const getCurrentCompanyImageUrl = (experience?: Experience[]) => {
+      const getCurrentCompanyImageUrl = (experience?: Experience[] | null) => {
         if (!experience) return null;
         return experience
           .sort((a, b) => {

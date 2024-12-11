@@ -39,10 +39,10 @@ export const LinkedInProfileSchema = z.object({
   position: z.string().nullable().optional(),
   about: z.string().nullable().optional(),
   current_company: CompanySchema,
-  experience: z.array(ExperienceSchema).optional(),
+  experience: z.array(ExperienceSchema).nullable().optional(),
 
   educations_details: z.string().nullable().optional(),
-  education: z.array(EducationSchema).optional(),
+  education: z.array(EducationSchema).nullable().optional(),
   followers: z.number().nullable().optional(),
   connections: z.number().nullable().optional(),
   current_company_name: z.string().nullable().optional(),
