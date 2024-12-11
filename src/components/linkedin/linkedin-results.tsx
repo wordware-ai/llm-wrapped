@@ -62,8 +62,9 @@ export function LinkedInResults({
   useEffect(() => {
     setResults({});
     setProfileData({});
-    // if we have pdf data
-    if (linkedinResult && !pdfData && !isLoading) {
+
+    if (isLoading) return;
+    if (linkedinResult && !pdfData) {
       const displayResults = convertLinkedinDbToState(linkedinResult);
       setResults(displayResults);
       // Set initial profile data

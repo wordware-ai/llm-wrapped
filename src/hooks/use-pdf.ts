@@ -15,5 +15,6 @@ export const usePDFJS = (
   useEffect(() => {
     if (!pdfjs) return;
     void (async () => await onLoad(pdfjs))();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pdfjs, onLoad, ...deps]);
 };
