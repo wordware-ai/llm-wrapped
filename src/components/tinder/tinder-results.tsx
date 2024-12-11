@@ -36,14 +36,24 @@ export function TinderResults({
     setResults,
     profileData: newProfileData,
     setProfileData,
+    isLoading,
   } = useStreamContext();
   const { streamResponse } = useStream();
+
+  const { data: tinderResult } = api.tinderResults.getById.useQuery(
+    { id: id as string },
+    {
+      initialData: previousRun,
+      staleTime: Infinity, // Prevents refetching until invalidation
+    },
+  );
 
   useEffect(() => {
     setResults({});
     setProfileData({});
-    if (previousRun) {
-      const displayResults = convertTinderDbToState(previousRun);
+    if (isLoading) return;
+    if (tinderResult) {
+      const displayResults = convertTinderDbToState(tinderResult);
       setResults(displayResults);
       setProfileData(profileData ?? {});
     } else {
@@ -68,7 +78,7 @@ export function TinderResults({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [previousRun]);
+  }, []);
 
   return (
     <ResultsPage

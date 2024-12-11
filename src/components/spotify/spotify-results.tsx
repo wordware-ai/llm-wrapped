@@ -32,9 +32,18 @@ export function SpotifyResults({
   llmData?: string;
 }) {
   const { session } = useUser();
+  const { username } = useParams();
 
   const { mutate: createSpotifyResult } =
     api.spotifyResults.create.useMutation();
+
+  const { data: spotifyResult } = api.spotifyResults.getByUsername.useQuery(
+    { username: username as string },
+    {
+      initialData: previousRun,
+      staleTime: Infinity, // Prevents refetching until invalidation
+    },
+  );
 
   const onFinish = (results: Record<string, unknown>) => {
     const spotifyResult = {
@@ -59,14 +68,15 @@ export function SpotifyResults({
     createSpotifyResult(spotifyResult);
   };
 
-  const { results, setResults, setProfileData } = useStreamContext();
+  const { results, setResults, setProfileData, isLoading } = useStreamContext();
   const { streamResponse } = useStream();
 
   useEffect(() => {
     setResults({});
     setProfileData({});
-    if (previousRun) {
-      const displayResults = convertSpotifyDbToState(previousRun);
+    if (isLoading) return;
+    if (spotifyResult) {
+      const displayResults = convertSpotifyDbToState(spotifyResult);
       setResults(displayResults);
     } else {
       void streamResponse({
@@ -77,12 +87,10 @@ export function SpotifyResults({
     }
     setProfileData(profileData ?? {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [previousRun, llmData]);
-
-  const { username } = useParams();
+  }, []);
 
   // might not need this have to think about it
-  if (!previousRun && !session?.provider_token) {
+  if (!spotifyResult && !session?.provider_token) {
     redirect("/");
   }
 
@@ -92,7 +100,7 @@ export function SpotifyResults({
         username: username as string,
         name: username as string,
         imageUrl:
-          previousRun?.imageUrl ??
+          spotifyResult?.imageUrl ??
           (
             session?.user.user_metadata as {
               picture?: string;

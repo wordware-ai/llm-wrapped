@@ -81,7 +81,7 @@ export function TinderInput() {
 
   return (
     <div className="">
-      {existingId ? (
+      {!existingId ? (
         <Link
           href={`/tinder/${existingId}`}
           className={cn(
