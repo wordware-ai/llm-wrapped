@@ -39,7 +39,7 @@ export default function WordwareCard({
           <WordwareLogo key={i} fillColor={cardData?.fillColor} />
         ))}
       </div>
-      <div className="z-30 flex h-full w-full flex-col justify-between p-8">
+      <div className="z-10 flex h-full w-full flex-col justify-between p-8">
         {!hideHashtag && <p className="text-[2.5vh] text-white">#LLMwrapped</p>}
         <div className="flex h-full w-full flex-col justify-end gap-10">
           {children}

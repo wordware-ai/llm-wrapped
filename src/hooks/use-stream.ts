@@ -52,7 +52,8 @@ export function useStream() {
         const { done, value } = await reader.read();
         if (done) break;
 
-        accumulatedData += decoder.decode(value);
+        // Decode with {stream: true} to handle partial chunks correctly
+        accumulatedData += decoder.decode(value, { stream: true });
 
         // Try to parse any complete key-value pairs
         try {
