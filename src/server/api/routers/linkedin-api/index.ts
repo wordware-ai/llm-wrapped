@@ -68,7 +68,7 @@ export const linkedinApiRouter = createTRPCRouter({
       const linkedinData = LinkedInProfileSchema.parse(rawData[0]);
 
       if (!linkedinData.experience) {
-        return { noExperienceData: true };
+        return { noExperienceData: true, profileData: linkedinData };
       }
 
       const getCurrentCompanyImageUrl = (experience?: Experience[] | null) => {

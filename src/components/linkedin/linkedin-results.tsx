@@ -119,10 +119,12 @@ export function LinkedInResults({
       } else if (snapshotId) {
         void pollData(snapshotId)
           .then((data) => {
-            if (!data || data.noExperienceData) {
+            if (data.noExperienceData) {
               createLinkedinResult({
                 username: username,
                 scrapeFailed: true,
+                name: data.profileData?.name ?? username,
+                imageUrl: data.profileData?.avatar ?? "",
               });
               setRenderScrapeFailed(true);
               return;
