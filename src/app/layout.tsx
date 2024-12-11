@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     "Get a true look at yourself through the lens of large language models (LLMs) ",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   openGraph: {
-    images: [{ url: "/og" }],
+    images: [{ url: "https://llm-wrapped.vercel.app/og.png" }],
   },
   twitter: {
     card: "summary_large_image",
-    images: [{ url: "/og.png" }],
+    images: [{ url: "https://llm-wrapped.vercel.app/og.png" }],
   },
 };
 
