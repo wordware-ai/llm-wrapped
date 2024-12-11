@@ -1,52 +1,24 @@
+import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { buttonVariants } from "./ui/button";
+
 export default function AnnouncementBanner() {
   return (
-    <div className="bg-gradient-to-r from-purple-600 to-blue-400">
-      <div className="mx-auto max-w-[85rem] px-4 py-4 sm:px-6 lg:px-8">
-        {/* Grid */}
-        <div className="grid gap-2 md:grid-cols-2 md:items-center md:justify-between">
-          <div className="text-center md:order-2 md:flex md:items-center md:justify-end md:text-start">
-            <p className="me-5 inline-block text-sm font-semibold text-white">
-              Ready to get started?
-            </p>
-            <a
-              className="inline-flex items-center gap-x-2 rounded-lg border-2 border-white px-3 py-2 text-sm font-medium text-white hover:border-white/70 hover:text-white/70 focus:border-white/70 focus:outline-none focus:text-white/70 disabled:pointer-events-none disabled:opacity-50"
-              href="#"
-            >
-              Sign up
-            </a>
-          </div>
-
-          <div className="flex items-center">
-            <a
-              className="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus:bg-white/10 focus:outline-none"
-              href="#"
-            >
-              <svg
-                className="size-4 shrink-0"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polygon points="5 3 19 12 5 21 5 3" />
-              </svg>
-              Watch demo
-            </a>
-            <span className="mx-2 inline-block h-5 w-px border-e border-white/30"></span>
-            <a
-              className="inline-flex items-center justify-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-white transition hover:bg-white/10 focus:bg-white/10 focus:outline-none"
-              href="#"
-            >
-              Explore what&apos;s new
-            </a>
-          </div>
-        </div>
-      </div>
+    <div className="flex h-16 w-full items-center justify-between gap-2 bg-[#EEE] px-4 py-2 md:px-12">
+      <p className="text-xs sm:text-sm lg:text-base">
+        This WordApp has been built with Wordware, the ultimate AI operating
+        system.
+      </p>
+      <Link
+        href="https://app.wordware.ai/register"
+        className={cn(
+          buttonVariants({ variant: "outline" }),
+          "h-8 sm:h-9 md:h-10", // Height: small -> default -> large
+          "px-3 sm:px-4 md:px-6", // Padding: small -> default -> large
+        )}
+      >
+        Try Wordware for free
+      </Link>
     </div>
   );
-} 
+}
