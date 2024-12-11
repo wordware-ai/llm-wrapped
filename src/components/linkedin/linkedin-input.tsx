@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 export function LinkedinInput() {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState("https://www.linkedin.com/in/");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -63,6 +63,7 @@ export function LinkedinInput() {
             setUrl(e.target.value);
             setError("");
           }}
+          onFocus={(e) => e.target.select()}
           disabled={isLoading}
         />
         <Button

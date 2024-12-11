@@ -15,6 +15,7 @@ import { ResultsPage } from "../results-page";
 import { useParams } from "next/navigation";
 import LinkedinLoadingPage from "./linkedin-loading-page";
 import { PDFInput } from "./pdf-input";
+import { validateImage } from "@/lib/validate-image";
 
 export function LinkedInResults({
   initialLinkedinResult,
@@ -103,10 +104,11 @@ export function LinkedInResults({
       ) => {
         const profileData = {
           imageUrl:
-            data.imageUrl ??
+            validateImage(data.imageUrl) ??
             "https://i.pinimg.com/originals/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg",
           name: data.name ?? username ?? null,
-          currentPositionImageUrl: data.currentCompanyImageUrl ?? null,
+          currentPositionImageUrl:
+            validateImage(data.currentCompanyImageUrl) ?? null,
           username: username,
         };
         setProfileData(profileData);
@@ -114,7 +116,10 @@ export function LinkedInResults({
       };
 
       if (pdfData) {
-        const profileData = createProfileData();
+        const profileData = createProfileData({
+          name: linkedinResult?.name ?? username,
+          imageUrl: linkedinResult?.imageUrl ?? "",
+        });
         return void handleStreamAndCreateResult(pdfData, profileData);
       } else if (snapshotId) {
         void pollData(snapshotId)
