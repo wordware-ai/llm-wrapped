@@ -54,10 +54,13 @@ export const linkedinApiRouter = createTRPCRouter({
 
       // If status is 202, data is not ready yet
       if (dataResponse.status === 202) {
-        return null;
+        console.log("Data not ready yet");
+        return {};
       }
 
       const rawData = (await dataResponse.json()) as unknown[];
+
+      console.log(rawData);
 
       // If no data, throw an error
       if (!rawData || rawData.length === 0) {

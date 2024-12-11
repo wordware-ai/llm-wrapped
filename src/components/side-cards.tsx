@@ -49,7 +49,7 @@ export function SideCards({
             {card2.text ? (
               <>
                 {card2.text && card2.title && (
-                  <h3 className="text-4xl font-semibold text-white lg:text-3xl xl:text-4xl">
+                  <h3 className="text-center text-4xl font-semibold text-white lg:text-3xl xl:text-4xl">
                     {card2.title}
                   </h3>
                 )}
