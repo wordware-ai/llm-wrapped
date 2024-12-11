@@ -21,6 +21,7 @@ export function TinderInput() {
   const [error, setError] = useState<string | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [existingId, setExistingId] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -35,6 +36,7 @@ export function TinderInput() {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       setError(null);
+      setLoading(true);
       if (acceptedFiles.length === 0) return;
 
       const file = acceptedFiles[0];
@@ -95,7 +97,7 @@ export function TinderInput() {
           <div
             {...getRootProps()}
             className={cn(
-              "cursor-pointer rounded-lg border-2 border-dashed bg-[#111] p-8 text-center transition-all",
+              "w-[500px] cursor-pointer rounded-lg border-2 border-dashed bg-[#111] p-8 text-center transition-all",
               isDragging
                 ? "border-blue-500 bg-blue-500/10"
                 : "border-gray-300 hover:border-gray-200 hover:bg-[#222]",
@@ -103,9 +105,13 @@ export function TinderInput() {
             )}
           >
             <input {...getInputProps()} />
-            <p className="text-muted-foreground">
-              Drag and drop your Tinder data file here, or click to select
-            </p>
+            {loading ? (
+              <p className="text-muted-foreground">Loading...</p>
+            ) : (
+              <p className="text-muted-foreground">
+                Drag and drop your Tinder data file here, or click to select
+              </p>
+            )}
 
             {error && <p className="mt-2 text-red-500">{error}</p>}
           </div>

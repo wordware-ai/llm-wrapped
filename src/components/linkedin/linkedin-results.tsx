@@ -59,7 +59,9 @@ export function LinkedInResults({
 
           // Update profile data first
           const updatedProfileData = {
-            imageUrl: data.imageUrl ?? null,
+            imageUrl:
+              data.imageUrl ??
+              "https://i.pinimg.com/originals/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg",
             name: data.name ?? null,
             currentPositionImageUrl: data.currentCompanyImageUrl ?? null,
             username: username as string,
