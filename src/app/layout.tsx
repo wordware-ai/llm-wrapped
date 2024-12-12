@@ -39,10 +39,12 @@ export const metadata: Metadata = {
     title: "LLMwrapped - AI agent by Wordware",
     description:
       "Get a true look at yourself through the lens of large language models (LLMs)",
-    creator: "@yourtwitterhandle", // Optional: Add your Twitter handle if you have one
+    creator: "@wordware_ai",
     images: [
       {
         url: "https://llm-wrapped.vercel.app/og.png",
+        width: 1200, // Add this
+        height: 630, // Add this
         alt: "LLMwrapped Preview",
       },
     ],
