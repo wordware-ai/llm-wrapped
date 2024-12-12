@@ -10,7 +10,7 @@ export function UserInfo({
   storyHref,
 }: {
   name: string;
-  imageUrl?: string;
+  imageUrl: string;
   storyHref: string;
 }) {
   const { results } = useStreamContext();
@@ -27,7 +27,7 @@ export function UserInfo({
               <BaseStory
                 className="size-36 p-1 sm:size-48 md:p-2"
                 src={imageUrl}
-                alt="Spotify 1"
+                alt="Pfp"
                 href={storyHref}
               />{" "}
               <div className="absolute -right-48 -top-4 flex-col-reverse items-center whitespace-nowrap sm:hidden lg:flex xl:-top-0 xl:right-[-340px] xl:flex-row">
@@ -46,7 +46,7 @@ export function UserInfo({
           ) : (
             <div className="aspect-square size-36 rounded-full bg-background object-cover sm:size-48">
               <Image
-                src={imageUrl ?? ""}
+                src={imageUrl}
                 alt={name}
                 width={200}
                 height={200}

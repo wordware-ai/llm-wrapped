@@ -86,7 +86,7 @@ export const linkedinConfig: CardItem[] = [
       <MetricCard
         title="How You're Performing"
         value={result.score as string}
-        description={result.description as string}
+        description={result.performance_review as string}
         valueColor="#182571"
       />
     ),

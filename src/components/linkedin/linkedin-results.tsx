@@ -167,7 +167,9 @@ export function LinkedInResults({
         user={{
           username,
           name: profileData?.name ?? "",
-          imageUrl: profileData?.imageUrl ?? "",
+          imageUrl:
+            profileData?.imageUrl ??
+            "https://i.pinimg.com/originals/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg",
           storyHref: `/linkedin/${username}?slide=1`,
         }}
         cards={{

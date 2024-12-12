@@ -25,7 +25,7 @@ export function useStream() {
         inputs: {
           data,
         },
-        version: "^2.0",
+        version: "^1.0",
       }),
     });
 
