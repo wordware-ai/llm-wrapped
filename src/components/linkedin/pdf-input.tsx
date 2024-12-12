@@ -15,6 +15,7 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { buttonVariants } from "../ui/button";
 import { useParams } from "next/navigation";
+import Image from "next/image";
 
 // Configure the worker
 // Note: You'll need to copy the pdf.worker.js file from node_modules/pdfjs-dist/build
@@ -64,7 +65,7 @@ export function PDFInput({
           .join(" ");
         fullText += pageText + "\n";
       }
-
+      console.log("fullText", fullText);
       return fullText;
     } catch (err) {
       setError(err instanceof Error ? err.message : "Error parsing PDF");
@@ -106,21 +107,30 @@ export function PDFInput({
       <DialogContent className="p-8 sm:max-w-[800px]">
         <DialogHeader className="space-y-4">
           <DialogTitle className="text-3xl font-bold">
-            LinkedIn Profile Analysis
+            Our Scraper Took a Coffee Break
           </DialogTitle>
           <DialogDescription className="text-lg leading-relaxed">
-            Unfortunately, the web scrape failed. If you would like to continue
-            with the LinkedIn analysis, please go to your{" "}
+            We’re currently experiencing issues with our web scraping provider,
+            which means we couldn’t retrieve your data, causing the analysis to
+            fail. While this is out of our control, there’s a quick fix: head to
+            your{" "}
             <Link
               href={`https://www.linkedin.com/in/${username as string}`}
               className="text-lg text-blue-500 hover:underline"
             >
-              LinkedIn profile
-            </Link>
-            , press More, and then press Save as PDF. Then drag that PDF into
-            the dropzone below.
+              LinkedIn profile,
+            </Link>{" "}
+            click More, then select Save as PDF. Once you’ve saved it, drag and
+            drop the PDF into the dropzone below to continue.
           </DialogDescription>
         </DialogHeader>
+        <Image
+          src="/images/linkedin-pdf-download.png"
+          alt="LinkedIn Save as PDF"
+          className="rounded-lg border"
+          width={500}
+          height={500}
+        />
 
         <div className="grid gap-6 py-6">
           <div
