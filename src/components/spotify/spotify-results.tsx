@@ -32,13 +32,14 @@ export function SpotifyResults({
   llmData?: string;
 }) {
   const { session } = useUser();
-  const { username } = useParams();
+  const { username: encodedUsername } = useParams();
+  const username = decodeURIComponent(encodedUsername as string);
 
   const { mutate: createSpotifyResult } =
     api.spotifyResults.create.useMutation();
 
   const { data: spotifyResult } = api.spotifyResults.getByUsername.useQuery(
-    { username: username as string },
+    { username },
     {
       initialData: previousRun,
       staleTime: Infinity, // Prevents refetching until invalidation
@@ -55,7 +56,7 @@ export function SpotifyResults({
       mostPopularUrl: profileData?.mostPopularUrl ?? null,
       topArtistUrl: profileData?.topArtistUrl ?? null,
       userId: session?.user.id ?? "",
-      username: username as string,
+      username: username,
       email: session?.user.email,
       imageUrl:
         (
@@ -97,8 +98,8 @@ export function SpotifyResults({
   return (
     <ResultsPage
       user={{
-        username: username as string,
-        name: username as string,
+        username: username,
+        name: username,
         imageUrl:
           spotifyResult?.imageUrl ??
           (
@@ -107,7 +108,7 @@ export function SpotifyResults({
             }
           ).picture ??
           "https://i.pinimg.com/originals/83/bc/8b/83bc8b88cf6bc4b4e04d153a418cde62.jpg",
-        storyHref: `/spotify/${username as string}?slide=1`,
+        storyHref: `/spotify/${username}?slide=1`,
       }}
       cards={{
         card1text: results.short_summary as string,
@@ -118,7 +119,7 @@ export function SpotifyResults({
           href: profileData?.topArtistUrl ?? undefined,
         },
         card3text: results.music_taste_analysis_2 as string,
-        wordwareStoryHref: `/spotify/${username as string}?name=wordware&slide=1`,
+        wordwareStoryHref: `/spotify/${username}?name=wordware&slide=1`,
         showWordwareCard: !!results.music_taste_analysis_3,
       }}
     />
