@@ -46,53 +46,69 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
   return clonedElement;
 };
 
-export const generateShareImage = async (): Promise<Blob | null> => {
-  const originalElement = document.getElementById("share-card");
+let _generateShareImage: () => Promise<Blob | null>;
 
-  if (!originalElement) {
-    return null;
+// Only initialize if we're on the client side
+if (typeof window !== "undefined") {
+  _generateShareImage = async (): Promise<Blob | null> => {
+    const originalElement = document.getElementById("share-card");
+
+    if (!originalElement) {
+      return null;
+    }
+
+    try {
+      const clonedElement = originalElement.cloneNode(true) as HTMLElement;
+      const preparedElement = prepareElementForCapture(clonedElement);
+
+      // Apply positioning styles
+      const computedStyle = window.getComputedStyle(originalElement);
+      preparedElement.style.position = "absolute";
+      preparedElement.style.top = "-9999px";
+      preparedElement.style.width = computedStyle.width;
+      preparedElement.style.height = computedStyle.height;
+
+      // Add clone to document temporarily
+      document.body.appendChild(preparedElement);
+
+      // Convert the cloned element to canvas
+      const canvas = await html2canvas(preparedElement, {
+        backgroundColor: null,
+        scale: 2,
+        logging: false,
+        onclone: (clonedDoc) => {
+          const preparedElement = clonedDoc.getElementById("share-card");
+          if (preparedElement) {
+            prepareElementForCapture(preparedElement);
+          }
+        },
+      });
+
+      // Remove the clone after capture
+      document.body.removeChild(preparedElement);
+
+      // Convert canvas to blob
+      return new Promise((resolve) => {
+        canvas.toBlob((blob) => {
+          resolve(blob);
+        }, "image/png");
+      });
+    } catch (error) {
+      console.error("Error generating image:", error);
+      return null;
+    }
+  };
+} else {
+  // Provide a fallback for SSR
+  _generateShareImage = async () => null;
+}
+
+// Export the wrapped function
+export const generateShareImage = () => {
+  if (typeof window === "undefined") {
+    return Promise.resolve(null);
   }
-
-  try {
-    const clonedElement = originalElement.cloneNode(true) as HTMLElement;
-    const preparedElement = prepareElementForCapture(clonedElement);
-
-    // Apply positioning styles
-    const computedStyle = window.getComputedStyle(originalElement);
-    preparedElement.style.position = "absolute";
-    preparedElement.style.top = "-9999px";
-    preparedElement.style.width = computedStyle.width;
-    preparedElement.style.height = computedStyle.height;
-
-    // Add clone to document temporarily
-    document.body.appendChild(preparedElement);
-
-    // Convert the cloned element to canvas
-    const canvas = await html2canvas(preparedElement, {
-      backgroundColor: null,
-      scale: 2,
-      logging: false,
-      onclone: (clonedDoc) => {
-        const preparedElement = clonedDoc.getElementById("share-card");
-        if (preparedElement) {
-          prepareElementForCapture(preparedElement);
-        }
-      },
-    });
-
-    // Remove the clone after capture
-    document.body.removeChild(preparedElement);
-
-    // Convert canvas to blob
-    return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
-        resolve(blob);
-      }, "image/png");
-    });
-  } catch (error) {
-    console.error("Error generating image:", error);
-    return null;
-  }
+  return _generateShareImage();
 };
 
 export const downloadDesktopImage = async () => {
