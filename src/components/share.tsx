@@ -32,10 +32,7 @@ export default function ShareButton() {
     if (typeof window === "undefined") return;
 
     if (typeof navigator.share === "function" && isMobile()) {
-      const shared = await shareContent();
-      if (!shared) {
-        setIsOpen(true);
-      }
+      await shareContent();
     } else {
       setIsOpen(true);
     }
@@ -44,48 +41,14 @@ export default function ShareButton() {
   if (!mounted) return null;
 
   return (
-    <Drawer open={isOpen} onOpenChange={setIsOpen}>
-      <DrawerTrigger asChild>
-        <Button
-          onClick={handleShare}
-          variant="ghost"
-          size="lg"
-          className="z-[100] flex w-min items-center justify-center gap-2 rounded-full bg-white/20 px-6 text-white backdrop-blur-sm hover:bg-white/30 hover:text-white"
-        >
-          <Share className="h-6 w-6" />
-          <span>Share</span>
-        </Button>
-      </DrawerTrigger>
-      <DrawerContent>
-        <div className="mx-auto w-full">
-          <DrawerHeader>
-            <DrawerTitle className="text-center">Share</DrawerTitle>
-            <DrawerDescription className="text-center">
-              Share your results with others
-            </DrawerDescription>
-          </DrawerHeader>
-          <div className="flex flex-wrap justify-center gap-2 p-4 sm:gap-4">
-            {shareConfig.map((shareOption) => (
-              <div key={shareOption.label} onClick={() => setIsOpen(false)}>
-                <ShareIcon
-                  label={shareOption.label}
-                  icon={shareOption.icon}
-                  action={shareOption.action}
-                />
-              </div>
-            ))}
-          </div>
-          <DrawerFooter>
-            <DrawerClose asChild>
-              <div className="flex justify-center">
-                <Button variant="outline" className="w-80">
-                  Close
-                </Button>
-              </div>
-            </DrawerClose>
-          </DrawerFooter>
-        </div>
-      </DrawerContent>
-    </Drawer>
+    <Button
+      onClick={handleShare}
+      variant="ghost"
+      size="lg"
+      className="z-[100] flex w-min items-center justify-center gap-2 rounded-full bg-white/20 px-6 text-white backdrop-blur-sm hover:bg-white/30 hover:text-white"
+    >
+      <Share className="h-6 w-6" />
+      <span>Share</span>
+    </Button>
   );
 }
