@@ -67,19 +67,6 @@ export const shareConfig = [
     },
   },
   {
-    icon: <FaInstagram className="h-6 w-6" />,
-    label: "Share to Instagram Story",
-    action: (shareUrl: string) => {
-      window.open(
-        `instagram://story-camera?text=${encodeURIComponent(
-          "Check out my #LLMWrapped results — prompted by an AI Agent powered by Wordware! 🤖\n\n" +
-            shareUrl,
-        )}`,
-        "_blank",
-      );
-    },
-  },
-  {
     icon: <Download className="h-6 w-6" />,
     label: "Export Image",
     action: downloadDesktopImage,
