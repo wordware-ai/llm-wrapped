@@ -112,7 +112,7 @@ const shareContent = async () => {
       title: "My LLM Wrapped",
       url: window.location.href,
       text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
-      // files: [file],
+      files: [file],
     });
 
     return true;
