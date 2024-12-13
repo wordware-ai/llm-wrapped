@@ -4,16 +4,16 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { AuthProvider } from "@/components/auth-provider";
+import Footer from "@/components/footer";
+import { CSPostHogProvider } from "@/components/posthog-provider";
+import SlideShow from "@/components/slideshow";
 import { StreamProvider } from "@/components/stream-provider";
+import { Toaster } from "@/components/ui/sonner";
 import { getSession, getUser } from "@/lib/supabase/server";
 import { TRPCReactProvider } from "@/trpc/react";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
-import SlideShow from "@/components/slideshow";
-import Footer from "@/components/footer";
-import { Suspense } from "react";
-import { CSPostHogProvider } from "@/components/posthog-provider";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
-import { Toaster } from "@/components/ui/sonner";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "LLMwrapped - AI agent by Wordware",
@@ -58,6 +58,13 @@ export default async function RootLayout({
   const { session } = await getSession();
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
+      <head>
+        <meta
+          id="viewport"
+          name="viewport"
+          content="width=device-width, initial-scale=1.0"
+        />
+      </head>
       <body className="flex min-h-screen flex-col">
         <TRPCReactProvider>
           <AuthProvider user={user ?? undefined} session={session ?? undefined}>

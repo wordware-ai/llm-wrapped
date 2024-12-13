@@ -124,7 +124,7 @@ export function PDFInput({
             drop the PDF into the dropzone below to continue.
           </DialogDescription>
         </DialogHeader>
-        <div className="relative aspect-[16/9] w-full">
+        <div className="relative aspect-[16/9] w-[50%]">
           <Image
             src="/images/linkedin-pdf-download.png"
             alt="LinkedIn Save as PDF"

@@ -69,13 +69,17 @@ export function UserInfo({
             <div className="flex w-min flex-col gap-4">
               <div className="flex items-center gap-4">
                 {shareConfig
-                  .filter((option) => !["Copy Link"].includes(option.label))
+                  .filter(
+                    (option) =>
+                      !["Copy Link", "Export Image"].includes(option.label),
+                  )
                   .map((shareOption) => (
                     <ShareIcon
                       key={shareOption.label}
                       label={shareOption.label}
                       icon={shareOption.icon}
                       action={shareOption.action}
+                      size="size-12"
                     />
                   ))}
               </div>

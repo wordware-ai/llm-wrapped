@@ -14,10 +14,13 @@ import {
 import { Share } from "lucide-react";
 import { shareConfig } from "@/config/share-config";
 import { ShareIcon } from "./share-icon";
+import { useState } from "react";
 
 export default function ShareButton() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Drawer>
+    <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
         <Button
           variant="ghost"
@@ -38,12 +41,13 @@ export default function ShareButton() {
           </DrawerHeader>
           <div className="flex flex-wrap justify-center gap-2 p-4 sm:gap-4">
             {shareConfig.map((shareOption) => (
-              <ShareIcon
-                key={shareOption.label}
-                label={shareOption.label}
-                icon={shareOption.icon}
-                action={shareOption.action}
-              />
+              <div key={shareOption.label} onClick={() => setIsOpen(false)}>
+                <ShareIcon
+                  label={shareOption.label}
+                  icon={shareOption.icon}
+                  action={shareOption.action}
+                />
+              </div>
             ))}
           </div>
           <DrawerFooter>

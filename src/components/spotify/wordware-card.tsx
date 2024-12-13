@@ -29,7 +29,7 @@ export default function WordwareCard({
       style={{ backgroundColor: cardData?.bgColor }}
       id="share-card"
     >
-      {cardData?.svg && !hideHashtag && <cardData.svg />}
+      {/* {cardData?.svg && !hideHashtag && <cardData.svg />} */}
       <div
         className={cn(
           "absolute left-0 top-0 w-full gap-[7px] px-2",
