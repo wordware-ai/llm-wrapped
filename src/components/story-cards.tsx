@@ -184,7 +184,7 @@ export const TextCard = ({ result }: { result: Record<string, unknown> }) => {
       animate="animate"
       variants={fadeInUp}
     >
-      <motion.p className="text-[4vh] leading-tight text-white sm:text-[3.5vh]">
+      <motion.p className="text-[4vh] leading-tight text-white sm:text-[4vh]">
         {result.value as string}
       </motion.p>
     </motion.div>

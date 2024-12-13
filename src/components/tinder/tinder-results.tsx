@@ -49,9 +49,9 @@ export function TinderResults({
   );
 
   useEffect(() => {
+    if (isLoading) return;
     setResults({});
     setProfileData({});
-    if (isLoading) return;
     if (tinderResult) {
       const displayResults = convertTinderDbToState(tinderResult);
       setResults(displayResults);

@@ -66,10 +66,9 @@ export function LinkedInResults({
   const [pdfData, setPdfData] = useState<string | null>(null);
 
   useEffect(() => {
+    if (isLoading) return;
     setResults({});
     setProfileData({});
-
-    if (isLoading) return;
     if (linkedinResult && !pdfData) {
       const displayResults = convertLinkedinDbToState(linkedinResult);
       setResults(displayResults);

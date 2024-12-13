@@ -72,9 +72,9 @@ export function SpotifyResults({
   const { streamResponse } = useStream();
 
   useEffect(() => {
+    if (isLoading) return;
     setResults({});
     setProfileData({});
-    if (isLoading) return;
     if (spotifyResult) {
       const displayResults = convertSpotifyDbToState(spotifyResult);
       setResults(displayResults);

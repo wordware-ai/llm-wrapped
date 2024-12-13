@@ -1,8 +1,9 @@
 import Image from "next/image";
 import { BaseStory } from "./base-story";
-import { ShareButtons } from "./share-buttons";
+import { ShareIcon } from "./share-icon";
 import { useStreamContext } from "./stream-provider";
 import { toast } from "sonner";
+import { shareConfig } from "@/config/share-config";
 
 export function UserInfo({
   name,
@@ -66,7 +67,18 @@ export function UserInfo({
             </div>
 
             <div className="flex w-min flex-col gap-4">
-              <ShareButtons />
+              <div className="flex items-center gap-4">
+                {shareConfig
+                  .filter((option) => !["Copy Link"].includes(option.label))
+                  .map((shareOption) => (
+                    <ShareIcon
+                      key={shareOption.label}
+                      label={shareOption.label}
+                      icon={shareOption.icon}
+                      action={shareOption.action}
+                    />
+                  ))}
+              </div>
               <div className="flex w-full items-center gap-2 rounded-lg border p-3">
                 <input
                   type="text"

@@ -12,7 +12,8 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { Share } from "lucide-react";
-import { ShareButtons } from "./share-buttons";
+import { shareConfig } from "@/config/share-config";
+import { ShareIcon } from "./share-icon";
 
 export default function ShareButton() {
   return (
@@ -28,19 +29,30 @@ export default function ShareButton() {
         </Button>
       </DrawerTrigger>
       <DrawerContent>
-        <div className="mx-auto w-min">
+        <div className="mx-auto w-full">
           <DrawerHeader>
             <DrawerTitle className="text-center">Share</DrawerTitle>
             <DrawerDescription className="text-center">
               Share your results with others
             </DrawerDescription>
           </DrawerHeader>
-          <div className="p-4">
-            <ShareButtons copyLink />
+          <div className="flex flex-wrap justify-center gap-2 p-4 sm:gap-4">
+            {shareConfig.map((shareOption) => (
+              <ShareIcon
+                key={shareOption.label}
+                label={shareOption.label}
+                icon={shareOption.icon}
+                action={shareOption.action}
+              />
+            ))}
           </div>
           <DrawerFooter>
             <DrawerClose asChild>
-              <Button variant="outline">Close</Button>
+              <div className="flex justify-center">
+                <Button variant="outline" className="w-80">
+                  Close
+                </Button>
+              </div>
             </DrawerClose>
           </DrawerFooter>
         </div>
