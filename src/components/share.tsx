@@ -20,11 +20,6 @@ import { isMobile } from "@/lib/utils";
 
 export default function ShareButton() {
   const [isOpen, setIsOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleShare = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -37,8 +32,6 @@ export default function ShareButton() {
       setIsOpen(true);
     }
   };
-
-  if (!mounted) return null;
 
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>

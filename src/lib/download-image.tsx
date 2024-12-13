@@ -53,6 +53,8 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
 const generateShareImage = async (): Promise<Blob | null> => {
   if (typeof window === "undefined") return null;
 
+  console.info("generateShareImage", window.location.href);
+
   const originalElement = document.getElementById("share-card");
   if (!originalElement) return null;
 
@@ -67,7 +69,7 @@ const generateShareImage = async (): Promise<Blob | null> => {
     // preparedElement.style.width = computedStyle.width;
     // preparedElement.style.height = computedStyle.height;
 
-    // document.body.appendChild(preparedElement);
+    document.body.appendChild(preparedElement);
 
     const canvas = await html2canvas(preparedElement, {
       backgroundColor: null,
@@ -81,7 +83,10 @@ const generateShareImage = async (): Promise<Blob | null> => {
       },
     });
 
-    // document.body.removeChild(preparedElement);
+    console.info("canvas", canvas);
+    console.info("window.location.href", window.location.href);
+
+    document.body.removeChild(preparedElement);
 
     return new Promise((resolve) => {
       canvas.toBlob((blob) => {
