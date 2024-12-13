@@ -32,10 +32,11 @@ export default function ShareButton() {
 
     if (typeof navigator.share === "function" && isMobile()) {
       try {
+        const url = window.location.href;
         await navigator.share({
           title: "Check this out!",
           text: "I created something awesome!",
-          url: window.location.href,
+          url,
         });
       } catch (error) {
         console.log("Error sharing:", error);
