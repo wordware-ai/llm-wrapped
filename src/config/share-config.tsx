@@ -1,4 +1,4 @@
-import { downloadImage } from "@/lib/download-image";
+import { downloadDesktopImage } from "@/lib/download-image";
 import { Download, Link } from "lucide-react";
 import {
   FaFacebook,
@@ -82,6 +82,6 @@ export const shareConfig = [
   {
     icon: <Download className="h-6 w-6" />,
     label: "Export Image",
-    action: downloadImage,
+    action: downloadDesktopImage,
   },
 ];

@@ -1,31 +1,6 @@
-import html2canvas from "html2canvas";
 import { toast } from "sonner";
 
-const isMobileDevice = () => {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent,
-  );
-};
-
-// Function to boost z-index for text content
-const boostTextZIndex = (element: HTMLElement) => {
-  // Find the content container with z-10
-  const contentContainer = element.querySelector(".z-10");
-  if (contentContainer) {
-    (contentContainer as HTMLElement).style.zIndex = "50"; // Boost z-index significantly
-
-    // Ensure all child text elements have high z-index
-    contentContainer.querySelectorAll("p, div").forEach((el) => {
-      // Don't modify SVG-containing elements
-      if (!el.querySelector("svg")) {
-        (el as HTMLElement).style.position = "relative";
-        (el as HTMLElement).style.zIndex = "50";
-      }
-    });
-  }
-
-  // Make sure the SVG container stays behind
-};
+import html2canvas from "html2canvas";
 
 const prepareElementForCapture = (clonedElement: HTMLElement) => {
   // Remove share button
@@ -56,12 +31,71 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
     (image as HTMLElement).style.transform = "scale(1)";
   }
 
-  boostTextZIndex(clonedElement);
+  // Boost text z-index
+  const contentContainer = clonedElement.querySelector(".z-10");
+  if (contentContainer) {
+    (contentContainer as HTMLElement).style.zIndex = "50";
+    contentContainer.querySelectorAll("p, div").forEach((el) => {
+      if (!el.querySelector("svg")) {
+        (el as HTMLElement).style.position = "relative";
+        (el as HTMLElement).style.zIndex = "50";
+      }
+    });
+  }
 
   return clonedElement;
 };
 
-const downloadDesktopImage = async () => {
+export const generateShareImage = async (): Promise<Blob | null> => {
+  const originalElement = document.getElementById("share-card");
+
+  if (!originalElement) {
+    return null;
+  }
+
+  try {
+    const clonedElement = originalElement.cloneNode(true) as HTMLElement;
+    const preparedElement = prepareElementForCapture(clonedElement);
+
+    // Apply positioning styles
+    const computedStyle = window.getComputedStyle(originalElement);
+    preparedElement.style.position = "absolute";
+    preparedElement.style.top = "-9999px";
+    preparedElement.style.width = computedStyle.width;
+    preparedElement.style.height = computedStyle.height;
+
+    // Add clone to document temporarily
+    document.body.appendChild(preparedElement);
+
+    // Convert the cloned element to canvas
+    const canvas = await html2canvas(preparedElement, {
+      backgroundColor: null,
+      scale: 2,
+      logging: false,
+      onclone: (clonedDoc) => {
+        const preparedElement = clonedDoc.getElementById("share-card");
+        if (preparedElement) {
+          prepareElementForCapture(preparedElement);
+        }
+      },
+    });
+
+    // Remove the clone after capture
+    document.body.removeChild(preparedElement);
+
+    // Convert canvas to blob
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        resolve(blob);
+      }, "image/png");
+    });
+  } catch (error) {
+    console.error("Error generating image:", error);
+    return null;
+  }
+};
+
+export const downloadDesktopImage = async () => {
   // Find the element you want to capture
   const originalElement = document.getElementById("share-card");
 
@@ -90,9 +124,9 @@ const downloadDesktopImage = async () => {
       scale: 2, // Higher quality
       logging: false,
       onclone: (clonedDoc) => {
-        const preparedElement = clonedDoc.getElementById("share-card");
-        if (preparedElement) {
-          boostTextZIndex(preparedElement);
+        const clonedElement = clonedDoc.getElementById("share-card");
+        if (clonedElement) {
+          prepareElementForCapture(clonedElement);
         }
       },
     });
@@ -121,121 +155,5 @@ const downloadDesktopImage = async () => {
   } catch (error) {
     toast.error("Failed to generate image");
     console.error(error);
-  }
-};
-
-const downloadMobileImage = async () => {
-  const element = document.getElementById("share-card");
-  if (!element) {
-    console.error("Share card element not found");
-    return;
-  }
-
-  try {
-    // Get element dimensions
-    const rect = element.getBoundingClientRect();
-
-    // Create canvas and convert to image data
-    const canvas = await html2canvas(element, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: "#ffffff",
-      width: rect.width,
-      height: rect.height,
-      onclone: (clonedDoc) => {
-        const clonedElement = clonedDoc.getElementById("share-card");
-        if (clonedElement) {
-          // Remove share button and adjust z-indices in the cloned document
-          prepareElementForCapture(clonedElement);
-        }
-      },
-    });
-
-    // Get image data URL
-    const imageUrl = canvas.toDataURL("image/png", 1.0);
-
-    // Create a full-screen container
-    const container = document.createElement("div");
-    Object.assign(container.style, {
-      position: "fixed",
-      top: "0",
-      left: "0",
-      width: "100%",
-      height: "100%",
-      backgroundColor: "rgba(255, 255, 255, 0.95)",
-      zIndex: "999999",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      padding: "20px",
-      boxSizing: "border-box",
-    });
-
-    // Create header section
-    const header = document.createElement("div");
-    Object.assign(header.style, {
-      width: "100%",
-      display: "flex",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: "20px",
-      pointerEvents: "auto",
-    });
-
-    // Create instruction text
-    const instruction = document.createElement("div");
-    Object.assign(instruction.style, {
-      padding: "10px 20px",
-      color: "#333",
-      fontSize: "16px",
-      backgroundColor: "#f0f0f0",
-      borderRadius: "8px",
-    });
-    instruction.textContent = "Press and hold image to save";
-
-    // Create close button
-    const closeButton = document.createElement("button");
-    Object.assign(closeButton.style, {
-      padding: "10px 20px",
-      backgroundColor: "#333",
-      color: "white",
-      border: "none",
-      borderRadius: "5px",
-      cursor: "pointer",
-    });
-    closeButton.textContent = "Close";
-    closeButton.onclick = () => document.body.removeChild(container);
-
-    // Add elements to header
-    header.appendChild(instruction);
-    header.appendChild(closeButton);
-
-    // Create the image element
-    const img = new Image();
-    Object.assign(img.style, {
-      maxWidth: "90%",
-      maxHeight: "calc(100vh - 100px)",
-      objectFit: "contain",
-      display: "block",
-      borderRadius: "8px",
-      boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
-    });
-
-    img.src = imageUrl;
-
-    container.appendChild(header);
-    container.appendChild(img);
-    document.body.appendChild(container);
-  } catch (error) {
-    console.error("Error generating image:", error);
-  }
-};
-
-export const downloadImage = async () => {
-  if (isMobileDevice()) {
-    await downloadMobileImage();
-  } else {
-    await downloadDesktopImage();
   }
 };

@@ -11,25 +11,41 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Share } from "lucide-react";
 import { shareConfig } from "@/config/share-config";
-import { ShareIcon } from "./share-icon";
+import { generateShareImage } from "@/lib/download-image";
+import { Share } from "lucide-react";
 import { useState } from "react";
+import { ShareIcon } from "./share-icon";
 
 export default function ShareButton() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleShare = async () => {
+  const handleShare = async (e: React.MouseEvent) => {
+    e.preventDefault();
+
     if (navigator.share) {
-      navigator
-        .share({
-          title: "Test Share",
-          text: "Testing share functionality",
-        })
-        .then(() => console.log("Shared successfully"))
-        .catch((error) => console.log("Error sharing:", error));
+      try {
+        const imageBlob = await generateShareImage();
+
+        if (!imageBlob) {
+          return;
+        }
+
+        const file = new File([imageBlob], "llm-wrapped.png", {
+          type: "image/png",
+        });
+
+        await navigator.share({
+          title: "My LLM Wrapped",
+          url: window.location.href,
+          text: "Check out my #LLMWrapped results — prompted by an AI Agent powered by Wordware! 🤖\n\n",
+          files: [file],
+        });
+      } catch (error) {
+        console.error("Error sharing:", error);
+      }
     } else {
-      alert("Share API not available");
+      setIsOpen(true);
     }
   };
 
@@ -37,10 +53,7 @@ export default function ShareButton() {
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
         <Button
-          onClick={async (e) => {
-            e.preventDefault();
-            await handleShare();
-          }}
+          onClick={handleShare}
           variant="ghost"
           size="lg"
           className="z-[100] flex w-min items-center justify-center gap-2 rounded-full bg-white/20 px-6 text-white backdrop-blur-sm hover:bg-white/30 hover:text-white"
