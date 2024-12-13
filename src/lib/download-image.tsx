@@ -1,7 +1,10 @@
+"use client";
+
 import { toast } from "sonner";
 
 import html2canvas from "html2canvas";
 
+// Prepare element for capture
 const prepareElementForCapture = (clonedElement: HTMLElement) => {
   // Remove share button
   const shareButtonContainer = clonedElement.querySelector(
@@ -46,70 +49,77 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
   return clonedElement;
 };
 
-let _generateShareImage: () => Promise<Blob | null>;
+// Generate share image
+const generateShareImage = async (): Promise<Blob | null> => {
+  if (typeof window === "undefined") return null;
 
-// Only initialize if we're on the client side
-if (typeof window !== "undefined") {
-  _generateShareImage = async (): Promise<Blob | null> => {
-    const originalElement = document.getElementById("share-card");
+  const originalElement = document.getElementById("share-card");
+  if (!originalElement) return null;
 
-    if (!originalElement) {
-      return null;
-    }
+  try {
+    const clonedElement = originalElement.cloneNode(true) as HTMLElement;
+    const preparedElement = prepareElementForCapture(clonedElement);
 
-    try {
-      const clonedElement = originalElement.cloneNode(true) as HTMLElement;
-      const preparedElement = prepareElementForCapture(clonedElement);
+    const computedStyle = window.getComputedStyle(originalElement);
+    preparedElement.style.position = "absolute";
+    preparedElement.style.top = "-9999px";
+    preparedElement.style.width = computedStyle.width;
+    preparedElement.style.height = computedStyle.height;
 
-      // Apply positioning styles
-      const computedStyle = window.getComputedStyle(originalElement);
-      preparedElement.style.position = "absolute";
-      preparedElement.style.top = "-9999px";
-      preparedElement.style.width = computedStyle.width;
-      preparedElement.style.height = computedStyle.height;
+    document.body.appendChild(preparedElement);
 
-      // Add clone to document temporarily
-      document.body.appendChild(preparedElement);
+    const canvas = await html2canvas(preparedElement, {
+      backgroundColor: null,
+      scale: 2,
+      logging: false,
+      onclone: (clonedDoc) => {
+        const preparedElement = clonedDoc.getElementById("share-card");
+        if (preparedElement) {
+          prepareElementForCapture(preparedElement);
+        }
+      },
+    });
 
-      // Convert the cloned element to canvas
-      const canvas = await html2canvas(preparedElement, {
-        backgroundColor: null,
-        scale: 2,
-        logging: false,
-        onclone: (clonedDoc) => {
-          const preparedElement = clonedDoc.getElementById("share-card");
-          if (preparedElement) {
-            prepareElementForCapture(preparedElement);
-          }
-        },
-      });
+    document.body.removeChild(preparedElement);
 
-      // Remove the clone after capture
-      document.body.removeChild(preparedElement);
-
-      // Convert canvas to blob
-      return new Promise((resolve) => {
-        canvas.toBlob((blob) => {
-          resolve(blob);
-        }, "image/png");
-      });
-    } catch (error) {
-      console.error("Error generating image:", error);
-      return null;
-    }
-  };
-} else {
-  // Provide a fallback for SSR
-  _generateShareImage = async () => null;
-}
-
-// Export the wrapped function
-export const generateShareImage = () => {
-  if (typeof window === "undefined") {
-    return Promise.resolve(null);
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        resolve(blob);
+      }, "image/png");
+    });
+  } catch (error) {
+    console.error("Error generating image:", error);
+    return null;
   }
-  return _generateShareImage();
 };
+
+// Share handler
+const shareContent = async () => {
+  if (typeof window === "undefined") return false;
+
+  try {
+    const imageBlob = await generateShareImage();
+    if (!imageBlob) return false;
+
+    const file = new File([imageBlob], "llm-wrapped.png", {
+      type: "image/png",
+    });
+
+    await navigator.share({
+      title: "My LLM Wrapped",
+      url: window.location.href,
+      text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
+      files: [file],
+    });
+
+    return true;
+  } catch (error) {
+    console.error("Error sharing:", error);
+    return false;
+  }
+};
+
+export { shareContent, generateShareImage, prepareElementForCapture };
 
 export const downloadDesktopImage = async () => {
   // Find the element you want to capture

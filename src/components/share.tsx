@@ -12,10 +12,10 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { shareConfig } from "@/config/share-config";
-import { generateShareImage } from "@/lib/download-image";
 import { Share } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ShareIcon } from "./share-icon";
+import { shareContent } from "@/lib/download-image"; // New import from combined utils
 import { isMobile } from "@/lib/utils";
 
 export default function ShareButton() {
@@ -29,36 +29,18 @@ export default function ShareButton() {
   const handleShare = async (e: React.MouseEvent) => {
     e.preventDefault();
 
-    // Only run share logic if we're in the browser
     if (typeof window === "undefined") return;
 
-    if (navigator.share && isMobile()) {
-      try {
-        const imageBlob = await generateShareImage();
-
-        if (!imageBlob) {
-          return;
-        }
-
-        const file = new File([imageBlob], "llm-wrapped.png", {
-          type: "image/png",
-        });
-
-        await navigator.share({
-          title: "My LLM Wrapped",
-          url: window.location.href,
-          text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
-          files: [file],
-        });
-      } catch (error) {
-        console.error("Error sharing:", error);
+    if (typeof navigator.share === "function" && isMobile()) {
+      const shared = await shareContent();
+      if (!shared) {
+        setIsOpen(true);
       }
     } else {
       setIsOpen(true);
     }
   };
 
-  // Don't render the button until we're on the client
   if (!mounted) return null;
 
   return (
