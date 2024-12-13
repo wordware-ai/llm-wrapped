@@ -15,7 +15,6 @@ import { shareConfig } from "@/config/share-config";
 import { Share } from "lucide-react";
 import { useState, useEffect } from "react";
 import { ShareIcon } from "./share-icon";
-import { shareContent } from "@/lib/download-image"; // New import from combined utils
 import { isMobile } from "@/lib/utils";
 
 export default function ShareButton() {
@@ -32,7 +31,15 @@ export default function ShareButton() {
     if (typeof window === "undefined") return;
 
     if (typeof navigator.share === "function" && isMobile()) {
-      await shareContent();
+      try {
+        await navigator.share({
+          title: "Check this out!",
+          text: "I created something awesome!",
+          url: window.location.href,
+        });
+      } catch (error) {
+        console.log("Error sharing:", error);
+      }
     } else {
       setIsOpen(true);
     }
