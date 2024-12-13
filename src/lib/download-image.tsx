@@ -25,17 +25,10 @@ const boostTextZIndex = (element: HTMLElement) => {
   }
 
   // Make sure the SVG container stays behind
-  const svgContainer = element.querySelector(".absolute");
-  if (svgContainer) {
-    (svgContainer as HTMLElement).style.zIndex = "1";
-  }
 };
 
-const prepareElementForCapture = (originalElement: HTMLElement) => {
-  // Clone the element
-  const clonedElement = originalElement.cloneNode(true) as HTMLElement;
-
-  // Remove the share button from clone
+const prepareElementForCapture = (clonedElement: HTMLElement) => {
+  // Remove share button
   const shareButtonContainer = clonedElement.querySelector(
     '[class*="justify-center"]:last-child',
   );
@@ -43,7 +36,26 @@ const prepareElementForCapture = (originalElement: HTMLElement) => {
     shareButtonContainer.remove();
   }
 
-  // Apply z-index modifications
+  // Hide the SVG container
+  const svgContainer = clonedElement.querySelector(".svg-container");
+  if (svgContainer) {
+    (svgContainer as HTMLElement).style.display = "none";
+  }
+
+  const hashtag = clonedElement.querySelector(".hashtag");
+  if (hashtag) {
+    (hashtag as HTMLElement).style.paddingTop = "1rem";
+  }
+
+  const image = clonedElement.querySelector(".image");
+  if (image) {
+    (image as HTMLElement).style.paddingTop = "1rem";
+    (image as HTMLElement).style.objectFit = "contain";
+    (image as HTMLElement).style.width = "100%";
+    (image as HTMLElement).style.height = "auto";
+    (image as HTMLElement).style.transform = "scale(1)";
+  }
+
   boostTextZIndex(clonedElement);
 
   return clonedElement;
@@ -59,33 +71,34 @@ const downloadDesktopImage = async () => {
   }
 
   try {
-    const clonedElement = prepareElementForCapture(originalElement);
+    const clonedElement = originalElement.cloneNode(true) as HTMLElement;
+    const preparedElement = prepareElementForCapture(clonedElement);
 
     // Apply positioning styles
     const computedStyle = window.getComputedStyle(originalElement);
-    clonedElement.style.position = "absolute";
-    clonedElement.style.top = "-9999px";
-    clonedElement.style.width = computedStyle.width;
-    clonedElement.style.height = computedStyle.height;
+    preparedElement.style.position = "absolute";
+    preparedElement.style.top = "-9999px";
+    preparedElement.style.width = computedStyle.width;
+    preparedElement.style.height = computedStyle.height;
 
     // Add clone to document temporarily
-    document.body.appendChild(clonedElement);
+    document.body.appendChild(preparedElement);
 
     // Convert the cloned element to canvas
-    const canvas = await html2canvas(clonedElement, {
+    const canvas = await html2canvas(preparedElement, {
       backgroundColor: null,
       scale: 2, // Higher quality
       logging: false,
       onclone: (clonedDoc) => {
-        const clonedElement = clonedDoc.getElementById("share-card");
-        if (clonedElement) {
-          boostTextZIndex(clonedElement);
+        const preparedElement = clonedDoc.getElementById("share-card");
+        if (preparedElement) {
+          boostTextZIndex(preparedElement);
         }
       },
     });
 
     // Remove the clone after capture
-    document.body.removeChild(clonedElement);
+    document.body.removeChild(preparedElement);
 
     // Convert canvas to blob
     canvas.toBlob((blob) => {
@@ -134,13 +147,7 @@ const downloadMobileImage = async () => {
         const clonedElement = clonedDoc.getElementById("share-card");
         if (clonedElement) {
           // Remove share button and adjust z-indices in the cloned document
-          const shareButtonContainer = clonedElement.querySelector(
-            '[class*="justify-center"]:last-child',
-          );
-          if (shareButtonContainer) {
-            shareButtonContainer.remove();
-          }
-          boostTextZIndex(clonedElement);
+          prepareElementForCapture(clonedElement);
         }
       },
     });

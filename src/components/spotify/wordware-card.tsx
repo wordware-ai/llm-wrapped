@@ -29,7 +29,11 @@ export default function WordwareCard({
       style={{ backgroundColor: cardData?.bgColor }}
       id="share-card"
     >
-      {/* {cardData?.svg && !hideHashtag && <cardData.svg />} */}
+      {cardData?.svg && !hideHashtag && (
+        <div className="svg-container">
+          <cardData.svg />
+        </div>
+      )}
       <div
         className={cn(
           "absolute left-0 top-0 w-full gap-[7px] px-2",
@@ -40,16 +44,20 @@ export default function WordwareCard({
           <WordwareLogo key={i} fillColor={cardData?.fillColor} />
         ))}
       </div>
-      <div className="z-10 flex h-full w-full flex-col justify-between p-8">
-        {!hideHashtag && <p className="text-[2.5vh] text-white">#LLMwrapped</p>}
-        <div className="z-40 flex h-full w-full flex-col justify-end gap-10">
+      <div className="z-10 flex h-full w-full flex-col justify-between p-4 pt-0 sm:p-8 sm:pt-0">
+        {!hideHashtag && (
+          <p className="hashtag pt-6 text-[4vh] text-white sm:text-[3vh]">
+            #LLMwrapped
+          </p>
+        )}
+        <div className="z-40 flex h-full w-full flex-col justify-end gap-4 sm:gap-10">
           {children}
           {!hideShare && (
             <div
               className={cn("flex w-full items-center justify-center")}
               onClick={(e) => e.stopPropagation()}
             >
-              <ShareButton data-share-button />
+              <ShareButton />
             </div>
           )}
         </div>

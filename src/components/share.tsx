@@ -19,10 +19,28 @@ import { useState } from "react";
 export default function ShareButton() {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleShare = async () => {
+    if (navigator.share) {
+      navigator
+        .share({
+          title: "Test Share",
+          text: "Testing share functionality",
+        })
+        .then(() => console.log("Shared successfully"))
+        .catch((error) => console.log("Error sharing:", error));
+    } else {
+      alert("Share API not available");
+    }
+  };
+
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger asChild>
         <Button
+          onClick={async (e) => {
+            e.preventDefault();
+            await handleShare();
+          }}
           variant="ghost"
           size="lg"
           className="z-[100] flex w-min items-center justify-center gap-2 rounded-full bg-white/20 px-6 text-white backdrop-blur-sm hover:bg-white/30 hover:text-white"
