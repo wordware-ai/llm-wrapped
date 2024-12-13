@@ -53,7 +53,7 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
 const generateShareImage = async (): Promise<Blob | null> => {
   if (typeof window === "undefined") return null;
 
-  console.info("generateShareImage", window.location.href);
+  console.log("generateShareImage", window.location.href);
 
   const originalElement = document.getElementById("share-card");
   if (!originalElement) return null;
@@ -83,8 +83,8 @@ const generateShareImage = async (): Promise<Blob | null> => {
       },
     });
 
-    console.info("canvas", canvas);
-    console.info("window.location.href", window.location.href);
+    console.log("canvas", canvas);
+    console.log("window.location.href", window.location.href);
 
     document.body.removeChild(preparedElement);
 
