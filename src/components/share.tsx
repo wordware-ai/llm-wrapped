@@ -23,7 +23,7 @@ export default function ShareButton() {
   const handleShare = async (e: React.MouseEvent) => {
     e.preventDefault();
 
-    if (navigator.share) {
+    if (navigator.share && navigator?.canShare({ files: [new File([], "")] })) {
       try {
         const imageBlob = await generateShareImage();
 
