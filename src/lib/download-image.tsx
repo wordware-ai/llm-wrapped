@@ -58,15 +58,16 @@ const generateShareImage = async (): Promise<Blob | null> => {
 
   try {
     const clonedElement = originalElement.cloneNode(true) as HTMLElement;
-    const preparedElement = prepareElementForCapture(clonedElement);
+    // const preparedElement = prepareElementForCapture(clonedElement);
+    const preparedElement = clonedElement;
 
-    const computedStyle = window.getComputedStyle(originalElement);
-    preparedElement.style.position = "absolute";
-    preparedElement.style.top = "-9999px";
-    preparedElement.style.width = computedStyle.width;
-    preparedElement.style.height = computedStyle.height;
+    // const computedStyle = window.getComputedStyle(originalElement);
+    // preparedElement.style.position = "absolute";
+    // preparedElement.style.top = "-9999px";
+    // preparedElement.style.width = computedStyle.width;
+    // preparedElement.style.height = computedStyle.height;
 
-    document.body.appendChild(preparedElement);
+    // document.body.appendChild(preparedElement);
 
     const canvas = await html2canvas(preparedElement, {
       backgroundColor: null,
@@ -80,7 +81,7 @@ const generateShareImage = async (): Promise<Blob | null> => {
       },
     });
 
-    document.body.removeChild(preparedElement);
+    // document.body.removeChild(preparedElement);
 
     return new Promise((resolve) => {
       canvas.toBlob((blob) => {
@@ -98,11 +99,8 @@ const shareContent = async () => {
   if (typeof window === "undefined") return false;
 
   try {
-    // const imageBlob = await generateShareImage();
-    // if (!imageBlob) return false;
-
-    const response = await fetch("/og.png");
-    const imageBlob = await response.blob();
+    const imageBlob = await generateShareImage();
+    if (!imageBlob) return false;
 
     const file = new File([imageBlob], "llm-wrapped.png", {
       type: "image/png",
