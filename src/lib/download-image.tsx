@@ -98,8 +98,11 @@ const shareContent = async () => {
   if (typeof window === "undefined") return false;
 
   try {
-    const imageBlob = await generateShareImage();
-    if (!imageBlob) return false;
+    // const imageBlob = await generateShareImage();
+    // if (!imageBlob) return false;
+
+    const response = await fetch("/og.png");
+    const imageBlob = await response.blob();
 
     const file = new File([imageBlob], "llm-wrapped.png", {
       type: "image/png",
@@ -109,7 +112,7 @@ const shareContent = async () => {
       title: "My LLM Wrapped",
       url: window.location.href,
       text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
-      files: [file],
+      // files: [file],
     });
 
     return true;
