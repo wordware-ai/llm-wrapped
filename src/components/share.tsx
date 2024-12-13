@@ -16,6 +16,7 @@ import { generateShareImage } from "@/lib/download-image";
 import { Share } from "lucide-react";
 import { useState } from "react";
 import { ShareIcon } from "./share-icon";
+import { isMobile } from "@/lib/utils";
 
 export default function ShareButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ export default function ShareButton() {
   const handleShare = async (e: React.MouseEvent) => {
     e.preventDefault();
 
-    if (navigator.share && navigator?.canShare({ files: [new File([], "")] })) {
+    if (navigator.share && isMobile()) {
       try {
         const imageBlob = await generateShareImage();
 
