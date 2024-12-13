@@ -124,13 +124,17 @@ export function PDFInput({
             drop the PDF into the dropzone below to continue.
           </DialogDescription>
         </DialogHeader>
-        <Image
-          src="/images/linkedin-pdf-download.png"
-          alt="LinkedIn Save as PDF"
-          className="rounded-lg border"
-          width={500}
-          height={500}
-        />
+        <div className="relative aspect-[16/9] w-full">
+          <Image
+            src="/images/linkedin-pdf-download.png"
+            alt="LinkedIn Save as PDF"
+            className="rounded-lg border"
+            fill
+            style={{ objectFit: "contain" }}
+            placeholder="blur"
+            blurDataURL="/images/linkedin-pdf-blur.png"
+          />
+        </div>
 
         <div className="grid gap-6 py-6">
           <div

@@ -1,5 +1,5 @@
 import html2canvas from "html2canvas";
-import { Image, Link } from "lucide-react";
+import { Download, Image, Link } from "lucide-react";
 import {
   FaFacebook,
   FaInstagram,
@@ -80,7 +80,7 @@ export const shareConfig = [
     },
   },
   {
-    icon: <Image className="h-6 w-6" />,
+    icon: <Download className="h-6 w-6" />,
     label: "Export Image",
     action: async () => {
       // Find the element you want to capture
