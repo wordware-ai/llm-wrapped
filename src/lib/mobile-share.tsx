@@ -72,6 +72,8 @@ const generateShareImage = async (): Promise<Blob | null> => {
       backgroundColor: null,
       scale: 2,
       logging: false,
+      useCORS: true,
+      allowTaint: true,
     });
     toast.success("Image generated!");
 
@@ -84,6 +86,7 @@ const generateShareImage = async (): Promise<Blob | null> => {
     });
   } catch (error) {
     console.error("Error generating image:", error);
+    toast.error("Error generating image");
     return null;
   }
 };
@@ -118,6 +121,7 @@ const shareContent = async () => {
     return true;
   } catch (error) {
     console.error("Error sharing:", error);
+    toast.error("Error sharing");
     return false;
   }
 };
