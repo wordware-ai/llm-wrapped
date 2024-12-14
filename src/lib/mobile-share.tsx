@@ -122,7 +122,7 @@ const shareContent = async () => {
     return true;
   } catch (error) {
     console.error("Error sharing:", error);
-    toast.error("Error sharing");
+    toast.error(JSON.stringify(error));
     return false;
   }
 };
