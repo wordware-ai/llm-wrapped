@@ -96,9 +96,13 @@ const shareContent = async () => {
     const imageBlob = await generateShareImage();
     if (!imageBlob) return false;
 
+    toast.info("Sharing...");
+
     const file = new File([imageBlob], "llm-wrapped.png", {
       type: "image/png",
     });
+
+    toast.info("File created!");
 
     await navigator.share({
       title: "My LLM Wrapped",
@@ -106,6 +110,8 @@ const shareContent = async () => {
       text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
       files: [file],
     });
+
+    toast.success("Shared!");
 
     return true;
   } catch (error) {
