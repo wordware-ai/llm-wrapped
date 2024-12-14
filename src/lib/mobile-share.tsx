@@ -1,5 +1,7 @@
 "use client";
 
+import { toast } from "sonner";
+
 // Prepare element for capture
 const prepareElementForCapture = (clonedElement: HTMLElement) => {
   // Remove share button
@@ -65,12 +67,13 @@ const generateShareImage = async (): Promise<Blob | null> => {
     preparedElement.style.height = computedStyle.height;
 
     document.body.appendChild(preparedElement);
-
+    toast.info("Generating image...");
     const canvas = await html2canvas(preparedElement, {
       backgroundColor: null,
       scale: 2,
       logging: false,
     });
+    toast.success("Image generated!");
 
     document.body.removeChild(preparedElement);
 

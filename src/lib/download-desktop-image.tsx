@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { prepareElementForCapture } from "./download-mobile-image";
+import { prepareElementForCapture } from "./mobile-share";
 import html2canvas from "html2canvas";
 
 export const downloadDesktopImage = async () => {

@@ -12,7 +12,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { shareConfig } from "@/config/share-config";
-import { shareContent } from "@/lib/download-mobile-image"; // New import from combined utils
+import { shareContent } from "@/lib/mobile-share";
 import { isMobile } from "@/lib/utils";
 import { Share } from "lucide-react";
 import { useState } from "react";
