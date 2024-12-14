@@ -12,11 +12,11 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { shareConfig } from "@/config/share-config";
-import { Share } from "lucide-react";
-import { useState, useEffect } from "react";
-import { ShareIcon } from "./share-icon";
-import { shareContent } from "@/lib/download-image"; // New import from combined utils
+import { shareContent } from "@/lib/download-mobile-image"; // New import from combined utils
 import { isMobile } from "@/lib/utils";
+import { Share } from "lucide-react";
+import { useState } from "react";
+import { ShareIcon } from "./share-icon";
 
 export default function ShareButton() {
   const [isOpen, setIsOpen] = useState(false);

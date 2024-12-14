@@ -1,9 +1,5 @@
 "use client";
 
-import { toast } from "sonner";
-
-import html2canvas from "html2canvas";
-
 // Prepare element for capture
 const prepareElementForCapture = (clonedElement: HTMLElement) => {
   // Remove share button
@@ -53,21 +49,20 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
 const generateShareImage = async (): Promise<Blob | null> => {
   if (typeof window === "undefined") return null;
 
-  alert(window.location.href);
-
   const originalElement = document.getElementById("share-card");
   if (!originalElement) return null;
 
+  const html2canvas = (await import("html2canvas")).default;
+
   try {
     const clonedElement = originalElement.cloneNode(true) as HTMLElement;
-    // const preparedElement = prepareElementForCapture(clonedElement);
-    const preparedElement = clonedElement;
+    const preparedElement = prepareElementForCapture(clonedElement);
 
-    // const computedStyle = window.getComputedStyle(originalElement);
-    // preparedElement.style.position = "absolute";
-    // preparedElement.style.top = "-9999px";
-    // preparedElement.style.width = computedStyle.width;
-    // preparedElement.style.height = computedStyle.height;
+    const computedStyle = window.getComputedStyle(originalElement);
+    preparedElement.style.position = "absolute";
+    preparedElement.style.top = "-9999px";
+    preparedElement.style.width = computedStyle.width;
+    preparedElement.style.height = computedStyle.height;
 
     document.body.appendChild(preparedElement);
 
@@ -75,16 +70,7 @@ const generateShareImage = async (): Promise<Blob | null> => {
       backgroundColor: null,
       scale: 2,
       logging: false,
-      onclone: (clonedDoc) => {
-        const preparedElement = clonedDoc.getElementById("share-card");
-        if (preparedElement) {
-          prepareElementForCapture(preparedElement);
-        }
-      },
     });
-
-    alert(canvas);
-    alert(window.location.href);
 
     document.body.removeChild(preparedElement);
 
@@ -125,67 +111,4 @@ const shareContent = async () => {
   }
 };
 
-export { shareContent, generateShareImage, prepareElementForCapture };
-
-export const downloadDesktopImage = async () => {
-  // Find the element you want to capture
-  const originalElement = document.getElementById("share-card");
-
-  if (!originalElement) {
-    toast.error("Could not find element to capture");
-    return;
-  }
-
-  try {
-    const clonedElement = originalElement.cloneNode(true) as HTMLElement;
-    const preparedElement = prepareElementForCapture(clonedElement);
-
-    // Apply positioning styles
-    const computedStyle = window.getComputedStyle(originalElement);
-    preparedElement.style.position = "absolute";
-    preparedElement.style.top = "-9999px";
-    preparedElement.style.width = computedStyle.width;
-    preparedElement.style.height = computedStyle.height;
-
-    // Add clone to document temporarily
-    document.body.appendChild(preparedElement);
-
-    // Convert the cloned element to canvas
-    const canvas = await html2canvas(preparedElement, {
-      backgroundColor: null,
-      scale: 2, // Higher quality
-      logging: false,
-      onclone: (clonedDoc) => {
-        const clonedElement = clonedDoc.getElementById("share-card");
-        if (clonedElement) {
-          prepareElementForCapture(clonedElement);
-        }
-      },
-    });
-
-    // Remove the clone after capture
-    document.body.removeChild(preparedElement);
-
-    // Convert canvas to blob
-    canvas.toBlob((blob) => {
-      if (!blob) {
-        toast.error("Failed to generate image");
-        return;
-      }
-
-      // Create download link
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.download = "llm-wrapped.png";
-      link.href = url;
-      link.click();
-
-      // Cleanup
-      URL.revokeObjectURL(url);
-      toast.success("Image downloaded successfully!");
-    }, "image/png");
-  } catch (error) {
-    toast.error("Failed to generate image");
-    console.error(error);
-  }
-};
+export { generateShareImage, prepareElementForCapture, shareContent };
