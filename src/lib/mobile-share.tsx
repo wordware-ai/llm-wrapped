@@ -104,9 +104,11 @@ const shareContent = async () => {
 
     toast.info("File created!");
 
+    const url = window.location.href;
+
     await navigator.share({
       title: "My LLM Wrapped",
-      url: window.location.href,
+      url,
       text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
       files: [file],
     });
