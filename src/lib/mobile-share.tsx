@@ -95,12 +95,6 @@ const generateShareImage = async (): Promise<Blob | null> => {
 const shareContent = async () => {
   if (typeof window === "undefined") return false;
 
-  if (screen.width < 1024) {
-    document
-      .getElementById("viewport")
-      ?.setAttribute("content", "width=1200px");
-  }
-
   try {
     const imageBlob = await generateShareImage();
     toast.info(JSON.stringify(imageBlob));
