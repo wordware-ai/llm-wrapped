@@ -96,9 +96,8 @@ const shareContent = async () => {
   if (typeof window === "undefined") return false;
 
   try {
-    // const imageBlob = await generateShareImage();
-    const response = await fetch("/og.png");
-    const imageBlob = await response.blob();
+    const imageBlob = await generateShareImage();
+    toast.info(JSON.stringify(imageBlob));
     if (!imageBlob) return false;
 
     toast.info("Sharing...");
