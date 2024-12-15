@@ -110,6 +110,8 @@ const shareContent = async () => {
     return false;
   }
 
+  alert(navigator.userActivation.isActive);
+
   const attemptShare = async () => {
     try {
       await navigator.share({
@@ -127,26 +129,28 @@ const shareContent = async () => {
   try {
     // First attempt
     return await attemptShare();
-  } catch {
-    // Show retry toast
-    toast.error(
-      <div className="flex gap-2">
-        <p>Image generation complete. Share your results?</p>
-        <Button
-          onClick={() => {
-            void attemptShare().catch((retryError) => {
-              console.error("Retry share failed:", retryError);
-              toast.error("Sharing failed again. Please try again later.");
-            });
-          }}
-        >
-          Share
-        </Button>
-      </div>,
-      {
-        duration: Infinity,
-      },
-    );
+  } catch (error) {
+    // Show retry toast only if the action is not allowed
+    if (error instanceof Error && error.name === "NotAllowedError") {
+      toast.error(
+        <div className="flex gap-2">
+          <p>Image generation complete. Share your results?</p>
+          <Button
+            onClick={() => {
+              toast.dismiss();
+              void attemptShare().catch((retryError) => {
+                console.error("Retry share failed:", retryError);
+              });
+            }}
+          >
+            Share
+          </Button>
+        </div>,
+        {
+          duration: Infinity,
+        },
+      );
+    }
 
     return false;
   }
