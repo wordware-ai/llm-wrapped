@@ -111,6 +111,7 @@ const shareContent = async () => {
   }
 
   alert(navigator.userActivation.isActive);
+  toast(navigator.userActivation.isActive);
 
   const attemptShare = async () => {
     try {
