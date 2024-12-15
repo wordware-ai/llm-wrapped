@@ -3,6 +3,7 @@
 import html2canvas from "html2canvas";
 import { logtail } from "./logtail";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 // Prepare element for capture
 const prepareElementForCapture = (clonedElement: HTMLElement) => {
@@ -50,26 +51,26 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
 };
 
 // Generate share image
-const generateShareImage = async (): Promise<Blob | null> => {
+const generateShareImage = async (): Promise<File | null> => {
   if (typeof window === "undefined") return null;
 
   const originalElement = document.getElementById("share-card");
   if (!originalElement) return null;
 
+  const clonedElement = originalElement.cloneNode(true) as HTMLElement;
+  const preparedElement = prepareElementForCapture(clonedElement);
+
+  const computedStyle = window.getComputedStyle(originalElement);
+  preparedElement.style.position = "absolute";
+  preparedElement.style.top = "-9999px";
+  preparedElement.style.width = computedStyle.width;
+  preparedElement.style.height = computedStyle.height;
+
+  document.body.appendChild(preparedElement);
+
+  const rect = preparedElement.getBoundingClientRect();
+
   try {
-    const clonedElement = originalElement.cloneNode(true) as HTMLElement;
-    const preparedElement = prepareElementForCapture(clonedElement);
-
-    const computedStyle = window.getComputedStyle(originalElement);
-    preparedElement.style.position = "absolute";
-    preparedElement.style.top = "-9999px";
-    preparedElement.style.width = computedStyle.width;
-    preparedElement.style.height = computedStyle.height;
-
-    document.body.appendChild(preparedElement);
-
-    const rect = preparedElement.getBoundingClientRect();
-
     const canvas = await html2canvas(preparedElement, {
       scale: 2,
       useCORS: true,
@@ -79,20 +80,17 @@ const generateShareImage = async (): Promise<Blob | null> => {
       height: rect.height,
     });
 
-    // const canvas = await html2canvas(preparedElement, {
-    //   backgroundColor: null,
-    //   scale: 2,
-    //   logging: false,
-    // });
+    document.body.removeChild(preparedElement);
 
-    // document.body.removeChild(preparedElement);
-
-    // return new Promise((resolve) => {
-    //   canvas.toBlob((blob) => {
-    //     resolve(blob);
-    //   }, "image/png");
-    // });
-    return null;
+    return new Promise((resolve) => {
+      canvas.toBlob((blob) => {
+        if (blob) {
+          resolve(new File([blob], "llm-wrapped.png", { type: "image/png" }));
+        } else {
+          resolve(null);
+        }
+      }, "image/png");
+    });
   } catch (error) {
     console.error("Error generating image:", error);
     return null;
@@ -105,86 +103,53 @@ const shareContent = async () => {
     void logtail.warn("Window is undefined, cannot proceed with sharing.");
     return false;
   }
+  const image = await generateShareImage();
+
+  if (!image) {
+    toast.error("Failed to generate image");
+    return false;
+  }
+
+  const attemptShare = async () => {
+    try {
+      await navigator.share({
+        title: "My LLM Wrapped",
+        text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
+        files: [image],
+      });
+      void logtail.info("Content shared successfully.");
+      return true;
+    } catch (error) {
+      throw error;
+    }
+  };
 
   try {
-    void logtail.info("Attempting to generate share image.");
-    const imageBlob = await generateShareImage();
+    // First attempt
+    return await attemptShare();
+  } catch {
+    // Show retry toast
+    toast.error(
+      <div className="flex gap-2">
+        <p>Image generation complete. Share your results?</p>
+        <Button
+          onClick={() => {
+            void attemptShare().catch((retryError) => {
+              console.error("Retry share failed:", retryError);
+              toast.error("Sharing failed again. Please try again later.");
+            });
+          }}
+        >
+          Share
+        </Button>
+      </div>,
+      {
+        duration: Infinity,
+      },
+    );
 
-    // if (!imageBlob) {
-    //   void logtail.warn("Image generation failed, no blob returned.");
-    //   return false;
-    // }
-
-    // const file = new File([imageBlob], "llm-wrapped.png", {
-    //   type: "image/png",
-    // });
-
-    // void logtail.info("File created, preparing to share.", {
-    //   url: window.location.href,
-    //   file,
-    // });
-
-    await navigator.share({
-      title: "My LLM Wrapped",
-      text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
-      // files: [file],
-    });
-
-    void logtail.info("Content shared successfully.");
-    return true;
-  } catch (error) {
-    console.error("Error sharing:", error);
-    void logtail.error("Error sharing", {
-      error,
-    });
     return false;
   }
 };
 
-const downloadMobileImage = async () => {
-  try {
-    const element = document.getElementById("share-card");
-    if (!element) {
-      console.error("Share card element not found");
-      return;
-    }
-
-    // const preparedElement = prepareElementForCapture(element);
-
-    // First make sure canvas creation works
-    const canvas = await html2canvas(element, {
-      scale: 2,
-      useCORS: true,
-      logging: false,
-      backgroundColor: "#ffffff",
-    });
-
-    // Once canvas works, we'll add sharing logic here
-    const blob = await new Promise<Blob>((resolve) =>
-      canvas.toBlob((blob) => {
-        if (blob) {
-          resolve(blob);
-        } else {
-          throw new Error("Blob creation failed");
-        }
-      }, "image/png"),
-    );
-    const file = new File([blob], "llm-wrapped.png", { type: "image/png" });
-
-    await navigator.share({
-      title: "My LLM Wrapped",
-      text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
-      files: [file],
-    });
-  } catch (error) {
-    // Log the full error for debugging
-    console.error("Full error:", error);
-  }
-};
-
-export {
-  generateShareImage,
-  prepareElementForCapture,
-  shareContent,
-  downloadMobileImage,
-};
+export { generateShareImage, prepareElementForCapture, shareContent };
