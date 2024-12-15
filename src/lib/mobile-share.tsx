@@ -94,6 +94,7 @@ const generateShareImage = async (): Promise<File | null> => {
       }, "image/png");
     });
   } catch (error) {
+    toast("failed to generate image");
     console.error("Error generating image:", error);
     return null;
   }
@@ -101,10 +102,12 @@ const generateShareImage = async (): Promise<File | null> => {
 
 // Share handler
 const shareContent = async () => {
+  toast("sharing content");
   if (typeof window === "undefined") {
     void logtail.warn("Window is undefined, cannot proceed with sharing.");
     return false;
   }
+  toast("generating image");
   const image = await generateShareImage();
 
   if (!image) {
