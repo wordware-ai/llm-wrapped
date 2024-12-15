@@ -30,7 +30,9 @@ export default function WordwareCard({
       id="share-card"
     >
       {cardData?.svg && !hideHashtag && (
-        <div className="svg-container">{/* <cardData.svg /> */}</div>
+        <div className="svg-container">
+          <cardData.svg />
+        </div>
       )}
       <div
         className={cn(

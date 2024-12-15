@@ -71,21 +71,7 @@ const generateShareImage = async (): Promise<File | null> => {
   const rect = preparedElement.getBoundingClientRect();
 
   try {
-    // Create a div element that says "Hello World"
-    const helloWorldDiv = document.createElement("div");
-    helloWorldDiv.textContent = "Hello World";
-    helloWorldDiv.style.position = "absolute";
-    helloWorldDiv.style.top = "0";
-    helloWorldDiv.style.left = "0";
-    helloWorldDiv.style.zIndex = "1000";
-    helloWorldDiv.style.backgroundColor = "white";
-    helloWorldDiv.style.padding = "10px";
-    helloWorldDiv.style.border = "1px solid black";
-
-    // Add the div to the document body
-    document.body.appendChild(helloWorldDiv);
-
-    const canvas = await html2canvas(helloWorldDiv, {
+    const canvas = await html2canvas(preparedElement, {
       scale: 2,
       useCORS: true,
       allowTaint: true,
@@ -96,9 +82,6 @@ const generateShareImage = async (): Promise<File | null> => {
     });
 
     // Clean up by removing the div after capturing
-    document.body.removeChild(helloWorldDiv);
-
-    toast("created image");
 
     document.body.removeChild(preparedElement);
 
@@ -112,7 +95,6 @@ const generateShareImage = async (): Promise<File | null> => {
       }, "image/png");
     });
   } catch (error) {
-    toast("failed to generate image");
     console.error("Error generating image:", error);
     return null;
   }
@@ -120,32 +102,25 @@ const generateShareImage = async (): Promise<File | null> => {
 
 // Share handler
 const shareContent = async () => {
-  toast("sharing content");
   if (typeof window === "undefined") {
     void logtail.warn("Window is undefined, cannot proceed with sharing.");
     return false;
   }
-  toast("generating image");
   const image = await generateShareImage();
-  toast("generated image");
 
   if (!image) {
-    toast.error("Failed to generate image");
     return false;
   }
 
   const attemptShare = async () => {
     try {
-      toast("pre share");
       await navigator.share({
         title: "My LLM Wrapped",
         text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
         files: [image],
       });
-      toast("shared image");
       return true;
     } catch (error) {
-      toast("failed to share image");
       throw error;
     }
   };
@@ -154,10 +129,9 @@ const shareContent = async () => {
     // First attempt
     return await attemptShare();
   } catch (error) {
-    toast("failed to share image");
     // Show retry toast only if the action is not allowed
     if (error instanceof Error && error.name === "NotAllowedError") {
-      toast.error(
+      toast(
         <div className="flex gap-2">
           <p>Image generation complete. Share your results?</p>
           <Button
