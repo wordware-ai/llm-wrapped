@@ -24,42 +24,45 @@ export default function WordwareCard({
   );
 
   return (
-    <div
-      className={cn(baseClasses, "bg-[#1A1A1A]")}
-      style={{ backgroundColor: cardData?.bgColor }}
-      id="share-card"
-    >
-      {cardData?.svg && !hideHashtag && (
-        <div className="svg-container">{/* <cardData.svg /> */}</div>
-      )}
-      <div
-        className={cn(
-          "absolute left-0 top-0 w-full gap-[7px] px-2",
-          "flex flex-col",
-        )}
-      >
-        {Array.from({ length: 15 }).map((_, i) => (
-          <WordwareLogo key={i} fillColor={cardData?.fillColor} />
-        ))}
-      </div>
-      <div className="z-10 flex h-full w-full flex-col justify-between p-4 pt-0 sm:p-8 sm:pt-0">
-        {!hideHashtag && (
-          <p className="hashtag pt-6 text-[4vh] text-white sm:text-[3vh]">
-            #LLMwrapped
-          </p>
-        )}
-        <div className="z-40 flex h-full w-full flex-col justify-end gap-4 sm:gap-10">
-          {children}
-          {!hideShare && (
-            <div
-              className={cn("flex w-full items-center justify-center")}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <ShareButton />
-            </div>
-          )}
-        </div>
-      </div>
+    // <div
+    //   className={cn(baseClasses, "bg-[#1A1A1A]")}
+    //   style={{ backgroundColor: cardData?.bgColor }}
+    //   id="share-card"
+    // >
+    //   {cardData?.svg && !hideHashtag && (
+    //     <div className="svg-container">{/* <cardData.svg /> */}</div>
+    //   )}
+    //   <div
+    //     className={cn(
+    //       "absolute left-0 top-0 w-full gap-[7px] px-2",
+    //       "flex flex-col",
+    //     )}
+    //   >
+    //     {Array.from({ length: 15 }).map((_, i) => (
+    //       <WordwareLogo key={i} fillColor={cardData?.fillColor} />
+    //     ))}
+    //   </div>
+    //   <div className="z-10 flex h-full w-full flex-col justify-between p-4 pt-0 sm:p-8 sm:pt-0">
+    //     {!hideHashtag && (
+    //       <p className="hashtag pt-6 text-[4vh] text-white sm:text-[3vh]">
+    //         #LLMwrapped
+    //       </p>
+    //     )}
+    //     <div className="z-40 flex h-full w-full flex-col justify-end gap-4 sm:gap-10">
+    //       {children}
+    //       {!hideShare && (
+    //         <div
+    //           className={cn("flex w-full items-center justify-center")}
+    //           onClick={(e) => e.stopPropagation()}
+    //         >
+    //           <ShareButton />
+    //         </div>
+    //       )}
+    //     </div>
+    //   </div>
+    // </div>
+    <div id="share-card" className="h-40 w-40 rounded-full bg-purple-400">
+      <ShareButton />
     </div>
   );
 }
