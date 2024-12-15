@@ -92,13 +92,13 @@ export const ImageCard = ({
     <>
       {imageUrl !== "" && (
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-          <Image
+          {/* <Image
             src={imageUrl}
             alt={title}
             className="image aspect-square size-[150px] rounded-lg object-cover sm:size-[200px]"
             width={200}
             height={200}
-          />
+          /> */}
         </motion.div>
       )}
     </>
