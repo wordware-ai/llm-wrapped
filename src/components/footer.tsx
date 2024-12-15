@@ -5,13 +5,13 @@ export default function Footer() {
   return (
     <footer className="mt-auto flex flex-col gap-8 bg-black p-8 pb-8 pt-16 text-white">
       <div className="flex items-center pb-12">
-        <Image
+        {/* <Image
           src="/brand/wordware-black.svg"
           alt="Wordware Logo"
           width={120}
           height={30}
           className="invert"
-        />
+        /> */}
       </div>
 
       <div className="flex flex-wrap gap-8">
