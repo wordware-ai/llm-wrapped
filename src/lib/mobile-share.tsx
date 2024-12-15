@@ -80,6 +80,8 @@ const generateShareImage = async (): Promise<File | null> => {
       height: rect.height,
     });
 
+    toast("created image");
+
     document.body.removeChild(preparedElement);
 
     return new Promise((resolve) => {
@@ -110,9 +112,6 @@ const shareContent = async () => {
     return false;
   }
 
-  alert(navigator.userActivation.isActive);
-  toast(navigator.userActivation.isActive);
-
   const attemptShare = async () => {
     try {
       await navigator.share({
@@ -120,9 +119,10 @@ const shareContent = async () => {
         text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
         files: [image],
       });
-      void logtail.info("Content shared successfully.");
+      toast("shared image");
       return true;
     } catch (error) {
+      toast("failed to share image");
       throw error;
     }
   };
