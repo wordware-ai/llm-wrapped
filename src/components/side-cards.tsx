@@ -63,6 +63,7 @@ export function SideCards({
                           className="rounded-lg object-cover"
                           width={120}
                           height={120}
+                          loading="eager"
                         />
                       </Link>
                     ) : (
@@ -72,6 +73,7 @@ export function SideCards({
                         className="rounded-lg object-cover"
                         width={120}
                         height={120}
+                        loading="eager"
                       />
                     )}
                   </>
@@ -109,6 +111,7 @@ export function SideCards({
               alt="Background"
               fill
               className="object-cover"
+              loading="eager"
               priority
             />
             <div className="relative z-10 flex w-full items-center justify-between gap-4">

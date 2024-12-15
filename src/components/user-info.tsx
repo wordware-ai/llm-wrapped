@@ -37,6 +37,7 @@ export function UserInfo({
                   alt="Curved arrow"
                   width={120}
                   height={120}
+                  loading="eager"
                   className="mr-16 mt-0 rotate-[40deg] sm:rotate-[110deg] sm:scale-x-[-1] xl:mr-0 xl:mt-16 xl:rotate-[0deg] xl:scale-x-[1]"
                 />
                 <p className="-mt-6 ml-10 max-w-[150px] text-wrap font-medium text-black sm:ml-8 sm:mt-0 xl:max-w-[250px] xl:text-lg">
@@ -51,6 +52,7 @@ export function UserInfo({
                 alt={name}
                 width={200}
                 height={200}
+                loading="eager"
                 className="aspect-square h-full w-full rounded-full object-cover"
               />
             </div>

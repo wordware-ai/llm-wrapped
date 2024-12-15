@@ -32,6 +32,7 @@ export default function WordwareSlideshow() {
         priority
         fetchPriority="high"
         placeholder="blur"
+        loading="eager"
         blurDataURL="iVBORw0KGgoAAAANSUhEUgAAAAoAAAAVCAMAAABIbI/BAAAAqFBMVEUhNzg/XV1IaWcsR0cnQEAzUFA2VFNTd3NMbWsvS0wjOjsOGxNPcWwjQhwpREMeMjNDYmEwTkcKFBFfhHklPj46V1g7W1JCY1cVJhRPdi5UdmtYgTdkijYfNDVHZmcuTSAoRh1GZ2MgORkoSR9vkVQwViFhhUgcMRdjiXpuk3BZfnocLzEaLC57r0lvpjpqmUpLcEZbfVp1oFxSclweNh1bez1pjoNAaCnKoVkWAAAAt0lEQVQI1x2NyWKDIABER1BUBJFixLXRmETTNmuX/P+fBTqnd5h5Ax7SNNoUJDZAmKcRC97FB1CG/5jEAC9pyoLC4cC5a2wCEkPBD5nHzwHe4Xb4UkOZ0yggCZRyOso8coWSMvchoDkPnWByMq1zXVVTIlbYSjNLBCEG11tlbdwWyYrL+XG3rWjNHw5Nd9zvv1tjsJVz0/e/x9MJUu7mcdt0fYc6q3fLj2dkLvUi5eGJ7M2nHmf5AgI0DnJo+IK6AAAAAElFTkSuQmCC"
       />
       <TitleCard

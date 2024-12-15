@@ -132,6 +132,7 @@ export function PDFInput({
             fill
             style={{ objectFit: "contain" }}
             placeholder="blur"
+            loading="eager"
             blurDataURL="/images/linkedin-pdf-blur.png"
           />
         </div>

@@ -112,6 +112,7 @@ export const MostVisited = async ({
                   width={48}
                   height={48}
                   className="z-10 rounded-full"
+                  loading="eager"
                 />
               ) : (
                 <PiUser className="h-12 w-12 rounded-full bg-gray-100 p-2 text-gray-400" />
@@ -123,7 +124,7 @@ export const MostVisited = async ({
                 className="font-medium text-gray-900 hover:underline"
               >
                 {platform === "linkedin"
-                  ? ((user as LinkedInUser).name ?? user.username)
+                  ? (user as LinkedInUser).name ?? user.username
                   : `@${user.username}`}
               </Link>
             </div>

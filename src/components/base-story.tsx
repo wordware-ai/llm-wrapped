@@ -33,6 +33,7 @@ export function BaseStory({
           alt={alt}
           width={200}
           height={200}
+          loading="eager"
           className={cn(
             "h-full w-full rounded-full object-cover",
             imageClassName,
