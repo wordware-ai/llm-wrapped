@@ -71,14 +71,21 @@ const generateShareImage = async (): Promise<File | null> => {
   const rect = preparedElement.getBoundingClientRect();
 
   try {
-    const vp = document.getElementById("viewportMeta")?.getAttribute("content");
-    if (screen.width < 1024) {
-      document
-        .getElementById("viewport")
-        ?.setAttribute("content", "width=1200px");
-    }
+    // Create a div element that says "Hello World"
+    const helloWorldDiv = document.createElement("div");
+    helloWorldDiv.textContent = "Hello World";
+    helloWorldDiv.style.position = "absolute";
+    helloWorldDiv.style.top = "0";
+    helloWorldDiv.style.left = "0";
+    helloWorldDiv.style.zIndex = "1000";
+    helloWorldDiv.style.backgroundColor = "white";
+    helloWorldDiv.style.padding = "10px";
+    helloWorldDiv.style.border = "1px solid black";
 
-    const canvas = await html2canvas(preparedElement, {
+    // Add the div to the document body
+    document.body.appendChild(helloWorldDiv);
+
+    const canvas = await html2canvas(helloWorldDiv, {
       scale: 2,
       useCORS: true,
       allowTaint: true,
@@ -88,10 +95,8 @@ const generateShareImage = async (): Promise<File | null> => {
       height: rect.height,
     });
 
-    toast(vp);
-    if (screen.width < 1024) {
-      document.getElementById("viewport")?.setAttribute("content", String(vp));
-    }
+    // Clean up by removing the div after capturing
+    document.body.removeChild(helloWorldDiv);
 
     toast("created image");
 
