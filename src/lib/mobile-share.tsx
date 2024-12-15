@@ -52,25 +52,36 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
 
 // Generate share image
 const generateShareImage = async (): Promise<File | null> => {
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined") {
+    toast("Window is undefined");
+    return null;
+  }
 
   const originalElement = document.getElementById("share-card");
-  if (!originalElement) return null;
+  if (!originalElement) {
+    toast("Original element not found");
+    return null;
+  }
 
+  toast("Cloning original element");
   const clonedElement = originalElement.cloneNode(true) as HTMLElement;
   const preparedElement = prepareElementForCapture(clonedElement);
 
+  toast("Getting computed style");
   const computedStyle = window.getComputedStyle(originalElement);
   preparedElement.style.position = "absolute";
   preparedElement.style.top = "-9999px";
   preparedElement.style.width = computedStyle.width;
   preparedElement.style.height = computedStyle.height;
 
+  toast("Appending prepared element to body");
   document.body.appendChild(preparedElement);
 
   const rect = preparedElement.getBoundingClientRect();
+  toast("Prepared element dimensions obtained");
 
   try {
+    toast("Starting html2canvas rendering");
     const canvas = await html2canvas(preparedElement, {
       scale: 2,
       useCORS: true,
@@ -80,21 +91,24 @@ const generateShareImage = async (): Promise<File | null> => {
       height: rect.height,
     });
 
-    toast("created image");
+    toast("Image created successfully");
 
     document.body.removeChild(preparedElement);
+    toast("Prepared element removed from body");
 
     return new Promise((resolve) => {
       canvas.toBlob((blob) => {
         if (blob) {
+          toast("Blob created successfully");
           resolve(new File([blob], "llm-wrapped.png", { type: "image/png" }));
         } else {
+          toast("Failed to create blob");
           resolve(null);
         }
       }, "image/png");
     });
   } catch (error) {
-    toast("failed to generate image");
+    toast("Failed to generate image");
     console.error("Error generating image:", error);
     return null;
   }
