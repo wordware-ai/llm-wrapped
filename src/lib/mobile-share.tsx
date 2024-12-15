@@ -166,6 +166,7 @@ const shareContent = async () => {
 
 const downloadMobileImage = async () => {
   const element = document.getElementById("share-card");
+
   if (!element) {
     console.error("Share card element not found");
     return;
@@ -176,6 +177,12 @@ const downloadMobileImage = async () => {
     const rect = element.getBoundingClientRect();
 
     // Create canvas and convert to image data
+    if (screen.width < 1024) {
+      document
+        .getElementById("viewport")
+        ?.setAttribute("content", "width=1200px");
+    }
+
     const canvas = await html2canvas(element, {
       scale: 2,
       useCORS: true,
@@ -196,6 +203,11 @@ const downloadMobileImage = async () => {
         }
       },
     });
+    if (screen.width < 1024) {
+      document
+        .getElementById("viewport")
+        ?.setAttribute("content", "width=1200px");
+    }
 
     // Get image data URL
     const imageUrl = canvas.toDataURL("image/png", 1.0);
