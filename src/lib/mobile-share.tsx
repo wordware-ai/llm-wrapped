@@ -85,6 +85,11 @@ const generateShareImage = async (): Promise<File | null> => {
     // Add the div to the document body
     document.body.appendChild(helloWorldDiv);
 
+    const lazyElements = document.querySelectorAll('[loading="lazy"]');
+    lazyElements.forEach((element) => {
+      element.setAttribute("loading", "eager");
+    });
+
     const canvas = await html2canvas(helloWorldDiv, {
       scale: 2,
       useCORS: true,
