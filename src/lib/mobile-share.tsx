@@ -1,5 +1,7 @@
 "use client";
 
+import html2canvas from "html2canvas";
+import { logtail } from "./logtail";
 import { toast } from "sonner";
 
 // Prepare element for capture
@@ -54,8 +56,6 @@ const generateShareImage = async (): Promise<Blob | null> => {
   const originalElement = document.getElementById("share-card");
   if (!originalElement) return null;
 
-  const html2canvas = (await import("html2canvas")).default;
-
   try {
     const clonedElement = originalElement.cloneNode(true) as HTMLElement;
     const preparedElement = prepareElementForCapture(clonedElement);
@@ -67,64 +67,124 @@ const generateShareImage = async (): Promise<Blob | null> => {
     preparedElement.style.height = computedStyle.height;
 
     document.body.appendChild(preparedElement);
-    toast.info("Generating image...");
+
+    const rect = preparedElement.getBoundingClientRect();
+
     const canvas = await html2canvas(preparedElement, {
-      backgroundColor: null,
       scale: 2,
-      logging: false,
       useCORS: true,
-      allowTaint: true,
+      logging: false,
+      backgroundColor: "#ffffff",
+      width: rect.width,
+      height: rect.height,
     });
-    toast.success("Image generated!");
 
-    document.body.removeChild(preparedElement);
+    // const canvas = await html2canvas(preparedElement, {
+    //   backgroundColor: null,
+    //   scale: 2,
+    //   logging: false,
+    // });
 
-    return new Promise((resolve) => {
-      canvas.toBlob((blob) => {
-        resolve(blob);
-      }, "image/png");
-    });
+    // document.body.removeChild(preparedElement);
+
+    // return new Promise((resolve) => {
+    //   canvas.toBlob((blob) => {
+    //     resolve(blob);
+    //   }, "image/png");
+    // });
+    return null;
   } catch (error) {
     console.error("Error generating image:", error);
-    toast.error("Error generating image");
     return null;
   }
 };
 
 // Share handler
 const shareContent = async () => {
-  if (typeof window === "undefined") return false;
+  if (typeof window === "undefined") {
+    void logtail.warn("Window is undefined, cannot proceed with sharing.");
+    return false;
+  }
 
   try {
+    void logtail.info("Attempting to generate share image.");
     const imageBlob = await generateShareImage();
-    toast.info(JSON.stringify(imageBlob));
-    if (!imageBlob) return false;
 
-    toast.info("Sharing...");
+    // if (!imageBlob) {
+    //   void logtail.warn("Image generation failed, no blob returned.");
+    //   return false;
+    // }
 
-    const file = new File([imageBlob], "llm-wrapped.png", {
-      type: "image/png",
-    });
+    // const file = new File([imageBlob], "llm-wrapped.png", {
+    //   type: "image/png",
+    // });
 
-    toast.info("File created!");
-
-    // const url = window.location.href;
+    // void logtail.info("File created, preparing to share.", {
+    //   url: window.location.href,
+    //   file,
+    // });
 
     await navigator.share({
       title: "My LLM Wrapped",
-      // url,
       text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
-      files: [file],
+      // files: [file],
     });
 
-    toast.success("Shared!");
-
+    void logtail.info("Content shared successfully.");
     return true;
   } catch (error) {
     console.error("Error sharing:", error);
-    toast.error(JSON.stringify(error));
+    void logtail.error("Error sharing", {
+      error,
+    });
     return false;
   }
 };
 
-export { generateShareImage, prepareElementForCapture, shareContent };
+const downloadMobileImage = async () => {
+  try {
+    const element = document.getElementById("share-card");
+    if (!element) {
+      console.error("Share card element not found");
+      return;
+    }
+
+    // const preparedElement = prepareElementForCapture(element);
+
+    // First make sure canvas creation works
+    const canvas = await html2canvas(element, {
+      scale: 2,
+      useCORS: true,
+      logging: false,
+      backgroundColor: "#ffffff",
+    });
+
+    // Once canvas works, we'll add sharing logic here
+    const blob = await new Promise<Blob>((resolve) =>
+      canvas.toBlob((blob) => {
+        if (blob) {
+          resolve(blob);
+        } else {
+          throw new Error("Blob creation failed");
+        }
+      }, "image/png"),
+    );
+    const file = new File([blob], "llm-wrapped.png", { type: "image/png" });
+
+    await navigator.share({
+      title: "My LLM Wrapped",
+      text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
+      files: [file],
+    });
+  } catch (error) {
+    // Log the full error for debugging
+    console.error("Full error:", error);
+  }
+};
+
+export {
+  generateShareImage,
+  prepareElementForCapture,
+  shareContent,
+  downloadMobileImage,
+};

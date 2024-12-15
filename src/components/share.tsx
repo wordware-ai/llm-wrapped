@@ -12,7 +12,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { shareConfig } from "@/config/share-config";
-import { shareContent } from "@/lib/mobile-share";
+import { downloadMobileImage, shareContent } from "@/lib/mobile-share";
 import { isMobile } from "@/lib/utils";
 import { Share } from "lucide-react";
 import { useState } from "react";
@@ -26,10 +26,14 @@ export default function ShareButton() {
 
     if (typeof window === "undefined") return;
 
-    if (typeof navigator.share === "function" && isMobile()) {
-      await shareContent();
-    } else {
+    if (!navigator.share || !isMobile()) {
       setIsOpen(true);
+    } else {
+      // await navigator.share({
+      //   title: "My LLM Wrapped",
+      //   text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
+      // });
+      await downloadMobileImage();
     }
   };
 
