@@ -109,6 +109,7 @@ const shareContent = async () => {
   }
   toast("generating image");
   const image = await generateShareImage();
+  toast("generated image");
 
   if (!image) {
     toast.error("Failed to generate image");
@@ -117,6 +118,7 @@ const shareContent = async () => {
 
   const attemptShare = async () => {
     try {
+      toast("pre share");
       await navigator.share({
         title: "My LLM Wrapped",
         text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
@@ -134,6 +136,7 @@ const shareContent = async () => {
     // First attempt
     return await attemptShare();
   } catch (error) {
+    toast("failed to share image");
     // Show retry toast only if the action is not allowed
     if (error instanceof Error && error.name === "NotAllowedError") {
       toast.error(
