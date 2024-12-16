@@ -46,7 +46,7 @@ export default function WordwareCard({
       </div>
       <div className="z-10 flex h-full w-full flex-col justify-between pt-0 sm:p-8">
         {!hideHashtag && (
-          <p className="hashtag pt-8 text-[4vh] text-white sm:text-[3vh]">
+          <p className="hashtag pt-2 text-[4vh] text-white sm:text-[3vh]">
             #LLMwrapped
           </p>
         )}

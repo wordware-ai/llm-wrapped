@@ -43,13 +43,13 @@ export function SideCards({
           hideShare
           hideHashtag
           cardData={cardConfig.card2}
-          className="aspect-auto min-h-[400px] w-full rounded-xl sm:min-h-full sm:w-1/2 lg:min-h-0"
+          className="aspect-auto min-h-[400px] w-full rounded-xl sm:min-h-full sm:w-1/2 sm:px-0 lg:min-h-0"
         >
-          <div className=":py-0 flex h-full w-full flex-col items-center justify-center gap-4 py-8">
+          <div className="flex h-full w-full flex-col items-center justify-center gap-4 py-8 sm:py-0">
             {card2.text ? (
               <>
                 {card2.text && card2.title && (
-                  <h3 className="text-center text-5xl font-semibold text-white sm:text-4xl lg:text-3xl xl:text-4xl">
+                  <h3 className="text-center text-5xl font-semibold text-white sm:text-4xl lg:text-3xl">
                     {card2.title}
                   </h3>
                 )}
@@ -95,7 +95,7 @@ export function SideCards({
             cardData={cardConfig.card3}
             className="flex aspect-auto h-full min-h-[400px] w-full items-center justify-center rounded-xl lg:h-full lg:min-h-0"
           >
-            <div className="flex h-full w-full items-center justify-center">
+            <div className="flex h-full w-full items-center justify-center py-8 sm:py-0">
               {card3text ? (
                 <p className="grow text-center text-4xl text-white sm:text-2xl">
                   {card3text}

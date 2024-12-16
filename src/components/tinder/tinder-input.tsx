@@ -6,7 +6,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { TinderDataSchema } from "./schemas";
 import { useRouter } from "next/navigation";
-import { createTinderId } from "@/lib/create-tinder-id";
+import { createId } from "@/lib/create-tinder-id";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
 import DownloadPopover from "./download-popover";
@@ -53,7 +53,7 @@ export function TinderInput() {
           const jsonData = JSON.parse(e.target?.result as string) as unknown;
           const parsedData = TinderDataSchema.parse(jsonData);
           const name = parsedData?.user?.name;
-          const id = createTinderId(name);
+          const id = createId(name);
           const markdown = convertTinderDataToMarkdown(parsedData);
           const dataToStore = { name, llmdata: markdown, id };
           localStorage.setItem("tinderData", JSON.stringify(dataToStore));

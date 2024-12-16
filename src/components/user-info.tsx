@@ -62,10 +62,10 @@ export function UserInfo({
           <p className="text-center text-xl font-semibold">{name}</p>
         </div>
         <div className="flex flex-col justify-end gap-8">
-          <div className="flex w-min flex-col gap-4">
+          <div className="flex flex-col gap-4 sm:w-min">
             <div className="flex flex-col gap-2">
               <h2 className="text-2xl font-semibold">Share your results</h2>
-              <p className="whitespace-nowrap text-gray-600 sm:whitespace-normal">
+              <p className="text-gray-600">
                 Unwrap your LLM-crafted journey with friends.
               </p>
             </div>

@@ -4,7 +4,7 @@ import { buttonVariants } from "./ui/button";
 
 export default function WordwareInfo() {
   return (
-    <div className="flex flex-col gap-16 px-4 py-12">
+    <div className="flex flex-col gap-16 px-6 py-12">
       <section className="mx-auto flex max-w-3xl flex-col gap-12 text-left">
         <div className="flex items-center gap-4">
           <h1 className="bg-zinc-900 bg-clip-text text-4xl font-semibold text-transparent">

@@ -1,3 +1,4 @@
+import { createId } from "@/lib/create-tinder-id";
 import { createClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
@@ -11,7 +12,8 @@ export async function GET(request: Request) {
     const { data, error } = await supabase.auth.exchangeCodeForSession(code);
 
     if (!error && data.user) {
-      next = `/spotify/${(data.user.user_metadata as { name?: string }).name}`;
+      const id = createId((data.user.user_metadata as { name?: string }).name);
+      next = `/spotify/${id}`;
 
       const forwardedHost = request.headers.get("x-forwarded-host"); // original origin before load balancer
       const isLocalEnv = process.env.NODE_ENV === "development";

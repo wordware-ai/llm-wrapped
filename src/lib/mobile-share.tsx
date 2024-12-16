@@ -15,7 +15,7 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
     shareButtonContainer.remove();
   }
 
-  clonedElement.style.padding = "2.25rem 1.5rem";
+  // clonedElement.style.padding = "1.5rem 1.5rem";
 
   // Hide the SVG container
   const svgContainer = clonedElement.querySelector(".svg-container");
