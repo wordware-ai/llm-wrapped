@@ -81,7 +81,7 @@ export function SpotifyResults({
       setResults(displayResults);
     } else {
       void streamResponse({
-        promptId: "45bf050b-4223-45c1-9fd6-a2d6c6b2ac1d",
+        promptId: "bfe383ca-da74-402e-b51a-5eb9cc73dac9",
         data: llmData ?? "",
         onFinish,
       });

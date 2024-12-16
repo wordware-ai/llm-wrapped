@@ -86,7 +86,7 @@ export function LinkedInResults({
         },
       ) => {
         return streamResponse({
-          promptId: "eb98a6bb-d867-42a3-a475-1e0546c9f638",
+          promptId: "3caa6225-335d-4c49-a96c-9b26a805685c",
           data,
           onFinish: (results: Record<string, unknown>) => {
             const linkedinResult = {
