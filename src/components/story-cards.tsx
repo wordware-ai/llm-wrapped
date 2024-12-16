@@ -56,20 +56,20 @@ export const MetricCard = ({
     >
       <motion.p
         variants={fadeInUp}
-        className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh]"
+        className="text-[4.5vh] font-semibold leading-tight sm:text-[3.5vh] md:text-[4vh]"
       >
         {title}
       </motion.p>
       <motion.div
         variants={scaleIn}
         style={{ color: valueColor }}
-        className="break-words font-semibold italic leading-tight"
+        className="x break-words text-[5vh] font-semibold italic leading-tight sm:text-[4vh] md:text-[4.5vh]"
       >
         <DynamicText text={String(value)} />
       </motion.div>
       <motion.p
         variants={fadeInUp}
-        className="text-[4vh] leading-tight sm:text-[3vh]"
+        className="text-[4vh] leading-tight xs:text-[2.5vh] sm:text-[3vh] md:text-[3.5vh]"
       >
         {description}
       </motion.p>
@@ -94,7 +94,7 @@ export const ImageCard = ({
         <motion.div
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="size-[150px] sm:size-[25vh]"
+          className="size-[150px] sm:size-[18vh] lg:size-[25vh]"
           style={{
             borderRadius: "0.5rem 0.5rem 0 0",
             overflow: "hidden",
@@ -144,13 +144,13 @@ export const ImageCard = ({
       </motion.div>
       <motion.h3
         variants={fadeInUp}
-        className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3.5vh]"
+        className="text-[4.5vh] font-semibold leading-tight text-white sm:text-[3vh] md:text-[4vh]"
       >
         {title}
       </motion.h3>
       <motion.p
         variants={fadeInUp}
-        className="text-[4vh] leading-tight text-white sm:text-[3vh]"
+        className="text-[4vh] leading-tight text-white sm:text-[2.5vh] md:text-[3.5vh]"
       >
         {description}
       </motion.p>
@@ -177,13 +177,13 @@ export const TitleCard = ({
     >
       <motion.h3
         variants={fadeInUp}
-        className="text-[4.5vh] font-medium leading-tight text-white sm:text-[3.5vh]"
+        className="text-[4.5vh] font-medium leading-tight text-white sm:text-[3.5vh] md:text-[4vh]"
       >
         {title}
       </motion.h3>
       <motion.p
         variants={fadeInUp}
-        className="text-[4vh] leading-tight text-white sm:text-[3vh]"
+        className="text-[4vh] leading-tight text-white sm:text-[3vh] md:text-[3.5vh]"
       >
         {String(description)}
       </motion.p>
@@ -199,7 +199,7 @@ export const TextCard = ({ result }: { result: Record<string, unknown> }) => {
       animate="animate"
       variants={fadeInUp}
     >
-      <motion.p className="text-[4vh] leading-tight text-white sm:text-[4vh]">
+      <motion.p className="text-[4vh] leading-tight text-white sm:text-[3vh] md:text-[3.5vh]">
         {result.value as string}
       </motion.p>
     </motion.div>

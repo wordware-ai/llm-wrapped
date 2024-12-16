@@ -39,6 +39,7 @@
     "@trpc/client": "^11.0.0-rc.446",
     "@trpc/react-query": "^11.0.0-rc.446",
     "@trpc/server": "^11.0.0-rc.446",
+    "@vercel/edge-config": "^1.4.0",
     "@vercel/og": "^0.6.4",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

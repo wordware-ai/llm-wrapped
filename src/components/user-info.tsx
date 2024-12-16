@@ -4,6 +4,8 @@ import { ShareIcon } from "./share-icon";
 import { useStreamContext } from "./stream-provider";
 import { toast } from "sonner";
 import { shareConfig } from "@/config/share-config";
+import { isMobile } from "@/lib/utils";
+import { Button } from "./ui/button";
 
 export function UserInfo({
   name,
@@ -59,32 +61,49 @@ export function UserInfo({
           )}
           <p className="text-center text-xl font-semibold">{name}</p>
         </div>
-        <div className="flex w-min flex-col justify-end gap-8">
-          <div className="flex flex-col gap-4">
+        <div className="flex flex-col justify-end gap-8">
+          <div className="flex w-min flex-col gap-4">
             <div className="flex flex-col gap-2">
               <h2 className="text-2xl font-semibold">Share your results</h2>
-              <p className="text-gray-600">
+              <p className="whitespace-nowrap text-gray-600 sm:whitespace-normal">
                 Unwrap your LLM-crafted journey with friends.
               </p>
             </div>
 
-            <div className="flex w-min flex-col gap-4">
-              <div className="flex items-center gap-4">
-                {shareConfig
-                  .filter(
-                    (option) =>
-                      !["Copy Link", "Export Image"].includes(option.label),
-                  )
-                  .map((shareOption) => (
-                    <ShareIcon
-                      key={shareOption.label}
-                      label={shareOption.label}
-                      icon={shareOption.icon}
-                      action={shareOption.action}
-                      size="size-12"
-                    />
-                  ))}
-              </div>
+            <div className="flex flex-col gap-4">
+              {isMobile() ? (
+                <Button
+                  onClick={async () =>
+                    await navigator.share({
+                      title: "My LLM Wrapped",
+                      text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
+                      url: window.location.href,
+                    })
+                  }
+                  size="lg"
+                  className="w-full"
+                >
+                  Share
+                </Button>
+              ) : (
+                <div className="flex items-center gap-4">
+                  {shareConfig
+                    .filter(
+                      (option) =>
+                        !["Copy Link", "Export Image"].includes(option.label),
+                    )
+                    .map((shareOption) => (
+                      <ShareIcon
+                        key={shareOption.label}
+                        label={shareOption.label}
+                        icon={shareOption.icon}
+                        action={shareOption.action}
+                        size="size-12"
+                      />
+                    ))}
+                </div>
+              )}
+
               <div className="flex w-full items-center gap-2 rounded-lg border p-3">
                 <input
                   type="text"

@@ -16,6 +16,7 @@ export const env = createEnv({
     SUPABASE_SERVICE_ROLE_KEY: z.string(),
     POSTHOG_PERSONAL_API_KEY: z.string(),
     POSTHOG_PROJECT_ID: z.string(),
+    EDGE_CONFIG: z.string(),
   },
 
   /**
@@ -48,6 +49,7 @@ export const env = createEnv({
     POSTHOG_PROJECT_ID: process.env.POSTHOG_PROJECT_ID,
     NEXT_PUBLIC_POSTHOG_KEY: process.env.NEXT_PUBLIC_POSTHOG_KEY,
     NEXT_PUBLIC_POSTHOG_HOST: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    EDGE_CONFIG: process.env.EDGE_CONFIG,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

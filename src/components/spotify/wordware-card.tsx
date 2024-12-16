@@ -19,7 +19,7 @@ export default function WordwareCard({
   hideHashtag?: boolean;
 }) {
   const baseClasses = cn(
-    "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg  ",
+    "relative flex aspect-[4/7] items-center overflow-hidden rounded-lg p-4 sm:p-0 ",
     className,
   );
 
@@ -44,9 +44,9 @@ export default function WordwareCard({
           <WordwareLogo key={i} fillColor={cardData?.fillColor} />
         ))}
       </div>
-      <div className="z-10 flex h-full w-full flex-col justify-between p-4 pt-0 sm:p-8 sm:pt-0">
+      <div className="z-10 flex h-full w-full flex-col justify-between pt-0 sm:p-8">
         {!hideHashtag && (
-          <p className="hashtag pt-6 text-[4vh] text-white sm:text-[3vh]">
+          <p className="hashtag pt-8 text-[4vh] text-white sm:text-[3vh]">
             #LLMwrapped
           </p>
         )}

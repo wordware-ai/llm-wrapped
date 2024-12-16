@@ -73,7 +73,7 @@ export default function Navbar() {
               target="_blank"
               href={url}
             >
-              Build your own version of LLMWrapped
+              Build your own version
             </Link>
           </div>
         </SheetContent>

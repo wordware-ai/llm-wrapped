@@ -30,11 +30,11 @@ export function SideCards({
       >
         <div className="flex h-full items-center justify-center">
           {card1text ? (
-            <p className="text-center text-4xl text-white lg:text-2xl">
+            <p className="py-8 text-center text-4xl text-white sm:py-0 sm:text-3xl lg:text-2xl">
               {card1text}
             </p>
           ) : (
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#1F5A4A] border-t-transparent" />
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-[#2d3533] border-t-transparent" />
           )}
         </div>
       </WordwareCard>
@@ -45,11 +45,11 @@ export function SideCards({
           cardData={cardConfig.card2}
           className="aspect-auto min-h-[400px] w-full rounded-xl sm:min-h-full sm:w-1/2 lg:min-h-0"
         >
-          <div className="flex h-full w-full flex-col items-center justify-center gap-4">
+          <div className=":py-0 flex h-full w-full flex-col items-center justify-center gap-4 py-8">
             {card2.text ? (
               <>
                 {card2.text && card2.title && (
-                  <h3 className="text-center text-4xl font-semibold text-white lg:text-3xl xl:text-4xl">
+                  <h3 className="text-center text-5xl font-semibold text-white sm:text-4xl lg:text-3xl xl:text-4xl">
                     {card2.title}
                   </h3>
                 )}
@@ -60,9 +60,9 @@ export function SideCards({
                         <Image
                           src={card2.imageUrl}
                           alt={card2.title ?? ""}
-                          className="rounded-lg object-cover"
-                          width={120}
-                          height={120}
+                          className="h-40 w-40 rounded-lg object-cover sm:h-[120px] sm:w-[120px]"
+                          width={160}
+                          height={160}
                           loading="eager"
                         />
                       </Link>
@@ -70,16 +70,16 @@ export function SideCards({
                       <Image
                         src={card2.imageUrl}
                         alt={card2.title ?? ""}
-                        className="rounded-lg object-cover"
-                        width={120}
-                        height={120}
+                        className="h-40 w-40 rounded-lg object-cover sm:h-[120px] sm:w-[120px]"
+                        width={160}
+                        height={160}
                         loading="eager"
                       />
                     )}
                   </>
                 )}
 
-                <p className="text-center text-2xl text-white lg:text-xl xl:text-2xl">
+                <p className="text-center text-4xl text-white sm:text-3xl lg:text-xl xl:text-2xl">
                   {card2.text}
                 </p>
               </>
@@ -97,7 +97,7 @@ export function SideCards({
           >
             <div className="flex h-full w-full items-center justify-center">
               {card3text ? (
-                <p className="grow text-center text-2xl text-white">
+                <p className="grow text-center text-4xl text-white sm:text-2xl">
                   {card3text}
                 </p>
               ) : (

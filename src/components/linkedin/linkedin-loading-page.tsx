@@ -34,7 +34,7 @@ export default function LinkedinLoadingPage() {
       <h1 className="text-5xl font-semibold text-muted-foreground xs:text-6xl sm:text-7xl md:text-8xl lg:text-6xl xl:text-8xl">
         #LLMwrapped
       </h1>
-      <div className="flex w-full flex-col items-center justify-center rounded-lg border px-8 py-24 lg:h-1/2">
+      <div className="flex w-full flex-col items-center justify-center rounded-lg border px-8 py-24 lg:h-2/3">
         <motion.div
           key={messageIndex}
           initial={{ opacity: 0, y: 20 }}
