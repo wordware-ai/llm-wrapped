@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import { parseAsInteger, parseAsString, useQueryState } from "nuqs";
 import { useMemo } from "react";
 import SlideshowShell from "./slideshow-shell";
-import WordwareCard from "./spotify/wordware-card";
+import WordwareCard from "./wordware-card";
 import { useStreamContext } from "./stream-provider";
 
 export default function SlideShow() {

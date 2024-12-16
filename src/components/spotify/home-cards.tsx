@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useEffect, useState } from "react";
-import WordwareCard from "./wordware-card";
+import WordwareCard from "../wordware-card";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cardConfig } from "@/config/card-config";

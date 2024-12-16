@@ -2,8 +2,8 @@
 
 import { cn } from "@/lib/utils";
 import { type ReactNode } from "react";
-import ShareButton from "../share";
-import { type CardData } from "../story-cards";
+import ShareButton from "./share";
+import { type CardData } from "./story-cards";
 
 export default function WordwareCard({
   children,

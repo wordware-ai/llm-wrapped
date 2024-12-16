@@ -39,7 +39,7 @@ Social Roast AI is a web application that creates AI-powered, personalized "roas
 
 ```bash
 git clone https://github.com/wordware-ai/llm-wrapped.git
-cd llmwrapped
+cd llm-wrapped
 ```
 
 2. Install dependencies:
@@ -99,4 +99,4 @@ BETTER_STACK_SOURCE_TOKEN="your_better_stack_token"
 
 ---
 
-Made with ❤️ by [Your Name/Team]
+Made with ❤️ by [Wordware](https://wordware.ai)

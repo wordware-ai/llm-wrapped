@@ -1,7 +1,7 @@
 import { cardConfig } from "@/config/card-config";
 import Image from "next/image";
 import Link from "next/link";
-import WordwareCard from "./spotify/wordware-card";
+import WordwareCard from "./wordware-card";
 import WordwareStory from "./wordware-story";
 
 export function SideCards({

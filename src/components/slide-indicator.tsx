@@ -15,7 +15,7 @@ export default function SlideIndicator({
   const [startTime, setStartTime] = useState(Date.now());
   const [pausedTime, setPausedTime] = useState<number | null>(null);
   const lastSlideRef = useRef(currentSlide);
-  const SLIDE_DURATION = 1000000;
+  const SLIDE_DURATION = 10000;
 
   useEffect(() => {
     lastSlideRef.current = currentSlide;
