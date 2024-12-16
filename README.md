@@ -1,29 +1,102 @@
-# Create T3 App
+# LLMwrapped 🔥
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+![Social Roast AI](https://llm-wrapped.vercel.app/og.png)
 
-## What's next? How do I make an app with this?
+Social Roast AI is a web application that creates AI-powered, personalized "roasts" based on your social media presence. Think Spotify Wrapped, but for your entire digital personality - and with a humorous twist! Choose between LinkedIn (professional roast), Spotify (music taste roast), or Tinder (dating profile roast) for a unique AI-generated analysis of your online presence. 🎯
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+## Explore the prompts used in this project that were created with Wordware
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+- [Spotify](https://app.wordware.ai/org/wordware/proj_10d71a12-e41e-46ff-91f6-2962d672a801/files?promptId=dc809790-ad1d-432b-ac28-ef317f5cac2b)
+- [LinkedIn](https://app.wordware.ai/org/wordware/proj_10d71a12-e41e-46ff-91f6-2962d672a801/files?promptId=34207f4e-eff2-4a4d-b03f-c256d8425341)
+- [Twitter](https://app.wordware.ai/org/wordware/proj_10d71a12-e41e-46ff-91f6-2962d672a801/files?promptId=62e272c7-31af-4e9d-95e8-635ce7ec30b7)
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+## Features 🌟
 
-## Learn More
+- **Multi-Platform Analysis**: Connect your LinkedIn, Spotify, or Tinder account for personalized insights
+- **AI-Powered Roasts**: Get witty, AI-generated commentary about your digital presence
+- **Shareable Results**: Easy-to-share cards with your personalized roasts
+- **Privacy-First**: Secure data handling with temporary analysis only
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+## Tech Stack 💻
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+- Next.js for the frontend and API routes
+- Supabase for database and authentication
+- Various AI models through Wordware API
+- PostHog for analytics
+- BrightData for data extraction
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+## Getting Started 🚀
 
-## How do I deploy this?
+### Prerequisites
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+- Node.js 18+ installed
+- A Supabase account
+- Required API keys (see Environment Variables section)
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/wordware-ai/llm-wrapped.git
+cd llmwrapped
+```
+
+2. Install dependencies:
+
+```bash
+pnpm install
+```
+
+3. Set up environment variables:
+
+   - Create a `.env.local` file in the root directory
+   - Copy the content from `.env.example`
+   - Fill in your values (see Environment Variables section)
+
+4. Start the development server:
+
+```bash
+pnpm run dev
+```
+
+## Environment Variables 🔐
+
+Create a `.env.local` file in the root directory with the following variables:
+
+```plaintext
+# App Configuration
+NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+# Database Configuration
+DATABASE_URL="postgresql://user:password@host:port/database"
+
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL="your_supabase_url"
+NEXT_PUBLIC_SUPABASE_ANON_KEY="your_supabase_anon_key"
+SUPABASE_SERVICE_ROLE_KEY="your_supabase_service_role_key"
+
+# Third-Party API Keys
+WORDWARE_API_KEY="your_wordware_api_key"
+BRIGHTDATA_API_KEY="your_brightdata_api_key"
+
+# PostHog Configuration
+NEXT_PUBLIC_POSTHOG_KEY="your_posthog_key"
+NEXT_PUBLIC_POSTHOG_HOST="https://us.i.posthog.com"
+POSTHOG_PROJECT_ID="your_posthog_project_id"
+POSTHOG_PERSONAL_API_KEY="your_posthog_personal_api_key"
+
+# Monitoring and Configuration
+BETTER_STACK_SOURCE_TOKEN="your_better_stack_token"
+```
+
+### Key Components
+
+- Authentication flow with Supabase
+- Data extraction from social media platforms
+- AI processing using Wordware API
+- Result generation and sharing functionality
+
+---
+
+Made with ❤️ by [Your Name/Team]
