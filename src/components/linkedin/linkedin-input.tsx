@@ -3,6 +3,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import Link from "next/link";
 
 export function LinkedinInput() {
   const [url, setUrl] = useState("");
@@ -53,7 +54,19 @@ export function LinkedinInput() {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex w-min flex-col gap-6">
+      <p className="w-full text-center text-sm text-white">
+        In order for our scraper to work, your LinkedIn profile needs to be
+        public. You can update it{" "}
+        <Link
+          href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
+          className="text-blue-500 hover:underline"
+          target="_blank"
+        >
+          here
+        </Link>{" "}
+        but it might take up to 24h.
+      </p>
       <form className="flex gap-2" onSubmit={handleSubmit}>
         <Input
           className="bg-white sm:w-96"

@@ -91,13 +91,27 @@ export const ImageCard = ({
   const ImageComponent = (
     <>
       {imageUrl !== "" && (
-        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="size-[150px] sm:size-[25vh]"
+          style={{
+            borderRadius: "0.5rem 0.5rem 0 0",
+            overflow: "hidden",
+          }}
+        >
           <Image
             src={imageUrl}
             alt={title}
-            className="image aspect-square size-[150px] rounded-lg object-cover sm:size-[200px]"
-            width={200}
-            height={200}
+            className="image rounded-lg"
+            width={400}
+            height={400}
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              aspectRatio: "1/1",
+            }}
             loading="eager"
           />
         </motion.div>

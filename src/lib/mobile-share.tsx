@@ -29,10 +29,20 @@ const prepareElementForCapture = (clonedElement: HTMLElement) => {
   const image = clonedElement.querySelector(".image");
   if (image) {
     (image as HTMLElement).style.paddingTop = "1rem";
-    (image as HTMLElement).style.objectFit = "contain";
-    (image as HTMLElement).style.width = "100%";
-    (image as HTMLElement).style.height = "auto";
-    (image as HTMLElement).style.transform = "scale(1)";
+    (image as HTMLElement).style.objectFit = "cover";
+
+    // Set size based on viewport width
+    const vw = Math.max(
+      document.documentElement.clientWidth || 0,
+      window.innerWidth || 0,
+    );
+    const size = vw >= 640 ? Math.min(window.innerHeight * 0.25, 400) : 150; // 640px is sm breakpoint
+
+    (image as HTMLElement).style.width = `${size}px`;
+    (image as HTMLElement).style.height = `${size}px`;
+    (image as HTMLElement).style.transform = "none";
+    (image as HTMLElement).style.aspectRatio = "1/1";
+    (image as HTMLElement).style.borderRadius = "0.5rem 0.5rem 0 0";
   }
 
   // Boost text z-index
@@ -72,13 +82,20 @@ const generateShareImage = async (): Promise<File | null> => {
 
   try {
     const canvas = await html2canvas(preparedElement, {
-      scale: 2,
+      scale: 3,
       useCORS: true,
       allowTaint: true,
       logging: false,
       backgroundColor: "#ffffff",
       width: rect.width,
       height: rect.height,
+      windowWidth: rect.width,
+      onclone: (clonedDoc) => {
+        const images = clonedDoc.getElementsByTagName("img");
+        for (const img of images) {
+          img.crossOrigin = "anonymous";
+        }
+      },
     });
 
     // Clean up by removing the div after capturing

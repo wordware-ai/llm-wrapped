@@ -112,7 +112,7 @@ export function Hero() {
         <div
           className="absolute left-0 right-0 top-0 -z-10 h-[500px]"
           style={{
-            backgroundImage: `url('${process.env.NEXT_PUBLIC_APP_URL}/blobs/background.svg')`,
+            backgroundImage: "url('/blobs/background.svg')",
             backgroundSize: "100% 100%",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center top",

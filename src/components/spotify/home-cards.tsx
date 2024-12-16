@@ -131,7 +131,7 @@ export default function HomeCards() {
   return (
     <div className="relative sm:px-4 xl:px-16">
       <button
-        className="absolute -left-4 top-1/2 z-[10] block -translate-y-1/2 rounded-full p-2 transition-all"
+        className="absolute -left-4 top-1/2 z-[10] block -translate-y-1/2 rounded-full p-2 transition-all sm:left-8"
         onClick={() => {
           if (!scrollRef.current) return;
           const cardElement = scrollRef.current.firstElementChild
@@ -144,7 +144,7 @@ export default function HomeCards() {
       </button>
 
       <button
-        className="absolute -right-4 top-1/2 z-[10] block -translate-y-1/2 rounded-full p-2 transition-all"
+        className="absolute -right-4 top-1/2 z-[10] block -translate-y-1/2 rounded-full p-2 transition-all sm:right-6"
         onClick={() => {
           if (!scrollRef.current) return;
           const cardElement = scrollRef.current.firstElementChild
