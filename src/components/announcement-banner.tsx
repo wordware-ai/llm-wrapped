@@ -4,7 +4,7 @@ import { buttonVariants } from "./ui/button";
 
 export default function AnnouncementBanner() {
   return (
-    <div className="flex h-16 w-full items-center justify-between gap-2 bg-[#EEE] px-4 py-2 md:px-12">
+    <div className="flex h-16 w-full items-center justify-between gap-2 bg-[#E9EFF9] px-4 py-2 md:px-12">
       <p className="text-xs sm:text-sm lg:text-base">
         This WordApp has been built with Wordware, the ultimate AI operating
         system.

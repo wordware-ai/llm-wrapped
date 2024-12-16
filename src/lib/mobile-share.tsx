@@ -117,6 +117,7 @@ const shareContent = async () => {
       await navigator.share({
         title: "My LLM Wrapped",
         text: "Check out my #LLMwrapped results — prompted by an AI Agent powered by Wordware!",
+        url: window.location.href,
         files: [image],
       });
       return true;
