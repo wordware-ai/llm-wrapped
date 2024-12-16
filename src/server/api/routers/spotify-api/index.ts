@@ -87,6 +87,7 @@ export const spotifyApiRouter = createTRPCRouter({
       allArtistNames,
       allTracks,
       playlistNames,
+      topArtistName: topArtists.items[0]?.name,
       leastPopularArtists,
       mostPopularArtists,
       mostFollowedArtists,

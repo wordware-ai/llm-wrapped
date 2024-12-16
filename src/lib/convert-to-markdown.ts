@@ -7,6 +7,9 @@ export const convertSpotifyDataToMarkdown = (data: any): string => {
   const sections = [
     "# Spotify User Data Analysis",
     "",
+    "### Top Artist",
+    `- ${data.topArtistName}`,
+
     "### Artists",
     data.allArtistNames.map((artist: any) => `- ${artist}`).join("\n"),
     "",

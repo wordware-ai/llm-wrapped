@@ -141,7 +141,7 @@ export const spotifyConfig: CardItem[] = [
       <ImageCard
         imageUrl={profileData?.mostPopularImageUrl ?? ""}
         url={profileData?.mostPopularUrl ?? ""}
-        title="Most Popular Artist"
+        title="The influencer of your playlist"
         description={result.value as string}
       />
     ),
