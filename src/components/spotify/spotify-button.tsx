@@ -41,7 +41,7 @@ export function SpotifyButton() {
     </div>
   ) : (
     <Button
-      className="w-min bg-[#1DB954] hover:bg-[#1DB954]/90"
+      className="w-min bg-[#DDD954] hover:bg-[#1DB954]/90"
       onClick={handleLogin}
     >
       Login with Spotify
