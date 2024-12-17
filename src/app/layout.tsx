@@ -40,7 +40,14 @@ export const metadata: Metadata = {
     description:
       "Get a true look at yourself through the lens of large language models (LLMs)",
     creator: "wordware",
-    images: ["https://llm-wrapped.vercel.app/og.png"],
+    images: [
+      {
+        url: "https://llm-wrapped.vercel.app/og.png",
+        width: 1200,
+        height: 630,
+        alt: "LLMwrapped Preview",
+      },
+    ],
   },
 };
 
