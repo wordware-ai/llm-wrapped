@@ -32,7 +32,7 @@ export function SpotifyButton() {
         href={`/spotify/${session.user.user_metadata.name}`}
         className={cn(
           buttonVariants(),
-          "w-min bg-[#1DB954] hover:bg-[#1DB954]/90",
+          "w-min bg-[#1DB954] hover:bg-[#1DB954]/80",
         )}
       >
         View Your Results
@@ -41,7 +41,7 @@ export function SpotifyButton() {
     </div>
   ) : (
     <Button
-      className="w-min bg-[#DDD954] hover:bg-[#1DB954]/90"
+      className="w-min bg-[#1DB954] hover:bg-[#1DB954]/80"
       onClick={handleLogin}
     >
       Login with Spotify
