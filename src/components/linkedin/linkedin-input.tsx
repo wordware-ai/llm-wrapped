@@ -57,15 +57,7 @@ export function LinkedinInput() {
     <div className="flex w-min flex-col gap-6">
       <p className="w-full text-center text-sm text-white">
         In order for our scraper to work, your LinkedIn profile needs to be
-        public. You can update it{" "}
-        <Link
-          href="https://www.linkedin.com/public-profile/settings?trk=d_flagship3_profile_self_view_public_profile"
-          className="text-blue-500 hover:underline"
-          target="_blank"
-        >
-          here
-        </Link>{" "}
-        but it might take up to 24h.
+        public. If it fails, you can upload a PDF instead.
       </p>
       <form className="flex gap-2" onSubmit={handleSubmit}>
         <Input
