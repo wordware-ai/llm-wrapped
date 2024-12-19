@@ -78,6 +78,8 @@ model LinkedinResult {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([scrapeFailed])
 }
 
 model TinderResult {
@@ -104,4 +106,6 @@ model TinderResult {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([name])
 }
