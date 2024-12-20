@@ -50,6 +50,7 @@ export default function WordwareInfo() {
             <div className="flex flex-col gap-4 pl-4">
               <Link
                 href="https://twitter.wordware.ai"
+                target="_blank"
                 className="flex items-center gap-3 text-xl text-zinc-600 transition-colors hover:text-zinc-900"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-blue-400 to-blue-600 text-white">
@@ -59,6 +60,7 @@ export default function WordwareInfo() {
               </Link>
               <Link
                 href="https://audioscribe.wordware.ai"
+                target="_blank"
                 className="flex items-center gap-3 text-xl text-zinc-600 transition-colors hover:text-zinc-900"
               >
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-purple-400 to-purple-600 text-white">
@@ -84,6 +86,7 @@ export default function WordwareInfo() {
       <div className="flex flex-col justify-center gap-4 pb-4 sm:flex-row">
         <Link
           href="https://app.wordware.ai/register"
+          target="_blank"
           className={cn(
             buttonVariants({ variant: "default", size: "lg" }),
             "bg-zinc-900 text-white hover:bg-zinc-800",
@@ -93,6 +96,7 @@ export default function WordwareInfo() {
         </Link>
         <Link
           href="https://app.wordware.ai/explore/apps/45bf050b-4223-45c1-9fd6-a2d6c6b2ac1d"
+          target="_blank"
           className={cn(
             buttonVariants({ variant: "default", size: "lg" }),
             "bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-600 text-white hover:opacity-90",
